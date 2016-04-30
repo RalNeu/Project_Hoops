@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="vorname_string">Vorname</string>
+    <string name="nachname_string">Nachname</string>
+    <string name="email_string">E-Mail</string>
+    <string name="passwort_string">Passwort</string>
+    <string name="passwort_erneut_string">Passwort bestätigen</string>
 </resources>

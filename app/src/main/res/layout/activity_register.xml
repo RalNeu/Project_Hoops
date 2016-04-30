@@ -12,58 +12,59 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etFirstname"
+        android:id="@+id/et_Firstname"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:hint="First name" />
+        android:hint="@string/vorname_string"
+        android:maxLength="15"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etSecondName"
-        android:layout_below="@+id/etFirstname"
+        android:id="@+id/et_SecondName"
+        android:layout_below="@+id/et_Firstname"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/etFirstname"
-        android:hint="Second name" />
+        android:layout_alignRight="@+id/et_Firstname"
+        android:hint="@string/nachname_string" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etEmail"
-        android:layout_below="@+id/etSecondName"
+        android:id="@+id/et_Email"
+        android:layout_below="@+id/et_SecondName"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/etSecondName"
-        android:hint="E-Mail" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/etPasswort"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etEmail"
-        android:layout_alignRight="@+id/etEmail"
-        android:hint="password" />
+        android:layout_alignRight="@+id/et_SecondName"
+        android:hint="@string/email_string" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/etPasswortAgain"
-        android:layout_below="@+id/etPasswort"
+        android:id="@+id/et_Passwort"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/etPasswort"
-        android:hint="password" />
+        android:layout_below="@+id/et_Email"
+        android:layout_alignRight="@+id/et_Email"
+        android:hint="@string/passwort_string" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/et_PasswortAgain"
+        android:layout_below="@+id/et_Passwort"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/et_Passwort"
+        android:hint="@string/passwort_erneut_string" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accept"
-        android:id="@+id/btAccept"
-        android:layout_below="@+id/etPasswortAgain"
+        android:id="@+id/bt_Accept"
+        android:layout_below="@+id/et_PasswortAgain"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
