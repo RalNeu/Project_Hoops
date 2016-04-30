@@ -45,7 +45,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/etEmail"
         android:layout_alignRight="@+id/etEmail"
-        android:hint="password" />
+        android:hint="@string/password_hint" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
         android:layout_below="@+id/etPasswort"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/etPasswort"
-        android:hint="password" />
+        android:hint="confirm password" />
 
     <Button
         android:layout_width="wrap_content"
