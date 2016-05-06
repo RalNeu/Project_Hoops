@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -49,8 +51,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void openRegister() {
-        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-        startActivity(registerIntent);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        ft.replace(R.id.contentPanel, new RegisterTab()).commit();
+        onBackPressed();
     }
 
     @Override
@@ -69,7 +74,6 @@ public class MainActivity extends AppCompatActivity
 
         getMenuInflater().inflate(R.menu.main, menu);
 
-        // Register Button wird erstellt
         bt_Register = (Button) findViewById(R.id.bt_Register);
 
         bt_Register.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +107,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            ft.replace(R.id.contentPanel, new NewsTab()).commit();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
