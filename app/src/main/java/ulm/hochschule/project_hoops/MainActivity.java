@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
 
         getMenuInflater().inflate(R.menu.main, menu);
 
+        // Register Button wird erstellt
         bt_Register = (Button) findViewById(R.id.bt_Register);
 
         bt_Register.setOnClickListener(new View.OnClickListener() {
