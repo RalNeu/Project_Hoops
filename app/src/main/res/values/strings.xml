@@ -11,11 +11,9 @@
     <string name="email_string">E-Mail</string>
     <string name="passwort_string">Passwort</string>
     <string name="passwort_erneut_string">Passwort bestätigen</string>
-
-
     <string name="password_hint">Passwort</string>
-    <string name="nav_password">Passwort</string>
-    <string name="nav_username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="username">Benutzername</string>
     <string name="btn_Register">Registrieren</string>
     <string name="btn_Login">Login</string>
     <string name="et_Username">Benutzername</string>
@@ -23,6 +21,7 @@
     <string name="et_Lastname">Nachname</string>
     <string name="et_Email">E-Mail</string>
     <string name="et_Passwort">Passwort</string>
-    <string name="et_ConfirmPasswort">Passwort Wiederholen</string>
+    <string name="et_ConfirmPasswort">Passwort wiederholen</string>
 
+    <string name="dr_EditProfile">Profil bearbeiten</string>
 </resources>

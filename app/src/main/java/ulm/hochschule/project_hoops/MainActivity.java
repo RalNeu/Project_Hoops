@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
         getMenuInflater().inflate(R.menu.main, menu);
 
-        bt_Register = (Button) findViewById(R.id.bt_Register);
+        bt_Register = (Button) findViewById(R.id.btn_Register);
 
         bt_Register.setOnClickListener(new View.OnClickListener() {
             @Override
