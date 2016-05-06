@@ -24,16 +24,16 @@
     <EditText
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etFirstname"
+        android:id="@+id/et_Firstname"
         android:layout_gravity="center"
-        android:hint="Vorname"
+        android:hint="@string/et_Firstname"
         android:singleLine="true"/>
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etLastname"
-        android:hint="Nachname"
+        android:id="@+id/et_Lastname"
+        android:hint="@string/et_Lastname"
         android:layout_gravity="center"
         android:singleLine="true"/>
 
@@ -41,8 +41,8 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:id="@+id/etEmail"
-        android:hint="E-mail"
+        android:id="@+id/et_Email"
+        android:hint="@string/et_Email"
         android:layout_gravity="center"
         android:singleLine="true"/>
 
@@ -50,7 +50,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/etUsername"
-        android:hint="Benutzername"
+        android:hint="@string/et_Username"
         android:layout_gravity="center"
         android:singleLine="true"/>
 
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:id="@+id/etPassword"
-        android:hint="Passwort"
+        android:hint="@string/et_Passwort"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:id="@+id/etRepeatPassword"
-        android:hint="Passwort Wiederholen"
+        android:hint="@string/et_ConfirmPasswort"
         android:layout_alignBaseline="@+id/editText7"
         android:layout_alignBottom="@+id/editText7"
         android:layout_gravity="center"

@@ -36,9 +36,9 @@ public class RegisterTab extends Fragment {
 
         layout = inflater.inflate(R.layout.fragment_register, container, false);
 
-        firstname = layout.findViewById(R.id.etFirstname).toString();
-        lastname = layout.findViewById(R.id.etLastname).toString();
-        email = layout.findViewById(R.id.etEmail).toString();
+        firstname = layout.findViewById(R.id.et_Firstname).toString();
+        lastname = layout.findViewById(R.id.et_Lastname).toString();
+        email = layout.findViewById(R.id.et_Email).toString();
         username = layout.findViewById(R.id.etUsername).toString();
         password = layout.findViewById(R.id.etPassword).toString();
         repeatpassword = layout.findViewById(R.id.etRepeatPassword).toString();

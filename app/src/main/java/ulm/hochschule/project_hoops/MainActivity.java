@@ -1,6 +1,9 @@
 package ulm.hochschule.project_hoops;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -17,8 +20,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button btn_Register;
-    private Button btn_Login;
+    private Button bt_Register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +49,6 @@ public class MainActivity extends AppCompatActivity
         onBackPressed();
     }
 
-    private void LogIn(){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.nav_header_main, new UserNavHeader()).commit();
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -70,17 +65,9 @@ public class MainActivity extends AppCompatActivity
 
         getMenuInflater().inflate(R.menu.main, menu);
 
-        btn_Register = (Button) findViewById(R.id.bt_Register);
-        btn_Login = (Button) findViewById(R.id.bt_Login);
+        bt_Register = (Button) findViewById(R.id.bt_Register);
 
-        btn_Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogIn();
-            }
-        });
-
-        btn_Register.setOnClickListener(new View.OnClickListener() {
+        bt_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRegister();
