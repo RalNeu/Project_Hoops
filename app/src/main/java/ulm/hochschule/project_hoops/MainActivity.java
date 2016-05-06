@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             ft.replace(R.id.contentPanel, new NewsTab()).commit();
         } else if (id == R.id.nav_gallery) {
-
+            ft.replace(R.id.contentPanel, new WebView2()).commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

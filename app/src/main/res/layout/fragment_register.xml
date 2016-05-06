@@ -27,6 +27,7 @@
         android:id="@+id/et_Firstname"
         android:layout_gravity="center"
         android:hint="@string/et_Firstname"
+        android:maxLength="15"
         android:singleLine="true"/>
 
     <EditText
