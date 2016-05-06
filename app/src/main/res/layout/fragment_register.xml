@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.19" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Regestrierung"
+        android:id="@+id/etHeading"
+        android:layout_weight="0.20"
+        android:layout_gravity="center"
+        android:textSize="40dp" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etFirstname"
+        android:layout_gravity="center"
+        android:hint="Vorname"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLastname"
+        android:hint="Nachname"
+        android:layout_gravity="center"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:id="@+id/etEmail"
+        android:hint="E-mail"
+        android:layout_gravity="center"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etUsername"
+        android:hint="Benutzername"
+        android:layout_gravity="center"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/etPassword"
+        android:hint="Passwort"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/etRepeatPassword"
+        android:hint="Passwort Wiederholen"
+        android:layout_alignBaseline="@+id/editText7"
+        android:layout_alignBottom="@+id/editText7"
+        android:layout_gravity="center"
+        android:singleLine="true"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.33" />
+
+    <Button
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:text="Registrieren"
+        android:id="@+id/bContentRegister"
+        android:layout_gravity="center"
+        android:background="#241f1f"
+        android:textColor="#ffffff" />
+
+</LinearLayout>
