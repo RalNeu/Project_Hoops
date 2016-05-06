@@ -3,6 +3,8 @@ package ulm.hochschule.project_hoops;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,7 @@ public class RegisterTab extends Fragment {
                     //And if Username doesent exist,
                     //And email doesnt exist, then send data to Server
                     //new User(firstname,lastname,email,username,password);
+
                 }
             }
         });
