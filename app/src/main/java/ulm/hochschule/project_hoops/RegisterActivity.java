@@ -20,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText et_Secondname = (EditText) findViewById(R.id.et_SecondName);
         final EditText et_Email = (EditText) findViewById(R.id.et_Email);
         final EditText et_Passwort = (EditText) findViewById(R.id.et_Passwort);
+        System.out.println("test");
         final EditText et_Passowortsecond = (EditText) findViewById(R.id.et_PasswortAgain);
 
         final Button bt_Accept = (Button) findViewById(R.id.bt_Accept);
