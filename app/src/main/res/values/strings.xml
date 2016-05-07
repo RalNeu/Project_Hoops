@@ -16,7 +16,7 @@
     <string name="btn_Login">Login</string>
     <string name="et_UserName">Username</string>
     <string name="alter_string">Alter</string>
-    <string name="meine_hobbys">Meine Hobbys</string>
+    <string name="meine_hobbys"><u>Meine Hobbys</u></string>
 
     <string name="lbl_AboutMe"><u>Über mich</u></string>
 

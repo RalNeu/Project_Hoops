@@ -11,9 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+
+
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -55,57 +63,32 @@ public class RegisterTab extends Fragment {
             @Override
             public void onClick(View view) {
                 System.out.println("testing");
+
+
+
                 try {
 
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
 
+                    CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ));
+
                     URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
-                    String data = URLEncoder.encode("username", "UTF-8")
-                            + "=" + URLEncoder.encode(username, "UTF-8");
-                    data += "&" + URLEncoder.encode("password", "UTF-8")
-                            + "=" + URLEncoder.encode(password, "UTF-8");
+
                     URLConnection conn = url.openConnection();
-                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                    wr.write( data );
-                    BufferedReader reader = new BufferedReader(new
-                            InputStreamReader(conn.getInputStream()));
+
+                    conn.setDoOutput(true);
+
+                    InputStreamReader is = new InputStreamReader(conn.getInputStream());
+                    char[] buffer = new char[1];
+
+
                 }catch (Exception e){
                     System.out.print("Fehler");
                     e.printStackTrace();
                 }
             }
         });
-
-       /* bregister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.print("test");
-                try {
-
-                    URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
-                    String data = URLEncoder.encode("username", "UTF-8")
-                            + "=" + URLEncoder.encode(username, "UTF-8");
-                    data += "&" + URLEncoder.encode("password", "UTF-8")
-                            + "=" + URLEncoder.encode(password, "UTF-8");
-                    URLConnection conn = url.openConnection();
-                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                    wr.write( data );
-                    BufferedReader reader = new BufferedReader(new
-                            InputStreamReader(conn.getInputStream()));
-                }catch (Exception e){
-                    System.out.print("Fehler");
-                }
-
-
-                if(password.equals(repeatpassword)){
-                    //And if Username doesent exist,
-                    //And email doesnt exist, then send data to Server
-                    //new User(firstname,lastname,email,username,password);
-
-                }
-            }
-        });*/
         return layout;
     }
 
