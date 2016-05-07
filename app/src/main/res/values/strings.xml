@@ -24,8 +24,13 @@
     <string name="et_ConfirmPasswort">Passwort wiederholen</string>
     <string name="nav_username">Benutzername</string>
     <string name="nav_password">Passwort</string>
+    <string name="alter_string">Alter</string>
+    <string name="meine_hobbys">Meine Hobbys</string>
 
-    <string name="lbl_AboutMe">Über mich <u>underline</u></string>
+    <string name="lbl_AboutMe"><u>Über mich</u></string>
 
     <string name="dr_EditProfile">Profil bearbeiten</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

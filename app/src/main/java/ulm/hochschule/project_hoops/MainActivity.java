@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.edit_profile) {
+            ft.replace(R.id.contentPanel, new EditProfileTab()).commit();
         } else if (id == R.id.nav_send) {
 
         }
