@@ -4,6 +4,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+
+
     defaultConfig {
         applicationId "ulm.hochschule.project_hoops"
         minSdkVersion 15
@@ -25,4 +27,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
+    compile files('src/main/java/libs/mysql-connector-java-3.1.14-bin.jar')
 }
