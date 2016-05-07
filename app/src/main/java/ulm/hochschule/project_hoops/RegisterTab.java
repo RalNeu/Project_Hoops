@@ -59,6 +59,13 @@ public class RegisterTab extends Fragment {
         password = layout.findViewById(R.id.et_Password).toString();
         repeatpassword = layout.findViewById(R.id.et_ConfirmPassword).toString();
         bregister = (Button) layout.findViewById(R.id.btn_ContentRegister);
+        return layout;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,14 +96,6 @@ public class RegisterTab extends Fragment {
                 }
             }
         });
-        return layout;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-
 
     }
 }
