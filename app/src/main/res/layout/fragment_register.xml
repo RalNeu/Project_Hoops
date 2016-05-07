@@ -50,7 +50,7 @@
     <EditText
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etUsername"
+        android:id="@+id/et_Username"
         android:hint="@string/et_Username"
         android:layout_gravity="center"
         android:singleLine="true"/>
@@ -59,7 +59,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:id="@+id/etPassword"
+        android:id="@+id/et_Password"
         android:hint="@string/et_Passwort"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
@@ -70,7 +70,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:id="@+id/etRepeatPassword"
+        android:id="@+id/et_ConfirmPassword"
         android:hint="@string/et_ConfirmPasswort"
         android:layout_alignBaseline="@+id/editText7"
         android:layout_alignBottom="@+id/editText7"
@@ -87,7 +87,7 @@
         android:layout_width="154dp"
         android:layout_height="wrap_content"
         android:text="Registrieren"
-        android:id="@+id/bContentRegister"
+        android:id="@+id/btn_ContentRegister"
         android:layout_gravity="center"
         android:background="#241f1f"
         android:textColor="#ffffff" />

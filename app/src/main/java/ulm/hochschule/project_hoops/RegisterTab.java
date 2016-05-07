@@ -10,6 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 /**
  * Created by Johann on 06.05.2016.
  */
@@ -39,10 +46,10 @@ public class RegisterTab extends Fragment {
         firstname = layout.findViewById(R.id.et_Firstname).toString();
         lastname = layout.findViewById(R.id.et_Lastname).toString();
         email = layout.findViewById(R.id.et_Email).toString();
-        username = layout.findViewById(R.id.etUsername).toString();
-        password = layout.findViewById(R.id.etPassword).toString();
-        repeatpassword = layout.findViewById(R.id.etRepeatPassword).toString();
-        bregister = (Button) layout.findViewById(R.id.bContentRegister);
+        username = layout.findViewById(R.id.et_Username).toString();
+        password = layout.findViewById(R.id.et_Password).toString();
+        repeatpassword = layout.findViewById(R.id.et_ConfirmPassword).toString();
+        bregister = (Button) layout.findViewById(R.id.btn_ContentRegister);
 
         return layout;
     }
@@ -53,6 +60,23 @@ public class RegisterTab extends Fragment {
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+
+                    URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
+                    String data = URLEncoder.encode("username", "UTF-8")
+                            + "=" + URLEncoder.encode(username, "UTF-8");
+                    data += "&" + URLEncoder.encode("password", "UTF-8")
+                            + "=" + URLEncoder.encode(password, "UTF-8");
+                    URLConnection conn = url.openConnection();
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write( data );
+                    BufferedReader reader = new BufferedReader(new
+                            InputStreamReader(conn.getInputStream()));
+                }catch (Exception e){
+                    System.out.print("Fehler");
+                }
+
+
                 if(password.equals(repeatpassword)){
                     //And if Username doesent exist,
                     //And email doesnt exist, then send data to Server
@@ -61,6 +85,8 @@ public class RegisterTab extends Fragment {
                 }
             }
         });
+
+
     }
 }
 
