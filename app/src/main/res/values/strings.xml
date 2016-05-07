@@ -22,6 +22,8 @@
     <string name="et_Email">E-Mail</string>
     <string name="et_Passwort">Passwort</string>
     <string name="et_ConfirmPasswort">Passwort wiederholen</string>
+    <string name="et_UserName">Username</string>
+    <string name="et_Password">Password</string>
     <string name="nav_username">Benutzername</string>
     <string name="nav_password">Passwort</string>
 
