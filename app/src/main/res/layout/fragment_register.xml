@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_Firstname"
         android:layout_gravity="center"
-        android:hint="@string/et_Firstname"
+        android:hint="@string/name"
         android:maxLength="15"
         android:singleLine="true"/>
 
@@ -34,7 +34,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/et_Lastname"
-        android:hint="@string/et_Lastname"
+        android:hint="@string/surname"
         android:layout_gravity="center"
         android:singleLine="true"/>
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:id="@+id/et_Email"
-        android:hint="@string/et_Email"
+        android:hint="@string/email"
         android:layout_gravity="center"
         android:singleLine="true"/>
 
@@ -51,7 +51,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/et_Username"
-        android:hint="@string/et_Username"
+        android:hint="@string/username"
         android:layout_gravity="center"
         android:singleLine="true"/>
 
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:id="@+id/et_Password"
-        android:hint="@string/et_Passwort"
+        android:hint="@string/password"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:id="@+id/et_ConfirmPassword"
-        android:hint="@string/et_ConfirmPasswort"
+        android:hint="@string/confirm_password"
         android:layout_alignBaseline="@+id/editText7"
         android:layout_alignBottom="@+id/editText7"
         android:layout_gravity="center"

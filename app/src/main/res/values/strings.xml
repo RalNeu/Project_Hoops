@@ -5,27 +5,16 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="vorname_string">Vorname</string>
-    <string name="nachname_string">Nachname</string>
-    <string name="email_string">E-Mail</string>
-    <string name="passwort_string">Passwort</string>
-    <string name="passwort_erneut_string">Passwort bestätigen</string>
-    <string name="password_hint">Passwort</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="name">Vorname</string>
+    <string name="surname">Nachname</string>
+    <string name="email">E-Mail</string>
+    <string name="confirm_password">Passwort bestätigen</string>
     <string name="password">Passwort</string>
     <string name="username">Benutzername</string>
     <string name="btn_Register">Registrieren</string>
     <string name="btn_Login">Login</string>
-    <string name="et_Username">Benutzername</string>
-    <string name="et_Firstname">Vorname</string>
-    <string name="et_Lastname">Nachname</string>
-    <string name="et_Email">E-Mail</string>
-    <string name="et_Passwort">Passwort</string>
-    <string name="et_ConfirmPasswort">Passwort wiederholen</string>
     <string name="et_UserName">Username</string>
-    <string name="et_Password">Password</string>
-    <string name="nav_username">Benutzername</string>
-    <string name="nav_password">Passwort</string>
     <string name="alter_string">Alter</string>
     <string name="meine_hobbys">Meine Hobbys</string>
 

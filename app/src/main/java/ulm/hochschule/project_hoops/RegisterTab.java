@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -50,16 +51,36 @@ public class RegisterTab extends Fragment {
         password = layout.findViewById(R.id.et_Password).toString();
         repeatpassword = layout.findViewById(R.id.et_ConfirmPassword).toString();
         bregister = (Button) layout.findViewById(R.id.btn_ContentRegister);
-
-        return layout;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View view) {
+                System.out.println("testing");
+                try {
+
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
+                    String data = URLEncoder.encode("username", "UTF-8")
+                            + "=" + URLEncoder.encode(username, "UTF-8");
+                    data += "&" + URLEncoder.encode("password", "UTF-8")
+                            + "=" + URLEncoder.encode(password, "UTF-8");
+                    URLConnection conn = url.openConnection();
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write( data );
+                    BufferedReader reader = new BufferedReader(new
+                            InputStreamReader(conn.getInputStream()));
+                }catch (Exception e){
+                    System.out.print("Fehler");
+                    e.printStackTrace();
+                }
+            }
+        });
+
+       /* bregister.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
+                System.out.print("test");
                 try {
 
                     URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
@@ -84,7 +105,14 @@ public class RegisterTab extends Fragment {
 
                 }
             }
-        });
+        });*/
+        return layout;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
 
 
     }
