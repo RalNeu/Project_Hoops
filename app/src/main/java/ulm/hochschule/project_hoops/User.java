@@ -5,14 +5,18 @@ package ulm.hochschule.project_hoops;
  */
 public class User {
 
+    private int id;
     private final String firstname, lastname,email,username,password;
+    private Coins coins;
 
-    public User(String firstname, String lastname, String email, String username, String password){
+    public User(int id, String firstname, String lastname, String email, String username, String password, int coins){
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.coins = new Coins(coins);
     }
 
     public String getEmail() {
@@ -31,8 +35,9 @@ public class User {
         return lastname;
     }
 
-    public String getFirstname() {
+    public String getFirstname() { return firstname; }
 
-        return firstname;
-    }
+    public int getid(){ return id; }
+
+    public int getCoins(){ return coins.getCoins(); }
 }

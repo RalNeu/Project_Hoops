@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
         android:layout_gravity="center"
         android:hint="@string/name"
         android:maxLength="15"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="280dp"
@@ -36,7 +35,7 @@
         android:id="@+id/et_Lastname"
         android:hint="@string/surname"
         android:layout_gravity="center"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="280dp"
@@ -45,7 +44,7 @@
         android:id="@+id/et_Email"
         android:hint="@string/email"
         android:layout_gravity="center"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="280dp"
@@ -53,7 +52,7 @@
         android:id="@+id/et_Username"
         android:hint="@string/username"
         android:layout_gravity="center"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="280dp"
@@ -64,7 +63,7 @@
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="280dp"
@@ -75,13 +74,13 @@
         android:layout_alignBaseline="@+id/editText7"
         android:layout_alignBottom="@+id/editText7"
         android:layout_gravity="center"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.33" />
+        android:layout_weight="0.33"/>
 
     <Button
         android:layout_width="154dp"
