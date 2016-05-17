@@ -22,6 +22,7 @@ public class SqlManager {
     private Connection con;
     private Statement st;
     private ResultSet rs;
+    private PreparedStatement preparedStmt;
 
     //create an object of SingleObject
     private static SqlManager instance = new SqlManager();
@@ -62,7 +63,7 @@ public class SqlManager {
 
         try {
             // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt = con.prepareStatement(query);
 
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2, password);
@@ -84,7 +85,47 @@ public class SqlManager {
         }
     }
 
-    public void remove(){
+    public void remove(int i){
+        try {
+            String query = "delete from users where UserID = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1, i);
+            preparedStmt.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setVerif_Status(boolean bool, int id)
+    {
+        try {
+            String query ="UPDATE users SET Verif_Status=? WHERE UserID=? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setBoolean(1, bool);
+            preparedStmt.setInt(2,id);
+            preparedStmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            e.getStackTrace();
+        }
+
+    }
+
+    public boolean userExist(){
+        return false;
+    }
+
+    public String getUser(){
+        try {
+            String query = "select name from users where UserID = ?";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            System.out.print(rs);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rs.toString();
     }
                     /*
                     String query = "select * from users;";

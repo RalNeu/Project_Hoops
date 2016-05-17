@@ -5,7 +5,6 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,9 @@ import java.util.Calendar;
  * Created by Johann on 06.05.2016.
  */
 public class RegisterTab extends Fragment {
-    private AppCompatActivity appcomp = new AppCompatActivity();
+
     private View layout;
-    private MailVerifier mailVerifier;
+
     private EditText firstname;
     private EditText lastname;
     private EditText email;
@@ -60,16 +59,54 @@ public class RegisterTab extends Fragment {
 
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
 
-                SqlManager m = SqlManager.getInstance();
-                m.createUser(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString()
-                        ,username.getText().toString(),password.getText().toString());
 
-                mailVerifier = new MailVerifier(appcomp,"r.zoll995@gmail.com");
-
+                if(ok()) {
+                    SqlManager m = SqlManager.getInstance();
+                    m.createUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString()
+                            , username.getText().toString(), password.getText().toString());
+                }
             }
         });
 
+    }
+
+    private boolean ok(){
+        boolean isok = true;
+
+        if(firstname.getText().toString().trim().equals("")){
+            firstname.setError("Enter your name");
+            isok = false;
+        }
+        if(lastname.getText().toString().trim().equals("")){
+            lastname.setError("Enter your name");
+            isok = false;
+        }
+        if(email.getText().toString().trim().equals("")){
+            email.setError("Enter your email");
+            isok = false;
+        }
+        if(!email.getText().toString().contains("@") || !email.getText().toString().contains(".")){
+            email.setError("Not email standard");
+            isok = false;
+        }
+        if(username.getText().toString().trim().equals("") || username.getText().toString().contains(" ")){
+            username.setError("No white spaces");
+            isok = false;
+        }
+        if(password.getText().toString().trim().equals("") || password.getText().toString().contains(" ")){
+            password.setError("No white spaces");
+            isok = false;
+        }
+        if(password.getText().toString().length() < 7){
+            password.setError("password to short. Must have a length of min. 8");
+            isok = false;
+        }
+        if(repeatpassword.getText().toString().equals(password.getText().toString())){
+            repeatpassword.setError("Repeat your password");
+            isok = false;
+        }
+        return isok;
     }
 }
