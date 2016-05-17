@@ -5,50 +5,21 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="385dp"
+        android:layout_height="200dp"
+        android:src="@mipmap/ic_launcher"
+        android:background="@android:color/transparent">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/txt"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText"
-                android:text="News"
-                android:editable="false"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="0dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/orange"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentLeft="true"
-                android:editable="false"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="250dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentLeft="true"
-                android:editable="false"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="750dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentLeft="true"
-                android:editable="false"/>
-        </RelativeLayout>
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:textSize="28dp"
+        android:text="hallo das ist iein test."
+        android:paddingTop="140dp"
+        android:textColor="@android:color/white">
+    </TextView>
 </RelativeLayout>

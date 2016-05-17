@@ -19,7 +19,5 @@ public class Coins {
         return (this.coins -= coins) > 0;
     }
 
-    public int getCoins(){
-        return coins;
-    }
+    public int getCoins(){ return coins; }
 }

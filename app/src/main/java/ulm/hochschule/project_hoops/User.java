@@ -5,7 +5,7 @@ package ulm.hochschule.project_hoops;
  */
 public class User {
 
-    private int id;
+    private int id, score;
     private final String firstname, lastname,email,username,password;
     private Coins coins;
 
@@ -17,6 +17,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.coins = new Coins(coins);
+        score = 0;
     }
 
     public String getEmail() {
@@ -31,13 +32,11 @@ public class User {
         return password;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
+    public String getLastname() { return lastname; }
 
     public String getFirstname() { return firstname; }
 
     public int getid(){ return id; }
 
-    public int getCoins(){ return coins.getCoins(); }
+    public Coins getCoinsObject(){ return coins; }
 }
