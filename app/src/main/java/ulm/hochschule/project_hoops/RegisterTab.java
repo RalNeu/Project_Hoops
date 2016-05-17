@@ -22,7 +22,7 @@ import java.util.Calendar;
  * Created by Johann on 06.05.2016.
  */
 public class RegisterTab extends Fragment {
-
+    private AppCompatActivity appcomp = new AppCompatActivity();
     private View layout;
     private MailVerifier mailVerifier;
     private EditText firstname;
@@ -60,15 +60,14 @@ public class RegisterTab extends Fragment {
 
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
 
                 SqlManager m = SqlManager.getInstance();
                 m.createUser(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString()
                         ,username.getText().toString(),password.getText().toString());
-                class SendMail extends AppCompatActivity {
 
-                    MailVerifier mailVerifier = new MailVerifier(this,"r.zoll995@gmail.com");
-                }
+                mailVerifier = new MailVerifier(appcomp,"r.zoll995@gmail.com");
+
             }
         });
 
