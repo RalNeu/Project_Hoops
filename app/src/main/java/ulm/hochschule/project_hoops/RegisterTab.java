@@ -73,34 +73,40 @@ public class RegisterTab extends Fragment {
     }
 
     private boolean ok(){
+        boolean isok = true;
+
         if(firstname.getText().toString().trim().equals("")){
             firstname.setError("Enter your name");
-            return false;
+            isok = false;
         }
         if(lastname.getText().toString().trim().equals("")){
             lastname.setError("Enter your name");
-            return false;
+            isok = false;
         }
         if(email.getText().toString().trim().equals("")){
             email.setError("Enter your email");
-            return false;
+            isok = false;
         }
-        if(username.getText().toString().trim().equals("")){
+        if(!email.getText().toString().contains("@") || !email.getText().toString().contains(".")){
+            email.setError("Not email standard");
+            isok = false;
+        }
+        if(username.getText().toString().trim().equals("") || username.getText().toString().contains(" ")){
             username.setError("No white spaces");
-            return false;
+            isok = false;
         }
-        if(password.getText().toString().trim().equals("")){
+        if(password.getText().toString().trim().equals("") || password.getText().toString().contains(" ")){
             password.setError("No white spaces");
-            return false;
+            isok = false;
         }
         if(password.getText().toString().length() < 7){
-            password.setError("password to short");
-            return false;
+            password.setError("password to short. Must have a length of min. 8");
+            isok = false;
         }
-        if(!repeatpassword.getText().toString().equals(password)){
-            lastname.setError("Repeat your password");
-            return false;
+        if(repeatpassword.getText().toString().equals(password.getText().toString())){
+            repeatpassword.setError("Repeat your password");
+            isok = false;
         }
-        return true;
+        return isok;
     }
 }

@@ -96,13 +96,36 @@ public class SqlManager {
         }
     }
 
-    public void getUser(){
+    public void setVerif_Status(boolean bool, int id)
+    {
         try {
-            String query = "select ? from users where name = ?";
-            preparedStmt = con.prepareStatement(query);
-        }catch(Exception e){
-
+            String query ="UPDATE users SET Verif_Status=? WHERE UserID=? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setBoolean(1, bool);
+            preparedStmt.setInt(2,id);
+            preparedStmt.executeUpdate();
         }
+        catch(Exception e)
+        {
+            e.getStackTrace();
+        }
+
+    }
+
+    public boolean userExist(){
+        return false;
+    }
+
+    public String getUser(){
+        try {
+            String query = "select name from users where UserID = ?";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            System.out.print(rs);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rs.toString();
     }
                     /*
                     String query = "select * from users;";
