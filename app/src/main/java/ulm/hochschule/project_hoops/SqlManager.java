@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops;
 
 import android.os.StrictMode;
+import android.widget.Toast;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -27,7 +28,7 @@ public class SqlManager {
 
     //make the constructor private so that this class cannot be
     //instantiated
-    public SqlManager(){
+    private  SqlManager(){
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -45,6 +46,9 @@ public class SqlManager {
 
     //Get the only object available
     public static SqlManager getInstance(){
+        if(instance == null){
+            instance = new SqlManager();
+        }
         return instance;
     }
 
@@ -74,6 +78,7 @@ public class SqlManager {
 
             // execute the preparedstatement
             preparedStmt.execute();
+
         }catch(Exception e){
             e.printStackTrace();
         }

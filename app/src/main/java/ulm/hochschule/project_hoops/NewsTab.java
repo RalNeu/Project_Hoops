@@ -109,6 +109,7 @@ public class NewsTab extends Fragment {
     }
 
 
+    /*
     private class LoadImage extends AsyncTask<String, String, Bitmap> {
         @Override
         protected void onPreExecute() {
@@ -142,5 +143,6 @@ public class NewsTab extends Fragment {
             }
         }
     }
+    */
 }
 
