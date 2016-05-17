@@ -100,7 +100,7 @@ public class SqlManager {
     {
         try {
             String query ="UPDATE users SET Verif_Status=? WHERE UserID=? ";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt = con.prepareStatement(query);
             preparedStmt.setBoolean(1, bool);
             preparedStmt.setInt(2,id);
             preparedStmt.executeUpdate();
@@ -113,6 +113,13 @@ public class SqlManager {
     }
 
     public boolean userExist(){
+        try {
+            String query = "select case WHEN (select count(*) from users where Username='teddy') > 0  THEN 1 ELSE 0 END;";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return false;
     }
 
