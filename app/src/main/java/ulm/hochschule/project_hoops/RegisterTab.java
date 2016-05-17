@@ -61,12 +61,46 @@ public class RegisterTab extends Fragment {
             @Override
             public void onClick(View view) {
 
-                SqlManager m = SqlManager.getInstance();
-                m.createUser(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString()
-                        ,username.getText().toString(),password.getText().toString());
 
+                if(ok()) {
+                    SqlManager m = SqlManager.getInstance();
+                    m.createUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString()
+                            , username.getText().toString(), password.getText().toString());
+                }
             }
         });
 
+    }
+
+    private boolean ok(){
+        if(firstname.getText().toString().trim().equals("")){
+            firstname.setError("Enter your name");
+            return false;
+        }
+        if(lastname.getText().toString().trim().equals("")){
+            lastname.setError("Enter your name");
+            return false;
+        }
+        if(email.getText().toString().trim().equals("")){
+            email.setError("Enter your email");
+            return false;
+        }
+        if(username.getText().toString().trim().equals("")){
+            username.setError("No white spaces");
+            return false;
+        }
+        if(password.getText().toString().trim().equals("")){
+            password.setError("No white spaces");
+            return false;
+        }
+        if(password.getText().toString().length() < 7){
+            password.setError("password to short");
+            return false;
+        }
+        if(!repeatpassword.getText().toString().equals(password)){
+            lastname.setError("Repeat your password");
+            return false;
+        }
+        return true;
     }
 }

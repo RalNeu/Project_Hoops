@@ -22,6 +22,7 @@ public class SqlManager {
     private Connection con;
     private Statement st;
     private ResultSet rs;
+    private PreparedStatement preparedStmt;
 
     //create an object of SingleObject
     private static SqlManager instance = new SqlManager();
@@ -62,7 +63,7 @@ public class SqlManager {
 
         try {
             // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt = con.prepareStatement(query);
 
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2, password);
@@ -84,7 +85,24 @@ public class SqlManager {
         }
     }
 
-    public void remove(){
+    public void remove(int i){
+        try {
+            String query = "delete from users where UserID = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1, i);
+            preparedStmt.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void getUser(){
+        try {
+            String query = "select ? from users where name = ?";
+            preparedStmt = con.prepareStatement(query);
+        }catch(Exception e){
+
+        }
     }
                     /*
                     String query = "select * from users;";
