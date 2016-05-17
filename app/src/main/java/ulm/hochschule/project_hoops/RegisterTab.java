@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -23,12 +24,12 @@ public class RegisterTab extends Fragment {
 
     private View layout;
 
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String username;
-    private String password;
-    private String repeatpassword;
+    private EditText firstname;
+    private EditText lastname;
+    private EditText email;
+    private EditText username;
+    private EditText password;
+    private EditText repeatpassword;
     private Button bregister;
 
     @Override
@@ -42,12 +43,12 @@ public class RegisterTab extends Fragment {
 
         layout = inflater.inflate(R.layout.fragment_register, container, false);
 
-        firstname = layout.findViewById(R.id.et_Firstname).toString();
-        lastname = layout.findViewById(R.id.et_Lastname).toString();
-        email = layout.findViewById(R.id.et_Email).toString();
-        username = layout.findViewById(R.id.et_Username).toString();
-        password = layout.findViewById(R.id.et_Password).toString();
-        repeatpassword = layout.findViewById(R.id.et_ConfirmPassword).toString();
+        firstname = (EditText) layout.findViewById(R.id.et_Firstname);
+        lastname = (EditText) layout.findViewById(R.id.et_Lastname);
+        email = (EditText)layout.findViewById(R.id.et_Email);
+        username = (EditText)layout.findViewById(R.id.et_Username);
+        password = (EditText)layout.findViewById(R.id.et_Password);
+        repeatpassword = (EditText)layout.findViewById(R.id.et_ConfirmPassword);
         bregister = (Button) layout.findViewById(R.id.btn_ContentRegister);
         return layout;
     }
@@ -60,10 +61,12 @@ public class RegisterTab extends Fragment {
             @Override
             public void onClick(View view) {
 
-                SqlManager.getInstance().registerUser(firstname, lastname, email,username,password);
+                SqlManager m = SqlManager.getInstance();
+                m.createUser(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString()
+                        ,username.getText().toString(),password.getText().toString());
+
             }
-
         });
-    }
 
+    }
 }
