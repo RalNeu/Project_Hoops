@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,9 @@ import java.util.Calendar;
  * Created by Johann on 06.05.2016.
  */
 public class RegisterTab extends Fragment {
-
+    private AppCompatActivity appcomp = new AppCompatActivity();
     private View layout;
-
+    private MailVerifier mailVerifier;
     private EditText firstname;
     private EditText lastname;
     private EditText email;
@@ -59,11 +60,13 @@ public class RegisterTab extends Fragment {
 
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
 
                 SqlManager m = SqlManager.getInstance();
                 m.createUser(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString()
                         ,username.getText().toString(),password.getText().toString());
+
+                mailVerifier = new MailVerifier(appcomp,"r.zoll995@gmail.com");
 
             }
         });
