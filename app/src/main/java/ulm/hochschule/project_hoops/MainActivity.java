@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, new NewsTab()).commit();
+        ft.replace(R.id.contentPanel, new NewsTab()).commit(); //test
 
     }
 

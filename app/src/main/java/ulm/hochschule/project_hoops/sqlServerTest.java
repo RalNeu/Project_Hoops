@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-public class sqlServer {
+public class sqlServerTest {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
