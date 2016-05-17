@@ -12,11 +12,15 @@ public class Coins {
     }
 
     public void addCoins(int coins){
-        this.coins = coins;
+        this.coins += coins;
     }
 
     public boolean removeCoins(int coins){
-        return (this.coins -= coins) > 0;
+        if(this.coins > coins){
+            coins -= coins;
+            return true;
+        }
+        return false;
     }
 
     public int getCoins(){ return coins; }
