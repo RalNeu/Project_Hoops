@@ -20,141 +20,169 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@drawable/avatarframe">
 
                 <TextureView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textureView"
+                    android:id="@+id/anim_Avatar"
                     android:layout_gravity="center"
-                    android:layout_margin="20dp" />
+                    android:layout_margin="15dp"
+                    android:visibility="visible" />
+
             </FrameLayout>
 
-            <TableLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:weightSum="4">
 
-                <TableRow
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:weightSum="1">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/textView2"
-                        android:layout_span="2"
-                        android:text="HansYOLOFicker"
-                        android:layout_marginTop="30dp"
-                        android:textStyle="bold"
-                        android:layout_weight="1" />
-                </TableRow>
+                        android:text="Username"
+                        android:id="@+id/lbl_Username"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold" />
+                </FrameLayout>
 
-                <TableRow
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:weightSum="4">
+                    android:weightSum="4"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/textunderliner">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="100000000"
-                        android:id="@+id/textView5"
-                        android:textStyle="bold"
+                        android:text="1000000"
+                        android:id="@+id/lbl_Coins"
                         android:layout_weight="3"
-                        android:layout_gravity="center_vertical|right" />
+                        android:layout_gravity="center_vertical|end"
+                        android:textAlignment="viewEnd"></TextView>
 
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <FrameLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:id="@+id/imageView2"
-                        android:layout_column="1"
-                        android:background="@drawable/abc_btn_check_to_on_mtrl_015"
-                        android:focusable="false"
-                        android:layout_weight="1"
-                        android:layout_gravity="right" />
-                </TableRow>
+                        android:layout_weight="1">
 
-                <TableRow
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/img_Coins"
+                            android:background="@drawable/coin"
+                            android:layout_margin="10dp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:weightSum="4" >
+                    android:weightSum="4"
+                    android:background="@drawable/textunderliner">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="100000000"
-                        android:id="@+id/textView6"
-                        android:textStyle="bold"
+                        android:text="1000000"
+                        android:id="@+id/lbl_Ranking"
                         android:layout_weight="3"
-                        android:layout_gravity="center_vertical|right" />
+                        android:layout_gravity="center_vertical|end"
+                        android:textAlignment="viewEnd" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <FrameLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:id="@+id/imageView3"
-                        android:layout_column="1"
-                        android:background="@drawable/abc_btn_check_to_on_mtrl_015"
-                        android:focusable="false"
-                        android:layout_weight="1"
-                        android:layout_gravity="right" />
-                </TableRow>
+                        android:layout_weight="1" >
 
-                <TableRow
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/img_Ranking"
+                            android:background="@drawable/coin"
+                            android:layout_margin="10dp" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:weightSum="4" >
+                    android:weightSum="4"
+                    android:background="@drawable/textunderliner">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="100000000"
-                        android:id="@+id/textView7"
-                        android:textStyle="bold"
+                        android:text="1000000"
+                        android:id="@+id/lbl_Highscore"
                         android:layout_weight="3"
-                        android:layout_gravity="center_vertical|right" />
+                        android:layout_gravity="center_vertical|end"
+                        android:textAlignment="viewEnd" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <FrameLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:id="@+id/imageView4"
-                        android:layout_column="1"
-                        android:background="@drawable/abc_btn_check_to_on_mtrl_015"
-                        android:focusable="false"
-                        android:layout_weight="1"
-                        android:layout_gravity="right" />
-                </TableRow>
+                        android:layout_weight="1" >
 
-            </TableLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/img_Highscore"
+                            android:background="@drawable/coin"
+                            android:layout_margin="10dp" />
+                    </FrameLayout>
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <ScrollView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/scrollView2"
-            android:layout_weight="5" />
+            android:layout_weight="5">
 
-        <Button
-            android:layout_width="fill_parent"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/dataContent" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="@string/editProfile"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp" />
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/editProfile"
+                android:id="@+id/btn_ConfigureProfile"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp" />
+        </FrameLayout>
 
     </LinearLayout>
 </LinearLayout>
