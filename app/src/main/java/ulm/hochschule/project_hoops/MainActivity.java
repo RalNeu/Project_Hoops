@@ -28,7 +28,7 @@ import java.net.URLEncoder;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button bt_Register;
+    private Button btn_Register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, new NewsTab()).commit(); //test
+        //ft.replace(R.id.contentPanel, new NewsTab()).commit(); //test
 
     }
 
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity
 
         getMenuInflater().inflate(R.menu.main, menu);
 
-        bt_Register = (Button) findViewById(R.id.btn_Register);
+        btn_Register = (Button) findViewById(R.id.btn_Register);
 
-        bt_Register.setOnClickListener(new View.OnClickListener() {
+        btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRegister();
@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.edit_profile) {
-            ft.replace(R.id.contentPanel, new EditProfileTab()).commit();
+            System.out.println("check");
+            ft.replace(R.id.contentPanel, new ProfilTab()).commit();
         } else if (id == R.id.nav_send) {
 
         }
