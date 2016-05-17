@@ -1,31 +1,129 @@
 package ulm.hochschule.project_hoops;
 
-import android.util.Log;
-import android.widget.Toast;
+        import android.app.ProgressDialog;
+        import android.content.Context;
+        import android.graphics.Bitmap;
+        import android.os.AsyncTask;
+        import android.util.Config;
+        import android.widget.Toast;
 
+        import java.util.Properties;
+        import java.util.Random;
+
+        import javax.mail.Message;
+        import javax.mail.MessagingException;
+        import javax.mail.PasswordAuthentication;
+        import javax.mail.Session;
+        import javax.mail.Transport;
+        import javax.mail.internet.InternetAddress;
+        import javax.mail.internet.MimeMessage;
 /**
  * Created by zoll on 17.05.2016.
  */
-public class MailVerifier {
+public class MailVerifier extends AsyncTask<Void,Void,Void> {
 
-    Mail m = new Mail("USER EMAIL", "PASSWORD");
-    String[] toArr = {"EMAIL-1", "EMAIL-2"};
 
-    m.setTo(toArr);
-    m.setFrom("USER EMAIL");
-    m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
-    m.setBody("Email body");
 
-    try {
-        // benötige ich nicht...
-        // m.addAttachment("/sdcard/bday.jpg");
-        if(m.send()) {
-            Toast.makeText(this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Email was not sent.", Toast.LENGTH_LONG).show();
+    /**
+     * Created by Belal on 10/30/2015.
+     */
+
+//Class is extending AsyncTask because this class is going to perform a networking operation
+
+        //Declaring Variables
+        private Context context;
+        private Session session;
+
+        //Information to send email
+        private String valString;
+        private String email;
+        private String subject = "Validation Code";
+        private String message = "Here is your Code: ";
+
+
+        //Progressdialog to show while sending email
+        private ProgressDialog progressDialog;
+
+        //Class Constructor
+        public MailVerifier(Context context, String email){
+            //Initializing variables
+            this.context = context;
+            this.email = email;
+
         }
-} catch(Exception e) ()
-        Log.e("MailApp", "Could not send email", e);
-    )
 
-}
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //Showing progress dialog while sending email
+            progressDialog = ProgressDialog.show(context,"Sending Code","Please wait...",false,false);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //Dismissing the progress dialog
+            progressDialog.dismiss();
+            //Showing a success message
+            Toast.makeText(context,"Code Sent",Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            //creating valString
+
+            Random generator = new Random();
+
+            StringBuilder randomStringBuilder = new StringBuilder();
+            int randomLength = generator.nextInt(12);
+            char tempChar;
+            for (int i = 0; i < randomLength; i++){
+                tempChar = (char) (generator.nextInt(96) + 32);
+                randomStringBuilder.append(tempChar);
+            }
+            this.valString = randomStringBuilder.toString();
+
+
+
+            //Creating properties
+            Properties props = new Properties();
+
+            //Configuring properties for gmail
+            //If you are not using gmail you may need to change the values
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+
+            //Creating a new session
+            session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                        //Authenticating the password
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication("projecthoops69", "JZ_Sslru");
+                        }
+                    });
+
+            try {
+                //Creating MimeMessage object
+                MimeMessage mm = new MimeMessage(session);
+
+                //Setting sender address
+                mm.setFrom(new InternetAddress("projecthoops69"));
+                //Adding receiver
+                mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+                //Adding subject
+                mm.setSubject(subject);
+                //Adding message
+                mm.setText(message);
+
+                //Sending email
+                Transport.send(mm);
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
