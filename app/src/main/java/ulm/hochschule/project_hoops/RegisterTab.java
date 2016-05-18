@@ -61,11 +61,11 @@ public class RegisterTab extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 if(ok()) {
                     SqlManager m = SqlManager.getInstance();
                     m.createUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString()
                             , username.getText().toString(), password.getText().toString());
+                    m.userExist("teddy");
                 }
             }
         });
@@ -103,7 +103,7 @@ public class RegisterTab extends Fragment {
             password.setError("password to short. Must have a length of min. 8");
             isok = false;
         }
-        if(repeatpassword.getText().toString().equals(password.getText().toString())){
+        if(!repeatpassword.getText().toString().equals(password.getText().toString())){
             repeatpassword.setError("Repeat your password");
             isok = false;
         }

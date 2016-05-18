@@ -112,28 +112,18 @@ public class SqlManager {
 
     }
 
-    public boolean userExist(){
+    public boolean userExist(String name){
         try {
-            String query = "select case WHEN (select count(*) from users where Username='teddy') > 0  THEN 1 ELSE 0 END;";
+            String query = "select case WHEN (select count(*) from users where Username='name') > 0  THEN 1 ELSE 0 END;";
             preparedStmt = con.prepareStatement(query);
             rs = preparedStmt.executeQuery();
+            System.out.print(rs.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
         return false;
     }
 
-    public String getUser(){
-        try {
-            String query = "select name from users where UserID = ?";
-            preparedStmt = con.prepareStatement(query);
-            rs = preparedStmt.executeQuery();
-            System.out.print(rs);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return rs.toString();
-    }
                     /*
                     String query = "select * from users;";
 
