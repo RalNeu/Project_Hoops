@@ -170,22 +170,22 @@
                 android:fillViewport="false"
                 android:background="@drawable/bgprofilebot" >
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:weightSum="6">
+                    android:layout_height="match_parent">
 
-                    <FrameLayout
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"></FrameLayout>
+                        android:layout_height="100dp">
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Large Text"
+                            android:id="@+id/textView2" />
+                    </TableRow>
+                </TableLayout>
             </ScrollView>
         </FrameLayout>
 
