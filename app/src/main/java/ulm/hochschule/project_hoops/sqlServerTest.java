@@ -1,4 +1,7 @@
 package ulm.hochschule.project_hoops;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -115,5 +118,4 @@ public class sqlServerTest {
 
         }
     }
-
 }
