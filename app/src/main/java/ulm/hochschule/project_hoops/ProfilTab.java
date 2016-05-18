@@ -21,7 +21,7 @@ import java.util.Observer;
  * Created by Johann on 06.05.2016.
  */
 public class ProfilTab extends Fragment {
-
+/*
     private UserProfile user;
 
     private Button btn_EditProfile;
@@ -82,5 +82,5 @@ public class ProfilTab extends Fragment {
         notif = new Notificator();
         notif.addObserver(obs);
     }
-
+*/
 }
