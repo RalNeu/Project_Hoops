@@ -168,7 +168,20 @@
                 android:layout_height="match_parent"
                 android:id="@+id/dataContent"
                 android:fillViewport="false"
-                android:background="@drawable/bgprofilebot" />
+                android:background="@drawable/bgprofilebot" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="6">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"></FrameLayout>
+                </LinearLayout>
+            </ScrollView>
         </FrameLayout>
 
         <FrameLayout
