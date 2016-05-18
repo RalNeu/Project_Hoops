@@ -124,9 +124,8 @@ public class SqlManager {
         return false;
     }
 
-    public Object[] getUser(String userName)
+    public User getUser(String userName)
     {
-        Object array[] = new Object[10];
         int userid = 0,coins = 0;
         String firstname = "",lastname ="",email="",username="",password="";
         try
@@ -156,7 +155,7 @@ public class SqlManager {
         System.out.println("UserID: " + johann.getid() + ", Firstname: " + johann.getFirstname() + ", Lastname: " + johann.getLastname() + ", Username: " + johann.getUsername() + ", Coins: " + johann.getCoinsObject().getCoins());
 
 
-        return array;
+        return johann;
     }
 
                     /*

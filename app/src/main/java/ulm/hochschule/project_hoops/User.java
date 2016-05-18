@@ -9,6 +9,8 @@ public class User {
     private final String firstname, lastname,email,username,password;
     private Coins coins;
 
+    private User user;
+
     public User(int id, String firstname, String lastname, String email, String username, String password, int coins){
         this.id = id;
         this.firstname = firstname;
@@ -18,7 +20,11 @@ public class User {
         this.password = password;
         this.coins = new Coins(coins);
         score = 0;
+
+        user = new User(id, firstname,lastname,email,username,password,coins);
     }
+
+    public User getUser(){ return user; }
 
     public String getEmail() {
         return email;
