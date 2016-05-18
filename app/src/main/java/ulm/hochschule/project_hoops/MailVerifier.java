@@ -35,7 +35,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         private Session session;
 
         //Information to send email
-        private String valString;
+        private String valString; // Random String der zur Verifikation benötigt wird
         private String email;
         private String subject = "Validation Code";
         private String message = "Here is your Code: ";
@@ -71,7 +71,6 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... params) {
             //creating valString
-
             Random generator = new Random();
 
             StringBuilder randomStringBuilder = new StringBuilder();
@@ -82,7 +81,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
                 randomStringBuilder.append(tempChar);
             }
             this.valString = randomStringBuilder.toString();
-
+            message += valString;
 
 
             //Creating properties
@@ -107,6 +106,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
 
             try {
                 //Creating MimeMessage object
+
                 MimeMessage mm = new MimeMessage(session);
 
                 //Setting sender address
