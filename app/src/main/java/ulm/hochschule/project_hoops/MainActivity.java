@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity
     private EditText et_username;
     private EditText et_password;
 
+    private SqlManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +90,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private boolean check(){
-        SqlManager m = SqlManager.getInstance();
+        manager = SqlManager.getInstance();
+        if(!manager.userExist(et_username.getText().toString())){
+            et_username.setError("username doesen't exist");
+        }
         if(true){
             et_password.setError("wrong password");
         }

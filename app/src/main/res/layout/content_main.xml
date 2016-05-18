@@ -13,14 +13,4 @@
     tools:context="ulm.hochschule.project_hoops.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imgv_test"
-        android:scaleType="center"
-        android:background="@drawable/testbackground"
-
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
 </RelativeLayout>
