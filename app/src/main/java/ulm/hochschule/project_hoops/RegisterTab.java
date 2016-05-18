@@ -56,7 +56,7 @@ public class RegisterTab extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         bregister.setOnClickListener(new View.OnClickListener() {
