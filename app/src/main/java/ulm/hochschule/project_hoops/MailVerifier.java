@@ -39,7 +39,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         private String email;
         private String subject = "Validation Code";
         private String message = "Here is your Code: ";
-
+        private final static String bungamail = "projecthoops69@gmail.com";
 
         //Progressdialog to show while sending email
         private ProgressDialog progressDialog;
@@ -101,7 +101,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
                     new javax.mail.Authenticator() {
                         //Authenticating the password
                         protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication("projecthoops69", "JZ_Sslru");
+                            return new PasswordAuthentication(bungamail, "JZ_Sslru");
                         }
                     });
 
@@ -110,7 +110,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
                 MimeMessage mm = new MimeMessage(session);
 
                 //Setting sender address
-                mm.setFrom(new InternetAddress("projecthoops69"));
+                mm.setFrom(new InternetAddress(bungamail));
                 //Adding receiver
                 mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
                 //Adding subject
