@@ -127,7 +127,8 @@ public class SqlManager {
     public Object[] getUser(String userName)
     {
         Object array[] = new Object[10];
-        User johann;
+        int userid = 0,coins = 0;
+        String firstname = "",lastname ="",email="",username="",password="";
         try
         {
             String query="select * from users where Username = ?";
@@ -137,7 +138,13 @@ public class SqlManager {
             rs.beforeFirst();
             while(rs.next())
             {
-                johann = new User(rs.getInt("UserID"),rs.getString("FirstName"),rs.getString("LastName"),rs.getString("EmailAdresse"),rs.getString("Username"),rs.getString("Password"),rs.getInt("Coins"));
+                userid = rs.getInt("UserID");
+                firstname = rs.getString("FirstName");
+                lastname = rs.getString("LastName");
+                email = rs.getString("EmailAdress");
+                username = rs.getString("Username");
+                password = rs.getString("Password");
+                coins = rs.getInt("Coins");
                 rs.next();
             }
         }
@@ -145,8 +152,8 @@ public class SqlManager {
         {
             ex.printStackTrace();
         }
-
-
+        User johann = new User(userid,firstname,lastname,email,username,password,coins);
+        System.out.println("UserID: " + johann.getid() + ", Firstname: " + johann.getFirstname() + ", Lastname: " + johann.getLastname() + ", Username: " + johann.getUsername() + ", Coins: " + johann.getCoinsObject().getCoins());
 
 
         return array;
