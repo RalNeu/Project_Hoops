@@ -100,7 +100,7 @@ public class SqlManager {
     {
         try {
             String query ="UPDATE users SET Verif_Status=? WHERE UserID=? ";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt = con.prepareStatement(query);
             preparedStmt.setBoolean(1, bool);
             preparedStmt.setInt(2,id);
             preparedStmt.executeUpdate();
@@ -112,21 +112,53 @@ public class SqlManager {
 
     }
 
-    public boolean userExist(){
-        return false;
-    }
-
-    public String getUser(){
+    public boolean userExist(String name){
         try {
-            String query = "select name from users where UserID = ?";
+            String query = "select case WHEN (select count(*) from users where Username='name') > 0  THEN 1 ELSE 0 END;";
             preparedStmt = con.prepareStatement(query);
             rs = preparedStmt.executeQuery();
-            System.out.print(rs);
+            System.out.print(rs.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
-        return rs.toString();
+        return false;
     }
+
+    public Object[] getUser(String userName)
+    {
+        Object array[] = new Object[10];
+        int userid = 0,coins = 0;
+        String firstname = "",lastname ="",email="",username="",password="";
+        try
+        {
+            String query="select * from users where Username = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,userName);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            while(rs.next())
+            {
+                userid = rs.getInt("UserID");
+                firstname = rs.getString("FirstName");
+                lastname = rs.getString("LastName");
+                email = rs.getString("EmailAdress");
+                username = rs.getString("Username");
+                password = rs.getString("Password");
+                coins = rs.getInt("Coins");
+                rs.next();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        User johann = new User(userid,firstname,lastname,email,username,password,coins);
+        System.out.println("UserID: " + johann.getid() + ", Firstname: " + johann.getFirstname() + ", Lastname: " + johann.getLastname() + ", Username: " + johann.getUsername() + ", Coins: " + johann.getCoinsObject().getCoins());
+
+
+        return array;
+    }
+
                     /*
                     String query = "select * from users;";
 

@@ -5,6 +5,9 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +26,8 @@ import java.util.Calendar;
 public class RegisterTab extends Fragment {
 
     private View layout;
-
+    private MailVerifier mailVerif;
+    private AppCompatActivity context;
     private EditText firstname;
     private EditText lastname;
     private EditText email;
@@ -32,9 +36,12 @@ public class RegisterTab extends Fragment {
     private EditText repeatpassword;
     private Button bregister;
 
+    private SqlManager manager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        manager = SqlManager.getInstance();
     }
 
     @Nullable
@@ -54,18 +61,24 @@ public class RegisterTab extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
                 if(ok()) {
-                    SqlManager m = SqlManager.getInstance();
-                    m.createUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString()
+
+                    manager.createUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString()
                             , username.getText().toString(), password.getText().toString());
+                    manager.userExist("teddy");
+                    mailVerif = new MailVerifier(context, "r.zoll995@gmail.com");
+                    mailVerif.execute();
+
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.contentPanel, new NewsTab()).commit();
                 }
             }
         });
@@ -103,7 +116,7 @@ public class RegisterTab extends Fragment {
             password.setError("password to short. Must have a length of min. 8");
             isok = false;
         }
-        if(repeatpassword.getText().toString().equals(password.getText().toString())){
+        if(!repeatpassword.getText().toString().equals(password.getText().toString())){
             repeatpassword.setError("Repeat your password");
             isok = false;
         }

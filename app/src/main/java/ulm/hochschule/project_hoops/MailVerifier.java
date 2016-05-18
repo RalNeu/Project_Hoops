@@ -35,11 +35,11 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         private Session session;
 
         //Information to send email
-        private String valString;
+        private String valString; // Random String der zur Verifikation benötigt wird
         private String email;
         private String subject = "Validation Code";
         private String message = "Here is your Code: ";
-
+        private final static String bungamail = "projecthoops69@gmail.com";
 
         //Progressdialog to show while sending email
         private ProgressDialog progressDialog;
@@ -52,26 +52,11 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
 
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            //Showing progress dialog while sending email
-            progressDialog = ProgressDialog.show(context,"Sending Code","Please wait...",false,false);
-        }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            //Dismissing the progress dialog
-            progressDialog.dismiss();
-            //Showing a success message
-            Toast.makeText(context,"Code Sent",Toast.LENGTH_LONG).show();
-        }
 
         @Override
         protected Void doInBackground(Void... params) {
             //creating valString
-
             Random generator = new Random();
 
             StringBuilder randomStringBuilder = new StringBuilder();
@@ -82,7 +67,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
                 randomStringBuilder.append(tempChar);
             }
             this.valString = randomStringBuilder.toString();
-
+            message += valString;
 
 
             //Creating properties
@@ -101,16 +86,17 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
                     new javax.mail.Authenticator() {
                         //Authenticating the password
                         protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication("projecthoops69", "JZ_Sslru");
+                            return new PasswordAuthentication(bungamail, "JZ_Sslru");
                         }
                     });
 
             try {
                 //Creating MimeMessage object
+
                 MimeMessage mm = new MimeMessage(session);
 
                 //Setting sender address
-                mm.setFrom(new InternetAddress("projecthoops69"));
+                mm.setFrom(new InternetAddress(bungamail));
                 //Adding receiver
                 mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
                 //Adding subject

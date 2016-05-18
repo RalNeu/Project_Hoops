@@ -1,20 +1,20 @@
 package ulm.hochschule.project_hoops;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 
-import filters.min_max_filter;
+/**
+ * Created by Teddy on 18.05.2016.
+ */
+public class TestTab extends Fragment {
 
+    Button btnTest;
 
-public class EditProfileTab extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,11 +24,9 @@ public class EditProfileTab extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_editprofile, container, false);
+        View layout = inflater.inflate(R.layout.tests, container, false);
 
-        //EditText et_age = (EditText) layout.findViewById(R.id.et_ageField);
-        //et_age.setFilters(new InputFilter[]{ new min_max_filter("1", "99")});
-
+        btnTest = (Button) layout.findViewById(R.id.btnTests);
         return layout;
     }
 
@@ -36,5 +34,15 @@ public class EditProfileTab extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SqlManager sqlManager = SqlManager.getInstance();
+
+                sqlManager.getUser("Teddy");
+            }
+        });
     }
+
+
 }
