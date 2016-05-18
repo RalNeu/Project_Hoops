@@ -105,11 +105,11 @@ public class RegisterTab extends Fragment {
             email.setError("Not email standard");
             isok = false;
         }
-        if(username.getText().toString().trim().equals("") || username.getText().toString().contains(" ")){
+        if(username.getText().toString().trim().equals("") || username.getText().toString().contains(" ")) {
             username.setError("No white spaces");
             isok = false;
         }
-        if(username.getText().toString().equals(manager.getUser(username.getText().toString()).getUsername())){
+        if(!manager.userExist(username.getText().toString())){
             username.setError("Username exists");
             isok = false;
         }

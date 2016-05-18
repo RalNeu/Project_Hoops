@@ -114,8 +114,9 @@ public class SqlManager {
 
     public boolean userExist(String name){
         try {
-            String query = "select case WHEN (select count(*) from users where Username='name') > 0  THEN 1 ELSE 0 END;";
+            String query = "select case WHEN (select count(*) from users where Username='?') > 0  THEN 1 ELSE 0 END;";
             preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,name);
             rs = preparedStmt.executeQuery();
             System.out.print(rs.toString());
         }catch(Exception e){
