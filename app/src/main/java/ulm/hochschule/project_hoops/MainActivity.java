@@ -1,14 +1,10 @@
 package ulm.hochschule.project_hoops;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,25 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Observer {
 
     private Button btn_Register;
     private Button btn_login;
@@ -90,7 +74,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private boolean check(){
-        manager = SqlManager.getInstance();
         if(!manager.userExist(et_username.getText().toString())){
             et_username.setError("username doesen't exist");
         }
@@ -173,9 +156,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.edit_profile) {
-            System.out.println("check");
-            ft.replace(R.id.contentPanel, new ProfilTab()).commit();
+        } else if (id == R.id.profile) {
+            ProfilTab tab = new ProfilTab();
+            tab.addObserver(this);
+            ft.replace(R.id.contentPanel, tab).commit();
         }
         else if (id == R.id.nav_test){
             ft.replace(R.id.contentPanel, new TestTab()).commit();
@@ -189,5 +173,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @Override
+    public void update(Observable observable, Object data) {
+        Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
+        startActivity(i);
     }
 }
