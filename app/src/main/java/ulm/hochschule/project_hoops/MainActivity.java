@@ -1,11 +1,13 @@
 package ulm.hochschule.project_hoops;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +33,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button btn_Register;
+    private Button btn_login;
+    private NavigationView navigationView;
+
+    private EditText et_username;
+    private EditText et_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +53,12 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        //ft.replace(R.id.contentPanel, new NewsTab()).commit(); //test
+        ft.replace(R.id.contentPanel, new NewsTab()).commit();
 
     }
 
@@ -59,6 +68,26 @@ public class MainActivity extends AppCompatActivity
 
         ft.replace(R.id.contentPanel, new RegisterTab()).commit();
         onBackPressed();
+    }
+
+    private void logIn(){
+            /*View header = navigationView.getHeaderView(0);
+            View header2 = LayoutInflater.from(this).inflate(R.layout.nav_header_usermenu, null);
+            navigationView.removeHeaderView(header);
+            navigationView.addHeaderView(header2);*/
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        ft.replace(R.id.nav_header_main, new login()).commit();
+    }
+
+    private boolean check(){
+        SqlManager m = SqlManager.getInstance();
+        if(true){
+            et_password.setError("wrong password");
+        }
+        //username exist and password that belongs to the username
+        return false;
     }
 
     @Override
@@ -78,6 +107,7 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
 
         btn_Register = (Button) findViewById(R.id.btn_Register);
+        btn_login = (Button) findViewById(R.id.bt_Login);
 
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +115,16 @@ public class MainActivity extends AppCompatActivity
                 openRegister();
             }
         });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logIn();
+            }
+        }
+        );
+
+        et_username = (EditText) findViewById(R.id.et_UserName_nav);
+        et_password = (EditText) findViewById(R.id.et_Password_nav);
 
         return true;
     }
