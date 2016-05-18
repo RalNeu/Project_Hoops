@@ -176,7 +176,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.edit_profile) {
             System.out.println("check");
             ft.replace(R.id.contentPanel, new ProfilTab()).commit();
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_test){
+            ft.replace(R.id.contentPanel, new TestTab()).commit();
+        }
+        else if (id == R.id.nav_send) {
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);

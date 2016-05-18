@@ -1,6 +1,5 @@
 package ulm.hochschule.project_hoops;
 
-import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.widget.Toast;
 
@@ -18,7 +17,7 @@ import java.util.Calendar;
 /**
  * Created by Johann on 14.05.2016.
  */
-public class SqlManager extends AsyncTask<String, String, String>{
+public class SqlManager {
 
     private Connection con;
     private Statement st;
@@ -27,16 +26,6 @@ public class SqlManager extends AsyncTask<String, String, String>{
 
     //create an object of SingleObject
     private static SqlManager instance = new SqlManager();
-
-    @Override
-    protected String doInBackground(String... s) {
-        return null;
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-    }
 
     //make the constructor private so that this class cannot be
     //instantiated
@@ -135,7 +124,81 @@ public class SqlManager extends AsyncTask<String, String, String>{
         return false;
     }
 
-    public boolean passwordExists(String username){
-        return false;
+    public Object[] getUser(String userName)
+    {
+        Object array[] = new Object[10];
+        User johann;
+        try
+        {
+            String query="select * from users where Username = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,userName);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            while(rs.next())
+            {
+                johann = new User(rs.getInt("UserID"),rs.getString("FirstName"),rs.getString("LastName"),rs.getString("EmailAdresse"),rs.getString("Username"),rs.getString("Password"),rs.getInt("Coins"));
+                rs.next();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+
+
+
+        return array;
     }
+
+                    /*
+                    String query = "select * from users;";
+
+
+                    rs = st.executeQuery(query);
+
+                    while(rs.next()) {
+                        String name = rs.getString("Username");
+                        String fname = rs.getString("FirstName");
+                        String nname = rs.getString("LastName");
+                        System.out.println("User: " + name + "   Vorname: " + fname + "   Nachname: " + nname);
+                    }*/
+
+
+                    /*
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ));
+
+                    URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
+
+                    URLConnection conn = url.openConnection();
+
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+
+                    conn.connect();
+
+                    BufferedOutputStream out = new BufferedOutputStream(conn.getOutputStream());
+
+
+                    for(int i = 0;i<100;i++) {
+                        out.write(i);
+                    }
+                    System.out.println("finished");
+                    /*BufferedReader br = new BufferedReader(
+                            new InputStreamReader(
+                                    conn.getInputStream()));
+                    String line;
+
+                    String result = "";
+
+                    while ((line = br.readLine()) != null)
+                        result += line + "\n";
+                    System.out.println(result);
+
+                    br.close();*/
+
 }
