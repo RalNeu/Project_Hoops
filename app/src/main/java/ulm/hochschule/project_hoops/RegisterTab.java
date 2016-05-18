@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,8 @@ public class RegisterTab extends Fragment {
     private EditText password;
     private EditText repeatpassword;
     private Button bregister;
-
+    private AppCompatActivity context;
+    private MailVerifier mailVerif;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +63,13 @@ public class RegisterTab extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 if(ok()) {
                     SqlManager m = SqlManager.getInstance();
                     m.createUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString()
                             , username.getText().toString(), password.getText().toString());
+                    mailVerif = new MailVerifier(context, "r.zoll995@gmail.com");
+                    mailVerif.execute();
+
                 }
             }
         });
