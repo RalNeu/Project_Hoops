@@ -14,8 +14,6 @@ public class UserProfile {
     private String surname;
     private String name;
 
-
-
     private UserProfile(String sqlUSER) {
 
         username = "TestUser";
