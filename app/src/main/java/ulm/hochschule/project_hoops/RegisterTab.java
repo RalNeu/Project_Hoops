@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,39 +91,39 @@ public class RegisterTab extends Fragment {
         boolean isok = true;
 
         if(firstname.getText().toString().trim().equals("")){
-            firstname.setError("Enter your name");
+            firstname.setError(getString(R.string.enter_your_firstname));
             isok = false;
         }
         if(lastname.getText().toString().trim().equals("")){
-            lastname.setError("Enter your name");
+            lastname.setError(getString(R.string.enter_your_lastname));
             isok = false;
         }
         if(email.getText().toString().trim().equals("")){
-            email.setError("Enter your email");
+            email.setError(getString(R.string.enter_your_email));
             isok = false;
         }
         if(!email.getText().toString().contains("@") || !email.getText().toString().contains(".")){
-            email.setError("Not email standard");
+            email.setError(getString((R.string.check_email_standard)));
             isok = false;
         }
         if(username.getText().toString().trim().equals("") || username.getText().toString().contains(" ")) {
-            username.setError("No white spaces");
+            username.setError(getString(R.string.no_whitespaces_allowed));
             isok = false;
         }
-        if(!manager.userExist(username.getText().toString())){
-            username.setError("Username exists");
+        if(manager.userExist(username.getText().toString())){
+            username.setError(getString(R.string.username_already_exists));
             isok = false;
         }
         if(password.getText().toString().trim().equals("") || password.getText().toString().contains(" ")){
-            password.setError("No white spaces");
+            password.setError(getString(R.string.no_whitespaces_allowed));
             isok = false;
         }
         if(password.getText().toString().length() < 7){
-            password.setError("password to short. Must have a length of min. 8");
+            password.setError(getString(R.string.password_too_short));
             isok = false;
         }
         if(!repeatpassword.getText().toString().equals(password.getText().toString())){
-            repeatpassword.setError("Repeat your password");
+            repeatpassword.setError(getString(R.string.passwords_arent_equal));
             isok = false;
         }
         return isok;
