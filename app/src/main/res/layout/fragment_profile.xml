@@ -204,7 +204,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="75dp"
                 android:layout_marginRight="75dp"
-                android:background="@drawable/coin"/>
+                android:background="@drawable/btnball"/>
 
         </FrameLayout>
     </LinearLayout>
