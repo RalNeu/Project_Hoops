@@ -32,7 +32,7 @@ public class ProfilTab extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = UserProfile.getInstance("lol");
+        user = UserProfile.getInstance("RalNeu");
     }
 
     @Nullable
