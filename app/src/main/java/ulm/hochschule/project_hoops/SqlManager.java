@@ -125,28 +125,29 @@ public class SqlManager {
         return false;
     }
 
-    public Object[] getUser(String userName) {
+    public void writeUser(UserProfile user) {
+        //TODO
+    }
+
+    public Object[] getUser(String userName) throws java.sql.SQLException{
 
         Object[] retArray = new Object[6];
-        try {
-            String query="select * from users where Username = ?";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1,userName);
-            rs = preparedStmt.executeQuery();
-            rs.beforeFirst();
 
-            rs.next();
+        String query="select * from users where Username = ?";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1,userName);
+        rs = preparedStmt.executeQuery();
+        rs.beforeFirst();
 
-            retArray[0] = rs.getString("FirstName");                // [0] -> Vorname
-            retArray[1] = rs.getString("LastName");                 // [1] -> Nachname
-            retArray[2] = rs.getString("EmailAdress");              // [2] -> Emailadresse
-            retArray[3] = rs.getString("Password");                 // [3] -> Passwort
-            retArray[4] = new Coins(rs.getInt("Coins"));            // [4] -> Coins
-            retArray[5] = rs.getInt("UserID");                      // [5] -> User ID
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        rs.next();
+
+        retArray[0] = rs.getString("FirstName");                // [0] -> Vorname
+        retArray[1] = rs.getString("LastName");                 // [1] -> Nachname
+        retArray[2] = rs.getString("EmailAdress");              // [2] -> Emailadresse
+        retArray[3] = rs.getString("Password");                 // [3] -> Passwort
+        retArray[4] = new Coins(rs.getInt("Coins"));            // [4] -> Coins
+        retArray[5] = rs.getInt("UserID");                      // [5] -> User ID
+
 
         return retArray;
     }

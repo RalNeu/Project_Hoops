@@ -50,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Username"
+                        android:text="Usernamemmmmm"
                         android:id="@+id/lbl_Username"
                         android:layout_gravity="center_vertical"
                         android:textStyle="bold" />
@@ -189,7 +189,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="75dp"
                 android:layout_marginRight="75dp"
-                android:background="@drawable/btnball"/>
+                android:background="@drawable/btnball" />
 
         </FrameLayout>
     </LinearLayout>
