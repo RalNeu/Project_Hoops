@@ -30,7 +30,7 @@ public class UserProfile {
 
         if(user == null) {
             user = new UserProfile("");
-        }
+    }
 
         return user;
     }
