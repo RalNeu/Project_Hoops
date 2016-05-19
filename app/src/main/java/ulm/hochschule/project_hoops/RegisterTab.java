@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,7 @@ public class RegisterTab extends Fragment {
             username.setError("No white spaces");
             isok = false;
         }
-        if(!manager.userExist(username.getText().toString())){
+        if(manager.userExist(username.getText().toString())){
             username.setError("Username exists");
             isok = false;
         }

@@ -157,6 +157,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.profile) {
+            ProfilTab tab = new ProfilTab();
+            tab.addObserver(this);
+            ft.replace(R.id.contentPanel, tab).commit();
         }
         else if (id == R.id.nav_test){
             ft.replace(R.id.contentPanel, new TestTab()).commit();
