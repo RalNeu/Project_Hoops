@@ -81,11 +81,12 @@
                         android:layout_weight="1">
 
                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitCenter"
+                            android:adjustViewBounds="true"
                             android:id="@+id/img_Coins"
-                            android:background="@drawable/coin2"
-                            android:layout_margin="10dp" />
+                            android:background="@drawable/coin2" />
                     </FrameLayout>
 
                 </LinearLayout>
@@ -117,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/img_Ranking"
-                            android:background="@drawable/coin2"
+                            android:background="@drawable/coin"
                             android:layout_margin="10dp" />
                     </FrameLayout>
                 </LinearLayout>
@@ -149,7 +150,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/img_Highscore"
-                            android:background="@drawable/coin2"
+                            android:background="@drawable/coin"
                             android:layout_margin="10dp" />
                     </FrameLayout>
                 </LinearLayout>
@@ -168,24 +169,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/dataContent"
                 android:fillViewport="false"
-                android:background="@drawable/bgprofilebot2">
+                android:background="@drawable/bgprofilebot" >
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Large Text"
-                            android:id="@+id/textView2" />
-                    </TableRow>
-                </TableLayout>
             </ScrollView>
         </FrameLayout>
 

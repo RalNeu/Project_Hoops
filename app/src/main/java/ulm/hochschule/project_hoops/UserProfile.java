@@ -7,22 +7,23 @@ public class UserProfile {
 
     private static UserProfile user;
 
-    private String username;
+    private String username, forename, surname, email, password;
     private Coins coins;
-    private int ranking;
-    private int highscore;
-    private String surname;
-    private String name;
+    private int ranking, highscore, userID;
 
     private UserProfile(String sqlUSER) {
 
-        username = "TestUser";
-        coins = new Coins(10313);
-        ranking = 1;
-        highscore = 10000;
-        surname = "Neumann";
-        name = "Ralph";
+        Object[] userInfo = SqlManager.getInstance().getUser(sqlUSER);
 
+        username = sqlUSER;
+        forename = (String) userInfo[0];
+        surname = (String) userInfo[1];
+        email = (String) userInfo[2];
+        password = (String) userInfo[3];
+
+        coins = (Coins) userInfo[4];
+
+        userID = (int) userInfo[5];
     }
 
     public static UserProfile getInstance() {

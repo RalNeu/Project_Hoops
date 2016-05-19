@@ -125,87 +125,79 @@ public class SqlManager {
         return false;
     }
 
-    public User getUser(String userName)
-    {
-        int userid = 0,coins = 0;
-        String firstname = "",lastname ="",email="",username="",password="";
-        try
-        {
+    public Object[] getUser(String userName) {
+
+        Object[] retArray = new Object[6];
+        try {
             String query="select * from users where Username = ?";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1,userName);
             rs = preparedStmt.executeQuery();
             rs.beforeFirst();
-            while(rs.next())
-            {
-                userid = rs.getInt("UserID");
-                firstname = rs.getString("FirstName");
-                lastname = rs.getString("LastName");
-                email = rs.getString("EmailAdress");
-                username = rs.getString("Username");
-                password = rs.getString("Password");
-                coins = rs.getInt("Coins");
-                rs.next();
-            }
+
+            rs.next();
+
+            retArray[0] = rs.getString("FirstName");                // [0] -> Vorname
+            retArray[1] = rs.getString("LastName");                 // [1] -> Nachname
+            retArray[2] = rs.getString("EmailAdress");              // [2] -> Emailadresse
+            retArray[3] = rs.getString("Password");                 // [3] -> Passwort
+            retArray[4] = new Coins(rs.getInt("Coins"));            // [4] -> Coins
+            retArray[5] = rs.getInt("UserID");                      // [5] -> User ID
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             ex.printStackTrace();
         }
-        User johann = new User(userid,firstname,lastname,email,username,password,coins);
-        System.out.println("UserID: " + johann.getid() + ", Firstname: " + johann.getFirstname() + ", Lastname: " + johann.getLastname() + ", Username: " + johann.getUsername() + ", Coins: " + johann.getCoinsObject().getCoins());
 
-
-        return johann;
+        return retArray;
     }
 
-                    /*
-                    String query = "select * from users;";
+        /*
+        String query = "select * from users;";
 
 
-                    rs = st.executeQuery(query);
+        rs = st.executeQuery(query);
 
-                    while(rs.next()) {
-                        String name = rs.getString("Username");
-                        String fname = rs.getString("FirstName");
-                        String nname = rs.getString("LastName");
-                        System.out.println("User: " + name + "   Vorname: " + fname + "   Nachname: " + nname);
-                    }*/
-
-
-                    /*
-                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                    StrictMode.setThreadPolicy(policy);
-
-                    CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ));
-
-                    URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
-
-                    URLConnection conn = url.openConnection();
-
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    conn.connect();
-
-                    BufferedOutputStream out = new BufferedOutputStream(conn.getOutputStream());
+        while(rs.next()) {
+            String name = rs.getString("Username");
+            String fname = rs.getString("FirstName");
+            String nname = rs.getString("LastName");
+            System.out.println("User: " + name + "   Vorname: " + fname + "   Nachname: " + nname);
+        }*/
 
 
-                    for(int i = 0;i<100;i++) {
-                        out.write(i);
-                    }
-                    System.out.println("finished");
-                    /*BufferedReader br = new BufferedReader(
-                            new InputStreamReader(
-                                    conn.getInputStream()));
-                    String line;
+        /*
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-                    String result = "";
+        CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ));
 
-                    while ((line = br.readLine()) != null)
-                        result += line + "\n";
-                    System.out.println(result);
+        URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
 
-                    br.close();*/
+        URLConnection conn = url.openConnection();
+
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+
+        conn.connect();
+
+        BufferedOutputStream out = new BufferedOutputStream(conn.getOutputStream());
+
+
+        for(int i = 0;i<100;i++) {
+            out.write(i);
+        }
+        System.out.println("finished");
+        /*BufferedReader br = new BufferedReader(
+                new InputStreamReader(
+                        conn.getInputStream()));
+        String line;
+
+        String result = "";
+
+        while ((line = br.readLine()) != null)
+            result += line + "\n";
+        System.out.println(result);
+
+        br.close();*/
 
 }

@@ -39,7 +39,7 @@ public class TestTab extends Fragment {
             public void onClick(View v) {
                 SqlManager sqlManager = SqlManager.getInstance();
 
-                sqlManager.getUser("Teddy");
+                //sqlManager.getUser("Teddy");
             }
         });
     }
