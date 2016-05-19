@@ -7,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * Created by Teddy on 18.05.2016.
  */
 public class TestTab extends Fragment {
 
-    Button btnTest;
+    Button btn_Test;
+    EditText et_Test;
 
 
     @Override
@@ -26,7 +28,8 @@ public class TestTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.tests, container, false);
 
-        btnTest = (Button) layout.findViewById(R.id.btnTests);
+        btn_Test = (Button) layout.findViewById(R.id.btnTests);
+        et_Test = (EditText) layout.findViewById(R.id.editText);
         return layout;
     }
 
@@ -34,12 +37,12 @@ public class TestTab extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        btnTest.setOnClickListener(new View.OnClickListener() {
+        btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SqlManager sqlManager = SqlManager.getInstance();
 
-                //sqlManager.getUser("Teddy");
+                System.out.println(sqlManager.userExist(et_Test.getText().toString()));
             }
         });
     }

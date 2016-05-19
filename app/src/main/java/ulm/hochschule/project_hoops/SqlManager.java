@@ -1,6 +1,8 @@
 package ulm.hochschule.project_hoops;
 
+import android.nfc.Tag;
 import android.os.StrictMode;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.net.CookieHandler;
@@ -96,8 +98,7 @@ public class SqlManager {
         }
     }
 
-    public void setVerif_Status(boolean bool, int id)
-    {
+    public void setVerif_Status(boolean bool, int id) {
         try {
             String query ="UPDATE users SET Verif_Status=? WHERE UserID=? ";
             preparedStmt = con.prepareStatement(query);
@@ -105,24 +106,24 @@ public class SqlManager {
             preparedStmt.setInt(2,id);
             preparedStmt.executeUpdate();
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             e.getStackTrace();
         }
 
     }
 
     public boolean userExist(String name){
+        boolean response = false;
         try {
-            String query = "select case WHEN (select count(*) from users where Username='?') > 0  THEN 1 ELSE 0 END;";
+            String query = "select case WHEN (select count(*) from users where Username='"+name+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
             preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1,name);
             rs = preparedStmt.executeQuery();
-            System.out.print(rs.toString());
+            rs.next();
+            response = rs.getBoolean("Abfrage");
         }catch(Exception e){
             e.printStackTrace();
         }
-        return false;
+        return response;
     }
 
     public Object[] getUser(String userName) {
