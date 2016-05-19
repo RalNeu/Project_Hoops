@@ -114,8 +114,9 @@ public class SqlManager {
 
     public boolean userExist(String name){
         try {
-            String query = "select case WHEN (select count(*) from users where Username='name') > 0  THEN 1 ELSE 0 END;";
+            String query = "select case WHEN (select count(*) from users where Username='?') > 0  THEN 1 ELSE 0 END;";
             preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,name);
             rs = preparedStmt.executeQuery();
             System.out.print(rs.toString());
         }catch(Exception e){
@@ -124,9 +125,8 @@ public class SqlManager {
         return false;
     }
 
-    public Object[] getUser(String userName)
+    public User getUser(String userName)
     {
-        Object array[] = new Object[10];
         int userid = 0,coins = 0;
         String firstname = "",lastname ="",email="",username="",password="";
         try
@@ -156,7 +156,7 @@ public class SqlManager {
         System.out.println("UserID: " + johann.getid() + ", Firstname: " + johann.getFirstname() + ", Lastname: " + johann.getLastname() + ", Username: " + johann.getUsername() + ", Coins: " + johann.getCoinsObject().getCoins());
 
 
-        return array;
+        return johann;
     }
 
                     /*
