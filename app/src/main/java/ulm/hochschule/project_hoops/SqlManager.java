@@ -1,9 +1,9 @@
 package ulm.hochschule.project_hoops;
 
-import android.nfc.Tag;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.StrictMode;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -12,8 +12,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLInvalidAuthorizationSpecException;
 import java.sql.Statement;
 import java.util.Calendar;
 
@@ -26,9 +24,6 @@ public class SqlManager {
     private Statement st;
     private ResultSet rs;
     private PreparedStatement preparedStmt;
-
-
-
 
     //create an object of SingleObject
     private static SqlManager instance = new SqlManager();
@@ -125,7 +120,6 @@ public class SqlManager {
             preparedStmt.setInt(4,erstellDatumID);
             preparedStmt.execute();
 
-
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -208,7 +202,28 @@ public class SqlManager {
         return response;
     }
 
-    public Object[] getUser(String userName) throws SQLException{
+    public boolean emailExist(String email){
+        boolean response = false;
+        try {
+            String query = "select case WHEN (select count(*) from users where EmailAdress='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.next();
+            response = rs.getBoolean("Abfrage");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public Object[] getUser(String userName) throws java.sql.SQLException{
         int  personID=0;
 
         Object[] retArray = new Object[6];
@@ -245,5 +260,20 @@ public class SqlManager {
     public void writeUser(UserProfile user) {
         //TODO
     }
+    public String getPassword(String email) throws java.sql.SQLException{
 
+        String result = "";
+
+        String query="select * from users where EmailAdress = ?";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1,email);
+        rs = preparedStmt.executeQuery();
+        rs.beforeFirst();
+
+        rs.next();
+
+        result = rs.getString("Password");
+
+        return result;
+    }
 }

@@ -1,12 +1,10 @@
 package ulm.hochschule.project_hoops;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.view.menu.MenuView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -48,14 +48,18 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-       //navigationView.getMenu().findItem(R.id.profile).setEnabled(false);
-
         navigationView.setNavigationItemSelectedListener(this);
+        
 
+        openNewsTab();
+        manager = SqlManager.getInstance();
+
+    }
+    
+    private void openNewsTab(){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, new NewsTab()).commit();
+        ft.replace(R.id.contentPanel, new NewsTab()).commit();   
     }
 
     private void openRegister() {
@@ -67,25 +71,38 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void logIn(){
-            /*View header = navigationView.getHeaderView(0);
-            View header2 = LayoutInflater.from(this).inflate(R.layout.nav_header_usermenu, null);
-            navigationView.removeHeaderView(header);
-            navigationView.addHeaderView(header2);*/
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.nav_header_main, new login()).commit();
+        // TODO: 20.05.2016
     }
 
     private boolean check(){
-        if(!manager.userExist(et_username.getText().toString())){
-            et_username.setError("username doesen't exist");
+        boolean ok = true;
+        try {
+            if(manager.userExist(et_username.getText().toString())){
+                if (!et_password.getText().toString().equals(manager.getUser(et_username.getText().toString())[3])){
+                    et_password.setError("Passwort falsch");
+                    et_username.setError("Benutzer existiert nicht");
+                    ok = false;
+                }
+            }else if(manager.emailExist(et_username.getText().toString())){
+                if(!et_password.getText().toString().equals(manager.getPassword(et_username.getText().toString()))){
+                    et_password.setError("Passwort falsch");
+                    et_username.setError("Benutzer existiert nicht");
+                    ok = false;
+                }
+            }else{
+                et_password.setError("Passwort falsch");
+                et_username.setError("Benutzer existiert nicht");
+                ok = false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if(true){ //TODO
-            et_password.setError("wrong password");
+        try{
+        System.out.println((manager.getPassword(et_username.getText().toString())));
+        }catch (Exception e){
+
         }
-        //username exist and password that belongs to the username
-        return false;
+        return ok;
     }
 
     @Override
@@ -107,6 +124,9 @@ public class MainActivity extends AppCompatActivity
         btn_Register = (Button) findViewById(R.id.btn_Register);
         btn_login = (Button) findViewById(R.id.bt_Login);
 
+        et_username = (EditText) findViewById(R.id.et_UserName_nav);
+        et_password = (EditText) findViewById(R.id.et_Password_nav);
+
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,13 +136,14 @@ public class MainActivity extends AppCompatActivity
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logIn();
-            }
-        }
+                    if(check()){
+                        Toast.makeText(getApplicationContext(), "eingeloggt", Toast.LENGTH_LONG).show();
+                        onBackPressed();
+                    }else
+                        Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
+                }
+             }
         );
-
-        et_username = (EditText) findViewById(R.id.et_UserName_nav);
-        et_password = (EditText) findViewById(R.id.et_Password_nav);
 
         return true;
     }
@@ -151,8 +172,6 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-
-
 
         if (id == R.id.nav_camera) {
             ft.replace(R.id.contentPanel, new NewsTab()).commit();
@@ -185,6 +204,4 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
     }
-
-
 }

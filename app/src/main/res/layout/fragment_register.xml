@@ -89,7 +89,7 @@
         android:text="Registrieren"
         android:id="@+id/btn_ContentRegister"
         android:layout_gravity="center"
-        android:background="#241f1f"
+        android:background="@android:color/holo_orange_dark"
         android:textColor="#ffffff" />
 
 </LinearLayout>

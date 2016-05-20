@@ -17,7 +17,7 @@ public class login extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.nav_header_usermenu, null);
+        layout = inflater.inflate(R.layout.fragment_login, container, false);
         return layout;
     }
 
