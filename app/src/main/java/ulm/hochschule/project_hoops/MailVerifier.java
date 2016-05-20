@@ -60,9 +60,9 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
             Random generator = new Random();
 
             StringBuilder randomStringBuilder = new StringBuilder();
-            int randomLength = generator.nextInt(12);
+
             char tempChar;
-            for (int i = 0; i < randomLength; i++){
+            for (int i = 0; i < 12; i++){
                 tempChar = (char) (generator.nextInt(96) + 32);
                 randomStringBuilder.append(tempChar);
             }
