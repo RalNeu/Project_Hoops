@@ -188,6 +188,18 @@ public class SqlManager {
 
     }
 
+    public void setVerif_Code(String name, String code){
+        try{
+            String query = "UPDATE account SET verified_string=? WHERE username=?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,code);
+            preparedStmt.setString(2,name);
+            preparedStmt.execute();
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+    }
+
     public boolean userExist(String name){
         boolean response = false;
         try {

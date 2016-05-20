@@ -42,7 +42,7 @@ public class TestTab extends Fragment {
             public void onClick(View v) {
                 SqlManager sqlManager = SqlManager.getInstance();
 
-                sqlManager.remove(et_Test.getText().toString());
+                sqlManager.setVerif_Code(et_Test.getText().toString(),"0xxxxxxxx0xx");
             }
         });
     }
