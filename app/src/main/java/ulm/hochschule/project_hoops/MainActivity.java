@@ -1,10 +1,12 @@
 package ulm.hochschule.project_hoops;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.view.menu.MenuView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -46,12 +48,14 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+       //navigationView.getMenu().findItem(R.id.profile).setEnabled(false);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contentPanel, new NewsTab()).commit();
-
     }
 
     private void openRegister() {
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         if(!manager.userExist(et_username.getText().toString())){
             et_username.setError("username doesen't exist");
         }
-        if(true){
+        if(true){ //TODO
             et_password.setError("wrong password");
         }
         //username exist and password that belongs to the username
@@ -148,6 +152,8 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
+
+
         if (id == R.id.nav_camera) {
             ft.replace(R.id.contentPanel, new NewsTab()).commit();
         } else if (id == R.id.nav_gallery) {
@@ -179,4 +185,6 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
     }
+
+
 }
