@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLInvalidAuthorizationSpecException;
 import java.sql.Statement;
 import java.util.Calendar;
@@ -169,40 +170,36 @@ public class SqlManager {
         return response;
     }
 
-    public Object[] getUser(String userName) {
+    public Object[] getUser(String userName) throws SQLException{
         int  personID=0;
 
-        Object[] retArray = new Object[5];
-        try {
-            String query="select * from account where Username = ?";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1,userName);
-            rs = preparedStmt.executeQuery();
-            rs.beforeFirst();
-            rs.next();
+        Object[] retArray = new Object[6];
 
-            retArray[0] = rs.getString("username");
-            retArray[1] = rs.getString("Password");
-            retArray[2] = new Coins(rs.getInt("Coins"));
-            personID = rs.getInt("pID");
+        String query="select * from account where Username = ?";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1,userName);
+        rs = preparedStmt.executeQuery();
+        rs.beforeFirst();
+        rs.next();
+
+        retArray[0] = rs.getString("username");
+        retArray[1] = rs.getString("Password");
+        retArray[2] = new Coins(rs.getInt("Coins"));
+        personID = rs.getInt("pID");
 
 
 
-            query = "select * from person where aID = ?";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1,personID);
-            rs = preparedStmt.executeQuery();
-            rs.beforeFirst();
-            rs.next();
+        query = "select * from person where aID = ?";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1,personID);
+        rs = preparedStmt.executeQuery();
+        rs.beforeFirst();
+        rs.next();
 
-            retArray[3] = rs.getString("vorname");
-            retArray[4] = rs.getString("nachname");
-            retArray[5] = rs.getString("email");
+        retArray[3] = rs.getString("vorname");
+        retArray[4] = rs.getString("nachname");
+        retArray[5] = rs.getString("email");
 
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         return retArray;
     }
