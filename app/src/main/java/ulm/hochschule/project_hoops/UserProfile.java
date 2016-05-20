@@ -13,7 +13,7 @@ public class UserProfile {
     private Coins coins;
     private int ranking, highscore, userID;
 
-    private boolean userFound = false;
+    private static boolean userFound = false;
 
     private UserProfile(String sqlUSER) {
 
@@ -22,12 +22,11 @@ public class UserProfile {
             userInfo = SqlManager.getInstance().getUser(sqlUSER);
 
             username    =           sqlUSER;
-            forename    = (String)  userInfo[0];
-            surname     = (String)  userInfo[1];
-            email       = (String)  userInfo[2];
-            password    = (String)  userInfo[3];
-            coins       = (Coins)   userInfo[4];
-            userID      = (int)     userInfo[5];
+            forename    = (String)  userInfo[3];
+            surname     = (String)  userInfo[4];
+            email       = (String)  userInfo[5];
+            password    = (String)  userInfo[1];
+            coins       = (Coins)   userInfo[2];
 
             userFound = true;
         } catch (SQLException e) {
@@ -45,7 +44,7 @@ public class UserProfile {
         return user;
     }
 
-    public boolean getUserFound() {
+    public static boolean getUserFound() {
         return userFound;
     }
 
@@ -57,18 +56,31 @@ public class UserProfile {
     }
 
     public String getUsername() {
+
         return username;
     }
+
     public int getCoins() {
+
         return coins.getCoins();
     }
 
     public int getRanking() {
+
         return ranking;
     }
 
     public int getHighscore() {
+
         return highscore;
+    }
+
+    public String getForename() {
+        return forename;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
 }

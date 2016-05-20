@@ -228,7 +228,7 @@ public class SqlManager {
 
         Object[] retArray = new Object[6];
 
-        String query="select * from account where Username = ?";
+        String query="select * from account where username = ?";
         preparedStmt = con.prepareStatement(query);
         preparedStmt.setString(1,userName);
         rs = preparedStmt.executeQuery();
@@ -236,13 +236,13 @@ public class SqlManager {
         rs.next();
 
         retArray[0] = rs.getString("username");
-        retArray[1] = rs.getString("Password");
-        retArray[2] = new Coins(rs.getInt("Coins"));
+        retArray[1] = rs.getString("password");
+        retArray[2] = new Coins(rs.getInt("coins"));
         personID = rs.getInt("pID");
 
 
 
-        query = "select * from person where aID = ?";
+        query = "select * from person where pID = ?";
         preparedStmt = con.prepareStatement(query);
         preparedStmt.setInt(1,personID);
         rs = preparedStmt.executeQuery();
