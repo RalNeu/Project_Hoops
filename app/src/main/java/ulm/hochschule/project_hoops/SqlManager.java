@@ -67,7 +67,7 @@ public class SqlManager {
 
         try {
             //create Lieblingsspieler
-            query = "insert into lieblingspieler()" + "values ()";
+            query = "insert into lieblingsspieler()" + "values ()";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.execute();
             //get the primeKey from the Lieblingsspieler
@@ -116,21 +116,14 @@ public class SqlManager {
             }
 
             //create Account
-            query ="insert into account(username,password pID,eID)"+"value(?,?,?,NOW())";
+            query ="insert into account(username,password, pID,eID,lastlogin)"+"value(?,?,?,?,NOW())";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2,password);
             preparedStmt.setInt(3,personID);
             preparedStmt.setInt(4,erstellDatumID);
             preparedStmt.execute();
-            //get ther primeKey form the account
-            query ="select aID from account where aID = (Select MAX(aID) from account)";
-            preparedStmt = con.prepareStatement(query);
-            rs= preparedStmt.executeQuery();
-            while(rs.next()) {
-                accountID = rs.getInt("pID");
-                rs.next();
-            }
+
 
         }catch(Exception e){
             e.printStackTrace();
@@ -177,23 +170,35 @@ public class SqlManager {
     }
 
     public Object[] getUser(String userName) {
+        int  personID=0;
 
-        Object[] retArray = new Object[6];
+        Object[] retArray = new Object[5];
         try {
-            String query="select * from users where Username = ?";
+            String query="select * from account where Username = ?";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1,userName);
             rs = preparedStmt.executeQuery();
             rs.beforeFirst();
-
             rs.next();
 
-            retArray[0] = rs.getString("FirstName");                // [0] -> Vorname
-            retArray[1] = rs.getString("LastName");                 // [1] -> Nachname
-            retArray[2] = rs.getString("EmailAdress");              // [2] -> Emailadresse
-            retArray[3] = rs.getString("Password");                 // [3] -> Passwort
-            retArray[4] = new Coins(rs.getInt("Coins"));            // [4] -> Coins
-            retArray[5] = rs.getInt("UserID");                      // [5] -> User ID
+            retArray[0] = rs.getString("username");
+            retArray[1] = rs.getString("Password");
+            retArray[2] = new Coins(rs.getInt("Coins"));
+            personID = rs.getInt("pID");
+
+
+
+            query = "select * from person where aID = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,personID);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+
+            retArray[3] = rs.getString("vorname");
+            retArray[4] = rs.getString("nachname");
+            retArray[5] = rs.getString("email");
+
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -202,53 +207,6 @@ public class SqlManager {
         return retArray;
     }
 
-        /*
-        String query = "select * from users;";
 
-
-        rs = st.executeQuery(query);
-
-        while(rs.next()) {
-            String name = rs.getString("Username");
-            String fname = rs.getString("FirstName");
-            String nname = rs.getString("LastName");
-            System.out.println("User: " + name + "   Vorname: " + fname + "   Nachname: " + nname);
-        }*/
-
-
-        /*
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ));
-
-        URL url = new URL("http://141.59.26.107/phpScripts/InsertValue");
-
-        URLConnection conn = url.openConnection();
-
-        conn.setDoOutput(true);
-        conn.setDoInput(true);
-
-        conn.connect();
-
-        BufferedOutputStream out = new BufferedOutputStream(conn.getOutputStream());
-
-
-        for(int i = 0;i<100;i++) {
-            out.write(i);
-        }
-        System.out.println("finished");
-        /*BufferedReader br = new BufferedReader(
-                new InputStreamReader(
-                        conn.getInputStream()));
-        String line;
-
-        String result = "";
-
-        while ((line = br.readLine()) != null)
-            result += line + "\n";
-        System.out.println(result);
-
-        br.close();*/
 
 }
