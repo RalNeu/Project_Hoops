@@ -117,7 +117,7 @@ public class SqlManager {
             }
 
             //create Account
-            query ="insert into account(username,password, pID,eID,lastlogin)"+"value(?,?,?,?,NOW())";
+            query ="insert into account(username,password pID,eID,lastlogin)"+"value(?,?,?,?,NOW())";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2,password);
@@ -131,12 +131,50 @@ public class SqlManager {
         }
     }
 
-    public void remove(int i){
+    public void remove(String accnametodelete){
         try {
-            String query = "delete from users where UserID = ?";
+            int pID = 0;
+            int erstellID = 0;
+            int lieblingsID = 0;
+            //Gette die pID des zu löschendes Datensatzes um zu wissen, zu welcher Person dieser
+            //gehört. Danach kann man die pID verwenden um die Person zu löschen!
+            String hilfsquery = "SELECT pID,eID from account where username=?";
+            preparedStmt = con.prepareStatement(hilfsquery);
+            preparedStmt.setString(1, accnametodelete);
+            rs=preparedStmt.executeQuery();
+            rs.next();
+            pID=rs.getInt("pID");
+            erstellID = rs.getInt("eID");
+
+
+            String query = "delete from account where username = ?";
             preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1, i);
+            preparedStmt.setString(1,accnametodelete);
             preparedStmt.execute();
+
+            hilfsquery = "select lID from person where pID=?";
+            preparedStmt = con.prepareStatement(hilfsquery);
+            preparedStmt.setInt(1,pID);
+            rs = preparedStmt.executeQuery();
+            rs.next();
+            lieblingsID = rs.getInt("lID");
+
+
+            query = "delete from person where pID=?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,pID);
+            preparedStmt.execute();
+
+            query = "delete from erstelldatum where eID=?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,erstellID);
+            preparedStmt.execute();
+
+            query = "delete from lieblingsspieler where lID=?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,lieblingsID);
+            preparedStmt.execute();
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -144,7 +182,7 @@ public class SqlManager {
 
     public void setVerif_Status(boolean bool, int id) {
         try {
-            String query ="UPDATE users SET Verif_Status=? WHERE UserID=? ";
+            String query ="UPDATE account SET verified=? WHERE uID=? ";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setBoolean(1, bool);
             preparedStmt.setInt(2,id);
@@ -159,7 +197,7 @@ public class SqlManager {
     public boolean userExist(String name){
         boolean response = false;
         try {
-            String query = "select case WHEN (select count(*) from users where Username='"+name+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
+            String query = "select case WHEN (select count(*) from account where username='"+name+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
             preparedStmt = con.prepareStatement(query);
             rs = preparedStmt.executeQuery();
             rs.next();

@@ -42,7 +42,7 @@ public class TestTab extends Fragment {
             public void onClick(View v) {
                 SqlManager sqlManager = SqlManager.getInstance();
 
-                System.out.println(sqlManager.userExist(et_Test.getText().toString()));
+                sqlManager.remove(et_Test.getText().toString());
             }
         });
     }
