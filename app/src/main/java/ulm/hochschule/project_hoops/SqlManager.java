@@ -207,6 +207,8 @@ public class SqlManager {
         return retArray;
     }
 
-
+    public void writeUser(UserProfile user) {
+        //TODO
+    }
 
 }
