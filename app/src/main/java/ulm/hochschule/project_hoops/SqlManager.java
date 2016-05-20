@@ -26,6 +26,9 @@ public class SqlManager {
     private ResultSet rs;
     private PreparedStatement preparedStmt;
 
+
+
+
     //create an object of SingleObject
     private static SqlManager instance = new SqlManager();
 
@@ -59,28 +62,75 @@ public class SqlManager {
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
-        // the mysql insert statement
-        String query = " insert into users (Username, Password, EmailAdress, FirstName, LastName, Coins, ChatBan, CreateDate, LastLogin)"
-                + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        int personID=0, spielerID=0, accountID=0,erstellDatumID=0;
+        String query;
 
         try {
-            // create the mysql insert preparedstatement
+            //create Lieblingsspieler
+            query = "insert into lieblingspieler()" + "values ()";
             preparedStmt = con.prepareStatement(query);
-
-            preparedStmt.setString(1, userName);
-            preparedStmt.setString(2, password);
-            preparedStmt.setString(3, email);
-            preparedStmt.setString(4, firstName);
-            preparedStmt.setString(5, lastName);
-            //Coins
-            preparedStmt.setLong(6, 0);
-
-            preparedStmt.setBoolean(7, false);
-            preparedStmt.setDate(8, startDate);
-            preparedStmt.setDate(9, startDate);
-
-            // execute the preparedstatement
             preparedStmt.execute();
+            //get the primeKey from the Lieblingsspieler
+            query ="select lID from lieblingsspieler where lID = (Select Max(lID)from lieblingsspieler)";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            while(rs.next()) {
+                spielerID = rs.getInt("lID");
+                rs.next();
+            }
+            preparedStmt.execute();
+
+
+            //Create
+            query = "insert into erstelldatum(eDatum)" + "value(Now())";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.execute();
+            //get Erstelldatum ID
+            query = "select eID from erstelldatum where eID = (Select MAX(eID) from erstelldatum)";
+            preparedStmt = con.prepareStatement(query);
+            rs= preparedStmt.executeQuery();
+            while(rs.next()) {
+                erstellDatumID = rs.getInt("eID");
+                rs.next();
+            }
+
+
+            // create the mysql insert for person
+            query = " insert into person ( email, vorname, nachname,lID)"
+                    + " values (?, ?, ?,?)";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, email);
+            preparedStmt.setString(2, firstName);
+            preparedStmt.setString(3, lastName);
+            preparedStmt.setInt(4,spielerID);
+            preparedStmt.execute();
+
+            //get the primeKey from the person
+            query ="select pID from person where pID = (Select MAX(pID) from person)";
+            preparedStmt = con.prepareStatement(query);
+            rs= preparedStmt.executeQuery();
+            while(rs.next()) {
+                personID = rs.getInt("pID");
+                rs.next();
+            }
+
+            //create Account
+            query ="insert into account(username,password pID,eID)"+"value(?,?,?,NOW())";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, userName);
+            preparedStmt.setString(2,password);
+            preparedStmt.setInt(3,personID);
+            preparedStmt.setInt(4,erstellDatumID);
+            preparedStmt.execute();
+            //get ther primeKey form the account
+            query ="select aID from account where aID = (Select MAX(aID) from account)";
+            preparedStmt = con.prepareStatement(query);
+            rs= preparedStmt.executeQuery();
+            while(rs.next()) {
+                accountID = rs.getInt("pID");
+                rs.next();
+            }
 
         }catch(Exception e){
             e.printStackTrace();
@@ -126,29 +176,28 @@ public class SqlManager {
         return response;
     }
 
-    public void writeUser(UserProfile user) {
-        //TODO
-    }
-
-    public Object[] getUser(String userName) throws java.sql.SQLException{
+    public Object[] getUser(String userName) {
 
         Object[] retArray = new Object[6];
+        try {
+            String query="select * from users where Username = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,userName);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
 
-        String query="select * from users where Username = ?";
-        preparedStmt = con.prepareStatement(query);
-        preparedStmt.setString(1,userName);
-        rs = preparedStmt.executeQuery();
-        rs.beforeFirst();
+            rs.next();
 
-        rs.next();
-
-        retArray[0] = rs.getString("FirstName");                // [0] -> Vorname
-        retArray[1] = rs.getString("LastName");                 // [1] -> Nachname
-        retArray[2] = rs.getString("EmailAdress");              // [2] -> Emailadresse
-        retArray[3] = rs.getString("Password");                 // [3] -> Passwort
-        retArray[4] = new Coins(rs.getInt("Coins"));            // [4] -> Coins
-        retArray[5] = rs.getInt("UserID");                      // [5] -> User ID
-
+            retArray[0] = rs.getString("FirstName");                // [0] -> Vorname
+            retArray[1] = rs.getString("LastName");                 // [1] -> Nachname
+            retArray[2] = rs.getString("EmailAdress");              // [2] -> Emailadresse
+            retArray[3] = rs.getString("Password");                 // [3] -> Passwort
+            retArray[4] = new Coins(rs.getInt("Coins"));            // [4] -> Coins
+            retArray[5] = rs.getInt("UserID");                      // [5] -> User ID
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         return retArray;
     }
