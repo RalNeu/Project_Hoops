@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 /**
@@ -11,7 +12,8 @@ public class UserProfile {
 
     private String username, forename, surname, email, password;
     private Coins coins;
-    private int ranking, highscore, userID;
+    private int ranking, highscore, userID, personID;
+    private Date gebDat;
 
     private static boolean userFound = false;
 
@@ -27,6 +29,8 @@ public class UserProfile {
             email       = (String)  userInfo[5];
             password    = (String)  userInfo[1];
             coins       = (Coins)   userInfo[2];
+            gebDat      = (Date)    userInfo[6];
+            personID    = (int)     userInfo[7];
 
             userFound = true;
         } catch (SQLException e) {
@@ -55,6 +59,10 @@ public class UserProfile {
         user = null;
     }
 
+    public Date getGebDat() {
+        return gebDat;
+    }
+
     public String getUsername() {
 
         return username;
@@ -81,6 +89,14 @@ public class UserProfile {
 
     public String getSurname() {
         return surname;
+    }
+
+    public int getPersonID() {
+        return  personID;
+    }
+
+    public String getAboutMe() {
+        return ""; //TODO
     }
 
 }

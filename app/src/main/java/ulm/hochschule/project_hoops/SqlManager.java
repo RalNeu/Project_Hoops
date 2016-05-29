@@ -9,9 +9,11 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 
@@ -58,6 +60,12 @@ public class SqlManager {
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
+        Calendar c = Calendar.getInstance();
+        c.set(1995, 3, 21); //TODO
+                            // schnelllösung
+
+        Date gebDat = new Date(c.getTimeInMillis());
+
         int personID=0, spielerID=0, accountID=0,erstellDatumID=0;
         String query;
 
@@ -93,13 +101,14 @@ public class SqlManager {
 
 
             // create the mysql insert for person
-            query = " insert into person ( email, vorname, nachname,lID)"
-                    + " values (?, ?, ?,?)";
+            query = "insert into person ( email, vorname, nachname,lID, geburtsdatum)"
+                    + " values (?, ?, ?, ?, ?)";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, email);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
             preparedStmt.setInt(4,spielerID);
+            preparedStmt.setDate(5, gebDat); //TODO
             preparedStmt.execute();
 
             //get the primeKey from the person
@@ -112,7 +121,7 @@ public class SqlManager {
             }
 
             //create Account
-            query ="insert into account(username,password pID,eID,lastlogin)"+"value(?,?,?,?,NOW())";
+            query ="insert into account(username, password, pID, eID, lastlogin) values (?, ?, ?, ?, NOW())";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2,password);
@@ -238,7 +247,7 @@ public class SqlManager {
     public Object[] getUser(String userName) throws java.sql.SQLException{
         int  personID=0;
 
-        Object[] retArray = new Object[6];
+        Object[] retArray = new Object[8];
 
         String query="select * from account where username = ?";
         preparedStmt = con.prepareStatement(query);
@@ -264,6 +273,9 @@ public class SqlManager {
         retArray[3] = rs.getString("vorname");
         retArray[4] = rs.getString("nachname");
         retArray[5] = rs.getString("email");
+        retArray[6] = rs.getDate("geburtsdatum");
+        retArray[7] = personID;
+
 
 
         return retArray;
@@ -272,6 +284,27 @@ public class SqlManager {
     public void writeUser(UserProfile user) {
         //TODO
     }
+
+    public void updatePerson(int personID, String col, String val) {
+        try {
+            String query = "update person set " + col + " = '" + val + "' where pID = '" + personID + "'";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePerson(int personID, String col, Date val) {
+        try {
+            String query = "update person set " + col + " = '" + val +"' where pID = '" + personID + "'";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getPassword(String email) throws java.sql.SQLException{
 
         String result = "";

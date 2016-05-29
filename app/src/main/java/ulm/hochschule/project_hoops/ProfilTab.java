@@ -32,7 +32,7 @@ public class ProfilTab extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = UserProfile.getInstance("Teddy");
+        user = UserProfile.getInstance("RalNeu");
     }
 
     @Nullable
@@ -67,14 +67,10 @@ public class ProfilTab extends Fragment {
     }
 
     private void mapUser() {
-        String coinString = "" + user.getCoins();
-        String rankingString = "" + user.getRanking();
-        String highscoreString = "" + user.getHighscore();
-
-        lbl_Coins.setText(coinString.toCharArray(), 0, coinString.length());
-        lbl_Ranking.setText(rankingString.toCharArray(), 0, rankingString.length());
-        lbl_Highscore.setText(highscoreString.toCharArray(), 0, highscoreString.length());
-        lbl_Username.setText(user.getUsername().toCharArray(), 0, user.getUsername().length());
+        lbl_Coins.setText("" + user.getCoins());
+        lbl_Ranking.setText("" + user.getRanking());
+        lbl_Highscore.setText("" + user.getHighscore());
+        lbl_Username.setText(user.getUsername());
     }
 
     @Override
