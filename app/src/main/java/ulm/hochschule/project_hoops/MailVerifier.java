@@ -42,6 +42,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         private final static String bungamail = "projecthoops69@gmail.com";
         private boolean emailSent = false;
         private SqlManager sm;
+        private UserProfile userProfile;
         private String username;
         //Progressdialog to show while sending email
         private ProgressDialog progressDialog;

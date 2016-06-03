@@ -15,12 +15,15 @@ import java.util.Calendar;
 
 public class EditProfilActivity extends AppCompatActivity {
 
-    private EditText et_Forename, et_Surname, et_AboutMe;
+    private EditText et_Forename, et_Surname, et_AboutMe, et_Code;
     private NumberPicker np_Day, np_Month, np_Year;
     private CheckBox cb_AllowForename, cb_AllowSurname, cb_AllowBirthdate, cb_AllowAboutMe;
     private Button btn_Save;
     private Button btn_reqCode;
+    private Button btn_Send;
     private UserProfile user;
+    private SqlManager sm;
+    private MailVerifier mailVerif;
 
     private String oldForename, oldSurname, oldAboutMe;
     private Date oldGebDat;
@@ -39,6 +42,8 @@ public class EditProfilActivity extends AppCompatActivity {
         et_Forename = (EditText) findViewById(R.id.et_Forename);
         et_Surname = (EditText) findViewById(R.id.et_Surname);
         et_AboutMe = (EditText) findViewById(R.id.et_AboutMe);
+        et_Code = (EditText) findViewById(R.id.et_Code);
+        final AppCompatActivity context = new AppCompatActivity();
 
         np_Day = (NumberPicker) findViewById(R.id.np_DayChooser);
         np_Day.setMinValue(1);
@@ -56,6 +61,22 @@ public class EditProfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 View l = (View) findViewById(R.id.lay_Verify);
                 l.setVisibility(View.GONE);
+                mailVerif = new MailVerifier(context, user.getEmail(), user.getUsername());
+                mailVerif.execute();
+            }
+        });
+        btn_Send = (Button) findViewById(R.id.btn_Send);
+        btn_Send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View l = (View) findViewById(R.id.lay_Verify);
+
+                if (et_Code.getText().toString() == sm.getVerif_Code(user.getUsername())){
+                    sm.setVerif_Status(true, user.getPersonID());
+                    l.setVisibility(View.GONE);
+                }else{
+                    et_Code.setError("Falscher Code!!!");
+                }
             }
         });
 

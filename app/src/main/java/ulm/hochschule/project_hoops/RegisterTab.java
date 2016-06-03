@@ -34,7 +34,6 @@ public class RegisterTab extends Fragment {
     private EditText et_Password;
     private EditText et_Repeatpassword;
     private Button btn_Register;
-
     private SqlManager manager;
 
     @Override
