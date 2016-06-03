@@ -185,7 +185,7 @@ public class SqlManager {
 
     public void setVerif_Status(boolean bool, int id) {
         try {
-            String query ="UPDATE account SET verified=? WHERE uID=? ";
+            String query ="UPDATE account SET verified=? WHERE aID=? ";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setBoolean(1, bool);
             preparedStmt.setInt(2,id);

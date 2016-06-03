@@ -53,6 +53,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
             this.context = context;
             this.email = email;
             this.username = username;
+            sm = SqlManager.getInstance();
         }
 
 
