@@ -33,7 +33,7 @@ public class EditProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
+        sm.getInstance();
         instantiateUiObjects();
         mapUser();
     }
@@ -60,7 +60,7 @@ public class EditProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View l = (View) findViewById(R.id.lay_Verify);
-                l.setVisibility(View.GONE);
+
                 mailVerif = new MailVerifier(context, user.getEmail(), user.getUsername());
                 mailVerif.execute();
             }
