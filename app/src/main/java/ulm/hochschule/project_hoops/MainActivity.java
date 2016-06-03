@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
         try{
-        System.out.println((manager.getPassword(et_username.getText().toString())));
+            System.out.println((manager.getPassword(et_username.getText().toString())));
         }catch (Exception e){
 
         }

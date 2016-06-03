@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditProfilActivity"
     android:weightSum="10"
     android:background="@drawable/bgregister">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/scrollView2"
-        android:layout_weight="10">
 
         <LinearLayout
             android:orientation="vertical"
@@ -239,32 +232,40 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="70dp"
                 android:id="@+id/lay_Verify"
-                android:weightSum="5">
+                android:weightSum="12">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Request Code"
+                    android:layout_height="50dp"
+                    android:text="@string/reqCode"
                     android:id="@+id/btn_reqCode"
-                    android:layout_weight="2" />
+                    android:layout_weight="4"
+                    android:layout_gravity="center_vertical" />
 
                 <EditText
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/et_Code"
-                    android:layout_weight="2"
-                    android:hint="Your code" />
+                    android:layout_weight="3"
+                    android:hint="@string/yourcode"
+                    android:layout_gravity="center_vertical" />
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Send"
+                    android:layout_height="50dp"
+                    android:text="@string/send"
                     android:id="@+id/btn_Send"
-                    android:layout_weight="1" />
+                    android:layout_weight="3"
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -277,7 +278,8 @@
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="10">
+                    android:layout_weight="10"
+                    android:id="@+id/d">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -325,6 +327,4 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</ScrollView>

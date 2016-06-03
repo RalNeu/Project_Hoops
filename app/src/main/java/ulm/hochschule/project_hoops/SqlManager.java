@@ -247,7 +247,7 @@ public class SqlManager {
     public Object[] getUser(String userName) throws java.sql.SQLException{
         int  personID=0;
 
-        Object[] retArray = new Object[8];
+        Object[] retArray = new Object[9];
 
         String query="select * from account where username = ?";
         preparedStmt = con.prepareStatement(query);
@@ -275,8 +275,7 @@ public class SqlManager {
         retArray[5] = rs.getString("email");
         retArray[6] = rs.getDate("geburtsdatum");
         retArray[7] = personID;
-
-
+        retArray[8] = rs.getString("hobbies");
 
         return retArray;
     }

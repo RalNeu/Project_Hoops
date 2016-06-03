@@ -21,7 +21,7 @@ android:layout_height="match_parent">
 <ImageView
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:background="@drawable/VS"
+    android:background="@drawable/vs"
     android:id="@+id/imageView3"
     android:layout_marginTop="25dp"
     android:layout_centerHorizontal="true" />

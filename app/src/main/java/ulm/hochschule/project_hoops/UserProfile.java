@@ -10,7 +10,7 @@ public class UserProfile {
 
     private static UserProfile user;
 
-    private String username, forename, surname, email, password;
+    private String username, forename, surname, email, password, aboutMe;
     private Coins coins;
     private int ranking, highscore, userID, personID;
     private Date gebDat;
@@ -100,6 +100,13 @@ public class UserProfile {
 
     public String getAboutMe() {
         return ""; //TODO
+    }
+
+    public void update(String forename, String surname, String aboutMe, Date gebDat) {
+        this.forename = forename;
+        this.surname = surname;
+        this.gebDat = gebDat;
+        this.aboutMe = aboutMe;
     }
 
 }

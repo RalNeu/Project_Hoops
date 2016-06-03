@@ -43,6 +43,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="reqCode">Neuer Code</string>
+    <string name="yourcode">Dein Code</string>
+    <string name="send">Senden</string>
+
 
     <string name="Project_Hoops">Async ListView</string>
     <array name="images_array">
