@@ -51,7 +51,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/et_Username"
-        android:hint="@string/username"
+        android:hint="@string/et_UserName"
         android:layout_gravity="center"
         android:singleLine="true" />
 

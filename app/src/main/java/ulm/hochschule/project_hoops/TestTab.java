@@ -41,8 +41,10 @@ public class TestTab extends Fragment {
             @Override
             public void onClick(View v) {
                 SqlManager sqlManager = SqlManager.getInstance();
-
-                sqlManager.setVerif_Code(et_Test.getText().toString(),"0xxxxxxxx0xx");
+                if(et_Test.getText().toString().isEmpty()){
+                    System.out.println("Empty");
+                }else
+                    System.out.println("not Empty");
             }
         });
     }

@@ -3,6 +3,7 @@ package ulm.hochschule.project_hoops;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -33,6 +34,10 @@ public class MainActivity extends AppCompatActivity
 
     private SqlManager manager;
 
+    private Fragment currTab = new NewsTab();
+    private Fragment newsTab = new NewsTab();
+    private Fragment registerTab = new RegisterTab2();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +56,15 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         
 
-        openNewsTab();
+        openTab();
         manager = SqlManager.getInstance();
 
     }
     
-    private void openNewsTab(){
+    private void openTab(){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, new NewsTab()).commit();   
+        ft.replace(R.id.contentPanel, currTab).commit();
     }
 
     private void openRegister() {
@@ -174,13 +179,15 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = fm.beginTransaction();
 
         if (id == R.id.nav_camera) {
-            ft.replace(R.id.contentPanel, new NewsTab()).commit();
+            ft.replace(R.id.contentPanel, newsTab).commit();
+            currTab = newsTab;
         } else if (id == R.id.nav_gallery) {
             ft.replace(R.id.contentPanel, new WebView2()).commit();
         } else if (id == R.id.nav_slideshow) {
-
+            ft.replace(R.id.contentPanel, registerTab).commit();
+            currTab = registerTab;
         } else if (id == R.id.nav_manage) {
-
+            ft.replace(R.id.contentPanel, new LoginTab()).commit();
         } else if (id == R.id.profile) {
             ProfilTab tab = new ProfilTab();
             tab.addObserver(this);
