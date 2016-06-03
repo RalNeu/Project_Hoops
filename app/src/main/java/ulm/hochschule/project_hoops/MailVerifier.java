@@ -67,7 +67,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
 
             char tempChar;
             for (int i = 0; i < 5; i++){
-                tempChar = (char) (generator.nextInt(96-32) + 32);
+                tempChar = (char) (generator.nextInt(128-32) + 32);
                 randomStringBuilder.append(tempChar);
             }
             this.valString = randomStringBuilder.toString();
