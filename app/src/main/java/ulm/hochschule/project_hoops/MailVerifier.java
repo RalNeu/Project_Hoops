@@ -40,16 +40,18 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         private String subject = "Validation Code";
         private String message = "Here is your Code: ";
         private final static String bungamail = "projecthoops69@gmail.com";
-
+        private boolean emailSent = false;
+        private SqlManager sm;
+        private String username;
         //Progressdialog to show while sending email
         private ProgressDialog progressDialog;
 
         //Class Constructor
-        public MailVerifier(Context context, String email){
+        public MailVerifier(Context context, String email, String username){
             //Initializing variables
             this.context = context;
             this.email = email;
-
+            this.username = username;
         }
 
 
@@ -62,7 +64,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
             StringBuilder randomStringBuilder = new StringBuilder();
 
             char tempChar;
-            for (int i = 0; i < 12; i++){
+            for (int i = 0; i < 5; i++){
                 tempChar = (char) (generator.nextInt(96) + 32);
                 randomStringBuilder.append(tempChar);
             }
@@ -106,6 +108,8 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
 
                 //Sending email
                 Transport.send(mm);
+                emailSent = true;
+                sm.setVerif_Code(username, valString);
 
             } catch (MessagingException e) {
                 e.printStackTrace();

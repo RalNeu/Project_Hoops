@@ -71,7 +71,7 @@ public class RegisterTab extends Fragment {
                     if(ok()) {
                         manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString()
                                 , et_Username.getText().toString(), et_Password.getText().toString());
-                        mailVerif = new MailVerifier(context, "neumann.ralph@gmx.de");
+                        mailVerif = new MailVerifier(context, et_Email.toString(), et_Username.getText().toString());
                         mailVerif.execute();
 
                         FragmentManager fm = getFragmentManager();
