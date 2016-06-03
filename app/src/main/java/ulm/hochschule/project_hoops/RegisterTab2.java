@@ -29,7 +29,7 @@ public class RegisterTab2 extends Fragment {
     private EditText et_Email;
     private EditText et_Password;
     private EditText et_ConfirmPassword;
-    private Button btn_Login;
+    private Button btn_Register;
     private TextView txt_Link;
 
     private SqlManager manager;
@@ -50,7 +50,7 @@ public class RegisterTab2 extends Fragment {
         et_Email = (EditText) layout.findViewById(R.id.et_Email);
         et_Password = (EditText) layout.findViewById(R.id.et_Password);
         et_ConfirmPassword = (EditText) layout.findViewById(R.id.et_ConfirmPassword);
-        btn_Login = (Button) layout.findViewById(R.id.btn_Login);
+        btn_Register = (Button) layout.findViewById(R.id.btn_Register);
         txt_Link = (TextView) layout.findViewById(R.id.link_Login);
         return layout;
     }
@@ -58,7 +58,7 @@ public class RegisterTab2 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        btn_Login.setOnClickListener(new View.OnClickListener() {
+        btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
@@ -71,7 +71,7 @@ public class RegisterTab2 extends Fragment {
             onLoginFailed();
             return;
         }
-        btn_Login.setEnabled(false);
+        btn_Register.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AppTheme_PopupOverlay);
@@ -93,13 +93,13 @@ public class RegisterTab2 extends Fragment {
     }
 
     public void onLoginSuccess() {
-        btn_Login.setEnabled(true);
+        btn_Register.setEnabled(true);
     }
 
     private void onLoginFailed() {
         Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
 
-        btn_Login.setEnabled(true);
+        btn_Register.setEnabled(true);
     }
 
     private boolean ok(){

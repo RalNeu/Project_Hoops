@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -73,10 +74,9 @@ public class LoginTab extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AppTheme_PopupOverlay);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Anfrage wird verarbeitet...");
+        progressDialog.setMessage("Login...");
+        progressDialog.getWindow().setLayout(600,400);
         progressDialog.show();
-
-        // TODO: Implement your own authentication logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -93,7 +93,7 @@ public class LoginTab extends Fragment {
         boolean ok = true;
         try {
             if(manager.userExist(et_Username.getText().toString())){
-                if (!et_Password.getText().toString().equals(manager.getUser(et_Username.getText().toString())[3])){
+                if (!et_Password.getText().toString().equals(manager.getUser(et_Username.getText().toString())[1])){
                     et_Password.setError("Passwort falsch");
                     et_Username.setError("Benutzer existiert nicht");
                     ok = false;
