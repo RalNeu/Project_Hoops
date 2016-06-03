@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment currTab = new NewsTab();
     private Fragment newsTab = new NewsTab();
     private Fragment registerTab = new RegisterTab2();
+    private Fragment loginTab = new LoginTab();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,8 +185,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             ft.replace(R.id.contentPanel, new WebView2()).commit();
         } else if (id == R.id.nav_slideshow) {
-            ft.replace(R.id.contentPanel, registerTab).commit();
-            currTab = registerTab;
+
         } else if (id == R.id.nav_manage) {
             ft.replace(R.id.contentPanel, new LoginTab()).commit();
         } else if (id == R.id.profile) {
@@ -195,8 +195,13 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_test){
             ft.replace(R.id.contentPanel, new TestTab()).commit();
-        }
-        else if (id == R.id.nav_send) {
+        } else  if(id == R.id.login){
+            ft.replace(R.id.contentPanel, loginTab).commit();
+            currTab = loginTab;
+        } else if(id == R.id.register){
+            ft.replace(R.id.contentPanel, registerTab).commit();
+            currTab = registerTab;
+        } else if (id == R.id.nav_send) {
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
