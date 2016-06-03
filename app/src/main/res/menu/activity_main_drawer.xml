@@ -28,7 +28,7 @@
             <item
                 android:id="@+id/profile"
                 android:icon="@drawable/ic_menu_share"
-                android:title="@string/profile" />
+                android:title="@string/profile"/>
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
@@ -46,6 +46,19 @@
                 android:id="@+id/register"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Register" />
+        </menu>
+    </item>
+
+    <item android:title="Games">
+        <menu>
+            <item
+                android:id="@+id/Tipp"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Tippspiel"/>
+            <item
+                android:id="@+id/BB"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
         </menu>
     </item>
 
