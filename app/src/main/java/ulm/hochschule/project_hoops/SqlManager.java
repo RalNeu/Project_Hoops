@@ -321,4 +321,22 @@ public class SqlManager {
 
         return result;
     }
+
+    public String getVerif_Code(String username){
+        String result = "";
+
+        try{
+            String query= "SELECT verified_string from account WHERE username=?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,username);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+            result = rs.getString("verified_string");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
