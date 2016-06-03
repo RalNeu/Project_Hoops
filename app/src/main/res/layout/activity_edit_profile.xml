@@ -240,6 +240,37 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/lay_Verify"
+                android:weightSum="5">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Request Code"
+                    android:id="@+id/btn_reqCode"
+                    android:layout_weight="2" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_Code"
+                    android:layout_weight="2"
+                    android:hint="Your code" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Send"
+                    android:id="@+id/btn_Send"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:weightSum="12"
                 android:background="@drawable/textunderliner">
 

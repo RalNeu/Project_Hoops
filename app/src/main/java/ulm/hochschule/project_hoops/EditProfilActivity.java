@@ -3,6 +3,7 @@ package ulm.hochschule.project_hoops;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +19,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private NumberPicker np_Day, np_Month, np_Year;
     private CheckBox cb_AllowForename, cb_AllowSurname, cb_AllowBirthdate, cb_AllowAboutMe;
     private Button btn_Save;
+    private Button btn_reqCode;
     private UserProfile user;
 
     private String oldForename, oldSurname, oldAboutMe;
@@ -47,6 +49,15 @@ public class EditProfilActivity extends AppCompatActivity {
         np_Year = (NumberPicker) findViewById(R.id.np_YearChooser);
         np_Year.setMinValue(1900);
         np_Year.setMaxValue(2016); //TODO
+
+        btn_reqCode = (Button) findViewById(R.id.btn_reqCode);
+        btn_reqCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View l = (View) findViewById(R.id.lay_Verify);
+                l.setVisibility(View.GONE);
+            }
+        });
 
         cb_AllowForename = (CheckBox) findViewById(R.id.cb_AllowForename);
         cb_AllowSurname = (CheckBox) findViewById(R.id.cb_AllowSurname);
