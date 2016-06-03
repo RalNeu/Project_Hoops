@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,11 +47,46 @@ public class LoginTab extends Fragment {
             @Override
             public void onClick(View v) {
                 if(check()){
-                    Toast.makeText(getActivity(), "eingeloggt", Toast.LENGTH_LONG).show();
-                }else
-                    Toast.makeText(getActivity(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
+                    login();
+                }
             }
         });
+    }
+
+    public void onLoginSuccess() {
+        btn_Login.setEnabled(true);
+    }
+
+    private void onLoginFailed() {
+        Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
+
+        btn_Login.setEnabled(true);
+    }
+
+    public void login() {
+        if (!check()) {
+            onLoginFailed();
+            return;
+        }
+        btn_Login.setEnabled(false);
+
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
+                R.style.AppTheme_PopupOverlay);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Anfrage wird verarbeitet...");
+        progressDialog.show();
+
+        // TODO: Implement your own authentication logic here.
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        // On complete call either onLoginSuccess or onLoginFailed
+                        onLoginSuccess();
+                        // onLoginFailed();
+                        progressDialog.dismiss();
+                    }
+                }, 3000);
     }
 
     private boolean check(){
