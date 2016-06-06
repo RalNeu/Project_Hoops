@@ -105,7 +105,7 @@ public class EditProfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 View l = (View) findViewById(R.id.lay_Verify);
 
-                if (et_Code.getText().toString() == sm.getVerif_Code(user.getUsername())){
+                if (et_Code.getText().toString() == user.getVerifCode()){
                     sm.setVerif_Status(true, user.getPersonID());
                     l.setVisibility(View.GONE);
                 }else{
