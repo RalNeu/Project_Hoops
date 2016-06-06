@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +53,11 @@ public class MainActivity extends AppCompatActivity
     private Fragment newsTab = new NewsTab();
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
+
+    //For closeKeyboard
+    private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout dLayout;
+    private static DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -71,14 +77,14 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        
+
 
         openTab();
         manager = SqlManager.getInstance();
 
     }
-    
-    private void openTab(){
+
+    private void openTab() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contentPanel, currTab).commit();
@@ -92,36 +98,36 @@ public class MainActivity extends AppCompatActivity
         onBackPressed();
     }
 
-    private void logIn(){
+    private void logIn() {
         // TODO: 20.05.2016
     }
 
-    private boolean check(){
+    private boolean check() {
         boolean ok = true;
         try {
-            if(manager.userExist(et_username.getText().toString())){
-                if (!et_password.getText().toString().equals(manager.getUser(et_username.getText().toString())[3])){
+            if (manager.userExist(et_username.getText().toString())) {
+                if (!et_password.getText().toString().equals(manager.getUser(et_username.getText().toString())[3])) {
                     et_password.setError("Passwort falsch");
                     et_username.setError("Benutzer existiert nicht");
                     ok = false;
                 }
-            }else if(manager.emailExist(et_username.getText().toString())){
-                if(!et_password.getText().toString().equals(manager.getPassword(et_username.getText().toString()))){
+            } else if (manager.emailExist(et_username.getText().toString())) {
+                if (!et_password.getText().toString().equals(manager.getPassword(et_username.getText().toString()))) {
                     et_password.setError("Passwort falsch");
                     et_username.setError("Benutzer existiert nicht");
                     ok = false;
                 }
-            }else{
+            } else {
                 et_password.setError("Passwort falsch");
                 et_username.setError("Benutzer existiert nicht");
                 ok = false;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try{
+        try {
             System.out.println((manager.getPassword(et_username.getText().toString())));
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return ok;
@@ -141,6 +147,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset){
+                hideKeyboard(true, MainActivity.this);
+            }
+        };
+
 
         getMenuInflater().inflate(R.menu.main, menu);
         closeKeyboard();
@@ -158,15 +172,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
         btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    if(check()){
-                        Toast.makeText(getApplicationContext(), "eingeloggt", Toast.LENGTH_LONG).show();
-                        onBackPressed();
-                    }else
-                        Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
-                }
-             }
+                                         @Override
+                                         public void onClick(View view) {
+                                             if (check()) {
+                                                 Toast.makeText(getApplicationContext(), "eingeloggt", Toast.LENGTH_LONG).show();
+                                                 onBackPressed();
+                                             } else
+                                                 Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
+                                         }
+                                     }
         );
 
         return true;
@@ -211,13 +225,12 @@ public class MainActivity extends AppCompatActivity
             ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);
             ft.replace(R.id.contentPanel, tab).commit();
-        }
-        else if (id == R.id.nav_test){
+        } else if (id == R.id.nav_test) {
             ft.replace(R.id.contentPanel, new TestTab()).commit();
-        } else  if(id == R.id.login){
+        } else if (id == R.id.login) {
             ft.replace(R.id.contentPanel, loginTab).commit();
             currTab = loginTab;
-        } else if(id == R.id.register){
+        } else if (id == R.id.register) {
             ft.replace(R.id.contentPanel, registerTab).commit();
             currTab = registerTab;
         } else if (id == R.id.nav_send) {
@@ -225,7 +238,7 @@ public class MainActivity extends AppCompatActivity
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-        }else if(id == R.id.Tipp){
+        } else if (id == R.id.Tipp) {
             startActivity(new Intent(MainActivity.this, TippspielActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -233,6 +246,7 @@ public class MainActivity extends AppCompatActivity
         closeKeyboard();
         return true;
     }
+
     @Override
     public void update(Observable observable, Object data) {
         Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
@@ -241,8 +255,20 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void closeKeyboard(){
+    //Close keyboard Patrick
+    public void closeKeyboard() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(dLayout.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(dLayout.getWindowToken(), 0);
     }
+
+    //do not work
+    public void hideKeyboard(boolean val, Activity activity) {
+        View view;
+        view = activity.getWindow().getCurrentFocus();
+        if (val == true) {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
 }
