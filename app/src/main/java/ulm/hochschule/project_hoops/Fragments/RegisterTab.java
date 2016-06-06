@@ -1,17 +1,12 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +14,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
+
 /**
  * Created by Johann on 06.05.2016.
  */
 public class RegisterTab extends Fragment {
 
     private View layout;
-    private MailVerifier mailVerif;
+    private MailVerifierTask mailVerif;
     private AppCompatActivity context;
     private EditText et_Firstname;
     private EditText et_Lastname;
@@ -70,7 +69,7 @@ public class RegisterTab extends Fragment {
                     if(ok()) {
                         manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString()
                                 , et_Username.getText().toString(), et_Password.getText().toString());
-                        mailVerif = new MailVerifier(context, et_Email.getText().toString(), et_Username.getText().toString());
+                        mailVerif = new MailVerifierTask(context, et_Email.getText().toString(), et_Username.getText().toString());
                         mailVerif.execute();
 
                         FragmentManager fm = getFragmentManager();

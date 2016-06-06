@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.activities;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import ulm.hochschule.project_hoops.R;
 
 /**
  * Created by Johann on 03.06.2016.

@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.utilities;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+
+import ulm.hochschule.project_hoops.objects.Coins;
 
 /**
  * Created by Johann on 14.05.2016.

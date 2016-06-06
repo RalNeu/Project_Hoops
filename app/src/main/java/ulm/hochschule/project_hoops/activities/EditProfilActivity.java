@@ -1,9 +1,7 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,6 +10,11 @@ import android.widget.NumberPicker;
 
 import java.sql.Date;
 import java.util.Calendar;
+
+import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
+import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 public class EditProfilActivity extends AppCompatActivity {
 
@@ -23,7 +26,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private Button btn_Send;
     private UserProfile user;
     private SqlManager sm;
-    private MailVerifier mailVerif;
+    private MailVerifierTask mailVerif;
 
     private String oldForename, oldSurname, oldAboutMe;
     private Date oldGebDat;
@@ -96,7 +99,7 @@ public class EditProfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 View l = (View) findViewById(R.id.lay_Verify);
 
-                mailVerif = new MailVerifier(context, user.getEmail(), user.getUsername());
+                mailVerif = new MailVerifierTask(context, user.getEmail(), user.getUsername());
                 mailVerif.execute();
             }
         });

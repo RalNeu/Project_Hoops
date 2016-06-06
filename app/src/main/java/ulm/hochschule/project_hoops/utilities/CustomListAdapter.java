@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.utilities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.tasks.ImageDownloaderTask;
+import ulm.hochschule.project_hoops.utilities.ListItem;
+
 
 /**
  * Created by Johann on 15.05.2016.

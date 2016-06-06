@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.utilities;
 
 /**
  * Created by Johann on 15.05.2016.

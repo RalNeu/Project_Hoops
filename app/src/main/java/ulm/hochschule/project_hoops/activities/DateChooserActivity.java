@@ -1,8 +1,10 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.NumberPicker;
+
+import ulm.hochschule.project_hoops.R;
 
 public class DateChooserActivity extends AppCompatActivity {
 
