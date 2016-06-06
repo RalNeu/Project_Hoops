@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
 
 
         getMenuInflater().inflate(R.menu.main, menu);
-        closeKeybord();
+        closeKeyboard();
 
         btn_Register = (Button) findViewById(R.id.btn_Register);
         btn_login = (Button) findViewById(R.id.bt_Login);
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        closeKeybord();
+        closeKeyboard();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        closeKeybord();
+        closeKeyboard();
         return true;
     }
     @Override
@@ -241,8 +241,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void closeKeybord(){
+    public void closeKeyboard(){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromInputMethod(dLayout.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(dLayout.getWindowToken(),0);
     }
 }
