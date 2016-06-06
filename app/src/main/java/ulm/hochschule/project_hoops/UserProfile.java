@@ -10,11 +10,10 @@ public class UserProfile {
 
     private static UserProfile user;
 
-    private String username, forename, surname, email, password, aboutMe, verif;
+    private String username, forename, surname, email, password, aboutMe, verifCode;
     private Coins coins;
-    private int ranking, highscore, userID, personID, settings;
+    private int ranking, highscore, userID, personID;
     private Date gebDat;
-
 
     private static boolean userFound = false;
 
@@ -34,7 +33,7 @@ public class UserProfile {
             personID    = (int)     userInfo[7];
             aboutMe     = (String)  userInfo[8];
             settings    = (int)     userInfo[9];
-            verif       = (String)  userInfo[10];
+            verifCode       = (String)  userInfo[10];
 
             userFound = true;
         } catch (SQLException e) {
@@ -69,6 +68,9 @@ public class UserProfile {
 
     public String getEmail(){
         return email;
+    }
+    public String getVerifCode(){
+        return verifCode;
     }
     public String getUsername() {
 
