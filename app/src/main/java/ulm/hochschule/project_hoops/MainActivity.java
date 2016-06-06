@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment loginTab = new LoginTab();
     private DrawerLayout dLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,10 +140,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromInputMethod(dLayout.getWindowToken(),0);
+
 
         getMenuInflater().inflate(R.menu.main, menu);
+        closeKeybord();
 
         btn_Register = (Button) findViewById(R.id.btn_Register);
         btn_login = (Button) findViewById(R.id.bt_Login);
@@ -177,6 +178,7 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        closeKeybord();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -228,6 +230,7 @@ public class MainActivity extends AppCompatActivity
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        closeKeybord();
         return true;
     }
     @Override
@@ -235,5 +238,11 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
 
+    }
+
+
+    public void closeKeybord(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromInputMethod(dLayout.getWindowToken(),0);
     }
 }

@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
@@ -34,6 +37,7 @@ public class RegisterTab extends Fragment {
     private EditText et_Repeatpassword;
     private Button btn_Register;
     private SqlManager manager;
+    private LinearLayout lLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class RegisterTab extends Fragment {
         et_Password = (EditText)layout.findViewById(R.id.et_Password);
         et_Repeatpassword = (EditText)layout.findViewById(R.id.et_ConfirmPassword);
         btn_Register = (Button) layout.findViewById(R.id.btn_ContentRegister);
+        lLayout = (LinearLayout) layout.findViewById(R.id.registerLayout);
         return layout;
     }
 
@@ -64,6 +69,8 @@ public class RegisterTab extends Fragment {
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(lLayout.getWindowToken(), 0);
 
                 if(manager.isNetworkAvailable(getContext())) {
                     if(ok()) {
@@ -75,6 +82,8 @@ public class RegisterTab extends Fragment {
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
                         ft.replace(R.id.contentPanel, new NewsTab()).commit();
+
+
                     }
                 }else Toast.makeText(getActivity(), "You are not connected to the internet",
                         Toast.LENGTH_LONG).show();
