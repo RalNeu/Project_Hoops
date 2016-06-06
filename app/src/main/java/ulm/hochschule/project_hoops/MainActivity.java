@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,8 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.Observable;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment newsTab = new NewsTab();
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
+    private DrawerLayout dLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         
 
         openTab();
@@ -124,6 +129,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromInputMethod(dLayout.getWindowToken(),0);
 
         getMenuInflater().inflate(R.menu.main, menu);
 
