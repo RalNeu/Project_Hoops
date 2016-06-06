@@ -10,7 +10,7 @@ public class UserProfile {
 
     private static UserProfile user;
 
-    private String username, forename, surname, email, password, aboutMe;
+    private String username, forename, surname, email, password, aboutMe, verifCode;
     private Coins coins;
     private int ranking, highscore, userID, personID;
     private Date gebDat;
@@ -65,6 +65,9 @@ public class UserProfile {
 
     public String getEmail(){
         return email;
+    }
+    public String getVerifCode(){
+        return verifCode;
     }
     public String getUsername() {
 
