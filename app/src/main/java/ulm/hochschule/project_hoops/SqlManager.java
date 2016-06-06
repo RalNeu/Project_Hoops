@@ -183,11 +183,11 @@ public class SqlManager {
         }
     }
 
-    public void setVerif_Status(boolean bool, int id) {
+    public void setVerif_Status(int intwert, int id) {
         try {
             String query ="UPDATE account SET verified=? WHERE aID=? ";
             preparedStmt = con.prepareStatement(query);
-            preparedStmt.setBoolean(1, bool);
+            preparedStmt.setInt(1, intwert);
             preparedStmt.setInt(2,id);
             preparedStmt.executeUpdate();
         }
