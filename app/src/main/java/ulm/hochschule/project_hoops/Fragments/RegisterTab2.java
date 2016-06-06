@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,7 @@ public class RegisterTab2 extends Fragment {
             public void onClick(View v) {
                 login();
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromInputMethod(lLayout.getWindowToken(),0);
+                imm.hideSoftInputFromWindow(lLayout.getWindowToken(), 0);
             }
         });
     }

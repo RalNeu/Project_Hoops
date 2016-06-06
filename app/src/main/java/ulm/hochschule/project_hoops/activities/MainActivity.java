@@ -25,13 +25,13 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
-import ulm.hochschule.project_hoops.fragments.LoginTab;
-import ulm.hochschule.project_hoops.fragments.NewsTab;
-import ulm.hochschule.project_hoops.fragments.ProfilTab;
-import ulm.hochschule.project_hoops.fragments.RegisterTab;
-import ulm.hochschule.project_hoops.fragments.RegisterTab2;
-import ulm.hochschule.project_hoops.fragments.TestTab;
-import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.Fragments.LoginTab;
+import ulm.hochschule.project_hoops.Fragments.NewsTab;
+import ulm.hochschule.project_hoops.Fragments.ProfilTab;
+import ulm.hochschule.project_hoops.Fragments.RegisterTab;
+import ulm.hochschule.project_hoops.Fragments.RegisterTab2;
+import ulm.hochschule.project_hoops.Fragments.TestTab;
+import ulm.hochschule.project_hoops.Fragments.WebView2;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
@@ -139,10 +139,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromInputMethod(dLayout.getWindowToken(),0);
+
 
         getMenuInflater().inflate(R.menu.main, menu);
+        closeKeyboard();
 
         btn_Register = (Button) findViewById(R.id.btn_Register);
         btn_login = (Button) findViewById(R.id.bt_Login);
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
+         closeKeyboard();
         return super.onOptionsItemSelected(item);
     }
 
@@ -228,11 +228,18 @@ public class MainActivity extends AppCompatActivity
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        closeKeyboard();
         return true;
     }
     @Override
     public void update(Observable observable, Object data) {
         Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
+    }
+
+
+    public void closeKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(dLayout.getWindowToken(), 0);
     }
 }
