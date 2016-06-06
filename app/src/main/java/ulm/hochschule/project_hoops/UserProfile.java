@@ -10,10 +10,11 @@ public class UserProfile {
 
     private static UserProfile user;
 
-    private String username, forename, surname, email, password, aboutMe;
+    private String username, forename, surname, email, password, aboutMe, verif;
     private Coins coins;
-    private int ranking, highscore, userID, personID;
+    private int ranking, highscore, userID, personID, settings;
     private Date gebDat;
+
 
     private static boolean userFound = false;
 
@@ -31,6 +32,9 @@ public class UserProfile {
             coins       = (Coins)   userInfo[2];
             gebDat      = (Date)    userInfo[6];
             personID    = (int)     userInfo[7];
+            aboutMe     = (String)  userInfo[8];
+            settings    = (int)     userInfo[9];
+            verif       = (String)  userInfo[10];
 
             userFound = true;
         } catch (SQLException e) {
