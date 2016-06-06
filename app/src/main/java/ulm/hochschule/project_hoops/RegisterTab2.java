@@ -1,14 +1,17 @@
 package ulm.hochschule.project_hoops;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +37,16 @@ public class RegisterTab2 extends Fragment {
 
     private SqlManager manager;
 
+    //Patrick für tastatur schließen
+    private LinearLayout lLayout;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager = SqlManager.getInstance();
+
+        lLayout = (LinearLayout) getActivity().findViewById(R.id.register2Layout);
     }
 
     @Nullable
@@ -62,6 +71,8 @@ public class RegisterTab2 extends Fragment {
             @Override
             public void onClick(View v) {
                 login();
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromInputMethod(lLayout.getWindowToken(),0);
             }
         });
     }
