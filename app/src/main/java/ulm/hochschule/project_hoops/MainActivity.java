@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             ft.replace(R.id.contentPanel, new LoginTab()).commit();
         } else if (id == R.id.profile) {
-            ProfilTab tab = new ProfilTab();
+            ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);
             ft.replace(R.id.contentPanel, tab).commit();
         }
@@ -234,5 +234,6 @@ public class MainActivity extends AppCompatActivity
     public void update(Observable observable, Object data) {
         Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
+
     }
 }

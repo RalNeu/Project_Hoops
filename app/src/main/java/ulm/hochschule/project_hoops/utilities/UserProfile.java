@@ -21,7 +21,7 @@ public class UserProfile {
 
     private UserProfile(String sqlUSER) {
 
-        Object[] userInfo = new Object[0];
+        Object[] userInfo;
         try {
             userInfo = SqlManager.getInstance().getUser(sqlUSER);
 
@@ -35,13 +35,17 @@ public class UserProfile {
             personID    = (int)     userInfo[7];
             aboutMe     = (String)  userInfo[8];
             settings    = (int)     userInfo[9];
-            verifCode       = (String)  userInfo[10];
+            verifCode   = (String)  userInfo[10];
 
             userFound = true;
         } catch (SQLException e) {
             System.err.println("User not found.");
             e.printStackTrace();
         }
+    }
+
+    public int getSettings() {
+        return settings;
     }
 
     public static UserProfile getInstance(String userName) {
@@ -110,11 +114,12 @@ public class UserProfile {
         return ""; //TODO
     }
 
-    public void update(String forename, String surname, String aboutMe, Date gebDat) {
+    public void update(String forename, String surname, String aboutMe, Date gebDat, int settings) {
         this.forename = forename;
         this.surname = surname;
         this.gebDat = gebDat;
         this.aboutMe = aboutMe;
+        this.settings = settings;
     }
 
 }

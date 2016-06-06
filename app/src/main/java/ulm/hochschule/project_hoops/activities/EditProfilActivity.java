@@ -11,6 +11,7 @@ import android.widget.NumberPicker;
 import java.sql.Date;
 import java.util.Calendar;
 
+import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
@@ -30,6 +31,7 @@ public class EditProfilActivity extends AppCompatActivity {
 
     private String oldForename, oldSurname, oldAboutMe;
     private Date oldGebDat;
+    private int oldSettings;
 
 
     @Override
@@ -127,6 +129,7 @@ public class EditProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 save();
+                ProfilTab.getInstance().updateData();
                 finish();
             }
         });
@@ -167,6 +170,10 @@ public class EditProfilActivity extends AppCompatActivity {
             manager.updatePerson(personID, "hobbies", oldAboutMe);
         }
 
+        if(oldSettings != calcSettings()) {
+            manager.updateAccount(user.getUsername(), "einstellung", calcSettings());
+        }
+
         Calendar c = Calendar.getInstance();
         c.set(np_Year.getValue(), np_Month.getValue(), np_Day.getValue());
 
@@ -177,17 +184,35 @@ public class EditProfilActivity extends AppCompatActivity {
             manager.updatePerson(personID, "geburtsdatum", oldGebDat);
         }
 
-        user.update(oldForename, oldSurname, oldAboutMe, oldGebDat);
+        user.update(oldForename, oldSurname, oldAboutMe, oldGebDat, calcSettings());
+    }
+
+    private int calcSettings() {
+        int retVal = 0;
+
+        boolean[] fields = {cb_AllowForename.isChecked(), cb_AllowSurname.isChecked(),cb_AllowBirthdate.isChecked(),cb_AllowAboutMe.isChecked()};
+
+        for (int i = 0;i<4;i++) {
+            if(fields[i]) {
+                retVal += Math.pow(2,i);
+            }
+        }
+
+        return retVal;
     }
 
     private void mapUser() {
         if(UserProfile.getUserFound()) {
-            user = UserProfile.getInstance("");
-
             oldForename = user.getForename();
             oldSurname = user.getSurname();
             oldAboutMe = user.getAboutMe();
             oldGebDat = user.getGebDat();
+            oldSettings = user.getSettings();
+
+            cb_AllowForename.setChecked((oldSettings&1) > 0 ? true : false);
+            cb_AllowSurname.setChecked((oldSettings&2) > 0 ? true : false);
+            cb_AllowBirthdate.setChecked((oldSettings&4) > 0 ? true : false);
+            cb_AllowAboutMe.setChecked((oldSettings&8) > 0 ? true : false);
 
             et_Forename.setText(oldForename);
             et_Surname.setText(oldSurname);

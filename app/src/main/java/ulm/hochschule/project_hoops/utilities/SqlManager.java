@@ -310,6 +310,16 @@ public class SqlManager {
         }
     }
 
+    public void updateAccount(String username, String col, int val) {
+        try {
+            String query = "update account set " + col + " = '" + val +"' where username = '" + username + "'";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getPassword(String email) throws java.sql.SQLException{
 
         String result = "";

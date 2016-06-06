@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops.fragments;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.Date;
+import java.util.Observable;
 import java.util.Observer;
 
 import ulm.hochschule.project_hoops.utilities.Notificator;
@@ -20,12 +25,14 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
  */
 public class ProfilTab extends Fragment {
 
+    private static ProfilTab tab;
+
     private UserProfile user;
 
     private Button btn_EditProfile;
-    private TextView lbl_Coins, lbl_Ranking, lbl_Highscore, lbl_Username;
+    private TextView lbl_Coins, lbl_Ranking, lbl_Highscore, lbl_Username, lbl_Name, lbl_GebDat, lbl_AboutMe;
     private Notificator notif;
-    private View layout;
+    private View layout, view_Name, view_GebDat, view_AboutMe;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +58,59 @@ public class ProfilTab extends Fragment {
         return layout;
     }
 
+    public static ProfilTab getInstance() {
+        if (tab == null) {
+            tab = new ProfilTab();
+        }
+        return tab;
+    }
+
+    public void updateData() {
+
+        String name = "", gebDat = "";
+
+        int settings = user.getSettings();
+
+        if((settings&3) > 0) {
+            if ((settings & 1) > 0) {
+                name += user.getForename();
+            }
+            if ((settings & 2) > 0) {
+                if(name.length() != 0) {
+                    name += " ";
+                }
+                name += user.getSurname();
+            }
+
+            lbl_Name.setText(name);
+            view_Name.setVisibility(View.VISIBLE);
+
+        } else {
+            view_Name.setVisibility(View.GONE);
+        }
+
+        if((settings&4) > 0) {
+            Date d = user.getGebDat();
+            String[] s = d.toString().split("-");
+
+            gebDat = s[2] + "." + d.getMonth() + "." + s[0];
+
+            System.out.println(gebDat);
+            lbl_GebDat.setText(gebDat);
+            view_GebDat.setVisibility(View.VISIBLE);
+        } else {
+            view_GebDat.setVisibility(View.GONE);
+        }
+
+        if((settings&8) > 0) {
+            lbl_AboutMe.setText(user.getAboutMe());
+            view_AboutMe.setVisibility(View.VISIBLE);
+        } else {
+            view_AboutMe.setVisibility(View.GONE);
+        }
+
+    }
+
     private void openEditProfile() {
 
         notif.notifObs();
@@ -61,7 +121,15 @@ public class ProfilTab extends Fragment {
         lbl_Highscore = (TextView) layout.findViewById(R.id.lbl_Highscore);
         lbl_Ranking = (TextView) layout.findViewById(R.id.lbl_Ranking);
         lbl_Username = (TextView) layout.findViewById(R.id.lbl_Username);
+        lbl_Name = (TextView) layout.findViewById(R.id.lbl_Name);
+        lbl_GebDat = (TextView) layout.findViewById(R.id.lbl_GebDat);
+        lbl_AboutMe = (TextView) layout.findViewById(R.id.lbl_AboutMe);
+
         btn_EditProfile = (Button) layout.findViewById(R.id.btn_ConfigureProfile);
+
+        view_Name = (View) layout.findViewById(R.id.view_Name);
+        view_GebDat = (View) layout.findViewById(R.id.view_GebDat);
+        view_AboutMe = (View) layout.findViewById(R.id.view_AboutMe);
     }
 
     private void mapUser() {
@@ -69,6 +137,7 @@ public class ProfilTab extends Fragment {
         lbl_Ranking.setText("" + user.getRanking());
         lbl_Highscore.setText("" + user.getHighscore());
         lbl_Username.setText(user.getUsername());
+        updateData();
     }
 
     @Override
