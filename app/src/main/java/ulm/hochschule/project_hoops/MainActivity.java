@@ -206,6 +206,8 @@ public class MainActivity extends AppCompatActivity
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
+        }else if(id == R.id.Tipp){
+            startActivity(new Intent(MainActivity.this, TippspielActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -26,6 +26,9 @@
             android:name=".EditProfilActivity"
             android:label="@string/app_name"></activity>
         <activity android:name=".DateChooserActivity"></activity>
+        <activity
+            android:name=".TippspielActivity"
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

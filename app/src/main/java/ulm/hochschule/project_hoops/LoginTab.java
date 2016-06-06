@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.beans.IndexedPropertyChangeEvent;
+
 /**
  * Created by Johann on 20.05.2016.
  */
@@ -24,6 +26,7 @@ public class LoginTab extends Fragment {
     private Button btn_Login;
 
     private SqlManager manager;
+    private UserProfile user;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class LoginTab extends Fragment {
 
     public void onLoginSuccess() {
         btn_Login.setEnabled(true);
+        user = UserProfile.getInstance(et_Username.getText().toString());
     }
 
     private void onLoginFailed() {
@@ -81,12 +85,11 @@ public class LoginTab extends Fragment {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
-                        // onLoginFailed();
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
     }
 
     private boolean check(){
@@ -94,28 +97,15 @@ public class LoginTab extends Fragment {
         try {
             if(manager.userExist(et_Username.getText().toString())){
                 if (!et_Password.getText().toString().equals(manager.getUser(et_Username.getText().toString())[1])){
-                    et_Password.setError("Passwort falsch");
-                    et_Username.setError("Benutzer existiert nicht");
-                    ok = false;
-                }
-            }else if(manager.emailExist(et_Username.getText().toString())){
-                if(!et_Password.getText().toString().equals(manager.getPassword(et_Username.getText().toString()))){
-                    et_Password.setError("Passwort falsch");
-                    et_Username.setError("Benutzer existiert nicht");
+                    //TODO
                     ok = false;
                 }
             }else{
-                et_Password.setError("Passwort falsch");
-                et_Username.setError("Benutzer existiert nicht");
+                //TODO
                 ok = false;
             }
         }catch (Exception e){
             e.printStackTrace();
-        }
-        try{
-            System.out.println((manager.getPassword(et_Username.getText().toString())));
-        }catch (Exception e){
-
         }
         return ok;
     }

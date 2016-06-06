@@ -55,5 +55,20 @@
             android:gravity="center"
             android:textSize="16dip"/>
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:background="@android:drawable/ic_menu_set_as"
+            android:layout_gravity="right" />
+
+        <android.support.v7.widget.DialogTitle
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:text="Halo"/>
+
     </LinearLayout>
 </ScrollView>
