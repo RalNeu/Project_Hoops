@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
@@ -109,13 +110,7 @@ public class EditProfilActivity extends AppCompatActivity {
         btn_Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View l = (View) findViewById(R.id.lay_Verify);
-                if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())){
-                    sm.setVerif_Status(0, user.getPersonID());
-                    l.setVisibility(View.GONE);
-                }else{
-                    et_Code.setError("Falscher Code!!!");
-                }
+               checkVerified();
             }
         });
 
@@ -133,6 +128,20 @@ public class EditProfilActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void checkVerified() {
+        if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())){
+            sm.setVerif_Status(0, user.getPersonID());
+            hideVerify();
+        }else{
+            et_Code.setError("Falscher Code!!!");
+        }
+    }
+
+    private void hideVerify() {
+        View l = (View) findViewById(R.id.lay_Verify);
+        l.setVisibility(View.GONE);
     }
 
     private boolean isLeapYear(int year) {
@@ -216,6 +225,8 @@ public class EditProfilActivity extends AppCompatActivity {
 
             et_Forename.setText(oldForename);
             et_Surname.setText(oldSurname);
+            et_AboutMe.setText(oldAboutMe);
+
             if(oldGebDat != null) {
                 Calendar c = Calendar.getInstance();
                 c.setTime(oldGebDat);
@@ -226,6 +237,14 @@ public class EditProfilActivity extends AppCompatActivity {
                 np_Day.setValue(1);
                 np_Month.setValue(1);
                 np_Year.setValue(2000);
+            }
+
+            try {
+                if (sm.isVerified(user.getUsername())) {
+                    hideVerify();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }

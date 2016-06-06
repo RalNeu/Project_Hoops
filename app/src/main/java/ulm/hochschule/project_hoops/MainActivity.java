@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.view.menu.MenuView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -161,6 +162,12 @@ public class MainActivity extends AppCompatActivity
 
         btn_Register = (Button) findViewById(R.id.btn_Register);
         btn_login = (Button) findViewById(R.id.bt_Login);
+
+       // dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+       // MenuView.ItemView i = (MenuView.ItemView) dLayout.findViewById(R.id.profile);
+        //i.setEnabled(false);
 
         et_username = (EditText) findViewById(R.id.et_UserName_nav);
         et_password = (EditText) findViewById(R.id.et_Password_nav);

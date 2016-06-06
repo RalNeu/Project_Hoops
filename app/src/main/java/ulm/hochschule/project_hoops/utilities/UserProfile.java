@@ -111,7 +111,7 @@ public class UserProfile {
     }
 
     public String getAboutMe() {
-        return ""; //TODO
+        return aboutMe; //test
     }
 
     public void update(String forename, String surname, String aboutMe, Date gebDat, int settings) {

@@ -228,7 +228,7 @@ public class SqlManager {
     public boolean emailExist(String email){
         boolean response = false;
         try {
-            String query = "select case WHEN (select count(*) from users where EmailAdress='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
+            String query = "select case WHEN (select count(*) from person where EmailAdress='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
             preparedStmt = con.prepareStatement(query);
             rs = preparedStmt.executeQuery();
             rs.next();
@@ -335,6 +335,22 @@ public class SqlManager {
         result = rs.getString("Password");
 
         return result;
+    }
+
+    public boolean isVerified(String username) throws SQLException {
+        boolean retVal = false;
+
+        String query = "select verified, username from account where username=?";
+
+        preparedStmt = con.prepareStatement(query);
+
+        preparedStmt.setString(1,username);
+        rs = preparedStmt.executeQuery();
+        rs.next();
+
+        retVal = ((int) rs.getInt("verified")) == 0;
+
+        return retVal;
     }
 
     public String getVerif_Code(String username){
