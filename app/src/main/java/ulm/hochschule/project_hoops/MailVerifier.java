@@ -7,6 +7,7 @@ package ulm.hochschule.project_hoops;
         import android.util.Config;
         import android.widget.Toast;
 
+        import java.security.SecureRandom;
         import java.util.Properties;
         import java.util.Random;
 
@@ -61,13 +62,13 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... params) {
             //creating valString
-            Random generator = new Random();
-
+            SecureRandom rnd = new SecureRandom();
+            final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             StringBuilder randomStringBuilder = new StringBuilder();
 
             char tempChar;
             for (int i = 0; i < 5; i++){
-                tempChar = (char) (generator.nextInt(128-32) + 32);
+                tempChar = AB.charAt(rnd.nextInt(AB.length()));
                 randomStringBuilder.append(tempChar);
             }
             this.valString = randomStringBuilder.toString();

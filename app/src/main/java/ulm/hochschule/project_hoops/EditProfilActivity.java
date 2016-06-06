@@ -34,6 +34,7 @@ public class EditProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         sm = SqlManager.getInstance();
+        user = UserProfile.getInstance("");
         instantiateUiObjects();
         mapUser();
     }
