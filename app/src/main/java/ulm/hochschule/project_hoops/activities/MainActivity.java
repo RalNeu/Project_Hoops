@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +24,16 @@ import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import ulm.hochschule.project_hoops.fragments.LoginTab;
+import ulm.hochschule.project_hoops.fragments.NewsTab;
+import ulm.hochschule.project_hoops.fragments.ProfilTab;
+import ulm.hochschule.project_hoops.fragments.RegisterTab;
+import ulm.hochschule.project_hoops.fragments.RegisterTab2;
+import ulm.hochschule.project_hoops.fragments.TestTab;
+import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Observer {

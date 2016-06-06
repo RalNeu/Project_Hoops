@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
  * Created by Teddy on 18.05.2016.

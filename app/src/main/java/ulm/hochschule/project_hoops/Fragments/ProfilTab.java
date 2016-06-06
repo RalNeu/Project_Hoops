@@ -1,21 +1,19 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.Observable;
 import java.util.Observer;
+
+import ulm.hochschule.project_hoops.utilities.Notificator;
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
  * Created by Johann on 06.05.2016.

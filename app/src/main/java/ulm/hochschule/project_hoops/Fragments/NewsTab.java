@@ -1,36 +1,22 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.fragments;
 
-import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.renderscript.Element;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
+import ulm.hochschule.project_hoops.utilities.CustomListAdapter;
+import ulm.hochschule.project_hoops.utilities.ListItem;
+import ulm.hochschule.project_hoops.R;
 
 
 /**

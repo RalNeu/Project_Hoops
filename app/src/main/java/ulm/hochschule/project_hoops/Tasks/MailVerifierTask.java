@@ -1,15 +1,11 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.tasks;
 
         import android.app.ProgressDialog;
         import android.content.Context;
-        import android.graphics.Bitmap;
         import android.os.AsyncTask;
-        import android.util.Config;
-        import android.widget.Toast;
 
         import java.security.SecureRandom;
         import java.util.Properties;
-        import java.util.Random;
 
         import javax.mail.Message;
         import javax.mail.MessagingException;
@@ -18,10 +14,14 @@ package ulm.hochschule.project_hoops;
         import javax.mail.Transport;
         import javax.mail.internet.InternetAddress;
         import javax.mail.internet.MimeMessage;
+
+        import ulm.hochschule.project_hoops.utilities.SqlManager;
+        import ulm.hochschule.project_hoops.utilities.UserProfile;
+
 /**
  * Created by zoll on 17.05.2016.
  */
-public class MailVerifier extends AsyncTask<Void,Void,Void> {
+public class MailVerifierTask extends AsyncTask<Void,Void,Void> {
 
 
 
@@ -49,7 +49,7 @@ public class MailVerifier extends AsyncTask<Void,Void,Void> {
         private ProgressDialog progressDialog;
 
         //Class Constructor
-        public MailVerifier(Context context, String email, String username){
+        public MailVerifierTask(Context context, String email, String username){
             //Initializing variables
             this.context = context;
             this.email = email;

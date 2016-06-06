@@ -1,7 +1,9 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.utilities;
 
 import java.sql.Date;
 import java.sql.SQLException;
+
+import ulm.hochschule.project_hoops.objects.Coins;
 
 /**
  * Created by Ralph on 18.05.2016.

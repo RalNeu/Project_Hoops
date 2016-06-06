@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,7 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
  * Created by Johann on 17.05.2016.

@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+
+import ulm.hochschule.project_hoops.R;
 
 /**
  * Created by Johann on 06.05.2016.
