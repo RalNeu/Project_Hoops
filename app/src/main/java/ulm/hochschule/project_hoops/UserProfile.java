@@ -12,7 +12,7 @@ public class UserProfile {
 
     private String username, forename, surname, email, password, aboutMe, verifCode;
     private Coins coins;
-    private int ranking, highscore, userID, personID;
+    private int ranking, highscore, userID, personID, settings;
     private Date gebDat;
 
     private static boolean userFound = false;
