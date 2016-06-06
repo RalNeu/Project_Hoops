@@ -46,7 +46,6 @@ public class RegisterTab2 extends Fragment {
         super.onCreate(savedInstanceState);
         manager = SqlManager.getInstance();
 
-        lLayout = (LinearLayout) getActivity().findViewById(R.id.register2Layout);
     }
 
     @Nullable
@@ -61,6 +60,7 @@ public class RegisterTab2 extends Fragment {
         et_ConfirmPassword = (EditText) layout.findViewById(R.id.et_ConfirmPassword);
         btn_Register = (Button) layout.findViewById(R.id.btn_Register);
         txt_Link = (TextView) layout.findViewById(R.id.link_Login);
+        lLayout = (LinearLayout) layout.findViewById(R.id.register2Layout);
         return layout;
     }
 

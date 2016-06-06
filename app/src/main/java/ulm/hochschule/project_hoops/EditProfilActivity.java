@@ -105,9 +105,8 @@ public class EditProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View l = (View) findViewById(R.id.lay_Verify);
-
-                if (et_Code.getText().toString() == user.getVerifCode()){
-                    sm.setVerif_Status(true, user.getPersonID());
+                if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())){
+                    sm.setVerif_Status(0, user.getPersonID());
                     l.setVisibility(View.GONE);
                 }else{
                     et_Code.setError("Falscher Code!!!");
