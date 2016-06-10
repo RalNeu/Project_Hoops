@@ -236,7 +236,7 @@ public class SqlManager {
         return response;
     }
 
-    public boolean emailExist(String email){
+    public boolean emailExist(String email){//TODO: Methode verweist auf alte Datenbankstruktur, muss erneuert werden
         boolean response = false;
         try {
             String query = "select case WHEN (select count(*) from person where EmailAdress='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
@@ -331,7 +331,7 @@ public class SqlManager {
         }
     }
 
-    public String getPassword(String email) throws java.sql.SQLException{
+    public String getPassword(String email) throws java.sql.SQLException{//TODO: SQL-Abfrage verweist auf alte Tabellenstruktur
 
         String result = "";
 
