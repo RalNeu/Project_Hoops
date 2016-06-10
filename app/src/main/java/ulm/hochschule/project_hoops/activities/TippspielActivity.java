@@ -1,61 +1,94 @@
 package ulm.hochschule.project_hoops.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TabHost;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.fragments.MyBetTab;
 
 /**
- * Created by Johann on 03.06.2016.
+ * Created by Johann on 10.06.2016.
  */
 public class TippspielActivity extends AppCompatActivity {
 
-    private ImageView team1;
-    private ImageView team2;
-    private SeekBar seekbar;
-    private TextView prozent1;
-    private TextView prozent2;
-
+    ViewPager Tab;
+    TabPagerAdapter TabAdapter;
+    ActionBar actionBar;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        setContentView(R.layout.activity_tippspiel);
-        init();
-        seekbar.setProgress(50);
-        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        setContentView(R.layout.activity_main);
 
-            int progress = 0;
+        TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
+
+        Tab = (ViewPager)findViewById(R.id.pager);
+        Tab.setOnPageChangeListener(
+                new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    public void onPageSelected(int position) {
+
+                        actionBar = getActionBar();
+                        actionBar.setSelectedNavigationItem(position);                    }
+                });
+        Tab.setAdapter(TabAdapter);
+
+        actionBar = getActionBar();
+        //Enable Tabs on Action Bar
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        ActionBar.TabListener tabListener = new ActionBar.TabListener(){
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                progress = progresValue;
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+                Tab.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
             }
-        });
 
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+            }
+        };
+        //Add New Tab
+        actionBar.addTab(actionBar.newTab().setText("Android").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("iOS").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("Windows").setTabListener(tabListener));
 
     }
 
-    private void init(){
-        team1 = (ImageView) findViewById(R.id.iv_Team1);
-        team2 = (ImageView) findViewById(R.id.iv_Team2);
-        seekbar = (SeekBar) findViewById(R.id.sb_SeekBar);
-        prozent1 = (TextView) findViewById(R.id.tv_Prozent1);
-        prozent2 = (TextView) findViewById(R.id.tv_Prozent2);
+    private class TabPagerAdapter extends FragmentStatePagerAdapter {
+        public TabPagerAdapter(FragmentManager fm) {
+            super(fm);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            switch (i) {
+                case 0:
+                    //Fragement for Android Tab
+                    return new MyBetTab();
+            }
+            return null;
+
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return 3; //No of Tabs
+        }
+
     }
 }

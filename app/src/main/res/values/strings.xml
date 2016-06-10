@@ -84,5 +84,7 @@
         <item>French soldier stabbed; link to Woolwich attack being probed</item>
         <item>Life convict can`t claim freedom after 14 yrs: SC</item>
     </array>
+    <string name="title_activity_tipp_spiel">TippSpiel</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

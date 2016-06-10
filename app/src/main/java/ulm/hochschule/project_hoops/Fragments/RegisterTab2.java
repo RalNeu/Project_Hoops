@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
@@ -38,6 +38,7 @@ public class RegisterTab2 extends Fragment {
     private TextView txt_Link;
 
     private SqlManager manager;
+    private ulm.hochschule.project_hoops.tasks.MailVerifierTask mailVerifierTask;
 
     //Patrick für tastatur schließen
     private LinearLayout lLayout;
@@ -47,7 +48,6 @@ public class RegisterTab2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager = SqlManager.getInstance();
-
     }
 
     @Nullable
@@ -74,7 +74,7 @@ public class RegisterTab2 extends Fragment {
             public void onClick(View v) {
                 login();
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(lLayout.getWindowToken(), 0);
+                imm.hideSoftInputFromInputMethod(lLayout.getWindowToken(),0);
             }
         });
     }
@@ -107,6 +107,8 @@ public class RegisterTab2 extends Fragment {
 
     public void onLoginSuccess() {
         btn_Register.setEnabled(true);
+        mailVerifierTask = new MailVerifierTask(getContext(), et_Email.getText().toString(), et_Username.getText().toString());
+        mailVerifierTask.execute();
     }
 
     private void onLoginFailed() {
