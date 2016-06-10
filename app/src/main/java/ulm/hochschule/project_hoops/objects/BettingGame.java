@@ -73,7 +73,7 @@ public class BettingGame {
         this.teamOtherMap.put(username,value);
     }
 
-    public void deletMaps(){
+    public void deleteMaps(){
         this.teamUlmMap.clear();
         this.teamOtherMap.clear();
     }

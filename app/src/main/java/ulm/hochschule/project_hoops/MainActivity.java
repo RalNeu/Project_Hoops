@@ -36,6 +36,7 @@ import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
 import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.tasks.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -250,6 +251,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             ft.replace(R.id.contentPanel, new LoginTab()).commit();
         } else if (id == R.id.profile) {
+
             ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);
             ft.replace(R.id.contentPanel, tab).commit();

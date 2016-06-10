@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.tasks.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
@@ -44,11 +45,16 @@ public class TestTab extends Fragment {
         btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SqlManager sqlManager = SqlManager.getInstance();
+                /*SqlManager sqlManager = SqlManager.getInstance();
                 if(et_Test.getText().toString().isEmpty()){
                     System.out.println("Empty");
                 }else
-                    System.out.println("not Empty");
+                    System.out.println("not Empty");*/
+
+                ServerCommunicate s = new ServerCommunicate();
+                s.g(getActivity());
+                s.start();
+
             }
         });
     }
