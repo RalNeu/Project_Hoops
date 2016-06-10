@@ -8,7 +8,7 @@
             android:title="Neuigkeiten" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/icticket"
             android:title="Gallery" />
         <item
             android:id="@+id/nav_slideshow"

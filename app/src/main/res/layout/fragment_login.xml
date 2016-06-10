@@ -65,10 +65,5 @@
             android:background="@android:drawable/ic_menu_set_as"
             android:layout_gravity="right" />
 
-        <android.support.v7.widget.DialogTitle
-            android:layout_width="56dp"
-            android:layout_height="wrap_content"
-            android:text="Halo"/>
-
     </LinearLayout>
 </ScrollView>
