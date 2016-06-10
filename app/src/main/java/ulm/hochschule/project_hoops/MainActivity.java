@@ -77,6 +77,27 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                closeKeyboard();
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
@@ -152,7 +173,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                hideKeyboard(true, MainActivity.this);
+
             }
         };
 
@@ -270,13 +291,4 @@ public class MainActivity extends AppCompatActivity
         imm.hideSoftInputFromWindow(dLayout.getWindowToken(), 0);
     }
 
-    //do not work
-    public void hideKeyboard(boolean val, Activity activity) {
-        View view;
-        view = activity.getWindow().getCurrentFocus();
-        if (val == true) {
-            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
 }
