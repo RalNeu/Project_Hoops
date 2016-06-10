@@ -27,6 +27,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private Button btn_Save;
     private Button btn_reqCode;
     private Button btn_Send;
+    private Button btn_deactivate;
     private UserProfile user;
     private SqlManager sm;
     private MailVerifierTask mailVerif;
@@ -94,6 +95,14 @@ public class EditProfilActivity extends AppCompatActivity {
                         np_Day.setMaxValue(28);
                     }
                 }
+            }
+        });
+        btn_deactivate = (Button) findViewById(R.id.btn_deactivate);
+        btn_deactivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                View l = (View) findViewById(R.id.lay_Verify);
+                sm.setStatus(user.getUsername(), "inactive");
             }
         });
 
