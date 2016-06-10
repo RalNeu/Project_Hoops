@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private UserProfile user;
     private SqlManager sm;
     private MailVerifierTask mailVerif;
-
+    private AppCompatActivity context;
     private String oldForename, oldSurname, oldAboutMe;
     private Date oldGebDat;
     private int oldSettings;
@@ -50,7 +51,7 @@ public class EditProfilActivity extends AppCompatActivity {
         et_Surname = (EditText) findViewById(R.id.et_Surname);
         et_AboutMe = (EditText) findViewById(R.id.et_AboutMe);
         et_Code = (EditText) findViewById(R.id.et_Code);
-        final AppCompatActivity context = new AppCompatActivity();
+        context = new AppCompatActivity();
 
         np_Day = (NumberPicker) findViewById(R.id.np_DayChooser);
         np_Day.setMinValue(1);
@@ -134,6 +135,8 @@ public class EditProfilActivity extends AppCompatActivity {
         if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())){
             sm.setVerif_Status(0, user.getPersonID());
             hideVerify();
+            Toast toast = Toast.makeText(context, "Verifizierung erfolgreich", Toast.LENGTH_SHORT);
+            toast.show();
         }else{
             et_Code.setError("Falscher Code!!!");
         }

@@ -210,6 +210,17 @@ public class SqlManager {
             e.getStackTrace();
         }
     }
+    public void setStatus(String username, String status){
+        try {
+            String query = "UPDATE account SET status=? WHERE username=?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1,status);
+            preparedStmt.setString(2,username);
+            preparedStmt.execute();
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+    }
 
     public boolean userExist(String name){
         boolean response = false;
@@ -349,6 +360,26 @@ public class SqlManager {
         rs.next();
 
         retVal = ((int) rs.getInt("verified")) == 0;
+
+        return retVal;
+    }
+
+    public boolean getVerifStatus(String username) {
+        boolean retVal = false;
+
+        String query = "select verified, username from account where username=?";
+
+        try {
+            preparedStmt = con.prepareStatement(query);
+
+        preparedStmt.setString(1,username);
+        rs = preparedStmt.executeQuery();
+        rs.next();
+
+        retVal = ((int) rs.getInt("verified")) == 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return retVal;
     }
