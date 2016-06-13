@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops.objects;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,15 +10,19 @@ import java.util.Map;
 public class BettingGame {
 
 
+
+
     private HashMap<String, Integer> teamUlmMap;
     private HashMap<String, Integer> teamOtherMap;
     //Quote
-    private int quoteUlm;
-    private int quoteOther;
+    private double quoteUlm;
+    private double quoteOther;
+    private double quotaCoinUlm;
+    private double quotaCoinOther;
     //Show max coin for each team
-    private int maxCoinsUlm;
-    private int maxCoinsOther;
-    private int maxCoins;
+    private double maxCoinsUlm;
+    private double maxCoinsOther;
+    private double maxCoins;
     //quote multiplicator
     private double oddsUlm;
     private double oddsOther;
@@ -40,6 +45,12 @@ public class BettingGame {
                 entry.setValue((int)(tmp * this.oddsOther));
             }
         }
+    }
+
+    public void calculateCoinsQuota(){
+        int total=0;
+        this.quotaCoinUlm = (this.maxCoinsUlm / this.maxCoins)*100;
+        this.quotaCoinOther = (this.maxCoinsOther / this.maxCoins)*100;
     }
 
     public void calculateQuote(){
@@ -80,13 +91,13 @@ public class BettingGame {
 
 
     //get Method
-    public int getMaxCoins(){
+    public double getMaxCoins(){
         return this.maxCoins;
     }
-    public int getMaxCoinsUlm(){
+    public double getMaxCoinsUlm(){
         return this.maxCoinsUlm;
     }
-    public int getMaxCoinsOther(){
+    public double getMaxCoinsOther(){
         return this.maxCoinsOther;
     }
 
