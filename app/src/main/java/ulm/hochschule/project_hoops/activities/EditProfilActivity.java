@@ -42,9 +42,10 @@ public class EditProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         sm = SqlManager.getInstance();
-        user = UserProfile.getInstance("");
+        user = UserProfile.getInstance();
         instantiateUiObjects();
         mapUser();
+        System.out.println(user.getUsername());
     }
 
     private void instantiateUiObjects() {
@@ -144,10 +145,10 @@ public class EditProfilActivity extends AppCompatActivity {
         if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())){
             sm.setVerif_Status(0, user.getPersonID());
             hideVerify();
-            Toast toast = Toast.makeText(context, "Verifizierung erfolgreich", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, "Verifizierung erfolgreich", Toast.LENGTH_SHORT);
             toast.show();
         }else{
-            et_Code.setError("Falscher Code!!!");
+            et_Code.setError("Falscher Code!");
         }
     }
 
@@ -186,6 +187,7 @@ public class EditProfilActivity extends AppCompatActivity {
             manager.updatePerson(personID, "nachname", oldSurname);
         }
 
+        System.out.println(oldAboutMe);
         if(!oldAboutMe.equals(et_AboutMe.getText().toString())) {
             oldAboutMe = et_AboutMe.getText().toString();
             manager.updatePerson(personID, "hobbies", oldAboutMe);

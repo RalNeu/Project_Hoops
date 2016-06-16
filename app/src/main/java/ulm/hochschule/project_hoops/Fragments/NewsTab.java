@@ -52,9 +52,9 @@ public class NewsTab extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<ListItem> listData = getListData();
+       // ArrayList<ListItem> listData = getListData();
 
-        listView.setAdapter(new CustomListAdapter(getContext(), listData));
+        //listView.setAdapter(new CustomListAdapter(getContext(), listData));
 
        /*new LoadImage().execute("http://www.ratiopharmulm.com/images/stories/Hauptnews/2016_05/2016_05_14_OLDvsULM_02.jpg");
 
@@ -79,7 +79,7 @@ public class NewsTab extends Fragment {
     }
 
     private ArrayList<ListItem> getListData() {
-        ArrayList<ListItem> listMockData = new ArrayList<ListItem>();
+        /*ArrayList<ListItem> listMockData = new ArrayList<ListItem>();
         String[] images = getResources().getStringArray(R.array.images_array);
         String[] headlines = getResources().getStringArray(R.array.headline_array);
 
@@ -91,7 +91,8 @@ public class NewsTab extends Fragment {
             newsData.setDate("May 26, 2013, 13:35");
             listMockData.add(newsData);
         }
-        return listMockData;
+        return listMockData;*/
+        return null;
     }
 
 

@@ -1,6 +1,6 @@
-package ulm.hochschule.project_hoops;
+package ulm.hochschule.project_hoops.activities;
 
-import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +27,7 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
-import ulm.hochschule.project_hoops.activities.EditProfilActivity;
-import ulm.hochschule.project_hoops.activities.TippspielActivity;
+import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.LoginTab;
 import ulm.hochschule.project_hoops.fragments.NewsTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
@@ -36,7 +35,7 @@ import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
 import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
-import ulm.hochschule.project_hoops.tasks.ServerCommunicate;
+import ulm.hochschule.project_hoops.utilities.ListItem;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -56,10 +55,18 @@ public class MainActivity extends AppCompatActivity
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
 
+    private MenuItem profile;
+    private MenuItem tipgame;
+
     //For closeKeyboard
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout dLayout;
     private static DrawerLayout mDrawerLayout;
+
+    public void setProfileEabled(boolean flag) {
+        tipgame.setEnabled(flag);
+        profile.setEnabled(flag);
+    }
 
 
     @Override
@@ -78,6 +85,15 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu navDrawer = navigationView.getMenu();
+        profile = navDrawer.findItem(R.id.profile);
+        tipgame = navDrawer.findItem(R.id.tipGame);
+
+        tipgame.setEnabled(false);
+        profile.setEnabled(false);
+        //mi.setEnabled(false);
+
         drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -86,12 +102,10 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onDrawerOpened(View drawerView) {
-
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-
             }
 
             @Override
@@ -169,6 +183,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
 
@@ -251,7 +267,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             ft.replace(R.id.contentPanel, new LoginTab()).commit();
         } else if (id == R.id.profile) {
-
             ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);
             ft.replace(R.id.contentPanel, tab).commit();
@@ -263,13 +278,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.register) {
             ft.replace(R.id.contentPanel, registerTab).commit();
             currTab = registerTab;
-        } else if (id == R.id.nav_send) {
-
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-        } else if (id == R.id.Tipp) {
-            startActivity(new Intent(MainActivity.this, TippspielActivity.class));
+        } else if (id == R.id.tipGame) {
+            startActivity(new Intent(getApplicationContext(), TippspielActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

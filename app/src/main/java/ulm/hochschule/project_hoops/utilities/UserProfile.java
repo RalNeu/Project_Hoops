@@ -52,8 +52,19 @@ public class UserProfile {
 
         if(user == null) {
             user = new UserProfile(userName);
+        } else {
+            if(user.username.equals(userName)) {
+                user = new UserProfile(userName);
+            }
+        }
+        return user;
     }
 
+    public static UserProfile getInstance() {
+
+        if(user == null) {
+            throw new RuntimeException("Please login a user in th efirst place.");
+        }
         return user;
     }
 
@@ -75,9 +86,11 @@ public class UserProfile {
     public String getEmail(){
         return email;
     }
+
     public String getVerifCode(){
         return verifCode;
     }
+
     public String getUsername() {
 
         return username;

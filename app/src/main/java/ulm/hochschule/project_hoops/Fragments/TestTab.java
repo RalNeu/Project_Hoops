@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,9 +52,9 @@ public class TestTab extends Fragment {
                 }else
                     System.out.println("not Empty");*/
 
-                ServerCommunicate s = new ServerCommunicate();
-                s.g(getActivity());
-                s.start();
+                ServerCommunicate sc = new ServerCommunicate(getActivity());
+                sc.start();
+
 
             }
         });

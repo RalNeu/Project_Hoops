@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="28dp"
-        android:text="hallo das ist iein test."
+        android:text="hallo das ist ein test."
         android:paddingTop="140dp"
         android:textColor="@android:color/white">
     </TextView>

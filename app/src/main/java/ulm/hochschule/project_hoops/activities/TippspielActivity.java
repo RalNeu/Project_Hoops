@@ -28,8 +28,8 @@ public class TippspielActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_tippspiel);
+/*
         TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
 
         Tab = (ViewPager)findViewById(R.id.pager);
@@ -41,7 +41,7 @@ public class TippspielActivity extends AppCompatActivity {
                         actionBar = getActionBar();
                         actionBar.setSelectedNavigationItem(position);                    }
                 });
-        Tab.setAdapter(TabAdapter);
+       // Tab.setAdapter(TabAdapter);
 
         actionBar = getActionBar();
         //Enable Tabs on Action Bar
@@ -64,7 +64,7 @@ public class TippspielActivity extends AppCompatActivity {
         actionBar.addTab(actionBar.newTab().setText("Android").setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText("iOS").setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText("Windows").setTabListener(tabListener));
-
+*/
     }
 
     private class TabPagerAdapter extends FragmentStatePagerAdapter {

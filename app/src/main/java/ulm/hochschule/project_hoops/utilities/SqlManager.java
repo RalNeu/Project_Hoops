@@ -103,14 +103,15 @@ public class SqlManager {
 
 
             // create the mysql insert for person
-            query = "insert into person ( email, vorname, nachname,lID, geburtsdatum)"
-                    + " values (?, ?, ?, ?, ?)";
+            query = "insert into person ( email, vorname, nachname,lID, geburtsdatum, hobbies)"
+                    + " values (?, ?, ?, ?, ?, ?)";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, email);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
             preparedStmt.setInt(4,spielerID);
-            preparedStmt.setDate(5, gebDat); //TODO
+            preparedStmt.setDate(5, new Date(100,1,1)); //TODO
+            preparedStmt.setString(6, "");
             preparedStmt.execute();
 
             //get the primeKey from the person
@@ -128,6 +129,7 @@ public class SqlManager {
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2,password);
             preparedStmt.setInt(3,personID);
+
             preparedStmt.setInt(4,erstellDatumID);
             preparedStmt.execute();
 
@@ -239,7 +241,7 @@ public class SqlManager {
     public boolean emailExist(String email){//TODO: Methode verweist auf alte Datenbankstruktur, muss erneuert werden
         boolean response = false;
         try {
-            String query = "select case WHEN (select count(*) from person where EmailAdress='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
+            String query = "select case WHEN (select count(*) from person where email='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
             preparedStmt = con.prepareStatement(query);
             rs = preparedStmt.executeQuery();
             rs.next();
@@ -295,7 +297,6 @@ public class SqlManager {
 
         return retArray;
     }
-
 
     public void writeUser(UserProfile user) {
         //TODO
