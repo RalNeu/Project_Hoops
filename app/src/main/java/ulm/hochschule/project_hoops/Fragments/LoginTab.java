@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.activities.MainActivity;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -29,9 +30,7 @@ public class LoginTab extends Fragment {
     private EditText et_Username;
     private EditText et_Password;
     private Button btn_Login;
-    private AppCompatActivity context;
     private SqlManager manager;
-    private UserProfile user;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class LoginTab extends Fragment {
         et_Username = (EditText) layout.findViewById(R.id.et_Username);
         et_Password = (EditText) layout.findViewById(R.id.et_Password);
         btn_Login = (Button) layout.findViewById(R.id.btn_Login);
-        context = new AppCompatActivity();
         return layout;
     }
 
@@ -56,24 +54,30 @@ public class LoginTab extends Fragment {
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(check()){
                     login();
-                }
             }
         });
     }
 
-    public void onLoginSuccess()  {
+    public void onLoginSuccess(ProgressDialog pd)  {
         btn_Login.setEnabled(true);
-        user = UserProfile.getInstance(et_Username.getText().toString());
+        UserProfile.logoffUser();
+        UserProfile.getInstance(et_Username.getText().toString());
+        MainActivity ma = (MainActivity) getActivity();
+        ma.setProfileEabled(true);
         if (!manager.getVerifStatus(et_Username.getText().toString())) {
             verifReminder();
         }
+        pd.dismiss();
     }
+
     public void verifReminder(){
-        Toast.makeText(context, "Vergessen Sie Ihre Verifikation nicht, Ihnen bleiben noch: ", Toast.LENGTH_SHORT).show();//TODO //verbleibende tage einfügen
+        Toast.makeText(getContext(), "Vergessen Sie Ihre Verifikation nicht, Ihnen bleiben noch: ", Toast.LENGTH_SHORT).show();//TODO //verbleibende tage einfügen
     }
+
     private void onLoginFailed() {
+        MainActivity ma = (MainActivity) getActivity();
+        ma.setProfileEabled(false);
         Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
 
         btn_Login.setEnabled(true);
@@ -81,6 +85,7 @@ public class LoginTab extends Fragment {
 
     public void login() {
         if (!check()) {
+
             onLoginFailed();
             return;
         }
@@ -93,14 +98,7 @@ public class LoginTab extends Fragment {
         progressDialog.getWindow().setLayout(600,400);
         progressDialog.show();
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        onLoginSuccess();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
-
+        onLoginSuccess(progressDialog);
     }
 
     private boolean check(){
