@@ -8,7 +8,7 @@
             android:title="Neuigkeiten" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/icticket"
+            android:icon="@drawable/ic_ticket_icon"
             android:title="Gallery" />
         <item
             android:id="@+id/nav_slideshow"
@@ -35,7 +35,7 @@
                 android:title="Register" />
             <item
                 android:id="@+id/profile"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_stat_name"
                 android:title="@string/profile"/>
         </menu>
     </item>
