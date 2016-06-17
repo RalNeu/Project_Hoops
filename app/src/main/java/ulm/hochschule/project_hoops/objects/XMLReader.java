@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Date;
 
 public class XMLReader {
 
@@ -37,7 +38,7 @@ public class XMLReader {
 
                 System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-                NodeList nList = doc.getElementsByTagName("staff");
+                NodeList nList = doc.getElementsByTagName("spiel");
 
                 System.out.println("----------------------------");
 
@@ -51,8 +52,21 @@ public class XMLReader {
 
                         Element eElement = (Element) nNode;
 
+                        //datum abfrage
+                        Date datumAbfrage = new Date();
 
-                        System.out.println("Datum: " + eElement.getElementsByTagName("datum").item(0).getTextContent());
+                        //String currentTimeDateString = (datumAbfrage.getYear()+"-"+datumAbfrage.getMonth()+"-"+datumAbfrage.getDate());
+                        String currentTimeDateString = (2016+"-"+06+"-"+17);
+                        String xmlDateString = eElement.getElementsByTagName("datum").item(0).getTextContent();
+
+                        if(currentTimeDateString == xmlDateString){
+
+                            System.out.println("Datum: " + eElement.getElementsByTagName("uhrzeit").item(0).getTextContent());
+                            String test = eElement.getElementsByTagName("uhrzeit").item(0).getTextContent();
+
+                        }
+
+
 
 
                     }
