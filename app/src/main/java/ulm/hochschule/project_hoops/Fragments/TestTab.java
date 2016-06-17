@@ -1,6 +1,5 @@
 package ulm.hochschule.project_hoops.fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.objects.XMLReader;
 import ulm.hochschule.project_hoops.tasks.ServerCommunicate;
-import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
  * Created by Teddy on 18.05.2016.
@@ -51,6 +50,7 @@ public class TestTab extends Fragment {
                     System.out.println("Empty");
                 }else
                     System.out.println("not Empty");*/
+                XMLReader xml = new XMLReader();
 
                 ServerCommunicate sc = new ServerCommunicate(getActivity());
                 sc.start();

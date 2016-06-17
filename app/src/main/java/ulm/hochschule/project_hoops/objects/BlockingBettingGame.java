@@ -14,7 +14,7 @@ public class BlockingBettingGame {
      */
     private int hour;
     private int minute;
-    private boolean startedGamebool = false;
+    private boolean startedGamebool = false ;
 
 
     public void checkIfGameStarted(){
@@ -34,5 +34,10 @@ public class BlockingBettingGame {
 
     }
     // diese methode sollte die ganze zeit laufen
-    // dann wenn man den button drückt um zu setzen wir das started bool abgefragt.
+    // wenn der button gedrückt wird wird abgefragt.
+
+    public boolean getstartedGamebool()
+    {
+        return startedGamebool;
+    }
 }

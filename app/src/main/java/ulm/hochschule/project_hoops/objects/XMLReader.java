@@ -11,13 +11,13 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
-public class ReadXML {
+public class XMLReader {
 
 
 
 
 
-        public static void main(String argv[]) {
+        public static void ReadXML() {
 
             try {
 
@@ -46,7 +46,7 @@ public class ReadXML {
                         Element eElement = (Element) nNode;
 
 
-                        System.out.println("First Name : " + eElement.getElementsByTagName("datum").item(0).getTextContent());
+                        System.out.println("Datum: " + eElement.getElementsByTagName("datum").item(0).getTextContent());
 
 
                     }
