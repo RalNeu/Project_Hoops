@@ -13,19 +13,21 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Calendar;
 import java.util.Date;
 
 public class XMLReader {
 
 
-
+private static String xmlDateString;
+private  String xmlTimeString;
 
 
         public static void ReadXML() {
 
             try {
 
-                ;
+
 
                 URL url = new URL("http://lmx.ratiopharmulm.com/stats/stats.php?data=teamschedule&teamid=418&saison=2015&fixedgamesonly=0");
                 URLConnection conn = url.openConnection();
@@ -42,24 +44,28 @@ public class XMLReader {
 
                 System.out.println("----------------------------");
 
+
+                //Calender
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
+
+
                 for (int temp = 0; temp < nList.getLength(); temp++) {
 
                     Node nNode = nList.item(temp);
-
                     System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                         Element eElement = (Element) nNode;
+                        String currentTimeDateString = (year+"-"+month+1+"-"+day);
+                        xmlDateString = eElement.getElementsByTagName("datum").item(0).getTextContent();
 
-                        //datum abfrage
-                        Date datumAbfrage = new Date();
-
-                        //String currentTimeDateString = (datumAbfrage.getYear()+"-"+datumAbfrage.getMonth()+"-"+datumAbfrage.getDate());
-                        String currentTimeDateString = (2016+"-"+06+"-"+17);
-                        String xmlDateString = eElement.getElementsByTagName("datum").item(0).getTextContent();
-
-                        if(currentTimeDateString == xmlDateString){
+                        if(currentTimeDateString.equals(xmlDateString)){
 
                             System.out.println("Datum: " + eElement.getElementsByTagName("uhrzeit").item(0).getTextContent());
                             String test = eElement.getElementsByTagName("uhrzeit").item(0).getTextContent();
@@ -76,6 +82,13 @@ public class XMLReader {
             }
         }
 
+    public String getXmlTimeString(){
+        return xmlTimeString;
+    }
+
+    public String getXmlDayString(){
+        return null;
+    }
 
     }
 
