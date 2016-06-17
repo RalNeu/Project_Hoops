@@ -35,6 +35,7 @@ import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
 import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.ListItem;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
@@ -115,24 +116,24 @@ public class MainActivity extends AppCompatActivity
         });
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
         openTab();
         manager = SqlManager.getInstance();
-
     }
 
     private void openTab() {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, currTab).commit();
+        changeFragment(new LoginTab());
     }
 
     private void openRegister() {
+
+        changeFragment(new RegisterTab());
+
+    }
+
+    private void changeFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.contentPanel, new RegisterTab()).commit();
-        onBackPressed();
+        ft.replace(R.id.contentPanel, f).addToBackStack( f.getTag() ).commit();
     }
 
     private void logIn() {
@@ -257,30 +258,34 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
+        Fragment f = null;
+
         if (id == R.id.nav_camera) {
-            ft.replace(R.id.contentPanel, newsTab).commit();
             currTab = newsTab;
+            changeFragment(newsTab);
         } else if (id == R.id.nav_gallery) {
-            ft.replace(R.id.contentPanel, new WebView2()).commit();
+            changeFragment(new WebView2());
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-            ft.replace(R.id.contentPanel, new LoginTab()).commit();
+            changeFragment(new LoginTab());
         } else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);
-            ft.replace(R.id.contentPanel, tab).commit();
+            changeFragment(tab);
         } else if (id == R.id.nav_test) {
-            ft.replace(R.id.contentPanel, new TestTab()).commit();
+            changeFragment(new testFragment());
+            //changeFragment(new TestTab());
         } else if (id == R.id.login) {
-            ft.replace(R.id.contentPanel, loginTab).commit();
             currTab = loginTab;
+            changeFragment(loginTab);
         } else if (id == R.id.register) {
-            ft.replace(R.id.contentPanel, registerTab).commit();
             currTab = registerTab;
+            changeFragment(new RegisterTab());
         } else if (id == R.id.tipGame) {
             startActivity(new Intent(getApplicationContext(), TippspielActivity.class));
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         closeKeyboard();

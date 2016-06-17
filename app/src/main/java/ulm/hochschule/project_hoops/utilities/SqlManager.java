@@ -63,8 +63,7 @@ public class SqlManager {
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
         Calendar c = Calendar.getInstance();
-        c.set(1995, 3, 21); //TODO
-                            // schnelllösung
+        c.set(2000, 1, 1);
 
         Date gebDat = new Date(c.getTimeInMillis());
 
@@ -383,6 +382,18 @@ public class SqlManager {
         }
 
         return retVal;
+    }
+
+    public void updateCoins(Coins c, String username) {
+        String query = "update account set coins = '" + c.getCoins() + "' where username = '" + username + "'";
+
+        try {
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getVerif_Code(String username){

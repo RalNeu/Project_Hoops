@@ -1,5 +1,7 @@
 package ulm.hochschule.project_hoops.utilities;
 
+import android.provider.Settings;
+
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -99,6 +101,15 @@ public class UserProfile {
     public int getCoins() {
 
         return coins.getCoins();
+    }
+
+    public void changeCoins(int c) {
+        System.out.println(c);
+        coins.changeCoins(c);
+        System.out.println(coins.getCoins());
+
+        SqlManager.getInstance().updateCoins(coins, username);
+
     }
 
     public int getRanking() {

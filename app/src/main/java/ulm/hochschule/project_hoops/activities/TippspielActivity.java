@@ -11,10 +11,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.MyBetTab;
+import ulm.hochschule.project_hoops.fragments.TipTab;
+import ulm.hochschule.project_hoops.fragments.fragment_Send_Tip;
 
 /**
  * Created by Johann on 10.06.2016.
@@ -25,10 +29,18 @@ public class TippspielActivity extends AppCompatActivity {
     TabPagerAdapter TabAdapter;
     ActionBar actionBar;
 
+
+    private void changeFragment(Fragment f) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.view_TipGame, f).commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tippspiel);
+        changeFragment(new TipTab());
 /*
         TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
 
@@ -39,7 +51,8 @@ public class TippspielActivity extends AppCompatActivity {
                     public void onPageSelected(int position) {
 
                         actionBar = getActionBar();
-                        actionBar.setSelectedNavigationItem(position);                    }
+                        actionBar.setSelectedNavigationItem(position);
+                    }
                 });
        // Tab.setAdapter(TabAdapter);
 
@@ -65,6 +78,9 @@ public class TippspielActivity extends AppCompatActivity {
         actionBar.addTab(actionBar.newTab().setText("iOS").setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText("Windows").setTabListener(tabListener));
 */
+
+
+
     }
 
     private class TabPagerAdapter extends FragmentStatePagerAdapter {

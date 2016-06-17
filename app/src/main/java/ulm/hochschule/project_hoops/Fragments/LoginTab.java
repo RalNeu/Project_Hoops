@@ -59,7 +59,7 @@ public class LoginTab extends Fragment {
         });
     }
 
-    public void onLoginSuccess(ProgressDialog pd)  {
+    public void onLoginSuccess()  {
         btn_Login.setEnabled(true);
         UserProfile.logoffUser();
         UserProfile.getInstance(et_Username.getText().toString());
@@ -68,7 +68,6 @@ public class LoginTab extends Fragment {
         if (!manager.getVerifStatus(et_Username.getText().toString())) {
             verifReminder();
         }
-        pd.dismiss();
     }
 
     public void verifReminder(){
@@ -98,7 +97,17 @@ public class LoginTab extends Fragment {
         progressDialog.getWindow().setLayout(600,400);
         progressDialog.show();
 
-        onLoginSuccess(progressDialog);
+        Runnable progressRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                onLoginSuccess();
+                progressDialog.cancel();
+                System.out.println("test");
+            }
+        };
+        progressRunnable.run();
+
     }
 
     private boolean check(){

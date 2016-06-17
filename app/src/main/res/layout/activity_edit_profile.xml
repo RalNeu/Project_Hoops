@@ -331,24 +331,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:weightSum="12">
-                <TextView
-                    android:layout_width="199dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/deactivateaccount"
-                    android:id="@+id/tv_accdeactivate"
-                    android:layout_gravity="left|center"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="25dp"
-                    />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:text="@string/btn_deactivateaccount"
                     android:id="@+id/btn_deactivate"
-                    android:layout_weight="9.31"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_weight="10"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
 
             </LinearLayout>

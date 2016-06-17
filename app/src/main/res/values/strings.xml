@@ -47,7 +47,9 @@
     <string name="yourcode">Dein Code</string>
     <string name="send">Senden</string>
     <string name="deactivateaccount">Account deaktivieren</string>
-    <string name="btn_deactivateaccount">Deaktivieren</string>
+    <string name="btn_deactivateaccount">Account deaktivieren</string>
+    <string name="beAware">Bitte beachten Sie, dass Sie pro Spiel nur einen Tipp abgeben können.</string>
+    <string name="opponent">Gegner</string>
 
 
     <string name="Project_Hoops">Project Hoops</string>
