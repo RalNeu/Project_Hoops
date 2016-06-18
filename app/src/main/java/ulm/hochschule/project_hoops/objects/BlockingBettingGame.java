@@ -35,18 +35,16 @@ public class BlockingBettingGame {
         try {
             while(startedGamebool==false) {
                 wait(30000);
-                if (currentTime.equals(xmlTime)&& currentDay.equals()) {
+                /*if (currentTime.equals(xmlTime)&& currentDay.equals()) {
                     this.startedGamebool = true;
                     xmlTime = null;
-                }
+                }*/
             }
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
-
-    public
 
     public boolean getstartedGamebool()
     {
