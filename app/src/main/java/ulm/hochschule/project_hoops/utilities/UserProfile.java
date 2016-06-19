@@ -38,6 +38,7 @@ public class UserProfile {
             aboutMe     = (String)  userInfo[8];
             settings    = (int)     userInfo[9];
             verifCode   = (String)  userInfo[10];
+            userID      = (int)     userInfo[11];
 
             userFound = true;
         } catch (SQLException e) {
@@ -144,6 +145,10 @@ public class UserProfile {
         this.gebDat = gebDat;
         this.aboutMe = aboutMe;
         this.settings = settings;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
 }

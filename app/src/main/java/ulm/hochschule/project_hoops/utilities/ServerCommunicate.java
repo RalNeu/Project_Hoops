@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.tasks;
+package ulm.hochschule.project_hoops.utilities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -19,7 +19,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 /**
  * Created by Ralph on 10.06.2016.
  */
-public class ServerCommunicate{
+public class ServerCommunicate {
 
     private Activity a;
 
@@ -35,10 +35,10 @@ public class ServerCommunicate{
             ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
             InputStream is = s.getInputStream();
 
-            oos.writeObject(UserProfile.getInstance().getUsername());
+            oos.writeObject(new Integer(UserProfile.getInstance().getUserID()));
             int answer = is.read();
             if(answer != 0) {
-                throw new ServerException("Sending of username went wrong. Errorcode: " + answer);
+                throw new ServerException("Sending of AccountID went wrong. Errorcode: " + answer);
             }
 
             oos.writeObject(new Integer(team));

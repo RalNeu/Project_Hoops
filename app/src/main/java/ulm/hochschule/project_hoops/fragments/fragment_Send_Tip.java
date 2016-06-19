@@ -2,8 +2,6 @@ package ulm.hochschule.project_hoops.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -16,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.tasks.ServerCommunicate;
+import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
