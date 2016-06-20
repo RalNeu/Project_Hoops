@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity
             tab.addObserver(this);
             changeFragment(tab);
         } else if (id == R.id.nav_test) {
-            startActivity(new Intent(MainActivity.this,  ListViewBet.class));
+            startActivity(new Intent(this,  ListViewBet.class));
             //changeFragment(new testFragment());
             //changeFragment(new TestTab());
         } else if (id == R.id.login) {
