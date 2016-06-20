@@ -2,23 +2,16 @@ package ulm.hochschule.project_hoops.activities;
 
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TabHost;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.MyBetTab;
 import ulm.hochschule.project_hoops.fragments.TipTab;
-import ulm.hochschule.project_hoops.fragments.fragment_Send_Tip;
 
 /**
  * Created by Johann on 10.06.2016.

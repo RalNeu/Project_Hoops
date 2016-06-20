@@ -1,16 +1,12 @@
 package ulm.hochschule.project_hoops.activities;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.view.menu.MenuView;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -33,10 +30,7 @@ import ulm.hochschule.project_hoops.fragments.NewsTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
-import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
-import ulm.hochschule.project_hoops.fragments.testFragment;
-import ulm.hochschule.project_hoops.utilities.ListItem;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -274,8 +268,9 @@ public class MainActivity extends AppCompatActivity
             tab.addObserver(this);
             changeFragment(tab);
         } else if (id == R.id.nav_test) {
+            startActivity(new Intent(MainActivity.this,  ListViewBet.class));
             //changeFragment(new testFragment());
-            changeFragment(new TestTab());
+            //changeFragment(new TestTab());
         } else if (id == R.id.login) {
             currTab = loginTab;
             changeFragment(loginTab);

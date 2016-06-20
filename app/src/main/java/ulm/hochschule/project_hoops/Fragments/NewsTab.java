@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ulm.hochschule.project_hoops.utilities.CustomListAdapter;
 import ulm.hochschule.project_hoops.utilities.ListItem;
 import ulm.hochschule.project_hoops.R;
 
