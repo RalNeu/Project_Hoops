@@ -14,6 +14,7 @@ public class BettingGame {
 
     private HashMap<String, Integer> teamUlmMap;
     private HashMap<String, Integer> teamOtherMap;
+
     //Quote
     private double quoteUlm;
     private double quoteOther;
@@ -60,6 +61,8 @@ public class BettingGame {
         this.quoteOther = (this.teamOtherMap.size() / total) * 100;
     }
 
+
+
     public void calculateMaxCoins() {
         for(Map.Entry<String,Integer> entry : teamUlmMap.entrySet()){
            this.maxCoinsUlm += entry.getValue();
@@ -100,6 +103,7 @@ public class BettingGame {
     public double getMaxCoinsOther(){
         return this.maxCoinsOther;
     }
+
 
 
 }

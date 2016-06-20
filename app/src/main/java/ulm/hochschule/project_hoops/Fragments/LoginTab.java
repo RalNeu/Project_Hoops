@@ -1,10 +1,12 @@
 package ulm.hochschule.project_hoops.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +70,10 @@ public class LoginTab extends Fragment {
         if (!manager.getVerifStatus(et_Username.getText().toString())) {
             verifReminder();
         }
+        startActivity(new Intent(getContext(),NewsTab.class));
+        Toast.makeText(getContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
+
+
     }
 
     public void verifReminder(){

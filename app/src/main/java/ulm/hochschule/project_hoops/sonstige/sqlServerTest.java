@@ -29,7 +29,7 @@ public class sqlServerTest {
             statement = connect.createStatement();
             // Result set get the result of the SQL query
             resultSet = statement
-                    .executeQuery("select * from users");
+                    .executeQuery("select * from account");
             writeResultSet(resultSet);
 
             // PreparedStatements can use variables and are more efficient
@@ -87,6 +87,7 @@ public class sqlServerTest {
             // also possible to get the columns via the column number
             // which starts at 1
             // e.g. resultSet.getSTring(2);
+
             String user = resultSet.getString("myuser");
             String website = resultSet.getString("webpage");
             String summery = resultSet.getString("summery");

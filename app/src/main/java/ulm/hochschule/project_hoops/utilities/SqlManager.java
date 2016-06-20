@@ -3,6 +3,7 @@ package ulm.hochschule.project_hoops.utilities;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 
 import java.net.CookieHandler;
@@ -22,7 +23,7 @@ import ulm.hochschule.project_hoops.objects.Coins;
 /**
  * Created by Johann on 14.05.2016.
  */
-public class SqlManager {
+public class SqlManager{
 
     private Connection con;
     private Statement st;
@@ -34,6 +35,7 @@ public class SqlManager {
 
     //make the constructor private so that this class cannot be
     //instantiated
+
     private  SqlManager(){
         try {
             //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -49,6 +51,8 @@ public class SqlManager {
             e.printStackTrace();
         }
     }
+
+
 
     //Get the only object available
     public static SqlManager getInstance(){
@@ -237,7 +241,7 @@ public class SqlManager {
         return response;
     }
 
-    public boolean emailExist(String email){//TODO: Methode verweist auf alte Datenbankstruktur, muss erneuert werden
+    public boolean emailExist(String email){ //TODO : testen obs geht
         boolean response = false;
         try {
             String query = "select case WHEN (select count(*) from person where email='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
@@ -332,19 +336,19 @@ public class SqlManager {
         }
     }
 
-    public String getPassword(String email) throws java.sql.SQLException{//TODO: SQL-Abfrage verweist auf alte Tabellenstruktur
+    public String getPassword(String username) throws java.sql.SQLException{//TODO: testen obs geht
 
         String result = "";
 
-        String query="select * from users where EmailAdress = ?";
+        String query="select password from account where username=?";
         preparedStmt = con.prepareStatement(query);
-        preparedStmt.setString(1,email);
+        preparedStmt.setString(1,username);
         rs = preparedStmt.executeQuery();
         rs.beforeFirst();
 
         rs.next();
 
-        result = rs.getString("Password");
+        result = rs.getString("password");
 
         return result;
     }
