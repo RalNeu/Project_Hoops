@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by acer on 13.06.2016.
  */
-public abstract class BlockBettingGame extends AsyncTask<Void, Void, Void> {
+public class BlockBettingGame extends AsyncTask<Void, Void, Void> {
 
     /*
     Wenn in der XML den start für das Spiel angezeigt wird muss man die Uhr zeit des severs abfragen und denn mit

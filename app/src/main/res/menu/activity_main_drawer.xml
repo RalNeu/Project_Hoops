@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_news"
             android:title="Neuigkeiten" />
         <item
             android:id="@+id/nav_gallery"
@@ -44,6 +44,7 @@
         <menu>
             <item
                 android:id="@+id/tipGame"
+                android:icon="@drawable/ic_bettinggame"
                 android:title="Tippspiel"/>
         </menu>
     </item>

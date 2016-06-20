@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.BettingGame;
-import ulm.hochschule.project_hoops.objects.BlockingBettingGame;
+import ulm.hochschule.project_hoops.objects.BlockBettingGame;
 import ulm.hochschule.project_hoops.objects.XMLReader;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
@@ -22,6 +22,7 @@ public class TestTab extends Fragment {
 
     Button btn_Test;
     EditText et_Test;
+    BlockBettingGame blockbGame;
 
 public TestTab(){
 
@@ -38,8 +39,8 @@ public TestTab(){
         View layout = inflater.inflate(R.layout.tests, container, false);
 
         btn_Test = (Button) layout.findViewById(R.id.btnTests);
-        BlockingBettingGame blockbGame = new BlockingBettingGame();
-        blockbGame.blockingBettingGame();
+        blockbGame = new BlockBettingGame();
+        blockbGame.execute();
         et_Test = (EditText) layout.findViewById(R.id.editText);
         return layout;
     }
