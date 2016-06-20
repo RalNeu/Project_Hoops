@@ -38,10 +38,10 @@ public class SqlManager{
 
     private  SqlManager(){
         try {
-            //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            //StrictMode.setThreadPolicy(policy);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
 
-            //CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
 
             Class.forName("com.mysql.jdbc.Driver");
 

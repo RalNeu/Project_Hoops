@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +71,9 @@ public class LoginTab extends Fragment {
         if (!manager.getVerifStatus(et_Username.getText().toString())) {
             verifReminder();
         }
-        startActivity(new Intent(getContext(),NewsTab.class));
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.contentPanel, new NewsTab()).commit();
         Toast.makeText(getContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
 
 
