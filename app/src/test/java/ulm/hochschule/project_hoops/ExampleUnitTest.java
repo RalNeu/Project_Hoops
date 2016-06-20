@@ -87,8 +87,7 @@ public class ExampleUnitTest {
 
         assertEquals(50, sc.getMaxCoinsUlm());
         assertEquals(50, sc.getMaxCoinsOther());
-        assertEquals(0.5, sc.getQuoteUlm(), 0.001);
-        assertEquals(0.5, sc.getQuoteOther(), 0.001);
-
+        assertEquals(50, sc.getQuoteUlm(), 0.01);
+        assertEquals(50, sc.getQuoteOther(), 0.01);
     }
 }

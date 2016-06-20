@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -23,6 +24,8 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 public class ServerCommunicate {
 
     private static ServerCommunicate instance;
+    private double quoteUlm, quoteOther, oddsUlm, oddsOther;
+    private int maxCoinsUlm, maxCoinsOther;
 
     private ServerCommunicate() {
 
@@ -35,8 +38,6 @@ public class ServerCommunicate {
         return instance;
     }
 
-    private double quoteUlm, quoteOther, oddsUlm, oddsOther;
-    private int maxCoinsUlm, maxCoinsOther;
     public boolean sendTip(int coins, int team) throws ServerException {
         boolean retVal = true;
 
@@ -130,25 +131,27 @@ public class ServerCommunicate {
         try {
             Socket s = new Socket("141.59.26.107", 21396);
             OutputStream os= s.getOutputStream();
-            InputStream is = s.getInputStream();
+            ObjectInputStream is = new ObjectInputStream(s.getInputStream());
 
-            quoteUlm = ((double) is.read())/100;
+            quoteUlm = (Double) is.readObject();
             os.write(0);
-            maxCoinsUlm = is.read();
+            maxCoinsUlm = (Integer) is.readObject();
             os.write(maxCoinsUlm);
-            maxCoinsOther = is.read();
+            maxCoinsOther = (Integer) is.readObject();
             os.write(0);
-            oddsUlm = ((double)is.read())/1000;
+            oddsUlm = (Double)is.readObject();
             os.write(0);
-            oddsOther = ((double)is.read())/1000;
+            oddsOther = (Double) is.readObject();
             os.write(1);
 
             s.close();
 
-            quoteOther = 1 - quoteUlm;
+            quoteOther = 100 - quoteUlm;
 
         } catch (IOException ex) {
             retVal = false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
         return retVal;
