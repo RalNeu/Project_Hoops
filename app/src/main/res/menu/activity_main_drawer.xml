@@ -27,11 +27,11 @@
         <menu>
             <item
                 android:id="@+id/login"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@mipmap/ic_login"
                 android:title="Login" />
             <item
                 android:id="@+id/register"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@mipmap/ic_register"
                 android:title="Register" />
             <item
                 android:id="@+id/profile"
@@ -44,7 +44,7 @@
         <menu>
             <item
                 android:id="@+id/tipGame"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_bettinggame"
                 android:title="Tippspiel"/>
         </menu>
     </item>

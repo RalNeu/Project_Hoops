@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.objects.BettingGame;
+import ulm.hochschule.project_hoops.objects.BlockingBettingGame;
 import ulm.hochschule.project_hoops.objects.XMLReader;
 
 /**
@@ -33,6 +35,8 @@ public class TestTab extends Fragment {
         View layout = inflater.inflate(R.layout.tests, container, false);
 
         btn_Test = (Button) layout.findViewById(R.id.btnTests);
+        BlockingBettingGame blockbGame = new BlockingBettingGame();
+        blockbGame.blockingBettingGame();
         et_Test = (EditText) layout.findViewById(R.id.editText);
         return layout;
     }
