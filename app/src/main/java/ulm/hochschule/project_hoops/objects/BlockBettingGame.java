@@ -1,12 +1,14 @@
 package ulm.hochschule.project_hoops.objects;
 
+import android.os.AsyncTask;
+
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by acer on 13.06.2016.
  */
-public class BlockingBettingGame{
+public abstract class BlockBettingGame extends AsyncTask<Void, Void, Void> {
 
     /*
     Wenn in der XML den start für das Spiel angezeigt wird muss man die Uhr zeit des severs abfragen und denn mit
@@ -19,7 +21,8 @@ public class BlockingBettingGame{
     private XMLReader xmlReader;
 
 
-    public void blockingBettingGame(){
+    @Override
+    protected Void doInBackground(Void... params) {
         while(true) {
             //Calendar
             Calendar cal = Calendar.getInstance();
@@ -68,8 +71,6 @@ public class BlockingBettingGame{
 
         }
     }
-
-
 
 
 

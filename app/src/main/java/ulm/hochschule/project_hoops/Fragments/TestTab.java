@@ -13,6 +13,7 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.BettingGame;
 import ulm.hochschule.project_hoops.objects.BlockingBettingGame;
 import ulm.hochschule.project_hoops.objects.XMLReader;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
  * Created by Teddy on 18.05.2016.
@@ -22,7 +23,9 @@ public class TestTab extends Fragment {
     Button btn_Test;
     EditText et_Test;
 
+public TestTab(){
 
+}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,11 +51,11 @@ public class TestTab extends Fragment {
         btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*SqlManager sqlManager = SqlManager.getInstance();
+                SqlManager sqlManager = SqlManager.getInstance();
                 if(et_Test.getText().toString().isEmpty()){
                     System.out.println("Empty");
                 }else
-                    System.out.println("not Empty");*/
+                    System.out.println("not Empty");
                 XMLReader xml = new XMLReader();
 
 
