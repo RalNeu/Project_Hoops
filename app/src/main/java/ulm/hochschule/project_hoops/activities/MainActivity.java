@@ -30,7 +30,9 @@ import ulm.hochschule.project_hoops.fragments.NewsTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
+import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_test) {
             startActivity(new Intent(this,  ListViewBet.class));
             //changeFragment(new testFragment());
-            //changeFragment(new TestTab());
+            changeFragment(new TestTab());
         } else if (id == R.id.login) {
             currTab = loginTab;
             changeFragment(loginTab);
