@@ -274,8 +274,8 @@ public class MainActivity extends AppCompatActivity
             tab.addObserver(this);
             changeFragment(tab);
         } else if (id == R.id.nav_test) {
-            changeFragment(new testFragment());
-            //changeFragment(new TestTab());
+            //changeFragment(new testFragment());
+            changeFragment(new TestTab());
         } else if (id == R.id.login) {
             currTab = loginTab;
             changeFragment(loginTab);
