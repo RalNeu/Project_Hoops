@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by acer on 13.06.2016.
  */
-public class BlockingBettingGame {
+public class BlockingBettingGame{
 
     /*
     Wenn in der XML den start für das Spiel angezeigt wird muss man die Uhr zeit des severs abfragen und denn mit
@@ -19,41 +19,64 @@ public class BlockingBettingGame {
     private XMLReader xmlReader;
 
 
-    public void checkIfGameStarted(){
-        Calendar cal = Calendar.getInstance();
-        hour = cal.get(Calendar.HOUR_OF_DAY);
-        minute = cal.get(Calendar.MINUTE);
-        String currentTime = (hour+":"+minute+":"+00);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        String currentDay = (year+"-"+month+1+"-"+day);
-        xmlReader.ReadXML();
-        String xmlTime = xmlReader.getXmlTimeString();
-        String xmlDay = xmlReader.getXmlDayString();
+    public void blockingBettingGame(){
+        while(true) {
+            //Calendar
+            Calendar cal = Calendar.getInstance();
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+            minute = cal.get(Calendar.MINUTE);
+            String currentTime = (hour + ":" + minute + ":" + 00);
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String currentDay = (year + "-" + month + 1 + "-" + day);
 
-        try {
-            while(startedGamebool==false) {
-                wait(30000);
-                /*if (currentTime.equals(xmlTime)&& currentDay.equals()) {
-                    this.startedGamebool = true;
-                    xmlTime = null;
-                }*/
+
+            //XML nur noch zum test kann gelöscht werden
+            xmlReader.ReadXMLGameTime();
+            String xmlTime = xmlReader.getXmlTimeString();
+            String xmlDay = xmlReader.getXmlDayString();
+            //Test outprint Test muss dann gelöscht werden
+            System.out.print("currentTime: "+ currentTime);
+            System.out.print("currentDay: " + currentDay);
+            System.out.print("xmlTime: " + xmlTime);
+            System.out.print("xmlDay: "+xmlDay);
+
+            try {
+                while (startedGamebool == false) {
+                    xmlReader.ReadXMLGameTime();
+                    wait(30000);
+                    //Test
+                    System.out.print("test 30 sec:"+"Day:"+xmlReader.getXmlDayString()+"Stunde:"+xmlReader.getXmlTimeString());
+                    //
+                    if (currentTime.equals( xmlReader.getXmlTimeString()) && currentDay.equals(xmlReader.getXmlDayString())) {
+                        this.startedGamebool = true;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
+            try {
+                wait(10000000);
+                this.startedGamebool = false;
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+        }
     }
+
+
+
+
 
     public boolean getstartedGamebool()
     {
         return startedGamebool;
     }
 
-    //Gedanken: 1. logic Tages abfrage benötigt schon fast fertig?
-    //          2. Button bei den Coins if abfage den getstartedGamebool() ture = text"spiel hat begonnen es ist nicht möglich zu tippen
-                   //false man kann einfach wetten
-    //xml Day muss getMthode  nochmachen
-    //Classen in den Server schreiben
+
 }

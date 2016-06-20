@@ -20,28 +20,22 @@ public class XMLReader {
 
 
 private static String xmlDateString;
-private  String xmlTimeString;
+private static String xmlTimeString;
 
 
-        public static void ReadXML() {
+        public static void ReadXMLGameTime() {
 
             try {
-
-
-
                 URL url = new URL("http://lmx.ratiopharmulm.com/stats/stats.php?data=teamschedule&teamid=418&saison=2015&fixedgamesonly=0");
                 URLConnection conn = url.openConnection();
 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 Document doc = builder.parse(conn.getInputStream());
-
                 doc.getDocumentElement().normalize();
 
                 System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
                 NodeList nList = doc.getElementsByTagName("spiel");
-
                 System.out.println("----------------------------");
 
 
@@ -65,10 +59,10 @@ private  String xmlTimeString;
                         String currentTimeDateString = (year+"-"+month+1+"-"+day);
                         xmlDateString = eElement.getElementsByTagName("datum").item(0).getTextContent();
 
-                        if(currentTimeDateString.equals(xmlDateString)){
 
-                            System.out.println("Datum: " + eElement.getElementsByTagName("uhrzeit").item(0).getTextContent());
-                            String test = eElement.getElementsByTagName("uhrzeit").item(0).getTextContent();
+                        if(currentTimeDateString.equals(xmlDateString)){
+                            //System.out.println("Datum: " + eElement.getElementsByTagName("uhrzeit").item(0).getTextContent());
+                            xmlTimeString = eElement.getElementsByTagName("uhrzeit").item(0).getTextContent();
 
                         }
 
@@ -87,7 +81,7 @@ private  String xmlTimeString;
     }
 
     public String getXmlDayString(){
-        return null;
+        return xmlDateString;
     }
 
     }
