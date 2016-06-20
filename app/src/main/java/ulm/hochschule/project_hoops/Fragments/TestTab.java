@@ -24,9 +24,6 @@ public class TestTab extends Fragment {
     EditText et_Test;
     BlockBettingGame blockbGame;
 
-public TestTab(){
-
-}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
