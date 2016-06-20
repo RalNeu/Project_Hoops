@@ -44,7 +44,6 @@
         <menu>
             <item
                 android:id="@+id/tipGame"
-                android:icon="@drawable/ic_bettinggame"
                 android:title="Tippspiel"/>
         </menu>
     </item>

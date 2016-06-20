@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.tasks.ImageDownloaderTask;
 import ulm.hochschule.project_hoops.utilities.ListItem;
 
 
@@ -62,7 +61,7 @@ public class CustomListAdapter extends BaseAdapter {
         holder.headlineView.setText(newsItem.getHeadline());
 
         if (holder.imageView != null) {
-            new ImageDownloaderTask(holder.imageView).execute(newsItem.getUrl());
+      //      new ImageDownloaderTask(holder.imageView).execute(newsItem.getUrl());
         }
 
         return convertView;

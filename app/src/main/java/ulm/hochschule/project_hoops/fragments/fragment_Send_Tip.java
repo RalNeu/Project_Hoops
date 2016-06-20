@@ -118,7 +118,7 @@ public class fragment_Send_Tip extends Fragment {
                     Looper.prepare();
                     if(chosenCoins > 0) {
                         try {
-                            ServerCommunicate sc = new ServerCommunicate(getActivity());
+                            ServerCommunicate sc = ServerCommunicate.getInstance();
                             sc.sendTip(chosenCoins, team);
                             s = "Tipp gesendet!";
                         } catch(ServerException e) {

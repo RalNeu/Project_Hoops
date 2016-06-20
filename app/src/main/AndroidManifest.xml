@@ -17,5 +17,6 @@ package="ulm.hochschule.project_hoops">
     </activity>
     <activity android:name=".activities.EditProfilActivity" android:label="@string/app_name" />
     <activity android:name=".activities.TippspielActivity" />
+    <activity android:name=".activities.ListViewBet"></activity>
 </application>
 </manifest>

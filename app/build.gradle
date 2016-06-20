@@ -5,6 +5,10 @@ android {
     buildToolsVersion "23.0.3"
 
 
+    testOptions {
+
+        unitTests.returnDefaultValues = true;
+    }
 
     defaultConfig {
         applicationId "ulm.hochschule.project_hoops"
