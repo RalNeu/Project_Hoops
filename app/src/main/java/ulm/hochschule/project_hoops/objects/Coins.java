@@ -11,7 +11,7 @@ public class Coins {
         this.coins = coins;
     }
 
-    public void changeCoins(int c) {
+    public void updateCoins(int c) {
         int ref = coins + c;
 
         coins = ref < 0 ? 0 : ref;
