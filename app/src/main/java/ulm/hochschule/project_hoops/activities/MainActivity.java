@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity
         closeKeyboard();
 
         btn_Register = (Button) findViewById(R.id.btn_Register);
-        btn_login = (Button) findViewById(R.id.bt_Login);
+        //btn_login = (Button) findViewById(R.id.bt_Login);
 
        // dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -204,10 +204,10 @@ public class MainActivity extends AppCompatActivity
        // MenuView.ItemView i = (MenuView.ItemView) dLayout.findViewById(R.id.profile);
         //i.setEnabled(false);
 
-        et_username = (EditText) findViewById(R.id.et_UserName_nav);
-        et_password = (EditText) findViewById(R.id.et_Password_nav);
+       // et_username = (EditText) findViewById(R.id.et_UserName_nav);
+        //et_password = (EditText) findViewById(R.id.et_Password_nav);
 
-        btn_Register.setOnClickListener(new View.OnClickListener() {
+/*        btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRegister();
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity
                                                  Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
                                          }
                                      }
-        );
+        );*/
 
         return true;
     }

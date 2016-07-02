@@ -36,9 +36,10 @@ public class SqlManager{
     //make the constructor private so that this class cannot be
     //instantiated
 
-    private  SqlManager(){
+    private SqlManager() {
+
         try {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
             CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
@@ -47,7 +48,7 @@ public class SqlManager{
 
             con = DriverManager.getConnection("jdbc:mysql://141.59.26.107:3306/hoops", "SuperUser", "root");
             st = con.createStatement();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -64,14 +65,12 @@ public class SqlManager{
 
     public void createUser(String firstName, String lastName, String email, String userName, String password){
         Calendar calendar = Calendar.getInstance();
-        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
         Calendar c = Calendar.getInstance();
         c.set(2000, 1, 1);
 
-        Date gebDat = new Date(c.getTimeInMillis());
 
-        int personID=0, spielerID=0, accountID=0,erstellDatumID=0;
+        int personID=0, spielerID=0, erstellDatumID=0;
         String query;
 
         try {

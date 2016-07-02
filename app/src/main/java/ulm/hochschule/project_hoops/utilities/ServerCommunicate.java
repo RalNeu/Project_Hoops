@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.InterfaceAddress;
 import java.net.Socket;
 
 /**
@@ -155,4 +156,29 @@ public class ServerCommunicate {
         }
     }
 
+    public int getWin() {
+        int retVal = -4;
+        try {
+            Socket s = new Socket("141.59.26.107", 21398);
+
+            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+
+            oos.writeObject(new Integer(UserProfile.getInstance().getUserID()));
+
+            retVal = (Integer) ois.readObject();
+
+            if(retVal < 0) {
+                oos.writeObject(new Integer(-1));
+            } else {
+                oos.writeObject(new Integer(0));
+            }
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return retVal;
+    }
 }

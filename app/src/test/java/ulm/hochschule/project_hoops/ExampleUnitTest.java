@@ -15,7 +15,7 @@ public class ExampleUnitTest {
 
 
 
-    @Test
+    //@Test
     public void testServerSendTip1() throws Exception {
         ServerCommunicate sc = ServerCommunicate.getInstance();
         sc.deleteTipps();
@@ -89,5 +89,29 @@ public class ExampleUnitTest {
         assertEquals(50, sc.getMaxCoinsOther());
         assertEquals(50, sc.getQuoteUlm(), 0.01);
         assertEquals(50, sc.getQuoteOther(), 0.01);
+    }
+
+    @Test
+    public void readWinGameNotFinished() throws Exception{
+        ServerCommunicate sc = ServerCommunicate.getInstance();
+        sc.deleteTipps();
+
+        SqlManager s = SqlManager.getInstance();
+
+        if(!s.userExist("a"))
+            s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "a", "11111111");
+        if(!s.userExist("b"))
+            s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "b", "11111111");
+
+        UserProfile.logoffUser();
+        UserProfile.getInstance("a");
+        sc.sendTip(10,0);
+
+        assertEquals(-2, sc.getWin());
+
+        UserProfile.logoffUser();
+        UserProfile.getInstance("b");
+        assertEquals(-1, sc.getWin());
+
     }
 }
