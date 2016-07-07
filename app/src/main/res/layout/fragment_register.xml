@@ -3,94 +3,156 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@drawable/bgregister"
-    android:id="@+id/registerLayout">
+    android:id="@+id/registerLayout"
+    android:weightSum="5">
 
-    <Space
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.19" />
+        android:layout_height="100dp"
+        android:layout_weight="0">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Registrierung"
-        android:id="@+id/etHeading"
-        android:layout_weight="0.20"
-        android:layout_gravity="center"
-        android:textSize="40dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Registrierung"
+            android:id="@+id/etHeading"
+            android:layout_weight="0.20"
+            android:layout_gravity="center"
+            android:textSize="40dp" />
+    </FrameLayout>
 
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_Firstname"
-        android:layout_gravity="center"
-        android:hint="@string/name"
-        android:maxLength="15"
-        android:singleLine="true" />
-
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_Lastname"
-        android:hint="@string/surname"
-        android:layout_gravity="center"
-        android:singleLine="true" />
-
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:id="@+id/et_Email"
-        android:hint="@string/email"
-        android:layout_gravity="center"
-        android:singleLine="true" />
-
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_Username"
-        android:hint="@string/et_UserName"
-        android:layout_gravity="center"
-        android:singleLine="true" />
-
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:id="@+id/et_Password"
-        android:hint="@string/password"
-        android:layout_gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:singleLine="true" />
-
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:id="@+id/et_ConfirmPassword"
-        android:hint="@string/confirm_password"
-        android:layout_alignBaseline="@+id/editText7"
-        android:layout_alignBottom="@+id/editText7"
-        android:layout_gravity="center"
-        android:singleLine="true" />
-
-    <Space
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.33"/>
+        android:layout_height="0dp"
+        android:id="@+id/scrollView"
+        android:layout_weight="4">
 
-    <Button
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:text="Registrieren"
-        android:id="@+id/btn_ContentRegister"
-        android:layout_gravity="center"
-        android:background="@android:color/holo_orange_dark"
-        android:textColor="#ffffff" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:id="@+id/et_Firstname"
+                    android:layout_gravity="left|center"
+                    android:hint="@string/name"
+                    android:maxLength="15"
+                    android:singleLine="true"
+                    android:layout_marginRight="80dp"
+                    android:layout_marginLeft="10dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:id="@+id/et_Lastname"
+                    android:hint="@string/surname"
+                    android:layout_gravity="left|center"
+                    android:singleLine="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="80dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/et_Email"
+                    android:hint="@string/email"
+                    android:layout_gravity="left|center"
+                    android:singleLine="true"
+                    android:layout_weight="2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="80dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:id="@+id/et_Username"
+                    android:hint="@string/et_UserName"
+                    android:layout_gravity="left|center"
+                    android:singleLine="true"
+                    android:layout_weight="2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="80dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textPassword"
+                    android:id="@+id/et_Password"
+                    android:hint="@string/password"
+                    android:layout_gravity="left|center"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:singleLine="true"
+                    android:layout_weight="2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="80dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textPassword"
+                    android:id="@+id/et_ConfirmPassword"
+                    android:hint="@string/confirm_password"
+                    android:layout_alignBaseline="@+id/editText7"
+                    android:layout_alignBottom="@+id/editText7"
+                    android:layout_gravity="left|center"
+                    android:singleLine="true"
+                    android:layout_weight="2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="80dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="Registrieren"
+                    android:id="@+id/btn_ContentRegister"
+                    android:layout_gravity="center"
+                    android:background="@android:color/holo_orange_dark"
+                    android:textColor="#ffffff"
+                    android:layout_weight="2" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

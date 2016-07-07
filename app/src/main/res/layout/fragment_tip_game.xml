@@ -1,105 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:orientation="vertical" android:layout_width="match_parent"
 android:layout_height="match_parent"
     android:background="@drawable/bgbetting"
-    android:id="@+id/view_TipGame_fragment">
+    android:id="@+id/view_TipGame_fragment"
+    android:weightSum="16">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/logoratiopharm"
-        android:id="@+id/iv_Team1"
-        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:weightSum="3">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/avatarframe"
-        android:id="@+id/iv_Team2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sb_SeekBar"
-        android:max="100"
-        android:progress="0"
-        android:layout_toLeftOf="@+id/tv_Prozent2"
-        android:layout_alignBottom="@+id/tv_Prozent1"
-        android:layout_alignLeft="@+id/btn_Vote"
-        android:layout_alignStart="@+id/btn_Vote" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_Team"
+                android:background="@drawable/logoratiopharm"
+                android:layout_gravity="center" />
+        </FrameLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vote"
-        android:id="@+id/btn_Vote"
-        android:layout_marginBottom="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/iv_Team1"
-        android:layout_alignEnd="@+id/iv_Team1" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vote"
-        android:id="@+id/button3"
-        android:layout_alignTop="@+id/btn_Vote"
-        android:layout_alignLeft="@+id/iv_Team2"
-        android:layout_alignStart="@+id/iv_Team2" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:background="@drawable/versus"
+                android:layout_above="@+id/sb_SeekBar"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center" />
+        </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="5%"
-        android:id="@+id/tv_Prozent1"
-        android:layout_below="@+id/iv_Team1"
-        android:layout_toLeftOf="@+id/sb_SeekBar"
-        android:layout_toStartOf="@+id/sb_SeekBar" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="95%"
-        android:id="@+id/tv_Prozent2"
-        android:layout_below="@+id/iv_Team2"
-        android:layout_toRightOf="@+id/button3"
-        android:layout_toEndOf="@+id/button3" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/avatarframe"
+                android:id="@+id/iv_Team2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </LinearLayout>
 
-    <ImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:id="@+id/imageView"
-        android:background="@drawable/versus"
-        android:layout_above="@+id/sb_SeekBar"
-        android:layout_centerHorizontal="true" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <ImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:id="@+id/imageView2"
-        android:layout_above="@+id/btn_Vote"
-        android:layout_alignRight="@+id/btn_Vote"
-        android:layout_alignEnd="@+id/btn_Vote"
-        android:layout_marginBottom="71dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/basketv2"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="8">
 
-    <ImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:id="@+id/imageView3"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3"
-        android:background="@drawable/basket"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignRight="@+id/iv_Team2"
-        android:layout_alignEnd="@+id/iv_Team2" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="5%"
+                android:id="@+id/tv_Prozent1"
+                android:layout_below="@+id/iv_Team1"
+                android:layout_toLeftOf="@+id/sb_SeekBar"
+                android:layout_toStartOf="@+id/sb_SeekBar"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical|right" />
+        </FrameLayout>
+
+        <SeekBar
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/sb_SeekBar"
+            android:max="100"
+            android:progress="0"
+            android:layout_toLeftOf="@+id/tv_Prozent2"
+            android:layout_alignBottom="@+id/tv_Prozent1"
+            android:layout_alignLeft="@+id/btn_Vote"
+            android:layout_alignStart="@+id/btn_Vote"
+            android:layout_weight="6" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="95%"
+                android:id="@+id/tv_Prozent2"
+                android:layout_below="@+id/iv_Team2"
+                android:layout_alignLeft="@+id/iv_Team2"
+                android:layout_weight="1"
+                android:layout_gravity="left|center_vertical" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:weightSum="3" >
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView2"
+                android:layout_above="@+id/btn_Vote"
+                android:layout_alignRight="@+id/btn_Vote"
+                android:layout_alignEnd="@+id/btn_Vote"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/basketv2"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView3"
+                android:background="@drawable/basketv2"
+                android:layout_alignTop="@+id/imageView2"
+                android:layout_alignRight="@+id/iv_Team2"
+                android:layout_alignEnd="@+id/iv_Team2"
+                android:layout_alignLeft="@+id/iv_Team2"
+                android:layout_alignStart="@+id/iv_Team2"
+                android:layout_weight="1" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Vote"
+            android:id="@+id/btn_Vote"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
+    </FrameLayout>
+
+</LinearLayout>

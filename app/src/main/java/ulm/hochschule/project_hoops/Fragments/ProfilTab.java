@@ -2,12 +2,15 @@ package ulm.hochschule.project_hoops.fragments;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -95,7 +98,6 @@ public class ProfilTab extends Fragment {
 
             gebDat = s[2] + "." + d.getMonth() + "." + s[0];
 
-            System.out.println(gebDat);
             lbl_GebDat.setText(gebDat);
             view_GebDat.setVisibility(View.VISIBLE);
         } else {
@@ -130,7 +132,38 @@ public class ProfilTab extends Fragment {
         view_Name = (View) layout.findViewById(R.id.view_Name);
         view_GebDat = (View) layout.findViewById(R.id.view_GebDat);
         view_AboutMe = (View) layout.findViewById(R.id.view_AboutMe);
+
+        final ImageView coins = (ImageView) layout.findViewById(R.id.img_Coins);
+        final ImageView ranking = (ImageView) layout.findViewById(R.id.img_Ranking);
+        final ImageView highscore = (ImageView) layout.findViewById(R.id.img_Highscore);
+
+        final FrameLayout fL = (FrameLayout) layout.findViewById(R.id.frLay);
+
+        coins.post(new Runnable() {
+            @Override
+            public void run() {
+                coins.getLayoutParams().width = coins.getHeight();
+                coins.requestLayout();
+            }
+        });
+
+        ranking.post(new Runnable() {
+            @Override
+            public void run() {
+                ranking.getLayoutParams().width = ranking.getHeight();
+                ranking.requestLayout();
+            }
+        });
+
+        highscore.post(new Runnable() {
+            @Override
+            public void run() {
+                highscore.getLayoutParams().width = highscore.getHeight();
+                highscore.requestLayout();
+            }
+        });
     }
+
 
     private void mapUser() {
         lbl_Coins.setText("" + user.getCoins());

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.EditProfilActivity"
     android:weightSum="10"
-    android:background="@drawable/bgregister">
+    android:background="@drawable/bghome">
 
         <LinearLayout
             android:orientation="vertical"

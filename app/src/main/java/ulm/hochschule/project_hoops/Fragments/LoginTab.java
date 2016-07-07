@@ -1,22 +1,17 @@
 package ulm.hochschule.project_hoops.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.sql.SQLException;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.activities.MainActivity;
@@ -67,7 +62,7 @@ public class LoginTab extends Fragment {
         UserProfile.logoffUser();
         UserProfile.getInstance(et_Username.getText().toString());
         MainActivity ma = (MainActivity) getActivity();
-        ma.setProfileEabled(true);
+        ma.setProfileEnabled(true);
         if (!manager.getVerifStatus(et_Username.getText().toString())) {
             verifReminder();
         }
@@ -85,7 +80,7 @@ public class LoginTab extends Fragment {
 
     private void onLoginFailed() {
         MainActivity ma = (MainActivity) getActivity();
-        ma.setProfileEabled(false);
+        ma.setProfileEnabled(false);
         Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
 
         btn_Login.setEnabled(true);

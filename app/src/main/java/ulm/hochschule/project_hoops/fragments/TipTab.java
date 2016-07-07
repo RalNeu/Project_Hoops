@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,20 @@ public class TipTab extends Fragment {
         layout = inflater.inflate(R.layout.fragment_tip_game, container, false);
 
         Button btn_Vote = (Button) layout.findViewById(R.id.btn_Vote);
+
+        final ImageView img_View = (ImageView) layout.findViewById(R.id.img_Team);
+
+        img_View.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                // Ensure you call it only once :
+                img_View.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+                img_View.getLayoutParams().height = img_View.getLayoutParams().width;
+               // img_View.requestLayout();
+            }
+        });
 
         btn_Vote.setOnClickListener(new View.OnClickListener() {
             @Override

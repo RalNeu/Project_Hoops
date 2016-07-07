@@ -69,7 +69,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="1000000"
+                        android:text="0"
                         android:id="@+id/lbl_Coins"
                         android:layout_weight="3"
                         android:layout_gravity="center_vertical|end"
@@ -78,14 +78,17 @@
                     <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/frLay">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:id="@+id/img_Coins"
                             android:background="@drawable/coin"
-                            android:layout_margin="10dp" />
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_gravity="center_horizontal" />
                     </FrameLayout>
 
                 </LinearLayout>
@@ -102,7 +105,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="1000000"
+                        android:text="0"
                         android:id="@+id/lbl_Ranking"
                         android:layout_weight="3"
                         android:layout_gravity="center_vertical|end"
@@ -114,11 +117,13 @@
                         android:layout_weight="1" >
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:id="@+id/img_Ranking"
                             android:background="@drawable/coin"
-                            android:layout_margin="10dp" />
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_gravity="center_horizontal" />
                     </FrameLayout>
                 </LinearLayout>
 
@@ -134,7 +139,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="1000000"
+                        android:text="0"
                         android:id="@+id/lbl_Highscore"
                         android:layout_weight="3"
                         android:layout_gravity="center_vertical|end"
@@ -146,11 +151,13 @@
                         android:layout_weight="1" >
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:id="@+id/img_Highscore"
                             android:background="@drawable/coin"
-                            android:layout_margin="10dp" />
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_gravity="center_horizontal" />
                     </FrameLayout>
                 </LinearLayout>
 

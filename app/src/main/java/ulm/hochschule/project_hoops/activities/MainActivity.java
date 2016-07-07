@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Observable;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout dLayout;
     private static DrawerLayout mDrawerLayout;
 
-    public void setProfileEabled(boolean flag) {
+    public void setProfileEnabled(boolean flag) {
         tipgame.setEnabled(flag);
         profile.setEnabled(flag);
     }
@@ -195,7 +196,15 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         closeKeyboard();
 
-        btn_Register = (Button) findViewById(R.id.btn_Register);
+
+        ImageView imV = (ImageView) findViewById(R.id.img_Logo);
+        if(imV != null) {
+            int h = imV.getHeight();
+            double ratio = 1296.0/1197.0;
+            imV.getLayoutParams().width = (int) (h*ratio);
+        }
+
+        //btn_Register = (Button) findViewById(R.id.btn_Register);
         //btn_login = (Button) findViewById(R.id.bt_Login);
 
        // dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -269,10 +278,10 @@ public class MainActivity extends AppCompatActivity
             ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);
             changeFragment(tab);
-        } else if (id == R.id.nav_test) {
-            startActivity(new Intent(this,  ListViewBet.class));
+       // } //else if (id == R.id.nav_test) {
+           // startActivity(new Intent(this,  ListViewBet.class));
             //changeFragment(new testFragment());
-            changeFragment(new TestTab());
+            //changeFragment(new TestTab());
         } else if (id == R.id.login) {
             currTab = loginTab;
             changeFragment(loginTab);
