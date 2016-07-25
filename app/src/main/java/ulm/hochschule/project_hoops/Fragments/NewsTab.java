@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class NewsTab extends Fragment {
     private String[] headline;
     private int[] images;
 
+    private SwipeRefreshLayout swipeRefresh;
 
     Button load_img;
     Bitmap bitmap;
@@ -41,8 +43,9 @@ public class NewsTab extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.list, container, false);
-        listView = (ListView) layout.findViewById(R.id.list);
+        View layout = inflater.inflate(R.layout.tippspiel_listview, container, false);
+        listView = (ListView) layout.findViewById(R.id.listView);
+        //swipeRefresh = (SwipeRefreshLayout) layout.findViewById(R.id.swiperefresh);
        // imageView = (ImageView) layout.findViewById(R.id.img);
         return layout;
     }
@@ -50,6 +53,15 @@ public class NewsTab extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Created by Johann
+                //TODO: Load Data from Server
+            }
+        });
+
 
        // ArrayList<ListItem> listData = getListData();
 

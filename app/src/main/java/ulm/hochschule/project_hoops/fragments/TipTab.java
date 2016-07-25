@@ -33,7 +33,7 @@ public class TipTab extends Fragment {
     private void changeFragment(Fragment f) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.view_TipGame, f).addToBackStack( f.getTag() ).commit();
+        //ft.replace(R.id.view_TipGame, f).addToBackStack( f.getTag() ).commit();
     }
 
     @Override

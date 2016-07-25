@@ -26,7 +26,7 @@ public class ListAdapterBet extends CustomListAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        layout = LayoutInflater.from(context).inflate(R.layout.list, null);
+        layout = LayoutInflater.from(context).inflate(R.layout.tippspiel_listview, null);
         return layout;
     }
 

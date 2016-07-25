@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         profile = navDrawer.findItem(R.id.profile);
         tipgame = navDrawer.findItem(R.id.tipGame);
 
-        tipgame.setEnabled(false);
+        //tipgame.setEnabled(false);
         profile.setEnabled(false);
         //mi.setEnabled(false);
 

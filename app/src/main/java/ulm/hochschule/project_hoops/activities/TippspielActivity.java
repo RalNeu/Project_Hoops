@@ -1,103 +1,119 @@
 package ulm.hochschule.project_hoops.activities;
 
-import android.app.ActionBar;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.fragments.MyBetTab;
 import ulm.hochschule.project_hoops.fragments.TipTab;
+import ulm.hochschule.project_hoops.objects.Card;
+import ulm.hochschule.project_hoops.utilities.CardArrayAdapter;
+import ulm.hochschule.project_hoops.utilities.ViewPagerAdapter;
 
 /**
  * Created by Johann on 10.06.2016.
  */
 public class TippspielActivity extends AppCompatActivity {
 
-    ViewPager Tab;
-    TabPagerAdapter TabAdapter;
-    ActionBar actionBar;
-
-
+    /*
     private void changeFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.view_TipGame, f).commit();
     }
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tippspiel);
-        changeFragment(new TipTab());
-/*
-        TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
+        //changeFragment(new TipTab());
 
-        Tab = (ViewPager)findViewById(R.id.pager);
-        Tab.setOnPageChangeListener(
-                new ViewPager.SimpleOnPageChangeListener() {
-                    @Override
-                    public void onPageSelected(int position) {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-                        actionBar = getActionBar();
-                        actionBar.setSelectedNavigationItem(position);
-                    }
-                });
-       // Tab.setAdapter(TabAdapter);
-
-        actionBar = getActionBar();
-        //Enable Tabs on Action Bar
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.TabListener tabListener = new ActionBar.TabListener(){
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-                Tab.setCurrentItem(tab.getPosition());
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                switch (tab.getPosition()) {
+                    case 0:
+                        break;
+                    case 1:;
+                        break;
+                    case 2:
+                        break;
+                }
             }
-
             @Override
-            public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+            public void onTabUnselected(TabLayout.Tab tab) {
             }
-
             @Override
-            public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+            public void onTabReselected(TabLayout.Tab tab) {
             }
-        };
-        //Add New Tab
-        actionBar.addTab(actionBar.newTab().setText("Android").setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText("iOS").setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText("Windows").setTabListener(tabListener));
-*/
-
-
-
+        });
     }
 
-    private class TabPagerAdapter extends FragmentStatePagerAdapter {
-        public TabPagerAdapter(FragmentManager fm) {
-            super(fm);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            switch (i) {
-                case 0:
-                    //Fragement for Android Tab
-                    return new MyBetTab();
-            }
-            return null;
-
-        }
-
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return 3; //No of Tabs
-        }
-
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new DummyFragment(0), "Tipps");
+        adapter.addFrag(new TipTab(), "Spiel");
+        viewPager.setAdapter(adapter);
     }
+
+    public static class DummyFragment extends Fragment {
+        int color;
+        ListView listView;
+        CardArrayAdapter cardArrayAdapter;
+
+        public DummyFragment() {
+        }
+
+        @SuppressLint("ValidFragment")
+        public DummyFragment(int color) {
+            this.color = color;
+        }
+
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.tippspiel_listview, container, false);
+
+            final FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.dummyfrag_bg);
+            frameLayout.setBackgroundColor(color);
+
+            listView = (ListView) view.findViewById(R.id.listView);
+
+            listView.addHeaderView(new View(getActivity()));
+            listView.addFooterView(new View(getActivity()));
+
+
+            cardArrayAdapter = new CardArrayAdapter(getContext(), R.layout.listitem_mybet);
+
+            //Liste von Einträgen
+            List<String> list = new ArrayList<String>();
+
+            for (int i = 0; i < 4; i++) {
+                Card card = new Card();
+                cardArrayAdapter.add(card);
+            }
+
+            listView.setAdapter(cardArrayAdapter);
+            return view;
+        }
+    }
+
 }

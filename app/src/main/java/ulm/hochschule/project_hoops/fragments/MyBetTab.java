@@ -13,13 +13,4 @@ import ulm.hochschule.project_hoops.R;
  * Created by Johann on 10.06.2016.
  */
 public class MyBetTab extends Fragment {
-
-    private View layout;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.mybet, container, false);
-        return layout;
-    }
 }
