@@ -47,7 +47,7 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_added_profile_tabs);
         init();
         user = UserProfile.getInstance();
         sm = SqlManager.getInstance();
@@ -60,32 +60,7 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
         setupViewPager(viewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()) {
-                    case 0:
-                        break;
-                    case 1:;
-                        break;
-                    case 2:
-                        break;
-                }
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
     }
-
-
-
-
 
     private void instantiateUiObjects() {
         et_Forename = (EditText) findViewById(R.id.et_Forename);
