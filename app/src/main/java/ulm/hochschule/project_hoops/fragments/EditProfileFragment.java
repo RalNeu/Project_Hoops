@@ -155,6 +155,7 @@ public class EditProfileFragment extends Fragment {
             public void onClick(View v) {
                 save();
                 ProfilTab.getInstance().updateData();
+                System.out.println("test");
                 notif.notifObs();
             }
         });

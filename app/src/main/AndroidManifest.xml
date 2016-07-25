@@ -16,7 +16,7 @@ package="ulm.hochschule.project_hoops">
         </intent-filter>
     </activity>
     <activity android:name=".activities.EditProfilActivity" android:label="@string/app_name"
-        android:windowSoftInputMode="adjustResize"/>
+        />
     <activity android:name=".activities.TippspielActivity"
         android:windowSoftInputMode="adjustResize"/>
     <activity

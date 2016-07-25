@@ -270,10 +270,10 @@ public class MainActivity extends AppCompatActivity
             changeFragment(newsTab);
         } else if (id == R.id.nav_gallery) {
             changeFragment(new WebView2());
-        } else if (id == R.id.nav_slideshow) {
+       // } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
-            changeFragment(new LoginTab());
+        //} else if (id == R.id.nav_manage) {
+          //  changeFragment(new LoginTab());
         } else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();
             tab.addObserver(this);

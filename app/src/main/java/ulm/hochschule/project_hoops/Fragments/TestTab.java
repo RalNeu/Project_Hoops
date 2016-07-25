@@ -36,8 +36,8 @@ public class TestTab extends Fragment {
         View layout = inflater.inflate(R.layout.tests, container, false);
 
         btn_Test = (Button) layout.findViewById(R.id.btnTests);
-        blockbGame = new BlockBettingGame();
-        blockbGame.execute();
+       // blockbGame = new BlockBettingGame();
+       // blockbGame.execute();
         et_Test = (EditText) layout.findViewById(R.id.editText);
         return layout;
     }
@@ -49,14 +49,12 @@ public class TestTab extends Fragment {
         btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SqlManager sqlManager = SqlManager.getInstance();
+             /*   SqlManager sqlManager = SqlManager.getInstance();
                 if(et_Test.getText().toString().isEmpty()){
                     System.out.println("Empty");
                 }else
                     System.out.println("not Empty");
-                XMLReader xml = new XMLReader();
-
-
+                XMLReader xml = new XMLReader();*/
 
 
             }

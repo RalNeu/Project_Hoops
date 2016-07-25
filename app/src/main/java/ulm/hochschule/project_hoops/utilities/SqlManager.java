@@ -6,6 +6,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -23,7 +26,7 @@ import ulm.hochschule.project_hoops.objects.Coins;
 /**
  * Created by Johann on 14.05.2016.
  */
-public class SqlManager{
+public class SqlManager {
 
     private Connection con;
     private Statement st;
@@ -52,7 +55,6 @@ public class SqlManager{
             e.printStackTrace();
         }
     }
-
 
 
     //Get the only object available
