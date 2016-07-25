@@ -1,12 +1,10 @@
 package ulm.hochschule.project_hoops.activities;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,6 +24,7 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
+import ulm.hochschule.project_hoops.utilities.ViewPagerAdapter;
 
 public class EditProfilActivity extends AppCompatActivity implements Observer{
     private EditText et_Forename, et_Surname, et_AboutMe, et_Code;
@@ -49,13 +48,40 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        init();
         user = UserProfile.getInstance();
         sm = SqlManager.getInstance();
         instantiateUiObjects();
         mapUser();
     }
 
+    private void init(){
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                switch (tab.getPosition()) {
+                    case 0:
+                        break;
+                    case 1:;
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+    }
 
 
 
@@ -279,5 +305,12 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     @Override
     public void update(Observable observable, Object data) {
         finish();
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new EditProfileFragment(), "Profil");
+        //adapter.addFrag(new , "Profil Bearbeiten");
+        viewPager.setAdapter(adapter);
     }
 }
