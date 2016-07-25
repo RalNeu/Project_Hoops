@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +102,13 @@ public class fragment_Send_Tip extends Fragment {
 
     }
 
-            public void vote() {
+    private void changeFragment() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.view_TipGame, new TipTab()).commit();
+    }
+
+    public void vote() {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Bitte warten Sie einen Moment");
@@ -121,11 +129,11 @@ public class fragment_Send_Tip extends Fragment {
                             ServerCommunicate sc = ServerCommunicate.getInstance();
                             sc.sendTip(chosenCoins, team);
                             s = "Tipp gesendet!";
+                            changeFragment();
                         } catch(ServerException e) {
                             e.printStackTrace();
                             s = "Es ist ein Fehler aufgetreten! Bitte versuchen Sie es erneut.";
                         }
-
                     } else {
                         s = "Bitte Geben Sie einen Tipp über 0 an!";
                     }
@@ -137,7 +145,8 @@ public class fragment_Send_Tip extends Fragment {
     }
 
     public void showToast(String s) {
-        Toast toast = Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT);
+        System.out.println("show toast");
         toast.show();
     }
 

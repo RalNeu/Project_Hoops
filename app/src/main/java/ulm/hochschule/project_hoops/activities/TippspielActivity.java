@@ -32,7 +32,7 @@ public class TippspielActivity extends AppCompatActivity {
     private void changeFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.viewpager, f).commit();
+        ft.replace(R.id.view_TipGame, f).commit();
     }
 
 
@@ -41,64 +41,7 @@ public class TippspielActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tippspiel);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
         changeFragment(new TipTab());
 
     }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new DummyFragment(0), "Tipps");
-        adapter.addFrag(new TipTab(), "Spiel");
-        viewPager.setAdapter(adapter);
-    }
-
-    public static class DummyFragment extends Fragment {
-        int color;
-        ListView listView;
-        CardArrayAdapter cardArrayAdapter;
-
-        public DummyFragment() {
-        }
-
-        @SuppressLint("ValidFragment")
-        public DummyFragment(int color) {
-            this.color = color;
-        }
-
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.tippspiel_listview, container, false);
-
-            final FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.dummyfrag_bg);
-            frameLayout.setBackgroundColor(color);
-
-            listView = (ListView) view.findViewById(R.id.listView);
-
-            listView.addHeaderView(new View(getActivity()));
-            listView.addFooterView(new View(getActivity()));
-
-
-            cardArrayAdapter = new CardArrayAdapter(getContext(), R.layout.listitem_mybet);
-
-            //Liste von Einträgen adden
-            List<Card> list = new ArrayList<Card>();
-            addTipps(list);
-            return view;
-        }
-
-        private void addTipps(List<Card> list){
-            for (int i = 0; i < list.size(); i++) {
-                cardArrayAdapter.add(list.get(i));
-            }
-
-            listView.setAdapter(cardArrayAdapter);
-        }
-    }
-
 }

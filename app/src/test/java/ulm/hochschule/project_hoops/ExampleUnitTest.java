@@ -15,12 +15,12 @@ public class ExampleUnitTest {
 
 
 
-    //@Test
+    @Test
     public void testServerSendTip1() throws Exception {
         ServerCommunicate sc = ServerCommunicate.getInstance();
         sc.deleteTipps();
 
-        SqlManager s = SqlManager.getInstance();
+        SqlManager s = SqlManager.getInstanceWithoutStrictMode();
 
         if(!s.userExist("a"))
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "a", "11111111");
@@ -91,12 +91,12 @@ public class ExampleUnitTest {
         assertEquals(50, sc.getQuoteOther(), 0.01);
     }
 
-    @Test
+    //@Test
     public void readWinGameNotFinished() throws Exception{
         ServerCommunicate sc = ServerCommunicate.getInstance();
         sc.deleteTipps();
 
-        SqlManager s = SqlManager.getInstance();
+        SqlManager s = SqlManager.getInstanceWithoutStrictMode();
 
         if(!s.userExist("a"))
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "a", "11111111");

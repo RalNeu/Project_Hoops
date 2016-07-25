@@ -63,6 +63,10 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.activity_edit_profile, container, false);
+        user = UserProfile.getInstance();
+        sm = SqlManager.getInstance();
+        instantiateUiObjects();
+        mapUser();
 
         return layout;
     }

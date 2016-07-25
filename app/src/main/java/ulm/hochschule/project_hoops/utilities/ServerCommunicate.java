@@ -7,6 +7,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.InterfaceAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Ralph on 10.06.2016.
@@ -33,6 +36,7 @@ public class ServerCommunicate {
 
         try {
             Socket s = new Socket("141.59.26.107", 21395);
+
             ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
             InputStream is = s.getInputStream();
 
@@ -61,6 +65,7 @@ public class ServerCommunicate {
 
         } catch (IOException ex) {
             retVal = false;
+            throw new ServerException("No answer from Server");
         }
 
         return retVal;

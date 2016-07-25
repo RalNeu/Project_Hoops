@@ -58,10 +58,13 @@ android:layout_height="match_parent"
         </FrameLayout>
     </LinearLayout>
 
-    <Space
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -79,8 +82,8 @@ android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="5%"
-                android:id="@+id/tv_Prozent1"
+                android:text="5"
+                android:id="@+id/tv_Prozent_Ulm"
                 android:layout_below="@+id/iv_Team1"
                 android:layout_toLeftOf="@+id/sb_SeekBar"
                 android:layout_toStartOf="@+id/sb_SeekBar"
@@ -94,7 +97,7 @@ android:layout_height="match_parent"
             android:id="@+id/sb_SeekBar"
             android:max="100"
             android:progress="0"
-            android:layout_toLeftOf="@+id/tv_Prozent2"
+            android:layout_toLeftOf="@+id/tv_Prozent_Other"
             android:layout_alignBottom="@+id/tv_Prozent1"
             android:layout_alignLeft="@+id/btn_Vote"
             android:layout_alignStart="@+id/btn_Vote"
@@ -109,8 +112,8 @@ android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="95%"
-                android:id="@+id/tv_Prozent2"
+                android:text="95"
+                android:id="@+id/tv_Prozent_Other"
                 android:layout_below="@+id/iv_Team2"
                 android:layout_alignLeft="@+id/iv_Team2"
                 android:layout_weight="1"
@@ -155,6 +158,12 @@ android:layout_height="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
 
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/btn_Refresh"
+                android:layout_gravity="center"
+                android:background="@drawable/refreshicon" />
         </FrameLayout>
 
         <FrameLayout

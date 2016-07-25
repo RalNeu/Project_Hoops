@@ -34,7 +34,7 @@ public class SqlManager {
     private PreparedStatement preparedStmt;
 
     //create an object of SingleObject
-    private static SqlManager instance = new SqlManager();
+    private static SqlManager instance;
 
     //make the constructor private so that this class cannot be
     //instantiated
@@ -56,11 +56,29 @@ public class SqlManager {
         }
     }
 
+    private SqlManager(boolean f) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            con = DriverManager.getConnection("jdbc:mysql://141.59.26.107:3306/hoops", "SuperUser", "root");
+            st = con.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //Get the only object available
     public static SqlManager getInstance(){
         if(instance == null){
             instance = new SqlManager();
+        }
+        return instance;
+    }
+
+    public static SqlManager getInstanceWithoutStrictMode() {
+        if(instance == null){
+            instance = new SqlManager(true);
         }
         return instance;
     }

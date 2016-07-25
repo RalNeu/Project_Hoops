@@ -51,8 +51,8 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
         init();
         user = UserProfile.getInstance();
         sm = SqlManager.getInstance();
-        instantiateUiObjects();
-        mapUser();
+        //instantiateUiObjects();
+       // mapUser();
     }
 
     private void init(){
@@ -284,7 +284,9 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new EditProfileFragment(), "Profil");
+        EditProfileFragment epf = new EditProfileFragment();
+        epf.setObserver(this);
+        adapter.addFrag(epf, "Profil");
         //adapter.addFrag(new , "Profil Bearbeiten");
         viewPager.setAdapter(adapter);
     }
