@@ -24,14 +24,30 @@
                 android:layout_weight="1"
                 android:background="@drawable/avatarframe">
 
-                <TextureView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/anim_Avatar"
+                    android:id="@+id/avatarBody"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/avatarbody" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/avatarHead"
+                    android:layout_gravity="center"
+                    android:background="@drawable/avatarhead"
+                    android:layout_margin="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/avatarHat"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
+                    android:background="@drawable/avatarhat"
                     android:visibility="visible" />
-
             </FrameLayout>
 
             <LinearLayout
