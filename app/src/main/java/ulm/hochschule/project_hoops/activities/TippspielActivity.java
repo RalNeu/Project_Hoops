@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -26,24 +28,25 @@ import ulm.hochschule.project_hoops.utilities.ViewPagerAdapter;
  */
 public class TippspielActivity extends AppCompatActivity {
 
-    /*
+
     private void changeFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.view_TipGame, f).commit();
+        ft.replace(R.id.viewpager, f).commit();
     }
-    */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tippspiel);
-        //changeFragment(new TipTab());
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        changeFragment(new TipTab());
 
     }
 
@@ -83,16 +86,18 @@ public class TippspielActivity extends AppCompatActivity {
 
             cardArrayAdapter = new CardArrayAdapter(getContext(), R.layout.listitem_mybet);
 
-            //Liste von Einträgen
-            List<String> list = new ArrayList<String>();
+            //Liste von Einträgen adden
+            List<Card> list = new ArrayList<Card>();
+            addTipps(list);
+            return view;
+        }
 
-            for (int i = 0; i < 4; i++) {
-                Card card = new Card();
-                cardArrayAdapter.add(card);
+        private void addTipps(List<Card> list){
+            for (int i = 0; i < list.size(); i++) {
+                cardArrayAdapter.add(list.get(i));
             }
 
             listView.setAdapter(cardArrayAdapter);
-            return view;
         }
     }
 

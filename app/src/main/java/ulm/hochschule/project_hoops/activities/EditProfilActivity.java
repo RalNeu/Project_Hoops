@@ -58,7 +58,7 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     private void init(){
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsProfile);
         tabLayout.setupWithViewPager(viewPager);
     }
 
