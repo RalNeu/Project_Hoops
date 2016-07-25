@@ -47,7 +47,7 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_added_profile_tabs);
+        setContentView(R.layout.activity_edit_profile_tabs);
         init();
         user = UserProfile.getInstance();
         sm = SqlManager.getInstance();

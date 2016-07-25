@@ -54,14 +54,14 @@ public class NewsTab extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 //Created by Johann
                 //TODO: Load Data from Server
             }
         });
-
+        */
 
        // ArrayList<ListItem> listData = getListData();
 

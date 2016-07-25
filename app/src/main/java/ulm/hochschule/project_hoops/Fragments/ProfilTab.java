@@ -133,33 +133,32 @@ public class ProfilTab extends Fragment {
         view_GebDat = (View) layout.findViewById(R.id.view_GebDat);
         view_AboutMe = (View) layout.findViewById(R.id.view_AboutMe);
 
-        final ImageView coins = (ImageView) layout.findViewById(R.id.img_Coins);
-        final ImageView ranking = (ImageView) layout.findViewById(R.id.img_Ranking);
-        final ImageView highscore = (ImageView) layout.findViewById(R.id.img_Highscore);
-
+        final ImageView iViewCoins = (ImageView) layout.findViewById(R.id.img_Coins);
+        final ImageView iViewRanking = (ImageView) layout.findViewById(R.id.img_Ranking);
+        final ImageView iViewHighscore = (ImageView) layout.findViewById(R.id.img_Highscore);
         final FrameLayout fL = (FrameLayout) layout.findViewById(R.id.frLay);
 
-        coins.post(new Runnable() {
+        iViewCoins.post(new Runnable() {
             @Override
             public void run() {
-                coins.getLayoutParams().width = coins.getHeight();
-                coins.requestLayout();
+                iViewCoins.getLayoutParams().width = iViewCoins.getHeight();
+                iViewCoins.requestLayout();
             }
         });
 
-        ranking.post(new Runnable() {
+        iViewRanking.post(new Runnable() {
             @Override
             public void run() {
-                ranking.getLayoutParams().width = ranking.getHeight();
-                ranking.requestLayout();
+                iViewRanking.getLayoutParams().width = iViewRanking.getHeight();
+                iViewRanking.requestLayout();
             }
         });
 
-        highscore.post(new Runnable() {
+        iViewHighscore.post(new Runnable() {
             @Override
             public void run() {
-                highscore.getLayoutParams().width = highscore.getHeight();
-                highscore.requestLayout();
+                iViewHighscore.getLayoutParams().width = iViewHighscore.getHeight();
+                iViewHighscore.requestLayout();
             }
         });
     }
