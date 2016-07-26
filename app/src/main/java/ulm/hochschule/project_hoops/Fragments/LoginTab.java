@@ -70,8 +70,6 @@ public class LoginTab extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contentPanel, new NewsTab()).commit();
         Toast.makeText(getContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
-
-
     }
 
     public void verifReminder(){

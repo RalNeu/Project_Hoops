@@ -37,7 +37,7 @@ import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Observer {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button btn_Register;
     private Button btn_login;
@@ -270,18 +270,9 @@ public class MainActivity extends AppCompatActivity
             changeFragment(newsTab);
         } else if (id == R.id.nav_gallery) {
             changeFragment(new WebView2());
-       // } else if (id == R.id.nav_slideshow) {
-
-        //} else if (id == R.id.nav_manage) {
-          //  changeFragment(new LoginTab());
         } else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();
-            tab.addObserver(this);
             changeFragment(tab);
-       // } //else if (id == R.id.nav_test) {
-           // startActivity(new Intent(this,  ListViewBet.class));
-            //changeFragment(new testFragment());
-            //changeFragment(new TestTab());
         } else if (id == R.id.login) {
             currTab = loginTab;
             changeFragment(loginTab);
@@ -296,13 +287,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         closeKeyboard();
         return true;
-    }
-
-    @Override
-    public void update(Observable observable, Object data) {
-        Intent i = new Intent(getApplicationContext(), EditProfilActivity.class);
-        startActivity(i);
-
     }
 
 

@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
+import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
@@ -114,8 +116,8 @@ public class ProfilTab extends Fragment {
     }
 
     private void openEditProfile() {
-
-        notif.notifObs();
+        Intent i = new Intent(getActivity().getApplicationContext(), EditProfilActivity.class);
+        startActivity(i);
     }
 
     private void instatiateUiObjects() {
