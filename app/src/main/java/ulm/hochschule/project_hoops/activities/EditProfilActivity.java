@@ -42,7 +42,6 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     private Date oldGebDat;
     private int oldSettings;
     private Notificator notif;
-    private View layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

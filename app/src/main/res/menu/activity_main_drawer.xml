@@ -10,6 +10,7 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_ticket_icon"
             android:title="Ticketshop" />
+
        <!-- <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -41,6 +42,10 @@
                 android:id="@+id/profile"
                 android:icon="@drawable/ic_stat_name"
                 android:title="@string/profile"/>
+            <item
+                android:id="@+id/achievement"
+                android:icon="@drawable/ic_achievement"
+                android:title="Achievements"/>
         </menu>
     </item>
 

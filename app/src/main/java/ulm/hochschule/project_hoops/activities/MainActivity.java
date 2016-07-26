@@ -20,15 +20,23 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.Observable;
+import java.util.Observer;
 
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
+
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.fragments.AchievementTab;
 import ulm.hochschule.project_hoops.fragments.LoginTab;
 import ulm.hochschule.project_hoops.fragments.NewsTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
+import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity
 
     private MenuItem profile;
     private MenuItem tipgame;
+    private MenuItem achievements;
 
     //For closeKeyboard
     private ActionBarDrawerToggle mDrawerToggle;
@@ -60,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     public void setProfileEnabled(boolean flag) {
         tipgame.setEnabled(flag);
         profile.setEnabled(flag);
+        achievements.setEnabled(flag);
     }
 
 
@@ -83,9 +93,12 @@ public class MainActivity extends AppCompatActivity
         Menu navDrawer = navigationView.getMenu();
         profile = navDrawer.findItem(R.id.profile);
         tipgame = navDrawer.findItem(R.id.tipGame);
+        achievements = navDrawer.findItem(R.id.achievement);
 
-        //tipgame.setEnabled(false);
+
+        tipgame.setEnabled(false);
         profile.setEnabled(false);
+        achievements.setEnabled(false);
         //mi.setEnabled(false);
 
         drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -280,6 +293,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.hausansicht){
         currTab = houseView;
         changeFragment(new HouseViewTab());
+        } else if(id == R.id.achievement) {
+            changeFragment(new AchievementTab());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
