@@ -25,6 +25,7 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
+import ulm.hochschule.project_hoops.Interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 
 import ulm.hochschule.project_hoops.R;
@@ -40,7 +41,7 @@ import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AchievementReceiver {
 
     private Button btn_Register;
     private Button btn_login;
@@ -51,11 +52,11 @@ public class MainActivity extends AppCompatActivity
 
     private SqlManager manager;
 
-    private Fragment currTab = new NewsTab();
-    private Fragment newsTab = new NewsTab();
+    private Fragment currTab;
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
     private Fragment houseView = new HouseViewTab();
+    private AchievementTab achievementTab = new AchievementTab();
 
     private MenuItem profile;
     private MenuItem tipgame;
@@ -191,8 +192,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-
-
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
 
             @Override
@@ -275,8 +274,8 @@ public class MainActivity extends AppCompatActivity
         Fragment f = null;
 
         if (id == R.id.nav_camera) {
-            currTab = newsTab;
-            changeFragment(newsTab);
+            //currTab = newsTab;
+           // changeFragment(newsTab);
         } else if (id == R.id.nav_gallery) {
             changeFragment(new WebView2());
         } else if (id == R.id.profile) {
@@ -291,10 +290,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.tipGame) {
             startActivity(new Intent(getApplicationContext(), TippspielActivity.class));
         } else if (id == R.id.hausansicht){
-        currTab = houseView;
-        changeFragment(new HouseViewTab());
+            currTab = houseView;
+            changeFragment(new HouseViewTab());
         } else if(id == R.id.achievement) {
-            changeFragment(new AchievementTab());
+            changeFragment(achievementTab);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -303,6 +302,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+    @Override
+    public void addAchievement(int idx, int emblem, String description, String date) {
+        achievementTab.addAchievement(idx, emblem, description, date);
+    }
 
     //Close keyboard Patrick
     public void closeKeyboard() {
