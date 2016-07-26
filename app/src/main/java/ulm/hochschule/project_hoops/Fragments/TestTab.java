@@ -1,8 +1,12 @@
 package ulm.hochschule.project_hoops.fragments;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,7 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.BettingGame;
 import ulm.hochschule.project_hoops.objects.BlockBettingGame;
 import ulm.hochschule.project_hoops.objects.XMLReader;
+import ulm.hochschule.project_hoops.utilities.NotifyManager;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
@@ -42,6 +47,8 @@ public class TestTab extends Fragment {
         return layout;
     }
 
+    NotifyManager m = new NotifyManager();
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -49,6 +56,7 @@ public class TestTab extends Fragment {
         btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                m.sentNotify(1, "HAllo", "nein", getActivity(), R.drawable.ic_ticket_icon);
              /*   SqlManager sqlManager = SqlManager.getInstance();
                 if(et_Test.getText().toString().isEmpty()){
                     System.out.println("Empty");
@@ -60,6 +68,5 @@ public class TestTab extends Fragment {
             }
         });
     }
-
 
 }

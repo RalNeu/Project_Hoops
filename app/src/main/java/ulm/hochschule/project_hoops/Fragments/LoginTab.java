@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
@@ -28,6 +29,7 @@ public class LoginTab extends Fragment {
     private EditText et_Username;
     private EditText et_Password;
     private Button btn_Login;
+    private TextView register;
     private SqlManager manager;
 
     @Override
@@ -43,6 +45,7 @@ public class LoginTab extends Fragment {
         et_Username = (EditText) layout.findViewById(R.id.et_Username);
         et_Password = (EditText) layout.findViewById(R.id.et_Password);
         btn_Login = (Button) layout.findViewById(R.id.btn_Login);
+        register = (TextView) layout.findViewById(R.id.link_register);
         return layout;
     }
 
@@ -53,6 +56,14 @@ public class LoginTab extends Fragment {
             @Override
             public void onClick(View v) {
                     login();
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.contentPanel, new RegisterTab2());
             }
         });
     }
