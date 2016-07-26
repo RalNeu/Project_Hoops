@@ -3,12 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ulm.hochschule.project_hoops.objects.TouchImageView
-        android:id="@+id/House"
+        android:id="@+id/Stadium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/haus"
+        android:src="@drawable/stadium"
         android:background="@android:color/transparent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -18,10 +17,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stadion"
-        android:id="@+id/btn_switchMap"
+        android:text="Gebäude"
+        android:id="@+id/btn_switchMap2"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-</RelativeLayout>
 
+</RelativeLayout>

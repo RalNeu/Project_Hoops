@@ -1,6 +1,8 @@
 package ulm.hochschule.project_hoops.fragments;
 
-
+/**
+ * Created by Zoll on 26.07.2016.
+ */
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +17,7 @@ import android.widget.Button;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.TouchImageView;
 
-
-
-public class HouseViewTab extends Fragment {
+public class StadiumViewTab extends Fragment{
 
     private Context context;
     private View layout;
@@ -25,10 +25,11 @@ public class HouseViewTab extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_houseview, container, false);
-        btn_switchMap = (Button) layout.findViewById(R.id.btn_switchMap);
+        layout = inflater.inflate(R.layout.fragment_stadiumview, container, false);
+        btn_switchMap = (Button) layout.findViewById(R.id.btn_switchMap2);
         return layout;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -36,7 +37,7 @@ public class HouseViewTab extends Fragment {
         btn_switchMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment f = new StadiumViewTab();
+                Fragment f = new HouseViewTab();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.contentPanel, f).addToBackStack(f.getTag()).commit();
@@ -53,7 +54,7 @@ public class HouseViewTab extends Fragment {
 
         context = getContext();
         TouchImageView img = new TouchImageView(context);
-        img.setImageResource(R.drawable.haus);
+        img.setImageResource(R.drawable.stadium);
         img.setMaxZoom(4f);
 
     }
