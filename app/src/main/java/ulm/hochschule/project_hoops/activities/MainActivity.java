@@ -20,20 +20,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.util.Observable;
-import java.util.Observer;
-
+import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.LoginTab;
 import ulm.hochschule.project_hoops.fragments.NewsTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
-import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
-import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -52,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment newsTab = new NewsTab();
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
+    private Fragment houseView = new HouseViewTab();
 
     private MenuItem profile;
     private MenuItem tipgame;
@@ -281,6 +277,9 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new RegisterTab());
         } else if (id == R.id.tipGame) {
             startActivity(new Intent(getApplicationContext(), TippspielActivity.class));
+        } else if (id == R.id.hausansicht){
+        currTab = houseView;
+        changeFragment(new HouseViewTab());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

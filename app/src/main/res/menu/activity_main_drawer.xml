@@ -21,6 +21,10 @@
         <item
             android:id="@+id/nav_test"
             android:title="Tests" /> -->
+        <item
+            android:id="@+id/hausansicht"
+            android:icon="@drawable/haus"
+            android:title="Gebäudeansicht"/>
     </group>
 
     <item android:title="Account">
