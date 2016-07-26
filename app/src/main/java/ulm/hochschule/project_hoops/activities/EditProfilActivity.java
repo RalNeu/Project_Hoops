@@ -1,10 +1,14 @@
 package ulm.hochschule.project_hoops.activities;
 
+import android.content.Context;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,6 +21,7 @@ import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
+import ulm.hochschule.project_hoops.fragments.EditAvatarTab;
 import ulm.hochschule.project_hoops.fragments.EditProfileFragment;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
@@ -42,6 +47,7 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     private Date oldGebDat;
     private int oldSettings;
     private Notificator notif;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +61,10 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     }
 
     private void init(){
+
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsProfile);
+        tabLayout = (TabLayout) findViewById(R.id.tabsProfile);
         tabLayout.setupWithViewPager(viewPager);
     }
 
@@ -284,9 +291,28 @@ public class EditProfilActivity extends AppCompatActivity implements Observer{
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         EditProfileFragment epf = new EditProfileFragment();
+        EditAvatarTab eat = new EditAvatarTab();
         epf.setObserver(this);
-        adapter.addFrag(epf, "Profil");
-        //adapter.addFrag(new , "Profil Bearbeiten");
+        adapter.addFrag(epf, "Profilinformationen");
+        adapter.addFrag(eat , "Avatar");
         viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrolled(int position, float offset, int offsetPixels) {
+                final InputMethodManager imm = (InputMethodManager)getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(tabLayout.getWindowToken(), 0);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
+
 }

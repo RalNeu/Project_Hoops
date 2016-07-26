@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ulm.hochschule.project_hoops.fragments.EditAvatarTab">
+    tools:context="ulm.hochschule.project_hoops.fragments.EditAvatarTab"
+    android:background="@drawable/bgprofilebot">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -16,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|top"
-            android:layout_weight="1" >
+            android:layout_weight="0.9" >
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -76,12 +77,26 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></FrameLayout>
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Hut"
+                        android:id="@+id/btnHat" />
+                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></FrameLayout>
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Augen"
+                        android:id="@+id/btnEyes" />
+                </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -93,12 +108,26 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Haare"
+                        android:id="@+id/btnHair" />
+                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Bart"
+                        android:id="@+id/btnBeard" />
+                </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -110,19 +139,40 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Hautfarbe"
+                        android:id="@+id/btnSkin" />
+                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Körper"
+                        android:id="@+id/btnBody" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"></FrameLayout>
+            android:layout_weight="1.5">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Speichern"
+                android:id="@+id/btnSave" />
+        </FrameLayout>
 
     </LinearLayout>
 
