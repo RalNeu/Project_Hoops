@@ -44,18 +44,11 @@ public class EditProfileFragment extends Fragment {
     private String oldForename, oldSurname, oldAboutMe;
     private Date oldGebDat;
     private int oldSettings;
-    private Notificator notif;
     private View layout;
 
 
     public EditProfileFragment() {
         // Required empty public constructor
-    }
-
-
-    public void setObserver(Observer obs) {
-        notif = new Notificator();
-        notif.addObserver(obs);
     }
 
     @Override
@@ -159,8 +152,7 @@ public class EditProfileFragment extends Fragment {
             public void onClick(View v) {
                 save();
                 ProfilTab.getInstance().updateData();
-                System.out.println("test");
-                notif.notifObs();
+                getActivity().finish();
             }
         });
     }
