@@ -112,6 +112,7 @@ public class RegisterTab2 extends Fragment {
 
     public void onRegisterSuccess() {
         btn_Register.setEnabled(true);
+        manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString(), et_Username.getText().toString(), et_Password.getText().toString());
         mailVerifierTask = new MailVerifierTask(getContext(), et_Email.getText().toString(), et_Username.getText().toString());
         mailVerifierTask.execute();
         manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString()
@@ -120,6 +121,8 @@ public class RegisterTab2 extends Fragment {
 
     public void login(String username){
         notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten :)", getActivity(), R.drawable.achievement_gold);
+        notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten :)", getActivity(), R.drawable.coin);
+        UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username);
         user.updateCoins(50);
         MainActivity ma = (MainActivity) getActivity();
@@ -134,6 +137,8 @@ public class RegisterTab2 extends Fragment {
 
     private boolean ok(){
         boolean isok = true;
+
+
         System.out.print(et_Email.getText().toString());
         if(et_Firstname.getText().toString().trim().equals("")){
             et_Firstname.setError(getString(R.string.enter_your_firstname));
