@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity
             changeFragment(loginTab);
         } else if (id == R.id.register) {
             currTab = registerTab;
-            changeFragment(new RegisterTab());
+            changeFragment(registerTab);
         } else if (id == R.id.tipGame) {
             startActivity(new Intent(getApplicationContext(), TippspielActivity.class));
         } else if (id == R.id.hausansicht){
