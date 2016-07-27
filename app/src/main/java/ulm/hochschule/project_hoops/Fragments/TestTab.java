@@ -56,7 +56,7 @@ public class TestTab extends Fragment {
         btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                m.sentNotify(1, "HAllo", "nein", getActivity(), R.drawable.ic_ticket_icon);
+                m.sendNotify(1, "HAllo", "nein", getActivity(), R.drawable.ic_ticket_icon);
              /*   SqlManager sqlManager = SqlManager.getInstance();
                 if(et_Test.getText().toString().isEmpty()){
                     System.out.println("Empty");
