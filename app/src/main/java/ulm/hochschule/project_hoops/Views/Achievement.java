@@ -1,21 +1,16 @@
-package ulm.hochschule.project_hoops.Views;
+package ulm.hochschule.project_hoops.views;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.sql.Date;
 
 import ulm.hochschule.project_hoops.R;
 
@@ -37,7 +32,6 @@ public class Achievement extends LinearLayout {
     int emblem = 0;
     String description = "???";
     String date = "01.01.2000";
-
 
     public Achievement(Context context) {
         super(context);
@@ -89,9 +83,6 @@ public class Achievement extends LinearLayout {
 
     private void mapUIObjects() {
         switch (emblem) {
-            case 0:
-                img_Emblem.setImageResource(R.drawable.achievement_grau_transparent);
-                break;
             case 1:
                 img_Emblem.setImageResource(R.drawable.achievement_bronze);
                 break;
@@ -100,6 +91,9 @@ public class Achievement extends LinearLayout {
                 break;
             case 3:
                 img_Emblem.setImageResource(R.drawable.achievement_gold);
+                break;
+            default:
+                img_Emblem.setImageResource(R.drawable.achievement_grau_transparent);
                 break;
         }
 

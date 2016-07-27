@@ -12,7 +12,7 @@ public class UserProfile {
 
     private static UserProfile user;
 
-    private String username, forename, surname, email, password, aboutMe, verifCode;
+    private String username, forename, surname, email, password, aboutMe, verifCode, achievements;
     private Coins coins;
     private int ranking, highscore, userID, personID, settings;
     private Date gebDat;
@@ -37,6 +37,8 @@ public class UserProfile {
             settings    = (int)     userInfo[9];
             verifCode   = (String)  userInfo[10];
             userID      = (int)     userInfo[11];
+            achievements = (String) userInfo[12];
+            System.out.println(achievements);
 
             userFound = true;
         } catch (SQLException e) {
@@ -64,7 +66,7 @@ public class UserProfile {
     public static UserProfile getInstance() {
 
         if(user == null) {
-            throw new RuntimeException("Please login a user in th efirst place.");
+            throw new RuntimeException("Please login a user in the first place.");
         }
         return user;
     }
@@ -103,12 +105,8 @@ public class UserProfile {
     }
 
     public void updateCoins(int c) {
-        System.out.println(c);
         coins.updateCoins(c);
-        System.out.println(coins.getCoins());
-
         SqlManager.getInstance().updateCoins(coins, username);
-
     }
 
     public int getRanking() {

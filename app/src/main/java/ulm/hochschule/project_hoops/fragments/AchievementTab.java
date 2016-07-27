@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import java.util.HashMap;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.Views.Achievement;
+import ulm.hochschule.project_hoops.views.Achievement;
 
 public class AchievementTab extends Fragment {
 
@@ -52,6 +52,8 @@ public class AchievementTab extends Fragment {
         lay_Achievement = (LinearLayout) layout.findViewById(R.id.lay_AchievementContainer);
 
         achievements = new HashMap<Integer, Achievement>();
+
+        addAchievement(0,1,"test", "1.1.1");
 
         return layout;
     }

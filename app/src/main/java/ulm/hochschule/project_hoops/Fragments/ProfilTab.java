@@ -42,7 +42,6 @@ public class ProfilTab extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = UserProfile.getInstance();
     }
 
     @Nullable
@@ -51,7 +50,6 @@ public class ProfilTab extends Fragment {
         layout = inflater.inflate(R.layout.fragment_profile, container, false);
 
         instatiateUiObjects();
-        mapUser();
 
         btn_EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +57,8 @@ public class ProfilTab extends Fragment {
                 openEditProfile();
             }
         });
+        user = UserProfile.getInstance();
+        mapUser();
 
         return layout;
     }

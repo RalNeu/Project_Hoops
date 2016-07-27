@@ -146,7 +146,6 @@ public class fragment_Send_Tip extends Fragment {
 
     public void showToast(String s) {
         Toast toast = Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT);
-        System.out.println("show toast");
         toast.show();
     }
 

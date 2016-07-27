@@ -22,10 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import ulm.hochschule.project_hoops.Interfaces.AchievementReceiver;
+import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 
 import ulm.hochschule.project_hoops.R;
@@ -286,7 +283,7 @@ public class MainActivity extends AppCompatActivity
             changeFragment(loginTab);
         } else if (id == R.id.register) {
             currTab = registerTab;
-            changeFragment(registerTab);
+            changeFragment(new RegisterTab2());
         } else if (id == R.id.tipGame) {
             startActivity(new Intent(getApplicationContext(), TippspielActivity.class));
         } else if (id == R.id.hausansicht){

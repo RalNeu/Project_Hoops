@@ -67,7 +67,6 @@ public class SqlManager {
         }
     }
 
-
     //Get the only object available
     public static SqlManager getInstance(){
         if(instance == null){
@@ -109,7 +108,6 @@ public class SqlManager {
             }
             preparedStmt.execute();
 
-
             //Create
             query = "insert into erstelldatum(eDatum)" + "value(Now())";
             preparedStmt = con.prepareStatement(query);
@@ -122,7 +120,6 @@ public class SqlManager {
                 erstellDatumID = rs.getInt("eID");
                 rs.next();
             }
-
 
             // create the mysql insert for person
             query = "insert into person ( email, vorname, nachname,lID, geburtsdatum, hobbies)"
@@ -146,13 +143,14 @@ public class SqlManager {
             }
 
             //create Account
-            query ="insert into account(username, password, pID, eID, lastlogin) values (?, ?, ?, ?, NOW())";
+            query ="insert into account(username, password, pID, eID, lastlogin, achievements) values (?, ?, ?, ?, NOW(), ?)";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, userName);
             preparedStmt.setString(2,password);
             preparedStmt.setInt(3,personID);
 
             preparedStmt.setInt(4,erstellDatumID);
+            preparedStmt.setString(5,"1/0/1/0/0/0/0/0/0/0/0/0/0/0/0/0");
             preparedStmt.execute();
 
         }catch(Exception e){
@@ -234,6 +232,7 @@ public class SqlManager {
             e.getStackTrace();
         }
     }
+
     public void setStatus(String username, String status){
         try {
             String query = "UPDATE account SET status=? WHERE username=?";
@@ -284,7 +283,7 @@ public class SqlManager {
     public Object[] getUser(String userName) throws java.sql.SQLException{
         int  personID=0;
 
-        Object[] retArray = new Object[12];
+        Object[] retArray = new Object[13];
 
         String query="select * from account where username = ?";
         preparedStmt = con.prepareStatement(query);
@@ -300,6 +299,7 @@ public class SqlManager {
         retArray[9] = rs.getInt("einstellung");
         retArray[10] = rs.getString("verified_string");
         retArray[11] = rs.getInt("aID");
+        retArray[12] = rs.getString("achievements");
         personID = rs.getInt("pID");
 
 

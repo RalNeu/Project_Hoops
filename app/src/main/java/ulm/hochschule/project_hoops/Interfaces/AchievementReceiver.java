@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.Interfaces;
+package ulm.hochschule.project_hoops.interfaces;
 
 /**
  * Created by Ralph on 26.07.2016.
