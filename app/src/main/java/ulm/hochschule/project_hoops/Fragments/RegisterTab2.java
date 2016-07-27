@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.activities.MainActivity;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.utilities.NotifyManager;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -39,6 +41,7 @@ public class RegisterTab2 extends Fragment {
     private TextView txt_Link;
 
     private SqlManager manager;
+    private NotifyManager notifyManager;
     private ulm.hochschule.project_hoops.tasks.MailVerifierTask mailVerifierTask;
 
     //Patrick für tastatur schließen
@@ -49,6 +52,7 @@ public class RegisterTab2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager = SqlManager.getInstance();
+        notifyManager = new NotifyManager();
     }
 
     @Nullable
@@ -113,8 +117,12 @@ public class RegisterTab2 extends Fragment {
     }
 
     public void login(String username){
+        notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten :)", getActivity(), R.drawable.achievement_gold);
         UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username);
+        user.updateCoins(50);
+        MainActivity ma = (MainActivity) getActivity();
+        ma.setProfileEnabled(true);
     }
 
     private void onRegisterFailed() {
