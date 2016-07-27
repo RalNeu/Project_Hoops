@@ -27,17 +27,8 @@ public class EditAvatarTab extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        layout = inflater.inflate(R.layout.fragment_edit_avatar_tab, container, false);
-        instatiateUiObjects();
-        System.out.println("test");
+    public void onActivityCreated (Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
         btnHair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +42,38 @@ public class EditAvatarTab extends Fragment {
             }
         });
 
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        layout = inflater.inflate(R.layout.fragment_edit_avatar_tab, container, false);
+        instatiateUiObjects();
+        System.out.println("test");
+        //btnHair.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+        //public void onClick(View v) {
+          //      openChangeItemsTab();
+           // }
+        //});
+        //btnEyes.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+           // public void onClick(View v) {
+             //   openChangeItemsTab();
+           // }
+        //});
+
         return layout;
     }
+
 
     private void instatiateUiObjects() {
 
