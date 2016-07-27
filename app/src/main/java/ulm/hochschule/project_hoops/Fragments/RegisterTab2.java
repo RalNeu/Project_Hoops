@@ -18,6 +18,7 @@ import android.widget.Toast;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
+import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
  * Created by Johann on 17.05.2016.
@@ -72,16 +73,16 @@ public class RegisterTab2 extends Fragment {
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                register();
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromInputMethod(lLayout.getWindowToken(),0);
             }
         });
     }
 
-    public void login() {
+    public void register() {
         if (!ok()) {
-            onLoginFailed();
+            onRegisterFailed();
             return;
         }
         btn_Register.setEnabled(false);
@@ -98,20 +99,25 @@ public class RegisterTab2 extends Fragment {
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+                        onRegisterSuccess();
+                        login(et_Username.getText().toString());
                         progressDialog.dismiss();
                     }
                 }, 3000);
     }
 
-    public void onLoginSuccess() {
+    public void onRegisterSuccess() {
         btn_Register.setEnabled(true);
         mailVerifierTask = new MailVerifierTask(getContext(), et_Email.getText().toString(), et_Username.getText().toString());
         mailVerifierTask.execute();
     }
 
-    private void onLoginFailed() {
+    public void login(String username){
+        UserProfile.logoffUser();
+        UserProfile user = UserProfile.getInstance(username);
+    }
+
+    private void onRegisterFailed() {
         Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
 
         btn_Register.setEnabled(true);
