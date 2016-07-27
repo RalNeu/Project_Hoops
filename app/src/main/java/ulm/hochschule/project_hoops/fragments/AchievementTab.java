@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import java.util.HashMap;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.AchievementHandler;
+import ulm.hochschule.project_hoops.utilities.AchievementObject;
 import ulm.hochschule.project_hoops.views.Achievement;
 
 public class AchievementTab extends Fragment {
@@ -53,7 +55,11 @@ public class AchievementTab extends Fragment {
 
         achievements = new HashMap<Integer, Achievement>();
 
-        addAchievement(0,1,"test", "1.1.1");
+
+        for(int i = 0;i< 16;i++) {
+            AchievementObject ao = AchievementHandler.getInstance().getAchievement(i);
+            addAchievement(i, ao.getEmblem(), ao.getDescription(), ao.getTitle());
+        }
 
         return layout;
     }

@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity
     private void changeFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, f).addToBackStack( f.getTag() ).commit();
+        ft.replace(R.id.contentPanel, f).addToBackStack( f.getTag()).commit();
     }
 
     private void logIn() {

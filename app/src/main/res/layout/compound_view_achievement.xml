@@ -28,7 +28,23 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="2"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv_Title"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:layout_marginLeft="10dp">
 
             <TextView
@@ -39,38 +55,6 @@
                 android:layout_weight="1"
                 android:layout_gravity="left|center_vertical"
                 android:textSize="15dp" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/textView6"
-                    android:text="@string/achieved_on"
-                    android:layout_gravity="center_vertical|bottom|right"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/tv_Date"
-                    android:layout_gravity="left|center_vertical|bottom"
-                    android:textSize="10dp"
-                    android:layout_marginLeft="8dp" />
-            </LinearLayout>
         </FrameLayout>
 
     </LinearLayout>

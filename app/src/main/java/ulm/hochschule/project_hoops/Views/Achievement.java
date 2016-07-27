@@ -20,7 +20,7 @@ import ulm.hochschule.project_hoops.R;
 public class Achievement extends LinearLayout {
 
     private ImageView img_Emblem;
-    private TextView tv_Description, tv_Date;
+    private TextView tv_Description, tv_Title;
 
     private Drawable mExampleDrawable;
 
@@ -31,7 +31,7 @@ public class Achievement extends LinearLayout {
 
     int emblem = 0;
     String description = "???";
-    String date = "01.01.2000";
+    String title = "???";
 
     public Achievement(Context context) {
         super(context);
@@ -65,18 +65,18 @@ public class Achievement extends LinearLayout {
         super.onFinishInflate();
     }
 
-    public void setAchievement(int emblem, String description, String date) {
+    public void setAchievement(int emblem, String description, String title) {
 
         this.emblem = emblem;
         this.description = description;
-        this.date = date;
+        this.title = title;
         mapUIObjects();
     }
 
     private void instantiateUIObjects() {
         img_Emblem = (ImageView) this.findViewById(R.id.img_Emblem);
         tv_Description = (TextView) this.findViewById(R.id.tv_Description);
-        tv_Date = (TextView) this.findViewById(R.id.tv_Date);
+        tv_Title = (TextView) this.findViewById(R.id.tv_Title);
 
         setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
     }
@@ -98,7 +98,6 @@ public class Achievement extends LinearLayout {
         }
 
         tv_Description.setText(description);
-        tv_Date.setText(date);
+        tv_Title.setText(title);
     }
-
 }

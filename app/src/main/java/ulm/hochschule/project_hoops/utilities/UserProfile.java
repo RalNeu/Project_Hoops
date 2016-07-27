@@ -38,7 +38,7 @@ public class UserProfile {
             verifCode   = (String)  userInfo[10];
             userID      = (int)     userInfo[11];
             achievements = (String) userInfo[12];
-            System.out.println(achievements);
+            AchievementHandler.getInstance().mapAchievements(achievements);
 
             userFound = true;
         } catch (SQLException e) {

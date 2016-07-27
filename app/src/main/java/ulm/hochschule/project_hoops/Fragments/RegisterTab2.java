@@ -3,6 +3,7 @@ package ulm.hochschule.project_hoops.fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.activities.MainActivity;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.NotifyManager;
+import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
+import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -91,9 +94,11 @@ public class RegisterTab2 extends Fragment {
         }
         btn_Register.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
-                R.style.AppTheme_PopupOverlay);
-        progressDialog.setIndeterminate(true);
+
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Bitte warten Sie einen Moment");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         progressDialog.setMessage("Anfrage wird verarbeitet...");
         progressDialog.show();
 
@@ -104,10 +109,10 @@ public class RegisterTab2 extends Fragment {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
                         onRegisterSuccess();
+                        login(et_Username.getText().toString());
                         progressDialog.dismiss();
                     }
                 }, 3000);
-        login(et_Username.getText().toString());
     }
 
     public void onRegisterSuccess() {
@@ -115,13 +120,10 @@ public class RegisterTab2 extends Fragment {
         manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString(), et_Username.getText().toString(), et_Password.getText().toString());
         mailVerifierTask = new MailVerifierTask(getContext(), et_Email.getText().toString(), et_Username.getText().toString());
         mailVerifierTask.execute();
-        manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString()
-                , et_Username.getText().toString(), et_Password.getText().toString());
     }
 
     public void login(String username){
-        notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten :)", getActivity(), R.drawable.achievement_gold);
-        notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten :)", getActivity(), R.drawable.coin);
+        notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten!", getActivity(), R.drawable.coin);
         UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username);
         user.updateCoins(50);
@@ -138,8 +140,6 @@ public class RegisterTab2 extends Fragment {
     private boolean ok(){
         boolean isok = true;
 
-
-        System.out.print(et_Email.getText().toString());
         if(et_Firstname.getText().toString().trim().equals("")){
             et_Firstname.setError(getString(R.string.enter_your_firstname));
             isok = false;
