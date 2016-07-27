@@ -56,7 +56,9 @@ public class EditAvatarTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.fragment_edit_avatar_tab, container, false);
-        instatiateUiObjects();
+        btnHair = (Button) layout.findViewById(R.id.btnHair);
+        btnEyes = (Button) layout.findViewById(R.id.btnEyes);
+        //instatiateUiObjects();
         System.out.println("test");
         //btnHair.setOnClickListener(new View.OnClickListener() {
           //  @Override
