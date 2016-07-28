@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ulm.hochschule.project_hoops.fragments.AchievementTab">
+    tools:context="ulm.hochschule.project_hoops.fragments.AchievementTab"
+    android:background="@drawable/bg_achievement">
 
     <!-- TODO: Update blank fragment layout -->
 

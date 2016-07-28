@@ -1,5 +1,7 @@
 package ulm.hochschule.project_hoops.utilities;
 
+import android.app.Activity;
+
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -19,7 +21,7 @@ public class UserProfile {
 
     private static boolean userFound = false;
 
-    private UserProfile(String sqlUSER) {
+    private UserProfile(String sqlUSER, Activity a) {
 
         Object[] userInfo;
         try {
@@ -38,7 +40,9 @@ public class UserProfile {
             verifCode   = (String)  userInfo[10];
             userID      = (int)     userInfo[11];
             achievements = (String) userInfo[12];
-            AchievementHandler.getInstance().mapAchievements(achievements);
+            AchievementHandler ah = AchievementHandler.getInstance();
+            ah.mapAchievements(userID, achievements);
+            ah.performEvent(2, 1, a);
 
             userFound = true;
         } catch (SQLException e) {
@@ -51,13 +55,13 @@ public class UserProfile {
         return settings;
     }
 
-    public static UserProfile getInstance(String userName) {
+    public static UserProfile getInstance(String userName, Activity a) {
 
         if(user == null) {
-            user = new UserProfile(userName);
+            user = new UserProfile(userName, a);
         } else {
             if(user.username.equals(userName)) {
-                user = new UserProfile(userName);
+                user = new UserProfile(userName, a);
             }
         }
         return user;

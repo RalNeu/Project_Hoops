@@ -71,7 +71,7 @@ public class LoginTab extends Fragment {
     public void onLoginSuccess()  {
         btn_Login.setEnabled(true);
         UserProfile.logoffUser();
-        UserProfile.getInstance(et_Username.getText().toString());
+        UserProfile.getInstance(et_Username.getText().toString(), getActivity());
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(true);
         if (!manager.getVerifStatus(et_Username.getText().toString())) {

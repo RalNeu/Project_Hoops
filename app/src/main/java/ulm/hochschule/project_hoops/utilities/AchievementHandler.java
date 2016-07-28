@@ -1,7 +1,10 @@
 package ulm.hochschule.project_hoops.utilities;
 
+import android.app.Activity;
+
 import java.util.HashMap;
 
+import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 
 /**
@@ -19,6 +22,7 @@ public class AchievementHandler {
 
     private String[] descriptions;
     private String[] titles;
+    private int aID;
 
     private AchievementHandler () {
         achievements = new HashMap<Integer, Integer>();
@@ -100,11 +104,20 @@ public class AchievementHandler {
         return instance;
     }
 
-    public static void addEvent(int event, AchievementReceiver ar) {
+    public void performEvent(int event, int val, Activity context) {
 
+        if(achiementStatus[event] != 3) {
+            int newVal = achievements.get(event) + val;
+            achievements.put(event, newVal);
+            if(checkForAchievement(event)) {
+                new NotifyManager().sendNotify(0, "Sie haben ein neues Achievement freigeschaltet!", titles[event], context, R.drawable.achievement_icon);
+            }
+            saveAchievements();
+        }
     }
 
-    public void mapAchievements(String achievements) {
+    public void mapAchievements(int aID, String achievements) {
+        this.aID = aID;
         String[] s = achievements.split("/");
 
         for (int i = 0; i<s.length; i++) {
@@ -119,8 +132,9 @@ public class AchievementHandler {
         }
     }
 
-    private void checkForAchievement(int i) {
+    private boolean checkForAchievement(int i) {
         int cur = achievements.get(i);
+        int temp = achiementStatus[i];
         achiementStatus[i] = 0;
         for (int j = 0;j < 3;j++) {
             if(achievementreference[i*3+j] <= cur) {
@@ -129,6 +143,11 @@ public class AchievementHandler {
                 j = 3;
             }
         }
+        return temp < achiementStatus[i];
+    }
+
+    private void saveAchievements() {
+        SqlManager.getInstance().updateAchievements(aID, formAchievementString());
     }
 
     public AchievementObject getAchievement(int i) {
@@ -141,13 +160,24 @@ public class AchievementHandler {
             t = "???";
         } else {
             d = descriptions[i];
-            d.replace("?", "" + achievementreference[i*3+e]);
+            d.replace("?", "" + achievementreference[i*3+e-1]);
             t = titles[i];
         }
 
         return new AchievementObject(e,d,t);
-
     }
 
+    private String formAchievementString() {
+        String ret = "";
+
+        for (int i = 0; i< N; i++) {
+            ret += achievements.get(i);
+            if(i != 15) {
+                ret += "/";
+            }
+        }
+
+        return ret;
+    }
 
 }

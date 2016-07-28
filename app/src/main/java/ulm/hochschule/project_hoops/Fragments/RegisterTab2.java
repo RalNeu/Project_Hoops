@@ -123,10 +123,10 @@ public class RegisterTab2 extends Fragment {
     }
 
     public void login(String username){
-        notifyManager.sendNotify(0, "Registrierung", "Sie haben 50 Coins erhalten!", getActivity(), R.drawable.coin);
+        notifyManager.sendNotify(0, "Registrierung", "Sie haben 500 Coins erhalten!", getActivity(), R.drawable.coin);
         UserProfile.logoffUser();
-        UserProfile user = UserProfile.getInstance(username);
-        user.updateCoins(50);
+        UserProfile user = UserProfile.getInstance(username, getActivity());
+        user.updateCoins(500);
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(true);
     }

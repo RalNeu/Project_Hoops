@@ -82,7 +82,15 @@ public class SqlManager {
         return instance;
     }
 
-    public void createUser(String firstName, String lastName, String email, String userName, String password){
+    public void createUser(String firstName, String lastName, String email, String userName, String password) {
+        createUser(firstName, lastName, email, userName, password, "1/0/1/0/0/0/0/0/0/0/0/0/0/0/0/0");
+    }
+
+    public void createUser(String firstName, String lastName, String email, String userName, String password, String achievements, int mod){
+        createUser(firstName, lastName, email, userName, password, achievements);
+    }
+
+    private void createUser(String firstName, String lastName, String email, String userName, String password, String achievements){
         Calendar calendar = Calendar.getInstance();
 
         Calendar c = Calendar.getInstance();
@@ -150,10 +158,20 @@ public class SqlManager {
             preparedStmt.setInt(3,personID);
 
             preparedStmt.setInt(4,erstellDatumID);
-            preparedStmt.setString(5,"1/0/1/0/0/0/0/0/0/0/0/0/0/0/0/0");
+            preparedStmt.setString(5, achievements);
             preparedStmt.execute();
 
         }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateAchievements(int aID, String achievements) {
+        try {
+            String query = "update account set achievements = '" + achievements + "' where aID = '" + aID + "'";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
