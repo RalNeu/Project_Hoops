@@ -28,8 +28,9 @@ public class EditAvatarTab extends Fragment {
     private Button btnHat, btnEyes, btnHair, btnBeard, btnSkin, btnBody, btnSave, btnPrev, btnNext, selectedBtn;
     private View layout;
     private ImageView imgHat, imgHead;
+    private int itemIndex;
 
-    private ArrayList<Drawable> hats = new ArrayList<>();
+    private ArrayList<Drawable> hats, hair, eyes;
 
 
     public EditAvatarTab() {
@@ -43,6 +44,7 @@ public class EditAvatarTab extends Fragment {
             @Override
             public void onClick(View v) {
                 disableButton(btnHair);
+                setSelectedCategory();
             }
         });
         btnEyes.setOnClickListener(new View.OnClickListener() {
@@ -57,21 +59,6 @@ public class EditAvatarTab extends Fragment {
                 disableButton(btnHat);
             }
         });
-        btnPrev.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    imgHat.setBackgroundDrawable(getResources().getDrawable(R.drawable.avatarhat));
-                }
-        });
-
-        btnNext.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //imgHat.setImageResource(R.drawable.avatarhat);
-                imgHat.setBackgroundDrawable(getResources().getDrawable(R.drawable.avatarhat2));
-
-            }
-        });
 
 
     }
@@ -81,6 +68,26 @@ public class EditAvatarTab extends Fragment {
             selectedBtn.setEnabled(true);
         btn.setEnabled(false);
         selectedBtn = btn;
+    }
+
+    public void setSelectedCategory() {
+        itemIndex = 0;
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.btnHat:
+                        imgHat.setBackgroundDrawable(hats.get(++itemIndex));
+                        break;
+                    case R.id.btnHair:
+                        hair.get(itemIndex);
+                        break;
+                    case R.id.btnEyes:
+                        eyes.get(itemIndex);
+                        break;
+                }
+            }
+        });
     }
 
     public void nextItem(){
@@ -106,6 +113,7 @@ public class EditAvatarTab extends Fragment {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.fragment_edit_avatar_tab, container, false);
         instatiateUiObjects();
+        fillItemArrays();
         btnPrev.setVisibility(View.INVISIBLE);
         btnPrev.setEnabled(false);
         btnNext.setVisibility(View.INVISIBLE);
@@ -125,6 +133,13 @@ public class EditAvatarTab extends Fragment {
         btnNext = (Button) layout.findViewById(R.id.btnNext);
         imgHat = (ImageView) layout.findViewById(R.id.imageView6);
         imgHead = (ImageView) layout.findViewById(R.id.imageView5);
+        hats = new ArrayList<>();
+        hair = new ArrayList<>();
+        eyes = new ArrayList<>();
+    }
 
+    private void fillItemArrays() {
+        hats.add(getResources().getDrawable(R.drawable.avatarhat));
+        hats.add(getResources().getDrawable(R.drawable.avatarhat2));
     }
 }
