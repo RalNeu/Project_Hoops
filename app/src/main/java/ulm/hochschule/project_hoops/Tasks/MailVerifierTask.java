@@ -57,11 +57,7 @@ public class MailVerifierTask extends AsyncTask<Void,Void,Void> {
             sm = SqlManager.getInstance();
         }
 
-
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            //creating valString
+        public String createValString() {
             SecureRandom rnd = new SecureRandom();
             final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             StringBuilder randomStringBuilder = new StringBuilder();
@@ -73,8 +69,11 @@ public class MailVerifierTask extends AsyncTask<Void,Void,Void> {
             }
             this.valString = randomStringBuilder.toString();
             message += valString;
+            return valString;
+        }
 
-
+        @Override
+        protected Void doInBackground(Void... params) {
             //Creating properties
             Properties props = new Properties();
 
@@ -112,7 +111,6 @@ public class MailVerifierTask extends AsyncTask<Void,Void,Void> {
                 //Sending email
                 Transport.send(mm);
                 emailSent = true;
-                sm.setVerif_Code(username, valString);
 
             } catch (MessagingException e) {
                 e.printStackTrace();

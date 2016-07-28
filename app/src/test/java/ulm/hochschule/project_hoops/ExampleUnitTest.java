@@ -1,5 +1,7 @@
 package ulm.hochschule.project_hoops;
 
+import android.app.Activity;
+
 import org.junit.Test;
 
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
@@ -46,43 +48,43 @@ public class ExampleUnitTest {
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "j", "11111111");
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("a");
+        UserProfile.getInstance("a", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("b");
+        UserProfile.getInstance("b", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("c");
+        UserProfile.getInstance("c", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("d");
+        UserProfile.getInstance("d", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("e");
+        UserProfile.getInstance("e", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("f");
+        UserProfile.getInstance("f", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("g");
+        UserProfile.getInstance("g", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("h");
+        UserProfile.getInstance("h", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("i");
+        UserProfile.getInstance("i", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("j");
+        UserProfile.getInstance("j", new Activity());
         sc.sendTip(10, 1);
 
         sc.readQuote();
@@ -106,13 +108,13 @@ public class ExampleUnitTest {
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "b", "11111111");
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("a");
+        UserProfile.getInstance("a", new Activity());
         sc.sendTip(10,0);
 
         assertEquals(-2, sc.getWin());
 
         UserProfile.logoffUser();
-        UserProfile.getInstance("b");
+        UserProfile.getInstance("b", new Activity());
         assertEquals(-1, sc.getWin());
 
     }
@@ -123,7 +125,7 @@ public class ExampleUnitTest {
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser1"))
             s.createUser("test", "test", "email@example.de", "AchUser1", "11111111", "0/0/5/2/1/1/1/9/3/2/0/0/4/478/1967/463", 1);
-        UserProfile.getInstance("AchUser1");
+        UserProfile.getInstance("AchUser1", new Activity());
 
         AchievementHandler ah = AchievementHandler.getInstance();
 
@@ -141,7 +143,7 @@ public class ExampleUnitTest {
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser2"))
             s.createUser("test", "test", "email@example.de", "AchUser2", "11111111", "1/1/10/3/5/5/1/20/5/5/2/2/10/2000/5000/4999", 1);
-        UserProfile.getInstance("AchUser2");
+        UserProfile.getInstance("AchUser2", new Activity());
 
         AchievementHandler ah = AchievementHandler.getInstance();
 
@@ -161,7 +163,7 @@ public class ExampleUnitTest {
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser3"))
             s.createUser("test", "test", "email@example.de", "AchUser3", "11111111", "1/1/50/7/30/10/1/50/15/15/10/10/21/9999/10000/10000", 1);
-        UserProfile.getInstance("AchUser3");
+        UserProfile.getInstance("AchUser3", new Activity());
 
         AchievementHandler ah = AchievementHandler.getInstance();
 
@@ -181,7 +183,7 @@ public class ExampleUnitTest {
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser4"))
             s.createUser("test", "test", "email@example.de", "AchUser4", "11111111", "1/1/75/15/50/15/3/100/30/30/30/30/50/10000/20000/15000", 1);
-        UserProfile.getInstance("AchUser4");
+        UserProfile.getInstance("AchUser4", new Activity());
 
         AchievementHandler ah = AchievementHandler.getInstance();
 

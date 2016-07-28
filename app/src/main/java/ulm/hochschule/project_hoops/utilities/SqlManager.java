@@ -83,7 +83,7 @@ public class SqlManager {
     }
 
     public void createUser(String firstName, String lastName, String email, String userName, String password) {
-        createUser(firstName, lastName, email, userName, password, "1/0/1/0/0/0/0/0/0/0/0/0/0/0/0/0");
+        createUser(firstName, lastName, email, userName, password, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
     }
 
     public void createUser(String firstName, String lastName, String email, String userName, String password, String achievements, int mod){
@@ -301,7 +301,7 @@ public class SqlManager {
     public Object[] getUser(String userName) throws java.sql.SQLException{
         int  personID=0;
 
-        Object[] retArray = new Object[13];
+        Object[] retArray = new Object[14];
 
         String query="select * from account where username = ?";
         preparedStmt = con.prepareStatement(query);
@@ -318,6 +318,7 @@ public class SqlManager {
         retArray[10] = rs.getString("verified_string");
         retArray[11] = rs.getInt("aID");
         retArray[12] = rs.getString("achievements");
+        retArray[13] = rs.getDate("lastlogin");
         personID = rs.getInt("pID");
 
 
@@ -338,6 +339,32 @@ public class SqlManager {
 
         return retArray;
     }
+
+    public void updateLastLogin(int aID) {
+        String query = "update account set lastlogin = NOW() where aID = '" + aID + "'";
+        try {
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Date getNow() {
+        String query = "select NOW() AS 'N' from account";
+        Date retVal = new Date(0,0,0);
+        try {
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+            retVal = rs.getDate("N");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return retVal;
+    }
+
 
     public void writeUser(UserProfile user) {
         //TODO

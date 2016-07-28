@@ -19,6 +19,7 @@ import android.widget.Toast;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.activities.MainActivity;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.NotifyManager;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
@@ -117,15 +118,20 @@ public class RegisterTab2 extends Fragment {
 
     public void onRegisterSuccess() {
         btn_Register.setEnabled(true);
-        manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString(), et_Username.getText().toString(), et_Password.getText().toString());
+
         mailVerifierTask = new MailVerifierTask(getContext(), et_Email.getText().toString(), et_Username.getText().toString());
+        String valString = mailVerifierTask.createValString();
+        manager.createUser(et_Firstname.getText().toString(), et_Lastname.getText().toString(), et_Email.getText().toString(), et_Username.getText().toString(), et_Password.getText().toString());
+        manager.setVerif_Code(et_Username.getText().toString(), valString);
+
         mailVerifierTask.execute();
     }
 
     public void login(String username){
-        notifyManager.sendNotify(0, "Registrierung", "Sie haben 500 Coins erhalten!", getActivity(), R.drawable.coin);
+        notifyManager.sendNotify(1000, "Registrierung", "Sie haben 500 Coins erhalten!", getActivity(), R.drawable.coin);
         UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username, getActivity());
+        AchievementHandler.getInstance().performEvent(0, 1, getActivity());
         user.updateCoins(500);
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(true);

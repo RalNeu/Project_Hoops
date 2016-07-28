@@ -23,6 +23,7 @@ public class AchievementHandler {
     private String[] descriptions;
     private String[] titles;
     private int aID;
+    private int tageHintereinander = 0;
 
     private AchievementHandler () {
         achievements = new HashMap<Integer, Integer>();
@@ -69,7 +70,7 @@ public class AchievementHandler {
         descriptions[6] = "Sie haben öfter als 3 mal Ihr Geburtsdatum geändert!";
         descriptions[7] = "Sie haben öfter als / mal die Information \"Über mich\" geändert!";
         descriptions[8] = "Sie haben mindestens / Accessoires gekauft!";
-        descriptions[9] = "Sie haben öfter als / Ihren Avatar geändert!";
+        descriptions[9] = "Sie haben öfter als / mal Ihren Avatar geändert!";
         descriptions[10] = "Sie haben mindestens / mal auf Ulm getippt!";
         descriptions[11] = "Sie haben mindestens / mal auf den Gegner getippt!";
         descriptions[12] = "Sie haben öfter als / mal richtig getippt!";
@@ -104,13 +105,22 @@ public class AchievementHandler {
         return instance;
     }
 
+    public int getTageHintereinander() {
+        return tageHintereinander;
+    }
+
     public void performEvent(int event, int val, Activity context) {
 
         if(achiementStatus[event] != 3) {
-            int newVal = achievements.get(event) + val;
+            //int newVal = achievements.get(event) + val;
+            int newVal = AchievementStrategyHandler.getStrategy(event).changeValue(achievements.get(event), val, achievementreference[event*3+2]);
+
+            if(event == 3)
+                tageHintereinander = val;
+            
             achievements.put(event, newVal);
             if(checkForAchievement(event)) {
-                new NotifyManager().sendNotify(0, "Sie haben ein neues Achievement!", titles[event], context, R.drawable.achievement_icon);
+                new NotifyManager().sendNotify(event, "Sie haben ein neues Achievement!", titles[event], context, R.drawable.achievement_icon);
             }
             saveAchievements();
         }
@@ -121,7 +131,13 @@ public class AchievementHandler {
         String[] s = achievements.split("/");
 
         for (int i = 0; i<s.length; i++) {
-            this.achievements.put(i, Integer.parseInt(s[i]));
+            if(i == 3) {
+                String[] t = s[i].split("-");
+                this.achievements.put(i, Integer.parseInt(t[0]));
+                tageHintereinander = Integer.parseInt(t[1]);
+            } else
+                this.achievements.put(i, Integer.parseInt(s[i]));
+
         }
         checkForAchievement();
     }
@@ -177,6 +193,9 @@ public class AchievementHandler {
 
         for (int i = 0; i< N; i++) {
             ret += achievements.get(i);
+            if(i == 3) {
+                ret += "-" + tageHintereinander;
+            }
             if(i != 15) {
                 ret += "/";
             }

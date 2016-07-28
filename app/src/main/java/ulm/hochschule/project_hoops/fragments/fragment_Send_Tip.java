@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
@@ -129,6 +130,12 @@ public class fragment_Send_Tip extends Fragment {
                             ServerCommunicate sc = ServerCommunicate.getInstance();
                             sc.sendTip(chosenCoins, team);
                             s = "Tipp gesendet!";
+                            if(team == 0) {
+                                AchievementHandler.getInstance().performEvent(10, 1, getActivity());
+                            } else {
+                                AchievementHandler.getInstance().performEvent(11, 1, getActivity());
+                            }
+                            AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
                             changeFragment();
                         } catch(ServerException e) {
                             e.printStackTrace();
