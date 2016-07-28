@@ -59,25 +59,21 @@ public class EditAvatarTab extends Fragment {
                 disableButton(btnHat);
             }
         });
-
-
-    }
-
-    public void disableButton(Button btn) {
-        if(selectedBtn != null)
-            selectedBtn.setEnabled(true);
-        btn.setEnabled(false);
-        selectedBtn = btn;
-    }
-
-    public void setSelectedCategory() {
-        itemIndex = 0;
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()) {
+
+                if (itemIndex == hats.size()){
+                    disableNext();
+                    enablePrev();
+                } else if ( itemIndex < hats.size()){
+                    enableNext();
+                    enablePrev();
+                }
+                switch (selectedBtn.getId()) {
                     case R.id.btnHat:
                         imgHat.setBackgroundDrawable(hats.get(++itemIndex));
+
                         break;
                     case R.id.btnHair:
                         hair.get(itemIndex);
@@ -88,6 +84,65 @@ public class EditAvatarTab extends Fragment {
                 }
             }
         });
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(itemIndex == 0 ){
+                    disablePrev();
+                    enableNext();
+                } else {
+                    enableNext();
+                    enablePrev();
+                }
+                switch (selectedBtn.getId()) {
+                    case R.id.btnHat:
+                        imgHat.setBackgroundDrawable(hats.get(--itemIndex));
+
+                        break;
+                    case R.id.btnHair:
+                        hair.get(itemIndex);
+                        break;
+                    case R.id.btnEyes:
+                        eyes.get(itemIndex);
+                        break;
+                }
+            }
+        });
+
+    }
+
+    public void disableButton(Button btn) {
+        if(selectedBtn != null)
+            selectedBtn.setEnabled(true);
+        btn.setEnabled(false);
+        selectedBtn = btn;
+        enableNext();
+    }
+
+    public void enableNext(){
+        btnNext.setVisibility(View.VISIBLE);
+        btnNext.setEnabled(true);
+    }
+
+    public void enablePrev(){
+        btnPrev.setVisibility(View.VISIBLE);
+        btnPrev.setEnabled(true);
+    }
+
+    public void disableNext(){
+        btnNext.setVisibility(View.INVISIBLE);
+        btnNext.setEnabled(false);
+    }
+
+    public void disablePrev(){
+        btnPrev.setVisibility(View.INVISIBLE);
+        btnPrev.setEnabled(false);
+    }
+
+    public void setSelectedCategory() {
+        itemIndex = 0;
+
     }
 
     public void nextItem(){
@@ -112,7 +167,7 @@ public class EditAvatarTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.fragment_edit_avatar_tab, container, false);
-        instatiateUiObjects();
+        instantiateUiObjects();
         fillItemArrays();
         btnPrev.setVisibility(View.INVISIBLE);
         btnPrev.setEnabled(false);
@@ -123,7 +178,7 @@ public class EditAvatarTab extends Fragment {
     }
 
 
-    private void instatiateUiObjects() {
+    private void instantiateUiObjects() {
 
         btnHair = (Button) layout.findViewById(R.id.btnHair);
         btnHat = (Button) layout.findViewById(R.id.btnHat);
