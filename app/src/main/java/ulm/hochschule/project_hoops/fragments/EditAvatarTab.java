@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import ulm.hochschule.project_hoops.R;
@@ -28,9 +29,9 @@ public class EditAvatarTab extends Fragment {
     private Button btnHat, btnEyes, btnHair, btnBeard, btnSkin, btnBody, btnSave, btnPrev, btnNext, selectedBtn;
     private View layout;
     private ImageView imgHat, imgHead, imgHair, imgEyes;
-    private int itemIndex;
+    private int hatIndex, eyesIndex, hairIndex, beardIndex, skinIndex, bodyIndex;
 
-    private ArrayList<Drawable> hats, hair, eyes;
+    private ArrayList<Drawable> hats, hair, eyes, beard, skin, body;
 
 
     public EditAvatarTab() {
@@ -43,81 +44,92 @@ public class EditAvatarTab extends Fragment {
         btnHair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disableButton(btnHair);
-                setSelectedCategory();
+                disableButton(btnHair, hairIndex);
+                handleArrowEnable(hair, hairIndex);
             }
         });
         btnEyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disableButton(btnEyes);
+                disableButton(btnEyes, eyesIndex);
+                handleArrowEnable(eyes, eyesIndex);
             }
         });
         btnHat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disableButton(btnHat);
+                handleArrowEnable(hats, hatIndex);
+                disableButton(btnHat, hatIndex);
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (itemIndex == hats.size()){
-                    disableNext();
-                    enablePrev();
-                } else if ( itemIndex < hats.size()){
-                    enableNext();
-                    enablePrev();
-                }
                 switch (selectedBtn.getId()) {
                     case R.id.btnHat:
-                        imgHat.setBackgroundDrawable(hats.get(++itemIndex));
-
+                        imgHat.setBackgroundDrawable(hats.get(++hatIndex));
+                        handleArrowEnable(hats, hatIndex);
                         break;
                     case R.id.btnHair:
-                        hair.get(itemIndex);
+                        imgHair.setBackgroundDrawable(hair.get(++hairIndex));
+                        handleArrowEnable(hair, eyesIndex);
                         break;
                     case R.id.btnEyes:
-                        imgEyes.setBackgroundDrawable(eyes.get(++itemIndex));
+                        imgEyes.setBackgroundDrawable(eyes.get(++eyesIndex));
+                        handleArrowEnable(eyes, eyesIndex);
                         break;
                 }
+
             }
         });
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(itemIndex == 0 ){
-                    disablePrev();
-                    enableNext();
-                } else {
-                    enableNext();
-                    enablePrev();
-                }
                 switch (selectedBtn.getId()) {
                     case R.id.btnHat:
-                        imgHat.setBackgroundDrawable(hats.get(--itemIndex));
-
+                        imgHat.setBackgroundDrawable(hats.get(--hatIndex));
+                        handleArrowEnable(hats, hatIndex);
                         break;
                     case R.id.btnHair:
-                        hair.get(itemIndex);
+                        imgHair.setBackgroundDrawable(hair.get(--hairIndex));
+                        handleArrowEnable(hair, eyesIndex);
                         break;
                     case R.id.btnEyes:
-                        imgEyes.setBackgroundDrawable(eyes.get(--itemIndex));
+                        imgEyes.setBackgroundDrawable(eyes.get(--eyesIndex));
+                        handleArrowEnable(eyes, eyesIndex);
                         break;
+                    /*case R.id.btnBeard:
+                        imgBeard.setBackgroundDrawable(beard.get(--beardIndex));
+                        handleArrowEnable(eyes, eyesIndex);
+                        break;
+                    */
                 }
+
+
             }
         });
 
     }
 
-    public void disableButton(Button btn) {
+    public void disableButton(Button btn, int itemIndex) {
         if(selectedBtn != null)
             selectedBtn.setEnabled(true);
         btn.setEnabled(false);
         selectedBtn = btn;
-        enableNext();
+    }
+
+    public void handleArrowEnable(ArrayList<Drawable> list, int itemIndex) {
+        if (itemIndex == list.size()-1)
+            disableNext();
+        else
+            enableNext();
+
+        if(itemIndex == 0 )
+            disablePrev();
+        else
+            enablePrev();
     }
 
     public void enableNext(){
@@ -138,11 +150,6 @@ public class EditAvatarTab extends Fragment {
     public void disablePrev(){
         btnPrev.setVisibility(View.INVISIBLE);
         btnPrev.setEnabled(false);
-    }
-
-    public void setSelectedCategory() {
-        itemIndex = 0;
-
     }
 
     public void nextItem(){
@@ -174,6 +181,12 @@ public class EditAvatarTab extends Fragment {
         btnNext.setVisibility(View.INVISIBLE);
         btnNext.setEnabled(false);
 
+        btnHair.setEnabled(false);
+        btnBeard.setEnabled(false);
+        btnBody.setEnabled(false);
+        btnSkin.setEnabled(false);
+        hatIndex = 0;
+        eyesIndex = 0;
         return layout;
     }
 
@@ -184,6 +197,8 @@ public class EditAvatarTab extends Fragment {
         btnHat = (Button) layout.findViewById(R.id.btnHat);
         btnBeard = (Button) layout.findViewById(R.id.btnBeard);
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
+        btnSkin = (Button) layout.findViewById(R.id.btnSkin);
+        btnBody = (Button) layout.findViewById(R.id.btnBody);
         btnPrev = (Button) layout.findViewById(R.id.btnPrev);
         btnNext = (Button) layout.findViewById(R.id.btnNext);
         imgHat = (ImageView) layout.findViewById(R.id.imgHat);
