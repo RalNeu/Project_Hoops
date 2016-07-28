@@ -24,7 +24,7 @@
             android:title="Tests" /> -->
         <item
             android:id="@+id/hausansicht"
-            android:icon="@drawable/haus"
+            android:icon="@drawable/icmap"
             android:title="Gebäudeansicht"/>
     </group>
 
