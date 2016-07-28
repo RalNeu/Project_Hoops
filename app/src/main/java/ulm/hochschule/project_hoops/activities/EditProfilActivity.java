@@ -2,6 +2,8 @@ package ulm.hochschule.project_hoops.activities;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -192,6 +194,7 @@ public class EditProfilActivity extends AppCompatActivity {
         EditAvatarTab eat = new EditAvatarTab();
         adapter.addFrag(epf, "Profilinformationen");
         adapter.addFrag(eat , "Avatar");
+        
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -1,8 +1,10 @@
 package ulm.hochschule.project_hoops.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +15,7 @@ import android.widget.Button;
 
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 
 
 public class EditAvatarTab extends Fragment {
@@ -32,13 +35,13 @@ public class EditAvatarTab extends Fragment {
         btnHair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openChangeItemsTab();
+                System.out.println("test0");
             }
         });
         btnEyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openChangeItemsTab();
+                System.out.println("test05");
             }
         });
 
@@ -51,6 +54,7 @@ public class EditAvatarTab extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +63,6 @@ public class EditAvatarTab extends Fragment {
         btnHair = (Button) layout.findViewById(R.id.btnHair);
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
         //instatiateUiObjects();
-        System.out.println("test");
         //btnHair.setOnClickListener(new View.OnClickListener() {
           //  @Override
         //public void onClick(View v) {
@@ -82,17 +85,5 @@ public class EditAvatarTab extends Fragment {
         btnHair = (Button) layout.findViewById(R.id.btnHair);
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
 
-    }
-
-
-
-    public void openChangeItemsTab() {
-        changeFragment(new ChangeItemsTab());
-    }
-
-    private void changeFragment(Fragment f) {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, f).addToBackStack( f.getTag() ).commit();
     }
 }
