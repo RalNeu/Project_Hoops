@@ -2,6 +2,7 @@ package ulm.hochschule.project_hoops.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,7 +56,7 @@ public class EditAvatarTab extends Fragment {
         btnPrev.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    imgHat.setImageResource(R.drawable.avatarhead);
+                    imgHat.setBackgroundDrawable(getResources().getDrawable(R.drawable.avatarhat));
                 }
         });
 
@@ -63,7 +64,7 @@ public class EditAvatarTab extends Fragment {
             @Override
             public void onClick(View v){
                 //imgHat.setImageResource(R.drawable.avatarhat);
-                //imgHat.setBackground(avatarhead);
+                imgHat.setBackgroundDrawable(getResources().getDrawable(R.drawable.avatarhat2));
             }
         });
 
