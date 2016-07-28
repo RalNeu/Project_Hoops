@@ -25,14 +25,12 @@ import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 
 public class EditAvatarTab extends Fragment {
 
-    private Button btnHat, btnEyes, btnHair, btnBeard, btnSkin, btnBody, btnSave, btnPrev, btnNext;
+    private Button btnHat, btnEyes, btnHair, btnBeard, btnSkin, btnBody, btnSave, btnPrev, btnNext, selectedBtn;
     private View layout;
     private ImageView imgHat, imgHead;
 
-    private ArrayList<ImageView> hats = new ArrayList<>();
+    private ArrayList<Drawable> hats = new ArrayList<>();
 
-
-    //private OnFragmentInteractionListener mListener;
 
     public EditAvatarTab() {
         // Required empty public constructor
@@ -44,13 +42,19 @@ public class EditAvatarTab extends Fragment {
         btnHair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("test0");
+                disableButton(btnHair);
             }
         });
         btnEyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("test05");
+                disableButton(btnEyes);
+            }
+        });
+        btnHat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disableButton(btnHat);
             }
         });
         btnPrev.setOnClickListener(new View.OnClickListener(){
@@ -65,12 +69,26 @@ public class EditAvatarTab extends Fragment {
             public void onClick(View v){
                 //imgHat.setImageResource(R.drawable.avatarhat);
                 imgHat.setBackgroundDrawable(getResources().getDrawable(R.drawable.avatarhat2));
+
             }
         });
 
+
     }
 
-    public void changeItem(ImageView item){
+    public void disableButton(Button btn) {
+        if(selectedBtn != null)
+            selectedBtn.setEnabled(true);
+        btn.setEnabled(false);
+        selectedBtn = btn;
+    }
+
+    public void nextItem(){
+
+
+    }
+
+    public void previousItem(){
 
 
     }
@@ -87,26 +105,11 @@ public class EditAvatarTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.fragment_edit_avatar_tab, container, false);
-        btnHair = (Button) layout.findViewById(R.id.btnHair);
-        btnEyes = (Button) layout.findViewById(R.id.btnEyes);
-        btnPrev = (Button) layout.findViewById(R.id.btnPrev);
-        btnNext = (Button) layout.findViewById(R.id.btnNext);
-        imgHat = (ImageView) layout.findViewById(R.id.imageView6);
-        imgHead = (ImageView) layout.findViewById(R.id.imageView5);
-
-        //instatiateUiObjects();
-        //btnHair.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-        //public void onClick(View v) {
-          //      openChangeItemsTab();
-           // }
-        //});
-        //btnEyes.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-           // public void onClick(View v) {
-             //   openChangeItemsTab();
-           // }
-        //});
+        instatiateUiObjects();
+        btnPrev.setVisibility(View.INVISIBLE);
+        btnPrev.setEnabled(false);
+        btnNext.setVisibility(View.INVISIBLE);
+        btnNext.setEnabled(false);
 
         return layout;
     }
@@ -115,7 +118,13 @@ public class EditAvatarTab extends Fragment {
     private void instatiateUiObjects() {
 
         btnHair = (Button) layout.findViewById(R.id.btnHair);
+        btnHat = (Button) layout.findViewById(R.id.btnHat);
+        btnBeard = (Button) layout.findViewById(R.id.btnBeard);
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
+        btnPrev = (Button) layout.findViewById(R.id.btnPrev);
+        btnNext = (Button) layout.findViewById(R.id.btnNext);
+        imgHat = (ImageView) layout.findViewById(R.id.imageView6);
+        imgHead = (ImageView) layout.findViewById(R.id.imageView5);
 
     }
 }
