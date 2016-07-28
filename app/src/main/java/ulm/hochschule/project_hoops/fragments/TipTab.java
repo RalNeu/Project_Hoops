@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.objects.BettingGame;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
-import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
  * A simple {@link Fragment} subclass.
