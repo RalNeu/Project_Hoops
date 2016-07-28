@@ -196,5 +196,8 @@ public class EditAvatarTab extends Fragment {
     private void fillItemArrays() {
         hats.add(getResources().getDrawable(R.drawable.avatarhat));
         hats.add(getResources().getDrawable(R.drawable.avatarhat2));
+        eyes.add(getResources().getDrawable(R.drawable.avatareyes));
+        eyes.add(getResources().getDrawable(R.drawable.avatareyes2));
+        hair.add(getResources().getDrawable(R.drawable.avatarhairunderhat));
     }
 }
