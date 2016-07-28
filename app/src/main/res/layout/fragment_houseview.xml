@@ -14,6 +14,7 @@
         android:layout_alignParentStart="true">
     </ulm.hochschule.project_hoops.objects.TouchImageView>
 
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"

@@ -86,7 +86,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text="Hut"
-                        android:id="@+id/btnHat" />
+                        android:id="@+id/toggleBtnHat" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -113,7 +113,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" >
 
-                    <Button
+                    <ToggleButton
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text="Haare"
