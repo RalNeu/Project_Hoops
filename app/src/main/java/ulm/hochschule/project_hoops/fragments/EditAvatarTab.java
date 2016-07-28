@@ -27,7 +27,7 @@ public class EditAvatarTab extends Fragment {
 
     private Button btnHat, btnEyes, btnHair, btnBeard, btnSkin, btnBody, btnSave, btnPrev, btnNext, selectedBtn;
     private View layout;
-    private ImageView imgHat, imgHead;
+    private ImageView imgHat, imgHead, imgHair, imgEyes;
     private int itemIndex;
 
     private ArrayList<Drawable> hats, hair, eyes;
@@ -79,7 +79,7 @@ public class EditAvatarTab extends Fragment {
                         hair.get(itemIndex);
                         break;
                     case R.id.btnEyes:
-                        eyes.get(itemIndex);
+                        imgEyes.setBackgroundDrawable(eyes.get(++itemIndex));
                         break;
                 }
             }
@@ -104,7 +104,7 @@ public class EditAvatarTab extends Fragment {
                         hair.get(itemIndex);
                         break;
                     case R.id.btnEyes:
-                        eyes.get(itemIndex);
+                        imgEyes.setBackgroundDrawable(eyes.get(--itemIndex));
                         break;
                 }
             }
@@ -186,8 +186,10 @@ public class EditAvatarTab extends Fragment {
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
         btnPrev = (Button) layout.findViewById(R.id.btnPrev);
         btnNext = (Button) layout.findViewById(R.id.btnNext);
-        imgHat = (ImageView) layout.findViewById(R.id.imageView6);
-        imgHead = (ImageView) layout.findViewById(R.id.imageView5);
+        imgHat = (ImageView) layout.findViewById(R.id.imgHat);
+        imgHead = (ImageView) layout.findViewById(R.id.imgHead);
+        imgHair = (ImageView) layout.findViewById(R.id.imgHair);
+        imgEyes = (ImageView) layout.findViewById(R.id.imgEyes);
         hats = new ArrayList<>();
         hair = new ArrayList<>();
         eyes = new ArrayList<>();

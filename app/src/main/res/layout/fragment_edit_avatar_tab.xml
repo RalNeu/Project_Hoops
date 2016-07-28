@@ -62,7 +62,7 @@
                     android:id="@+id/imgHair"
                     android:background="@drawable/avatarhairunderhat"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="0dp" />
+                    android:layout_margin="15dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -71,6 +71,13 @@
                     android:layout_gravity="center"
                     android:background="@drawable/avatarhat"
                     android:visibility="visible"
+                    android:layout_margin="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgMouth"
+                    android:background="@drawable/avatarmouth"
                     android:layout_margin="15dp" />
 
             </FrameLayout>
