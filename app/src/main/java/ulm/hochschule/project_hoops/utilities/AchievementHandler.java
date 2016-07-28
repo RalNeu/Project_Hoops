@@ -62,20 +62,20 @@ public class AchievementHandler {
         descriptions = new String[N];
         descriptions[0] = "Sie haben sich erfolgreich registriert!";
         descriptions[1] = "Sie haben Ihr Profil verifiziert!";
-        descriptions[2] = "Sie haben sich öfter als ? mal eingeloggt!";
-        descriptions[3] = "Sie haben sich öfter als ? mal hintereinander eingeloggt!";
-        descriptions[4] = "Sie haben Ihr Profil öfter als ? mal bearbeitet!";
-        descriptions[5] = "Sie haben öfter als ? Ihren Namen geändert!";
+        descriptions[2] = "Sie haben sich öfter als / mal eingeloggt!";
+        descriptions[3] = "Sie haben sich öfter als / mal hintereinander eingeloggt!";
+        descriptions[4] = "Sie haben Ihr Profil öfter als / mal bearbeitet!";
+        descriptions[5] = "Sie haben öfter als / mal Ihren Namen geändert!";
         descriptions[6] = "Sie haben öfter als 3 mal Ihr Geburtsdatum geändert!";
-        descriptions[7] = "Sie haben öfter als ? mal die Information \"Über mich\" geändert!";
-        descriptions[8] = "Sie haben mindestens ? Accessoires gekauft!";
-        descriptions[9] = "Sie haben öfter als ? Ihren Avatar geändert!";
-        descriptions[10] = "Sie haben mindestens ? mal auf Ulm getippt!";
-        descriptions[11] = "Sie haben mindestens ? mal auf den Gegner getippt!";
-        descriptions[12] = "Sie haben öfter als ? mal richtig getippt!";
-        descriptions[13] = "Sie haben in einem Tipp mehr als ? Coins gesetzt!";
-        descriptions[14] = "Sie haben mehr als ? Coins über das Tippspiel verdient!";
-        descriptions[15] = "Sie haben einen Highscore von ? übertroffen!";
+        descriptions[7] = "Sie haben öfter als / mal die Information \"Über mich\" geändert!";
+        descriptions[8] = "Sie haben mindestens / Accessoires gekauft!";
+        descriptions[9] = "Sie haben öfter als / Ihren Avatar geändert!";
+        descriptions[10] = "Sie haben mindestens / mal auf Ulm getippt!";
+        descriptions[11] = "Sie haben mindestens / mal auf den Gegner getippt!";
+        descriptions[12] = "Sie haben öfter als / mal richtig getippt!";
+        descriptions[13] = "Sie haben in einem Tipp mehr als / Coins gesetzt!";
+        descriptions[14] = "Sie haben mehr als / Coins über das Tippspiel verdient!";
+        descriptions[15] = "Sie haben einen Highscore von / übertroffen!";
 
         titles = new String[N];
 
@@ -110,7 +110,7 @@ public class AchievementHandler {
             int newVal = achievements.get(event) + val;
             achievements.put(event, newVal);
             if(checkForAchievement(event)) {
-                new NotifyManager().sendNotify(0, "Sie haben ein neues Achievement freigeschaltet!", titles[event], context, R.drawable.achievement_icon);
+                new NotifyManager().sendNotify(0, "Sie haben ein neues Achievement!", titles[event], context, R.drawable.achievement_icon);
             }
             saveAchievements();
         }
@@ -159,8 +159,13 @@ public class AchievementHandler {
             d = "???";
             t = "???";
         } else {
-            d = descriptions[i];
-            d.replace("?", "" + achievementreference[i*3+e-1]);
+            if(i != 0 && i != 1 && i != 6) {
+                String[] s = descriptions[i].split("/");
+                System.out.println(i);
+                d = s[0] + achievementreference[i * 3 + e - 1] + s[1];
+            } else {
+                d = descriptions[i];
+            }
             t = titles[i];
         }
 

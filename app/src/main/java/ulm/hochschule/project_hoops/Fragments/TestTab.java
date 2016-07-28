@@ -14,9 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.objects.BettingGame;
-import ulm.hochschule.project_hoops.objects.BlockBettingGame;
-import ulm.hochschule.project_hoops.objects.XMLReader;
 import ulm.hochschule.project_hoops.utilities.NotifyManager;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
@@ -27,7 +24,6 @@ public class TestTab extends Fragment {
 
     Button btn_Test;
     EditText et_Test;
-    BlockBettingGame blockbGame;
 
 
     @Override
@@ -56,7 +52,7 @@ public class TestTab extends Fragment {
         btn_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                m.sendNotify(1, "HAllo", "nein", getActivity(), R.drawable.ic_ticket_icon);
+                m.sendNotify(1, "Hallo", "nein", getActivity(), R.drawable.ic_ticket_icon);
              /*   SqlManager sqlManager = SqlManager.getInstance();
                 if(et_Test.getText().toString().isEmpty()){
                     System.out.println("Empty");
