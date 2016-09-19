@@ -212,6 +212,7 @@ public class EditProfilActivity extends AppCompatActivity {
             @Override
             public void onPageScrollStateChanged(int state) {
             }
+
         });
     }
 }

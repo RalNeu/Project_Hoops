@@ -27,7 +27,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/avatarBody"
+                    android:id="@+id/imgBody"
                     android:layout_margin="15dp"
                     android:layout_gravity="center"
                     android:background="@drawable/avatarbody" />
@@ -35,7 +35,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/avatarHead"
+                    android:id="@+id/imgHead"
                     android:layout_gravity="center"
                     android:background="@drawable/avatarhead"
                     android:layout_margin="15dp"
@@ -44,11 +44,33 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/avatarHat"
+                    android:id="@+id/imgEyes"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/avatareyes" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgHair"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/avatarhairunderhat" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgHat"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
                     android:background="@drawable/avatarhat"
                     android:visibility="visible" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgMouth"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/avatarmouth" />
             </FrameLayout>
 
             <LinearLayout

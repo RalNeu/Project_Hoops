@@ -340,6 +340,30 @@ public class SqlManager {
         return retArray;
     }
 
+    public String getAvatarItems(String username) throws java.sql.SQLException {
+        String itemsString = new String();
+
+        String query="select * from account where username = ?";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1,username);
+        rs = preparedStmt.executeQuery();
+        rs.beforeFirst();
+        rs.next();
+        itemsString = rs.getString("avatar_items");
+
+        return itemsString;
+    }
+
+    public void updateAvatarItems(String itemsString, String username) {
+        String query = "update account set avatar_items = '" + itemsString + "' where username = '" + username + "'";
+        try {
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void updateLastLogin(int aID) {
         String query = "update account set lastlogin = NOW() where aID = '" + aID + "'";
         try {

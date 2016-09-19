@@ -16,13 +16,16 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
 import ulm.hochschule.project_hoops.activities.EditProfilActivity;
+import ulm.hochschule.project_hoops.objects.AvatarItems;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
@@ -33,11 +36,13 @@ public class ProfilTab extends Fragment {
     private static ProfilTab tab;
 
     private UserProfile user;
+    private AvatarItems aItems;
 
     private Button btn_EditProfile;
     private TextView lbl_Coins, lbl_Ranking, lbl_Highscore, lbl_Username, lbl_Name, lbl_GebDat, lbl_AboutMe;
     private Notificator notif;
     private View layout, view_Name, view_GebDat, view_AboutMe;
+    private ImageView imgHat, imgHead, imgHair, imgEyes;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +64,12 @@ public class ProfilTab extends Fragment {
         });
         user = UserProfile.getInstance();
         mapUser();
+
+        try {
+            updateAvatar();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
 
         return layout;
     }
@@ -115,6 +126,17 @@ public class ProfilTab extends Fragment {
 
     }
 
+    public void updateAvatar() throws SQLException{
+        aItems = AvatarItems.getInstance();
+        /*imgHat.setBackgroundDrawable(aItems.getAccountItem("hat"));
+        imgEyes.setBackgroundDrawable(aItems.getAccountItem("eyes"));
+        imgHair.setBackgroundDrawable(aItems.getAccountItem("hair"));*/
+        imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
+        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
+        imgHair.setBackgroundResource(aItems.getAccountItemByID("hair"));
+
+    }
+
     private void openEditProfile() {
         Intent i = new Intent(getActivity().getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
@@ -128,6 +150,11 @@ public class ProfilTab extends Fragment {
         lbl_Name = (TextView) layout.findViewById(R.id.lbl_Name);
         lbl_GebDat = (TextView) layout.findViewById(R.id.lbl_GebDat);
         lbl_AboutMe = (TextView) layout.findViewById(R.id.lbl_AboutMe);
+
+        imgHat = (ImageView) layout.findViewById(R.id.imgHat);
+        imgHead = (ImageView) layout.findViewById(R.id.imgHead);
+        imgHair = (ImageView) layout.findViewById(R.id.imgHair);
+        imgEyes = (ImageView) layout.findViewById(R.id.imgEyes);
 
         btn_EditProfile = (Button) layout.findViewById(R.id.btn_ConfigureProfile);
 
