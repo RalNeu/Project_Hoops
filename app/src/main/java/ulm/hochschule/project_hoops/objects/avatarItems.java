@@ -40,6 +40,7 @@ public class AvatarItems {
 
         hats.add(R.drawable.avatarhat);
         hats.add(R.drawable.avatarhat2);
+        hats.add(R.drawable.skyrim_helmet);
 
         eyes.add(R.drawable.avatareyes);
         eyes.add(R.drawable.avatareyes2);
