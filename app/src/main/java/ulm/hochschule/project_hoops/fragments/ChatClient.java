@@ -33,10 +33,10 @@ public class ChatClient extends Thread {
     private ChatActivity cA;
 
 
-    public ChatClient() {
+    public ChatClient(ChatActivity ca) {
         host =  "37.209.33.128";
         port = 4999;
-
+       cA = ca;
 
 
         try {
@@ -59,8 +59,8 @@ public class ChatClient extends Thread {
     }
 
 
-public void sendtext(String msg){
-    cA.text(msg);
+public void recieveText(String msg){
+    cA.recieveText(msg);
 }
 
 
@@ -73,7 +73,7 @@ public void sendtext(String msg){
 
             while (true){
                 String message = din.readUTF();
-                sendtext(message);
+                recieveText(message);
             }
         }catch(IOException e){
             System.out.println(e);
