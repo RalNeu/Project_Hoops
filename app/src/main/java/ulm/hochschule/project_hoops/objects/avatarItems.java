@@ -12,7 +12,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
  */
 
 
-public class AvatarItems {
+class AvatarItems {
 
     private int hatIndex, eyesIndex, hairIndex, mouthIndex, skinIndex, bodyIndex;
     private ArrayList<Integer> hats, hair, eyes, mouth, skin, body;

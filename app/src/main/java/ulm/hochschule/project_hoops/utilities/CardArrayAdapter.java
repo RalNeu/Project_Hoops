@@ -53,7 +53,7 @@ public class CardArrayAdapter  extends ArrayAdapter<Card> {
         CardViewHolder viewHolder;
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.listitem_mybet, parent, false);
+            row = inflater.inflate(R.layout.listitem_news, parent, false);
             viewHolder = new CardViewHolder();
             viewHolder.line1 = (TextView) row.findViewById(R.id.line1);
             row.setTag(viewHolder);

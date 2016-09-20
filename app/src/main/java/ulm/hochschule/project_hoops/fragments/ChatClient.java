@@ -4,7 +4,6 @@ package ulm.hochschule.project_hoops.fragments;
 
 
 
-import android.os.AsyncTask;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import ulm.hochschule.project_hoops.activities.ChatActivity;
+import ulm.hochschule.project_hoops.activities.Chat.ChatActivity;
 
 
 public class ChatClient extends Thread {

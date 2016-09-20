@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.utilities.ListAdapterBet;
 import ulm.hochschule.project_hoops.utilities.MyBet;
 
 /**
@@ -42,7 +40,7 @@ public class ListViewBet extends Activity {
     private void init(){
         listView = (ListView) findViewById(R.id.listView);
         list = new ArrayList<>();
-        adapter = new ArrayAdapter<MyBet>(this , R.layout.listitem_mybet, R.id.tv_yourBetResult, list);
+        adapter = new ArrayAdapter<MyBet>(this , R.layout.listitem_news, R.id.tv_yourBetResult, list);
         iv_bbu = (ImageView) findViewById(R.id.Iv_bbu);
         iv_opponent = (ImageView) findViewById(R.id.Iv_opponent);
         tv_result = (TextView) findViewById(R.id.tv_result);

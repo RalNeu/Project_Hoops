@@ -25,15 +25,8 @@ import ulm.hochschule.project_hoops.R;
 public class NewsTab extends Fragment {
 
     private ListView listView;
-    private ImageView imageView;
-    private String[] headline;
-    private int[] images;
 
     private SwipeRefreshLayout swipeRefresh;
-
-    Button load_img;
-    Bitmap bitmap;
-    ProgressDialog pDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,10 +47,8 @@ public class NewsTab extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
-        /*swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-
-/*        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
             @Override
             public void onRefresh() {
@@ -65,88 +56,9 @@ public class NewsTab extends Fragment {
                 //TODO: Load Data from Server
             }
         });
-
-        });*/
-
-
-       // ArrayList<ListItem> listData = getListData();
-
-        //listView.setAdapter(new CustomListAdapter(getContext(), listData));
-
-       /*new LoadImage().execute("http://www.ratiopharmulm.com/images/stories/Hauptnews/2016_05/2016_05_14_OLDvsULM_02.jpg");
-
-        List<HashMap<String,String>> aList = new ArrayList<HashMap<String,String>>();
-
-        for(int i=0;i<10;i++){
-            HashMap<String, String> hm = new HashMap<String,String>();
-            hm.put("txt", "wuhu");
-
-            //get the image from Website
-            hm.put("img", Integer.toString(R.mipmap.ic_launcher));
-            aList.add(hm);
-        }
-
-        String[] from = new String[]{"img", "txt"};
-        int[] to = new int[]{R.id.img, R.id.txt};
-        SimpleAdapter adapter = new SimpleAdapter(getContext(), aList, R.layout.fragment_news, from, to);
-
-        listView.setAdapter(adapter);
         */
 
     }
 
-    private ArrayList<ListItem> getListData() {
-        /*ArrayList<ListItem> listMockData = new ArrayList<ListItem>();
-        String[] images = getResources().getStringArray(R.array.images_array);
-        String[] headlines = getResources().getStringArray(R.array.headline_array);
-
-        for (int i = 0; i < images.length; i++) {
-            ListItem newsData = new ListItem();
-            newsData.setUrl(images[i]);
-            newsData.setHeadline(headlines[i]);
-            newsData.setReporterName("Pankaj Gupta");
-            newsData.setDate("May 26, 2013, 13:35");
-            listMockData.add(newsData);
-        }
-        return listMockData;*/
-        return null;
-    }
-
-
-    /*
-    private class LoadImage extends AsyncTask<String, String, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Loading Image ....");
-            pDialog.show();
-
-        }
-        protected Bitmap doInBackground(String... args) {
-            try {
-                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        protected void onPostExecute(Bitmap image) {
-
-            if(image != null){
-                imageView.setImageBitmap(image);
-                pDialog.dismiss();
-
-            }else{
-
-                pDialog.dismiss();
-                Toast.makeText(getActivity(), "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-    }
-    */
 }
 
