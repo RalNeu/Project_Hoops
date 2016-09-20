@@ -175,17 +175,7 @@ public class EditAvatarTab extends Fragment {
                     e.printStackTrace();
                 }
             }
-        });
 
-        String itemsString = "" + String.format("%02d", hatIndex) + String.format("%02d", eyesIndex) + String.format("%02d", hairIndex)
-                + String.format("%02d", beardIndex) + String.format("%02d", skinIndex) + String.format("%02d", bodyIndex);
-        sqlManager.updateAvatarItems(itemsString, uProfile.getUsername());
-        try {
-            ProfilTab.getInstance().updateAvatar();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void disableButton(Button btn) {
         if(selectedBtn != null)
