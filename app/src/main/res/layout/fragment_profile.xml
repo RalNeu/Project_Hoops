@@ -35,9 +35,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgHead"
+                    android:id="@+id/imgSkin"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatarhead"
+                    android:background="@drawable/avatarskin"
                     android:layout_margin="15dp"
                     android:visibility="visible" />
 

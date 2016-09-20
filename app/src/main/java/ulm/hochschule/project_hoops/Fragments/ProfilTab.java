@@ -2,8 +2,6 @@ package ulm.hochschule.project_hoops.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,18 +12,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Observable;
 import java.util.Observer;
 
 import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 import ulm.hochschule.project_hoops.objects.AvatarItems;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
@@ -42,7 +36,7 @@ public class ProfilTab extends Fragment {
     private TextView lbl_Coins, lbl_Ranking, lbl_Highscore, lbl_Username, lbl_Name, lbl_GebDat, lbl_AboutMe;
     private Notificator notif;
     private View layout, view_Name, view_GebDat, view_AboutMe;
-    private ImageView imgHat, imgHead, imgHair, imgEyes;
+    private ImageView imgHat, imgHair, imgEyes, imgMouth, imgSkin, imgBody;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,12 +122,12 @@ public class ProfilTab extends Fragment {
 
     public void updateAvatar() throws SQLException{
         aItems = AvatarItems.getInstance();
-        /*imgHat.setBackgroundDrawable(aItems.getAccountItem("hat"));
-        imgEyes.setBackgroundDrawable(aItems.getAccountItem("eyes"));
-        imgHair.setBackgroundDrawable(aItems.getAccountItem("hair"));*/
         imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
-        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
         imgHair.setBackgroundResource(aItems.getAccountItemByID("hair"));
+        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
+        imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth"));
+        imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin"));
+        imgBody.setBackgroundResource(aItems.getAccountItemByID("body"));
 
     }
 
@@ -152,9 +146,11 @@ public class ProfilTab extends Fragment {
         lbl_AboutMe = (TextView) layout.findViewById(R.id.lbl_AboutMe);
 
         imgHat = (ImageView) layout.findViewById(R.id.imgHat);
-        imgHead = (ImageView) layout.findViewById(R.id.imgHead);
         imgHair = (ImageView) layout.findViewById(R.id.imgHair);
         imgEyes = (ImageView) layout.findViewById(R.id.imgEyes);
+        imgMouth = (ImageView) layout.findViewById(R.id.imgMouth);
+        imgSkin = (ImageView) layout.findViewById(R.id.imgSkin);
+        imgBody = (ImageView) layout.findViewById(R.id.imgBody);
 
         btn_EditProfile = (Button) layout.findViewById(R.id.btn_ConfigureProfile);
 

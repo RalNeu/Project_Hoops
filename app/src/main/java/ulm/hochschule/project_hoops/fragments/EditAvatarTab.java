@@ -1,15 +1,8 @@
 package ulm.hochschule.project_hoops.fragments;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 import ulm.hochschule.project_hoops.objects.AvatarItems;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
@@ -30,12 +21,12 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 public class EditAvatarTab extends Fragment {
 
-    private Button btnHat, btnEyes, btnHair, btnBeard, btnSkin, btnBody, btnSave, btnPrev, btnNext, selectedBtn;
+    private Button btnHat, btnEyes, btnHair, btnMouth, btnSkin, btnBody, btnSave, btnPrev, btnNext, selectedBtn;
     private View layout;
-    private ImageView imgHat, imgHair, imgEyes;
-    private int hatIndex, eyesIndex, hairIndex, beardIndex, skinIndex, bodyIndex;
+    private ImageView imgHat, imgHair, imgEyes, imgMouth, imgSkin, imgBody;
+    private int hatIndex, eyesIndex, hairIndex, mouthIndex, skinIndex, bodyIndex;
 
-    private ArrayList<Integer> hats, hair, eyes, beard, skin, body;
+    private ArrayList<Integer> hats, hair, eyes, mouth, skin, body;
 
     SqlManager sqlManager = SqlManager.getInstance();
     UserProfile uProfile = UserProfile.getInstance();
@@ -71,6 +62,27 @@ public class EditAvatarTab extends Fragment {
                 disableButton(btnHat, hatIndex);
             }
         });
+        btnMouth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleArrowEnable(mouth, mouthIndex);
+                disableButton(btnMouth, mouthIndex);
+            }
+        });
+        btnSkin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleArrowEnable(skin, skinIndex);
+                disableButton(btnSkin, skinIndex);
+            }
+        });
+        btnBody.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleArrowEnable(body, bodyIndex);
+                disableButton(btnBody, bodyIndex);
+            }
+        });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +99,18 @@ public class EditAvatarTab extends Fragment {
                     case R.id.btnEyes:
                         imgEyes.setBackgroundResource(eyes.get(++eyesIndex));
                         handleArrowEnable(eyes, eyesIndex);
+                        break;
+                    case R.id.btnMouth:
+                        imgMouth.setBackgroundResource(mouth.get(++mouthIndex));
+                        handleArrowEnable(mouth, mouthIndex);
+                        break;
+                    case R.id.btnSkin:
+                        imgSkin.setBackgroundResource(skin.get(++skinIndex));
+                        handleArrowEnable(skin, skinIndex);
+                        break;
+                    case R.id.btnBody:
+                        imgBody.setBackgroundResource(body.get(++bodyIndex));
+                        handleArrowEnable(body, bodyIndex);
                         break;
                 }
 
@@ -109,6 +133,18 @@ public class EditAvatarTab extends Fragment {
                         imgEyes.setBackgroundResource(eyes.get(--eyesIndex));
                         handleArrowEnable(eyes, eyesIndex);
                         break;
+                    case R.id.btnMouth:
+                        imgMouth.setBackgroundResource(mouth.get(--mouthIndex));
+                        handleArrowEnable(mouth, mouthIndex);
+                        break;
+                    case R.id.btnSkin:
+                        imgSkin.setBackgroundResource(skin.get(--skinIndex));
+                        handleArrowEnable(skin, skinIndex);
+                        break;
+                    case R.id.btnBody:
+                        imgBody.setBackgroundResource(body.get(--bodyIndex));
+                        handleArrowEnable(body, bodyIndex);
+                        break;
                 }
 
             }
@@ -119,7 +155,7 @@ public class EditAvatarTab extends Fragment {
             public void onClick(View v) {
 
                 String itemsString = "" + String.format("%02d", hatIndex) + String.format("%02d", eyesIndex) + String.format("%02d", hairIndex)
-                        + String.format("%02d", beardIndex) + String.format("%02d", skinIndex) + String.format("%02d", bodyIndex);
+                        + String.format("%02d", mouthIndex) + String.format("%02d", skinIndex) + String.format("%02d", bodyIndex);
                 sqlManager.updateAvatarItems(itemsString, uProfile.getUsername());
                 try {
                     ProfilTab.getInstance().updateAvatar();
@@ -189,14 +225,10 @@ public class EditAvatarTab extends Fragment {
         btnNext.setVisibility(View.INVISIBLE);
         btnNext.setEnabled(false);
 
-        btnHair.setEnabled(false);
-        btnBeard.setEnabled(false);
+        /*btnHair.setEnabled(false);
+        btnMouth.setEnabled(false);
         btnBody.setEnabled(false);
-        btnSkin.setEnabled(false);
-
-        beardIndex = 0;
-        skinIndex = 0;
-        bodyIndex = 0;
+        btnSkin.setEnabled(false);*/
 
         try {
             setItemView();
@@ -212,7 +244,7 @@ public class EditAvatarTab extends Fragment {
 
         btnHair = (Button) layout.findViewById(R.id.btnHair);
         btnHat = (Button) layout.findViewById(R.id.btnHat);
-        btnBeard = (Button) layout.findViewById(R.id.btnBeard);
+        btnMouth = (Button) layout.findViewById(R.id.btnMouth);
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
         btnSkin = (Button) layout.findViewById(R.id.btnSkin);
         btnBody = (Button) layout.findViewById(R.id.btnBody);
@@ -222,22 +254,28 @@ public class EditAvatarTab extends Fragment {
         imgHat = (ImageView) layout.findViewById(R.id.imgHat);
         imgHair = (ImageView) layout.findViewById(R.id.imgHair);
         imgEyes = (ImageView) layout.findViewById(R.id.imgEyes);
+        imgMouth = (ImageView) layout.findViewById(R.id.imgMouth);
+        imgSkin = (ImageView) layout.findViewById(R.id.imgSkin);
+        imgBody = (ImageView) layout.findViewById(R.id.imgBody);
         hats = aItems.getList("hat");
         hair = aItems.getList("hair");
         eyes = aItems.getList("eyes");
+        mouth = aItems.getList("mouth");
+        skin = aItems.getList("skin");
+        body = aItems.getList("body");
     }
 
     private void setItemView() throws SQLException {
-        /*imgHat.setBackgroundDrawable(aItems.getAccountItem("hat"));
-        imgEyes.setBackgroundDrawable(aItems.getAccountItem("eyes"));
-        imgHair.setBackgroundDrawable(aItems.getAccountItem("hair"));*/
         imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
-        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
         imgHair.setBackgroundResource(aItems.getAccountItemByID("hair"));
+        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
+        imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth"));
+        imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin"));
+        imgBody.setBackgroundResource(aItems.getAccountItemByID("body"));
         hatIndex = aItems.getIndex("hat");
         hairIndex = aItems.getIndex("hair");
         eyesIndex = aItems.getIndex("eyes");
-        beardIndex = aItems.getIndex("beard");
+        mouthIndex = aItems.getIndex("mouth");
         skinIndex = aItems.getIndex("skin");
         bodyIndex = aItems.getIndex("body");
     }
