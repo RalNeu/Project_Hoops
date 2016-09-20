@@ -12,6 +12,7 @@ import java.util.HashMap;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.AchievementObject;
+import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.views.Achievement;
 
 public class AchievementTab extends Fragment {
@@ -57,8 +58,13 @@ public class AchievementTab extends Fragment {
 
 
         for(int i = 0;i< 16;i++) {
-            AchievementObject ao = AchievementHandler.getInstance().getAchievement(i);
-            addAchievement(i, ao.getEmblem(), ao.getDescription(), ao.getTitle());
+            AchievementObject ao = null;
+            try {
+                ao = AchievementHandler.getInstance().getAchievement(i);
+                addAchievement(i, ao.getEmblem(), ao.getDescription(), ao.getTitle());
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
         }
 
         return layout;

@@ -190,8 +190,8 @@ public class EditProfilActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        EditProfileFragment epf = new EditProfileFragment();
-        EditAvatarTab eat = new EditAvatarTab();
+        final EditProfileFragment epf = new EditProfileFragment();
+        final EditAvatarTab eat = new EditAvatarTab();
         adapter.addFrag(epf, "Profilinformationen");
         adapter.addFrag(eat , "Avatar");
         
@@ -199,7 +199,8 @@ public class EditProfilActivity extends AppCompatActivity {
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-
+                epf.save();
+                eat.save();
             }
 
             @Override

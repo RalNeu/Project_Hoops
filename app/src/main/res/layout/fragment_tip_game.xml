@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:orientation="vertical" android:layout_width="match_parent"
 android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
     android:background="@drawable/bgbetting"
+    android:windowSoftInputMode="stateHidden|adjustResize"
     android:id="@+id/view_TipGame_fragment"
     android:weightSum="16">
 
@@ -164,6 +167,7 @@ android:layout_height="match_parent"
                 android:id="@+id/btn_Refresh"
                 android:layout_gravity="center"
                 android:background="@drawable/refreshicon" />
+
         </FrameLayout>
 
         <FrameLayout
@@ -185,10 +189,20 @@ android:layout_height="match_parent"
         </FrameLayout>
     </LinearLayout>
 
-    <Space
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/tv_vote_information"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="14dp" />
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

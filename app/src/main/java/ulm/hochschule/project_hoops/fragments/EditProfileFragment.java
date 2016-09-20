@@ -23,6 +23,7 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.Notificator;
+import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -152,21 +153,23 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 save();
-                ProfilTab.getInstance().updateData();
                 getActivity().finish();
             }
         });
     }
 
+
+
     private void checkVerified() {
-        System.out.println(user.getVerifCode());
-        System.out.println(user.getUserID());
-        System.out.println(et_Code.getText().toString());
         if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())) {
             sm.setVerif_Status(0, user.getUserID());
             hideVerify();
             Toast toast = Toast.makeText(getActivity(), "Verifizierung erfolgreich", Toast.LENGTH_SHORT);
-            AchievementHandler.getInstance().performEvent(1, 1, getActivity());
+            try {
+                AchievementHandler.getInstance().performEvent(1, 1, getActivity());
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
             toast.show();
         } else {
             et_Code.setError("Falscher Code!");
@@ -192,7 +195,7 @@ public class EditProfileFragment extends Fragment {
         return retVal;
     }
 
-    private void save() {
+    public void save()  {
         int personID = user.getPersonID();
         SqlManager manager = SqlManager.getInstance();
 
@@ -217,7 +220,11 @@ public class EditProfileFragment extends Fragment {
             oldAboutMe = et_AboutMe.getText().toString();
             manager.updatePerson(personID, "hobbies", oldAboutMe);
             achProfileEdited = true;
-            AchievementHandler.getInstance().performEvent(7, 1, getActivity());
+            try {
+                AchievementHandler.getInstance().performEvent(7, 1, getActivity());
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
         }
 
         if (oldSettings != calcSettings()) {
@@ -233,16 +240,29 @@ public class EditProfileFragment extends Fragment {
             oldGebDat = d;
             manager.updatePerson(personID, "geburtsdatum", oldGebDat);
             achProfileEdited = true;
-            AchievementHandler.getInstance().performEvent(6, 1, getActivity());
+            try {
+                AchievementHandler.getInstance().performEvent(6, 1, getActivity());
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
         }
 
         if(achNameChanged) {
-            AchievementHandler.getInstance().performEvent(5, 1, getActivity());
+            try {
+                AchievementHandler.getInstance().performEvent(5, 1, getActivity());
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
         }
         if(achProfileEdited) {
-            AchievementHandler.getInstance().performEvent(4, 1, getActivity());
+            try {
+                AchievementHandler.getInstance().performEvent(4, 1, getActivity());
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
         }
         user.update(oldForename, oldSurname, oldAboutMe, oldGebDat, calcSettings());
+        ProfilTab.getInstance().updateData();
     }
 
     private int calcSettings() {

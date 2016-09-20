@@ -5,7 +5,6 @@ import android.app.Activity;
 import java.util.HashMap;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 
 /**
  * Created by Ralph on 26.07.2016.
@@ -25,7 +24,7 @@ public class AchievementHandler {
     private int aID;
     private int tageHintereinander = 0;
 
-    private AchievementHandler () {
+    private AchievementHandler () throws ServerException{
         achievements = new HashMap<Integer, Integer>();
         achiementStatus = new int[N];
         for(int i = 0; i< N;i++) {
@@ -35,8 +34,12 @@ public class AchievementHandler {
     }
 
 
-    private void instantiateVariables() {
-        String reference =
+    private void instantiateVariables() throws ServerException{
+        String[] items;
+
+        items = ServerCommunicate.getInstance().getAch();
+
+       /* String reference =
                 "1/1/1/" +
                 "1/1/1/" +
                 "10/30/75/" +
@@ -53,14 +56,17 @@ public class AchievementHandler {
                 "500/3000/10000/" +
                 "2000/8000/20000/" +
                 "1000/5000/15000";
+*/
 
-        String[] referenceString = reference.split("/");
+        String[] referenceString = items[0].split("/");
         achievementreference = new int[referenceString.length];
         for(int i = 0;i < referenceString.length;i++) {
             achievementreference[i] = Integer.parseInt(referenceString[i]);
         }
 
-        descriptions = new String[N];
+        descriptions = items[1].split("#");
+        titles = items[2].split("#");
+        /*descriptions = new String[N];
         descriptions[0] = "Sie haben sich erfolgreich registriert!";
         descriptions[1] = "Sie haben Ihr Profil verifiziert!";
         descriptions[2] = "Sie haben sich öfter als / mal eingeloggt!";
@@ -95,10 +101,10 @@ public class AchievementHandler {
         titles[12] = "Ich kenn mich halt aus";
         titles[13] = "All in";
         titles[14] = "Ein lukratives Geschäft";
-        titles[15] = "Ich will der Allerbeste sein!";
+        titles[15] = "Ich will der Allerbeste sein!";*/
     }
 
-    public static AchievementHandler getInstance() {
+    public static AchievementHandler getInstance() throws ServerException{
         if (instance == null) {
             instance = new AchievementHandler();
         }

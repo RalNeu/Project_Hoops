@@ -158,7 +158,14 @@ public class EditAvatarTab extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                save();
+                getActivity().finish();
+            }
+        });
 
+    }
+
+    public void save() {
                 String itemsString = "" + String.format("%02d", hatIndex) + String.format("%02d", eyesIndex) + String.format("%02d", hairIndex)
                         + String.format("%02d", mouthIndex) + String.format("%02d", skinIndex) + String.format("%02d", bodyIndex);
                 sqlManager.updateAvatarItems(itemsString, uProfile.getUsername());
@@ -167,10 +174,17 @@ public class EditAvatarTab extends Fragment {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                getActivity().finish();
             }
         });
 
+        String itemsString = "" + String.format("%02d", hatIndex) + String.format("%02d", eyesIndex) + String.format("%02d", hairIndex)
+                + String.format("%02d", beardIndex) + String.format("%02d", skinIndex) + String.format("%02d", bodyIndex);
+        sqlManager.updateAvatarItems(itemsString, uProfile.getUsername());
+        try {
+            ProfilTab.getInstance().updateAvatar();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void disableButton(Button btn) {

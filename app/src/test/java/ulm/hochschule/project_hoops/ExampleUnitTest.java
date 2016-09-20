@@ -7,6 +7,7 @@ import org.junit.Test;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.AchievementObject;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
+import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -120,7 +121,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void checkAchievementsFehlt() {
+    public void checkAchievementsFehlt() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser1"))
@@ -138,7 +139,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void checkAchievementsBronze() {
+    public void checkAchievementsBronze() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser2"))
@@ -158,7 +159,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void checkAchievementsSilber() {
+    public void checkAchievementsSilber() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser3"))
@@ -185,7 +186,12 @@ public class ExampleUnitTest {
             s.createUser("test", "test", "email@example.de", "AchUser4", "11111111", "1/1/75/15/50/15/3/100/30/30/30/30/50/10000/20000/15000", 1);
         UserProfile.getInstance("AchUser4", new Activity());
 
-        AchievementHandler ah = AchievementHandler.getInstance();
+        AchievementHandler ah = null;
+        try {
+            ah = AchievementHandler.getInstance();
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
 
         AchievementObject ao;
 

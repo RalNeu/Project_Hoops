@@ -19,6 +19,7 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
+import ulm.hochschule.project_hoops.utilities.TimeoutException;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 
@@ -128,15 +129,20 @@ public class fragment_Send_Tip extends Fragment {
                     if(chosenCoins > 0) {
                         try {
                             ServerCommunicate sc = ServerCommunicate.getInstance();
-                            sc.sendTip(chosenCoins, team);
-                            s = "Tipp gesendet!";
-                            if(team == 0) {
-                                AchievementHandler.getInstance().performEvent(10, 1, getActivity());
-                            } else {
-                                AchievementHandler.getInstance().performEvent(11, 1, getActivity());
+                            try {
+                                sc.sendTip(chosenCoins, team);
+                                s = "Tipp gesendet!";
+                                if(team == 0) {
+                                    AchievementHandler.getInstance().performEvent(10, 1, getActivity());
+                                } else {
+                                    AchievementHandler.getInstance().performEvent(11, 1, getActivity());
+                                }
+                                AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
+                                changeFragment();
+                            } catch (TimeoutException e) {
+                                s = "Es können momentan keine Tipps entgegen genommen werden. Versuchen Sie es bitte später erneut.";
+                                System.out.println("Es können momentan keine Tipps entgegen genommen werden. Versuchen Sie es bitte später erneut.");
                             }
-                            AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
-                            changeFragment();
                         } catch(ServerException e) {
                             e.printStackTrace();
                             s = "Es ist ein Fehler aufgetreten! Bitte versuchen Sie es erneut.";

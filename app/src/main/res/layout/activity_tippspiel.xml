@@ -5,6 +5,8 @@
     android:id="@+id/view_TipGame"
     android:background="@drawable/bghome"
     android:layout_height="match_parent">
-
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:windowSoftInputMode="stateHidden|adjustResize"
 
 </android.support.design.widget.CoordinatorLayout>

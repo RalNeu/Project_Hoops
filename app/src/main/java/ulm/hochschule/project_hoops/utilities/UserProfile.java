@@ -22,7 +22,6 @@ public class UserProfile {
     private static boolean userFound = false;
 
     private UserProfile(String sqlUSER, Activity a) {
-
         Object[] userInfo;
         try {
             userInfo = SqlManager.getInstance().getUser(sqlUSER);
@@ -40,11 +39,16 @@ public class UserProfile {
             verifCode   = (String)  userInfo[10];
             userID      = (int)     userInfo[11];
             achievements = (String) userInfo[12];
-            lastLogin = (Date) userInfo[13];
-            AchievementHandler ah = AchievementHandler.getInstance();
-            ah.mapAchievements(userID, achievements);
-            ah.performEvent(2, 1, a);
-            checkDateYesterday(a);
+            lastLogin =     (Date)  userInfo[13];
+            AchievementHandler ah = null;
+            try {
+                ah = AchievementHandler.getInstance();
+                ah.mapAchievements(userID, achievements);
+                ah.performEvent(2, 1, a);
+                checkDateYesterday(a, ah);
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
             userFound = true;
         } catch (SQLException e) {
             System.err.println("User not found.");
@@ -52,12 +56,10 @@ public class UserProfile {
         }
     }
 
-    private void checkDateYesterday(Activity a) {
+    private void checkDateYesterday(Activity a, AchievementHandler ah) {
         Date now = SqlManager.getInstance().getNow();
         long l = now.getTime() - lastLogin.getTime();
         int tagevergangen = (int) l/(1000*60*60*24);
-
-        AchievementHandler ah = AchievementHandler.getInstance();
 
         if(tagevergangen == 0 || tagevergangen == 1) {
             ah.performEvent(3, ah.getTageHintereinander() + tagevergangen, a);

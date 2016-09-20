@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
@@ -27,6 +30,8 @@ public class TipTab extends Fragment {
     private ServerCommunicate sc;
     private TextView tv_Prozent_Other, tv_Prozent_Ulm;
     private SeekBar sb_SeekBar;
+    private Button btn_Vote;
+    private TextView tv_information_vote;
 
     public TipTab() {
         // Required empty public constructor
@@ -47,6 +52,7 @@ public class TipTab extends Fragment {
         tv_Prozent_Other = (TextView) layout.findViewById(R.id.tv_Prozent_Other);
         sb_SeekBar = (SeekBar) layout.findViewById(R.id.sb_SeekBar);
 
+
         Button btn_Refresh = (Button) layout.findViewById(R.id.btn_Refresh);
 
         sb_SeekBar.setEnabled(false);
@@ -59,9 +65,11 @@ public class TipTab extends Fragment {
             }
         });
 
+        btn_Vote = (Button) layout.findViewById(R.id.btn_Vote);
+        tv_information_vote = (TextView) layout.findViewById(R.id.tv_vote_information);
         update();
 
-        Button btn_Vote = (Button) layout.findViewById(R.id.btn_Vote);
+
 
         final ImageView img_View = (ImageView) layout.findViewById(R.id.img_Team);
 
@@ -77,6 +85,7 @@ public class TipTab extends Fragment {
             }
         });
 
+
         btn_Vote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,10 +98,35 @@ public class TipTab extends Fragment {
 
     private void update() {
         try {
-            sc.readQuote();
-            tv_Prozent_Ulm.setText("" + Math.round(sc.getQuoteUlm()));
-            tv_Prozent_Other.setText("" + Math.round(sc.getQuoteOther()));
-            sb_SeekBar.setProgress((int) sc.getQuoteOther());
+            boolean rdy = sc.getRdyToTipp();
+            btn_Vote.setEnabled(rdy);
+            if(!rdy) {
+                tv_information_vote.setText("Es können momentan keine Tipps/Quote entgegen genommen werden.\nBitte versuchen Sie es später erneut.");
+                tv_Prozent_Ulm.setText("0");
+                tv_Prozent_Other.setText("0");
+                sb_SeekBar.setProgress(50);
+            } else {
+                sc.readQuote();
+                tv_Prozent_Ulm.setText("" + Math.round(sc.getQuoteUlm()));
+                tv_Prozent_Other.setText("" + (100 - Math.round(sc.getQuoteUlm())));
+                sb_SeekBar.setProgress((int) sc.getQuoteOther());
+                tv_information_vote.setText("");
+            }
+
+
+            System.out.println("a");
+            int win = sc.getWin();
+            System.out.println("b");
+
+            if(win > 0) {
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Sie haben im letzten Tippspiel " + win + " Coins gewonnen! Glückwunsch!", Toast.LENGTH_SHORT);
+                toast.show();
+            } else if(win == 0) {
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Sie haben im letzten Tippspiel leider nichts gewonnen, aber probieren Sie es doch ruhig noch einmal!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+
         } catch (ServerException e) {
             e.printStackTrace();
         }

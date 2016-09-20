@@ -131,7 +131,11 @@ public class RegisterTab2 extends Fragment {
         notifyManager.sendNotify(1000, "Registrierung", "Sie haben 500 Coins erhalten!", getActivity(), R.drawable.coin);
         UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username, getActivity());
-        AchievementHandler.getInstance().performEvent(0, 1, getActivity());
+        try {
+            AchievementHandler.getInstance().performEvent(0, 1, getActivity());
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
         user.updateCoins(500);
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(true);

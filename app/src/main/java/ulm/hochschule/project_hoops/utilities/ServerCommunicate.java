@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.InterfaceAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -31,11 +32,42 @@ public class ServerCommunicate {
         return instance;
     }
 
-    public boolean sendTip(int coins, int team) throws ServerException {
-        boolean retVal = true;
+    public String[] getAch() throws ServerException {
+
+        String[] retString = new String[3];
+
+        boolean access = false;
 
         try {
-            Socket s = new Socket("141.59.26.107", 21395);
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress("141.59.26.107", 21399), 3000);
+            access = true;
+
+            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+
+            retString[0] = (String) ois.readObject();
+            retString[1] = (String) ois.readObject();
+            retString[2] = (String) ois.readObject();
+
+            s.close();
+        } catch (IOException ex) {
+            throw new ServerException("No answer from Server");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return retString; //TODO
+        }
+
+    public boolean sendTip(int coins, int team) throws ServerException, TimeoutException {
+        boolean retVal = true;
+
+        boolean access = false;
+        try {
+
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress("141.59.26.107", 21395), 3000);
+            access = true;
 
             ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
             InputStream is = s.getInputStream();
@@ -64,12 +96,35 @@ public class ServerCommunicate {
             s.close();
 
         } catch (IOException ex) {
-            retVal = false;
-            throw new ServerException("No answer from Server");
+
+            if(!access) {
+                throw new TimeoutException();
+            } else {
+
+                retVal = false;
+                throw new ServerException("No answer from Server");
+            }
         }
 
         return retVal;
     }
+
+    public boolean getRdyToTipp() {
+        boolean res = false;
+        try {
+
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress("141.59.26.107", 21400), 3000);
+
+            if(s.getInputStream().read() == 0) {
+                res = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 
     public double getQuoteUlm() {
         return quoteUlm;
@@ -123,8 +178,14 @@ public class ServerCommunicate {
     public boolean readQuote() throws ServerException {
         boolean retVal = true;
 
+        boolean access = false;
+
         try {
-            Socket s = new Socket("141.59.26.107", 21396);
+
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress("141.59.26.107", 21396), 3000);
+            access = true;
+
             OutputStream os= s.getOutputStream();
             ObjectInputStream is = new ObjectInputStream(s.getInputStream());
 
@@ -154,7 +215,8 @@ public class ServerCommunicate {
 
     public void deleteTipps() {
         try {
-            Socket s = new Socket("141.59.26.107", 21397);
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress("141.59.26.107", 21397), 3000);
             s.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -163,8 +225,11 @@ public class ServerCommunicate {
 
     public int getWin() {
         int retVal = -4;
+        boolean access = false;
         try {
-            Socket s = new Socket("141.59.26.107", 21398);
+            Socket s = new Socket();
+            s.connect(new InetSocketAddress("141.59.26.107", 21398), 3000);
+            access = true;
 
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
@@ -173,11 +238,6 @@ public class ServerCommunicate {
 
             retVal = (Integer) ois.readObject();
 
-            if(retVal < 0) {
-                oos.writeObject(new Integer(-1));
-            } else {
-                oos.writeObject(new Integer(0));
-            }
             s.close();
         } catch (IOException e) {
             e.printStackTrace();
