@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -20,21 +21,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import ulm.hochschule.project_hoops.fragments.ChatClientView;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.AchievementTab;
 import ulm.hochschule.project_hoops.fragments.LoginTab;
-import ulm.hochschule.project_hoops.fragments.NewsTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
-import ulm.hochschule.project_hoops.fragments.TestTab;
 import ulm.hochschule.project_hoops.fragments.WebView2;
-import ulm.hochschule.project_hoops.fragments.testFragment;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
     private Fragment houseView = new HouseViewTab();
+    private Fragment chatClient = new ChatClientView();
     private AchievementTab achievementTab = new AchievementTab();
 
     private MenuItem profile;
@@ -122,6 +121,7 @@ public class MainActivity extends AppCompatActivity
 
         openTab();
         manager = SqlManager.getInstance();
+
     }
 
     private void openTab() {
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity
            // changeFragment(newsTab);
         } else if (id == R.id.nav_gallery) {
             changeFragment(new WebView2());
-        } else if (id == R.id.profile) {
+        }else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();
             changeFragment(tab);
         } else if (id == R.id.login) {
@@ -291,7 +291,10 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new HouseViewTab());
         } else if(id == R.id.achievement) {
             changeFragment(achievementTab);
-        }
+        }else if(id == R.id.nav_chat) {
+            currTab = chatClient;
+            changeFragment(new ChatClientView());
+    }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

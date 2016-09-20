@@ -10,6 +10,10 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_ticket_icon"
             android:title="Ticketshop" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_ticket_icon"
+            android:title="Chat" />
 
        <!-- <item
             android:id="@+id/nav_slideshow"
