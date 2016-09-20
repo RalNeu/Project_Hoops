@@ -18,7 +18,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.ChatClient;
@@ -28,13 +31,20 @@ import ulm.hochschule.project_hoops.fragments.TipTab;
 /**
  * Created by Patri on 19.09.2016.
  */
-public class ChatClientView extends Fragment {
+public class ChatClientView extends Fragment{
 
     private View layout;
     private Button button;
     public TextView txt_View;
     private EditText et_Text;
     //Attribut für den Username und der muss dann abgesendet werden mit der nachricht
+    private String host;
+    private int port;
+    private Button buttonSend;
+    private DataOutputStream dout;
+    private DataInputStream din;
+    private Socket socket;
+    private ChatClientView chatcv;
 
 
 
@@ -50,13 +60,14 @@ public class ChatClientView extends Fragment {
         button = (Button) layout.findViewById(R.id.buttonSend);
         txt_View = (TextView) layout.findViewById(R.id.txt_chat);
         et_Text  = (EditText) layout.findViewById(R.id.et_ChatMessage);
-       final ChatClient myClient = new ChatClient(this);
-        myClient.execute();
+      // final ChatClient myClient = new ChatClient(this);
+     // myClient.start();
+
 
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                myClient.processMessage(et_Text.getText().toString()+"\n");
+             //   myClient.processMessage(et_Text.getText().toString()+"\n");
             }
         });
 
@@ -64,7 +75,9 @@ public class ChatClientView extends Fragment {
     }
 
    public void text(String text ){
-        txt_View.append(text);
+      txt_View.append(text);
     }
+
+
 
 }

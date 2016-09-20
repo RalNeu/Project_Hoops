@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import ulm.hochschule.project_hoops.fragments.ChatClient;
 import ulm.hochschule.project_hoops.fragments.ChatClientView;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
     private Fragment houseView = new HouseViewTab();
-    private Fragment chatClient = new ChatClientView();
+
     private AchievementTab achievementTab = new AchievementTab();
 
     private MenuItem profile;
@@ -292,8 +292,8 @@ public class MainActivity extends AppCompatActivity
         } else if(id == R.id.achievement) {
             changeFragment(achievementTab);
         }else if(id == R.id.nav_chat) {
-            currTab = chatClient;
-            changeFragment(new ChatClientView());
+            startActivity(new Intent(getApplicationContext(), ChatActivity.class));
+
     }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

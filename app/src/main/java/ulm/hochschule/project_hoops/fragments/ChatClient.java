@@ -5,7 +5,6 @@ package ulm.hochschule.project_hoops.fragments;
 
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,8 +14,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import ulm.hochschule.project_hoops.activities.ChatActivity;
 
-public class ChatClient extends AsyncTask<Void,Void,Void> {
+
+public class ChatClient extends Thread {
 
 
 
@@ -29,13 +30,13 @@ public class ChatClient extends AsyncTask<Void,Void,Void> {
     private DataOutputStream dout;
     private DataInputStream din;
     private Socket socket;
-    private ChatClientView chatcv;
+    private ChatActivity cA;
 
 
-    public ChatClient(ChatClientView ccv) {
+    public ChatClient() {
         host =  "37.209.33.128";
         port = 4999;
-        chatcv = ccv;
+
 
 
         try {
@@ -58,27 +59,28 @@ public class ChatClient extends AsyncTask<Void,Void,Void> {
     }
 
 
+public void sendtext(String msg){
+    cA.text(msg);
+}
 
-    protected void onProgressUpdate(String... values) {
 
-        chatcv.text(values[0]);
-    }
+
 
     @Override
-    protected Void doInBackground(Void... params) {
+    public void run() {
+        super.run();
         try{
 
-            while (!this.isCancelled()){
+            while (true){
                 String message = din.readUTF();
-                onProgressUpdate(message);
+                sendtext(message);
             }
         }catch(IOException e){
             System.out.println(e);
         }
-        return null;
-    }
 
     }
+}
 
 
 
