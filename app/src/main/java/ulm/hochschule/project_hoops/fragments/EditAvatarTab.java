@@ -44,14 +44,14 @@ public class EditAvatarTab extends Fragment {
         btnHair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disableButton(btnHair, hairIndex);
+                disableButton(btnHair);
                 handleArrowEnable(hair, hairIndex);
             }
         });
         btnEyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disableButton(btnEyes, eyesIndex);
+                disableButton(btnEyes);
                 handleArrowEnable(eyes, eyesIndex);
             }
         });
@@ -59,28 +59,28 @@ public class EditAvatarTab extends Fragment {
             @Override
             public void onClick(View v) {
                 handleArrowEnable(hats, hatIndex);
-                disableButton(btnHat, hatIndex);
+                disableButton(btnHat);
             }
         });
         btnMouth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleArrowEnable(mouth, mouthIndex);
-                disableButton(btnMouth, mouthIndex);
+                disableButton(btnMouth);
             }
         });
         btnSkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleArrowEnable(skin, skinIndex);
-                disableButton(btnSkin, skinIndex);
+                disableButton(btnSkin);
             }
         });
         btnBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleArrowEnable(body, bodyIndex);
-                disableButton(btnBody, bodyIndex);
+                disableButton(btnBody);
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +122,12 @@ public class EditAvatarTab extends Fragment {
 
                 switch (selectedBtn.getId()) {
                     case R.id.btnHat:
-                        imgHat.setBackgroundResource(hats.get(--hatIndex));
+                        if(hatIndex == 0) {
+                            imgHat.setBackgroundResource(0);
+                            hatIndex--;
+                        } else {
+                            imgHat.setBackgroundResource(hats.get(--hatIndex));
+                        }
                         handleArrowEnable(hats, hatIndex);
                         break;
                     case R.id.btnHair:
@@ -168,7 +173,7 @@ public class EditAvatarTab extends Fragment {
 
     }
 
-    public void disableButton(Button btn, int itemIndex) {
+    public void disableButton(Button btn) {
         if(selectedBtn != null)
             selectedBtn.setEnabled(true);
         btn.setEnabled(false);
@@ -176,15 +181,24 @@ public class EditAvatarTab extends Fragment {
     }
 
     public void handleArrowEnable(ArrayList list, int itemIndex) {
+
         if (itemIndex == list.size()-1)
             disableNext();
         else
             enableNext();
 
-        if(itemIndex == 0 )
-            disablePrev();
-        else
-            enablePrev();
+        //Bei hats kann noch 1 Schritt weiter zurückgegangen werden um den Hut zu entfernen
+        if(list == hats) {
+            if(itemIndex == -1 )
+                disablePrev();
+            else
+                enablePrev();
+        } else {
+            if(itemIndex == 0 )
+                disablePrev();
+            else
+                enablePrev();
+        }
     }
 
     public void enableNext(){
@@ -225,11 +239,6 @@ public class EditAvatarTab extends Fragment {
         btnNext.setVisibility(View.INVISIBLE);
         btnNext.setEnabled(false);
 
-        /*btnHair.setEnabled(false);
-        btnMouth.setEnabled(false);
-        btnBody.setEnabled(false);
-        btnSkin.setEnabled(false);*/
-
         try {
             setItemView();
         } catch(SQLException e) {
@@ -248,15 +257,18 @@ public class EditAvatarTab extends Fragment {
         btnEyes = (Button) layout.findViewById(R.id.btnEyes);
         btnSkin = (Button) layout.findViewById(R.id.btnSkin);
         btnBody = (Button) layout.findViewById(R.id.btnBody);
+
         btnPrev = (Button) layout.findViewById(R.id.btnPrev);
         btnNext = (Button) layout.findViewById(R.id.btnNext);
         btnSave = (Button) layout.findViewById(R.id.btnSave);
+
         imgHat = (ImageView) layout.findViewById(R.id.imgHat);
         imgHair = (ImageView) layout.findViewById(R.id.imgHair);
         imgEyes = (ImageView) layout.findViewById(R.id.imgEyes);
         imgMouth = (ImageView) layout.findViewById(R.id.imgMouth);
         imgSkin = (ImageView) layout.findViewById(R.id.imgSkin);
         imgBody = (ImageView) layout.findViewById(R.id.imgBody);
+
         hats = aItems.getList("hat");
         hair = aItems.getList("hair");
         eyes = aItems.getList("eyes");
@@ -272,6 +284,7 @@ public class EditAvatarTab extends Fragment {
         imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth"));
         imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin"));
         imgBody.setBackgroundResource(aItems.getAccountItemByID("body"));
+
         hatIndex = aItems.getIndex("hat");
         hairIndex = aItems.getIndex("hair");
         eyesIndex = aItems.getIndex("eyes");

@@ -65,6 +65,8 @@ public class AvatarItems {
         switch (item) {
             case "hat":
                 hatIndex = Integer.parseInt(itemsString.substring(0, 2));
+                if(hatIndex == -1)
+                    return 0;
                 return hats.get(hatIndex);
             case "eyes":
                 eyesIndex = Integer.parseInt(itemsString.substring(2, 4));

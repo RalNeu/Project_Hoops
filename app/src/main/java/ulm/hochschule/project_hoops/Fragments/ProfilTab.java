@@ -122,6 +122,7 @@ public class ProfilTab extends Fragment {
 
     public void updateAvatar() throws SQLException{
         aItems = AvatarItems.getInstance();
+
         imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
         imgHair.setBackgroundResource(aItems.getAccountItemByID("hair"));
         imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
