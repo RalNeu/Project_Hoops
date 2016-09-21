@@ -20,7 +20,7 @@ public class AnimatedView extends ImageView {
     int y = 200;
     private int xVelocityDirection = 20;
     private int yVelocityDirection = 20;
-    private int tempTimerx = 10;
+    private int tempTimerx = 30;
     private int tempTimery = 5;
     private Handler handler;
     private final int FRAME_RATE = 30;
@@ -42,7 +42,9 @@ public class AnimatedView extends ImageView {
     protected void onDraw(Canvas canvas) {
         BitmapDrawable drawableball = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
         //System.out.println("velocityx: " + xVelocityDirection + "    x: " + x);
-        System.out.println("velocityy: " + yVelocityDirection + "       y: " + y);
+        //System.out.println("velocityy: " + yVelocityDirection + "       y: " + y);
+
+        //Bei Kontakt mit seitlichen Wänden wird x Geschwindigkeit umgedreht
         if(xVelocityDirection != 0) {
             x += xVelocityDirection;
             if ((x > this.getWidth() - drawableball.getBitmap().getWidth()) || (x < 0)) {
@@ -53,42 +55,37 @@ public class AnimatedView extends ImageView {
                     xVelocityDirection--;
                 else
                     xVelocityDirection++;
-                tempTimerx = 10;
+                tempTimerx = 30;
             }
         }
 
+        //Bei Kontakt mit Boden oder Decke wird y Geschwindigkeit umgedreht
         if(yVelocityDirection != 0) {
-            if ((y > this.getHeight() - drawableball.getBitmap().getHeight())) {
+            if ((y > this.getHeight() - drawableball.getBitmap().getHeight()) || y < 0)
                 yVelocityDirection = (yVelocityDirection *-1);
-                y += yVelocityDirection;
-            } else if(y < 0) {
-                yVelocityDirection = (yVelocityDirection *-1);
-                y += yVelocityDirection+1;
-            } else
-                y += yVelocityDirection;
+            y += yVelocityDirection;
 
         }
-        if(y < this.getHeight() - drawableball.getBitmap().getHeight())
-            if(yVelocityDirection < 0)
+
+        //Bei Ball in der Luft soll Gravitation wirken. Fliegt der Ball hoch, wirkt sie doppelt so oft
+        if(y < this.getHeight() - drawableball.getBitmap().getHeight()) {
+            if (yVelocityDirection < 0)
                 --tempTimery;
-            if(--tempTimery <= 0) {
+            if (--tempTimery <= 0) {
                 yVelocityDirection++;
                 tempTimery = 5;
             }
-
-        /*if (x<0 && y <0) {
-            x = this.getWidth()/2;
-            y = this.getHeight()/2;
         } else {
-            x += xVelocityDirection;
-            y += yVelocityDirection;
-            if ((x > this.getWidth() - drawableball.getBitmap().getWidth()) || (x < 0)) {
-                xVelocityDirection = xVelocityDirection *-1;
+            if(xVelocityDirection > 0)
+                xVelocityDirection--;
+            else if(xVelocityDirection < 0)
+                xVelocityDirection++;
+            if(yVelocityDirection < 3 && yVelocityDirection > -3) {
+                y = this.getHeight() - drawableball.getBitmap().getHeight();
+                yVelocityDirection = 0;
             }
-            if ((y > this.getHeight() - drawableball.getBitmap().getHeight()) || (y < 0)) {
-                yVelocityyDirection = yVelocityDirection *-1;
-            }
-        }*/
+        }
+
         canvas.drawBitmap(drawableball.getBitmap(), x, y, null);
         handler.postDelayed(r, FRAME_RATE);
     }
