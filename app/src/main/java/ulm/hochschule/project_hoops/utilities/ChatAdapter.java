@@ -47,10 +47,8 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         View row = convertView;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(obj.getKind().equals("String")){
-            if(obj.getMessage().charAt(0) == '.'){
-                row = inflater.inflate(R.layout.string_message_left, parent, false);
-            }else
-                row = inflater.inflate(R.layout.string_message_right, parent, false);
+
+            row = inflater.inflate(R.layout.string_message_left, parent, false);
             textView = (TextView) row.findViewById(R.id.msgr);
             time = (TextView) row.findViewById(R.id.time);
             time.setText(obj.getTime());

@@ -30,7 +30,8 @@
         <activity
             android:name=".activities.TippspielActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".activities.ChatActivity"></activity>
+        <activity android:name=".activities.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".activities.GameActivity"></activity>
     </application>
 

@@ -16,15 +16,19 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.ChatAdapter;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
 import ulm.hochschule.project_hoops.fragments.ChatClient;
+import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 public class ChatActivity extends AppCompatActivity {
 
     private Button button;
-    public TextView txt_View;
     private EditText et_Text;
+
     private ChatClient myClient;
     private ChatAdapter adapter;
     private ListView listView;
+    private UserProfile user;
+
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,32 +38,48 @@ public class ChatActivity extends AppCompatActivity {
         et_Text  = (EditText) findViewById(R.id.tv_message);
         listView = (ListView) findViewById(R.id.listView);
         listView.setClipToPadding(false);
+
+
         adapter = new ChatAdapter(getApplicationContext(), R.layout.string_message_right,listView);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("ChatTeilnehmer");
-        setSupportActionBar(toolbar);
         listView.setAdapter(adapter);
+
+        user = UserProfile.getInstance();
+        userName = user.getUsername();
+
         final ChatClient myClient = new ChatClient(this);
         myClient.start();
 
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                myClient.processMessage(et_Text.getText().toString()+"\n");
+                if(textSize()){
+                myClient.processMessage(userName+": "+et_Text.getText().toString());
+                    et_Text.setText("");
+            }else{
+                    et_Text.setError("Es können nur 80 Zeichen verwendet werden");
+                }
             }
+
         });
     }
 
+    public boolean textSize(){
+        if(et_Text.length()<=80){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void recieveText(String text ){
         final String text1 = text;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                txt_View.append(text1+"\n");
+                sendMessage(new ChatMessage(text1,"","String"));
             }
         });
     }

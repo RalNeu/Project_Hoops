@@ -33,8 +33,8 @@ public class ChatClient extends Thread {
 
 
     public ChatClient(ChatActivity ca) {
-        host =  "37.209.33.128";
-        port = 4999;
+        host =  "141.59.26.107";
+        port = 21401;
        cA = ca;
 
 

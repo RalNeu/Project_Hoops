@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     private MenuItem profile;
     private MenuItem tipgame;
     private MenuItem achievements;
+    private MenuItem chatClientMenuItem;
 
     //For closeKeyboard
     private ActionBarDrawerToggle mDrawerToggle;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         tipgame.setEnabled(flag);
         profile.setEnabled(flag);
         achievements.setEnabled(flag);
+        chatClientMenuItem.setEnabled(flag);
     }
 
 
@@ -89,11 +91,13 @@ public class MainActivity extends AppCompatActivity
         profile = navDrawer.findItem(R.id.profile);
         tipgame = navDrawer.findItem(R.id.tipGame);
         achievements = navDrawer.findItem(R.id.achievement);
+        chatClientMenuItem = navDrawer.findItem(R.id.nav_chat);
 
 
         tipgame.setEnabled(false);
         profile.setEnabled(false);
         achievements.setEnabled(false);
+        chatClientMenuItem.setEnabled(false);
         //mi.setEnabled(false);
 
         drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
