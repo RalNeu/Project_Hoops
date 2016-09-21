@@ -65,5 +65,6 @@
     </array>
     <string name="title_activity_tipp_spiel">TippSpiel</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="what_apos_s_hoops_chat">What\'s Hoops Chat</string>
 
 </resources>

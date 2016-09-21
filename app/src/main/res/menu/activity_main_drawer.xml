@@ -12,7 +12,7 @@
             android:title="Ticketshop" />
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_ticket_icon"
+            android:icon="@drawable/ic_menu_send"
             android:title="Chat" />
 
        <!-- <item

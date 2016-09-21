@@ -31,10 +31,12 @@
         <activity
             android:name=".activities.TippspielActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity android:name=".activities.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.GameActivity"
-            android:screenOrientation="landscape"></activity>
+            android:label="What's Hoops"></activity>
+
+
+        <activity android:name=".activities.GameActivity"></activity>
     </application>
 
 </manifest>
