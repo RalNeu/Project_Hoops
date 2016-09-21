@@ -23,7 +23,7 @@ public class AnimatedView extends ImageView {
     private int tempTimerx = 30;
     private int tempTimery = 5;
     private Handler handler;
-    private final int FRAME_RATE = 30;
+    private final int FRAME_RATE = 10;
 
 
     public AnimatedView(Context context, AttributeSet attrs)  {
@@ -46,14 +46,14 @@ public class AnimatedView extends ImageView {
 
         //Bei Kontakt mit seitlichen Wänden wird x Geschwindigkeit umgedreht
         if(xVelocityDirection != 0) {
-            x += xVelocityDirection;
             if ((x > this.getWidth() - drawableball.getBitmap().getWidth()) || (x < 0)) {
                 xVelocityDirection = xVelocityDirection *-1;
             }
+            x += xVelocityDirection;
             if(--tempTimerx == 0) {
-                if(xVelocityDirection > 0)
+                if(xVelocityDirection > 1)
                     xVelocityDirection--;
-                else
+                else if(xVelocityDirection < 1)
                     xVelocityDirection++;
                 tempTimerx = 30;
             }
