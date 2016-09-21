@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.AnimatedView;
 
 public class GameActivity extends Activity {
 
@@ -29,14 +30,14 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Turn title off
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         //Fullscreen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_basketball_game);
-        image = (ImageView) findViewById(R.id.basketball);
-        start = new Point((int)image.getTranslationX(), (int)image.getTranslationY());
-        mainLayout = (RelativeLayout) findViewById(R.id.layout);
-        image.setOnTouchListener(onTouchListener());
+        //image = (ImageView) findViewById(R.id.basketball);
+        //start = new Point((int)image.getTranslationX(), (int)image.getTranslationY());
+        //mainLayout = (RelativeLayout) findViewById(R.id.layout);
+        //image.setOnTouchListener(onTouchListener());
     }
 
     private View.OnTouchListener onTouchListener() {

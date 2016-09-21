@@ -94,7 +94,7 @@ public class EditAvatarTab extends Fragment {
                         break;
                     case R.id.btnHair:
                         imgHair.setBackgroundResource(hair.get(++hairIndex));
-                        handleArrowEnable(hair, eyesIndex);
+                        handleArrowEnable(hair, hairIndex);
                         break;
                     case R.id.btnEyes:
                         imgEyes.setBackgroundResource(eyes.get(++eyesIndex));

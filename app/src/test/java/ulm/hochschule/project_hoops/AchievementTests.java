@@ -8,6 +8,7 @@ import ulm.hochschule.project_hoops.interfaces.AchievementStrategy;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.AchievementObject;
 import ulm.hochschule.project_hoops.utilities.AchievementStrategyHandler;
+import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 public class AchievementTests {
 
     @Test
-    public void checkAchievementsFehlt() {
+    public void checkAchievementsFehlt() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser1"))
@@ -37,7 +38,7 @@ public class AchievementTests {
     }
 
     @Test
-    public void checkAchievementsBronze() {
+    public void checkAchievementsBronze() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser2"))
@@ -57,7 +58,7 @@ public class AchievementTests {
     }
 
     @Test
-    public void checkAchievementsSilber() {
+    public void checkAchievementsSilber() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser3"))
@@ -77,7 +78,7 @@ public class AchievementTests {
     }
 
     @Test
-    public void checkAchievementsGold() {
+    public void checkAchievementsGold() throws ServerException {
         UserProfile.logoffUser();
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
         if(!s.userExist("AchUser4"))

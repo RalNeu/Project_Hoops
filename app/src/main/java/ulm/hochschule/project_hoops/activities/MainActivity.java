@@ -21,10 +21,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.fragments.ChatClient;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
+
+import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.AchievementTab;
 import ulm.hochschule.project_hoops.fragments.LoginTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
@@ -295,9 +295,10 @@ public class MainActivity extends AppCompatActivity
             changeFragment(achievementTab);
         }else if(id == R.id.nav_chat) {
             startActivity(new Intent(getApplicationContext(), ChatActivity.class));
-        }else if(id == R.id.basketball){
+        }else if(id == R.id.basketball) {
             startActivity(new Intent(getApplicationContext(), GameActivity.class));
-        }
+
+    }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
