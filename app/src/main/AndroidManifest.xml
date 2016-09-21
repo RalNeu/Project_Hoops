@@ -30,9 +30,6 @@
         <activity
             android:name=".activities.TippspielActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".activities.ListViewBet"
-            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
         <activity android:name=".activities.ChatActivity"></activity>
         <activity android:name=".activities.GameActivity"></activity>
     </application>

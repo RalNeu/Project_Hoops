@@ -55,13 +55,11 @@ public class GameActivity extends Activity {
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        if(!running){
-                            startThrowAnimation(x, y, event.getRawX(), event.getRawY());
-                        }
-                        System.out.println(running);
                         break;
 
                     case MotionEvent.ACTION_MOVE:
+                        image.setX(event.getRawX()-200);
+                        image.setY(event.getRawY()-200);
                         break;
                 }
                 mainLayout.invalidate();
