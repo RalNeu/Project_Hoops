@@ -38,6 +38,7 @@ public class ListViewBet extends Activity {
     }
 
     private void init(){
+        /*
         listView = (ListView) findViewById(R.id.listView);
         list = new ArrayList<>();
         adapter = new ArrayAdapter<MyBet>(this , R.layout.listitem_news, R.id.tv_yourBetResult, list);
@@ -48,6 +49,7 @@ public class ListViewBet extends Activity {
         tv_myBet = (TextView) findViewById(R.id.tv_yourBetResult);
 
         listView.setAdapter(adapter);
+        */
     }
 
     public void update(MyBet myBet){

@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.activities.Chat;
+package ulm.hochschule.project_hoops.objects;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;

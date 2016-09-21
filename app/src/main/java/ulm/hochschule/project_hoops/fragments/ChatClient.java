@@ -13,7 +13,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import ulm.hochschule.project_hoops.activities.Chat.ChatActivity;
+import ulm.hochschule.project_hoops.activities.ChatActivity;
 
 
 public class ChatClient extends Thread {

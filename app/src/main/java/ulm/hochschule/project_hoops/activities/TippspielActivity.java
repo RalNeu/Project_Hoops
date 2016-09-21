@@ -22,9 +22,6 @@ import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.TipTab;
-import ulm.hochschule.project_hoops.objects.Card;
-import ulm.hochschule.project_hoops.utilities.CardArrayAdapter;
-import ulm.hochschule.project_hoops.utilities.ViewPagerAdapter;
 
 /**
  * Created by Johann on 10.06.2016.

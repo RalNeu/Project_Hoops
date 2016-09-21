@@ -1,25 +1,19 @@
-package ulm.hochschule.project_hoops.activities.Chat;
+package ulm.hochschule.project_hoops.utilities;
 
 import android.content.Context;
-import android.media.Image;
-import android.os.AsyncTask;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.objects.ChatMessage;
 
 /**
  * Created by Johann on 27.07.2016.

@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.game;
+package ulm.hochschule.project_hoops.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,7 +16,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-public class MainActivity extends Activity {
+import ulm.hochschule.project_hoops.R;
+
+public class GameActivity extends Activity {
 
 
     private ViewGroup mainLayout;

@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
+import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.EditAvatarTab;
 import ulm.hochschule.project_hoops.fragments.EditProfileFragment;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;

@@ -1,15 +1,10 @@
-package ulm.hochschule.project_hoops.activities.Chat;
+package ulm.hochschule.project_hoops.activities;
 
-import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.ChatAdapter;
+import ulm.hochschule.project_hoops.objects.ChatMessage;
 import ulm.hochschule.project_hoops.fragments.ChatClient;
 
 public class ChatActivity extends AppCompatActivity {
@@ -28,7 +25,6 @@ public class ChatActivity extends AppCompatActivity {
     private ChatClient myClient;
     private ChatAdapter adapter;
     private ListView listView;
-    private Conversation conversation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +77,5 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-    }
-
-    public void loadMessages(Conversation conversation) {
-        conversation.getConversation();
     }
 }

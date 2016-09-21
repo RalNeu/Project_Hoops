@@ -59,6 +59,10 @@
                 android:id="@+id/tipGame"
                 android:icon="@drawable/ic_bettinggame"
                 android:title="Tippspiel"/>
+            <item
+                android:id="@+id/basketball"
+                android:icon="@drawable/ic_bettinggame"
+                android:title="Basketball"/>
         </menu>
     </item>
 
