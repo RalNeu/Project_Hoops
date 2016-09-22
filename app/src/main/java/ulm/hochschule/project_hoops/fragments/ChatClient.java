@@ -58,13 +58,9 @@ public class ChatClient extends Thread {
 
     }
 
-
 public void recieveText(String msg,String username){
     cA.recieveText(msg,username);
 }
-
-
-
 
     @Override
     public void run() {
