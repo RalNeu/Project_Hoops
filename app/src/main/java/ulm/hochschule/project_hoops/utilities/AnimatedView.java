@@ -40,7 +40,7 @@ public class AnimatedView extends ImageView {
     };
 
     protected void onDraw(Canvas canvas) {
-        BitmapDrawable drawableball = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
+        BitmapDrawable drawableball = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball);
         //System.out.println("velocityx: " + xVelocityDirection + "    x: " + x);
         //System.out.println("velocityy: " + yVelocityDirection + "       y: " + y);
 
