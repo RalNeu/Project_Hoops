@@ -59,7 +59,7 @@ public class GameActivity extends Activity{
     // the view that renders the ball
     private class ShapeView extends SurfaceView implements SurfaceHolder.Callback{
 
-        private final int RADIUS = 185;
+        private final int RADIUS = 180;
         private final float FACTOR_BOUNCEBACK = 0.75f;
 
         private int xCenter;
@@ -222,7 +222,7 @@ public class GameActivity extends Activity{
                 }
             }
 
-
+            angle += xVelocity/15;
             return true;
         }
 
@@ -233,7 +233,7 @@ public class GameActivity extends Activity{
         {
             if(canvas != null){
                 canvas.drawColor(getResources().getColor(android.R.color.white));
-                canvas.drawBitmap(RotateBitmap(ball.getBitmap(), angle++), xCenter, yCenter, null);
+                canvas.drawBitmap(RotateBitmap(ball.getBitmap(), angle), xCenter, yCenter, null);
                 Paint p = new Paint();
                 p.setColor(getResources().getColor(android.R.color.holo_red_dark));
                 canvas.drawRect(widthScreen, heightScreen /2, widthScreen -500 , heightScreen /2 + 50, p);
