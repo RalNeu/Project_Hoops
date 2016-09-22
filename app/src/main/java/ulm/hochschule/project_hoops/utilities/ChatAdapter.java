@@ -15,9 +15,7 @@ import java.util.List;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
 
-/**
- * Created by Johann on 27.07.2016.
- */
+
 public class ChatAdapter extends ArrayAdapter<ChatMessage> {
 
     //TextMessage
@@ -47,24 +45,20 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         ChatMessage obj = getItem(position);
         View row = convertView;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if(obj.getKind().equals("String")){
-
             row = inflater.inflate(R.layout.string_message_left, parent, false);
             textView = (TextView) row.findViewById(R.id.msgr);
             name = (TextView) row.findViewById(R.id.name);
             time = (TextView) row.findViewById(R.id.time);
-            time.setText(obj.getTime());
             if(obj.getUserName().length() > 10){
-                name.setText("~" + obj.getUserName().substring(0,10) + "...");
+                name.setText(obj.getUserName().substring(0,10) + "...:");
             }else
-                name.setText("~" + obj.getUserName());
+                name.setText(obj.getUserName()+":");
             String mes;
             if(obj.getMessage().charAt(0) == '.'){
                 mes = obj.getMessage().replaceFirst(".", "");
             }else
                 mes = obj.getMessage();
             textView.setText(mes);
-        }
         return row;
     }
 }

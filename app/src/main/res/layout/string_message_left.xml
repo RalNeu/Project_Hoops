@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="name"
+            android:textColor="#000"
             android:textSize="18dp" />
 
         <TextView

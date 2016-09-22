@@ -3,16 +3,13 @@ package ulm.hochschule.project_hoops.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.ChatAdapter;
@@ -30,7 +27,7 @@ public class ChatActivity extends AppCompatActivity {
     private ListView listView;
     private UserProfile user;
 
-    private String userName;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         user = UserProfile.getInstance();
-        userName = user.getUsername();
+        username = user.getUsername();
 
         final ChatClient myClient = new ChatClient(this);
         myClient.start();
@@ -58,7 +55,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if(textSize()){
-                myClient.processMessage(userName+": "+et_Text.getText().toString());
+                myClient.processMessage(et_Text.getText().toString(), username);
                     et_Text.setText("");
             }else{
                     et_Text.setError("Es können nur 80 Zeichen verwendet werden");
@@ -80,12 +77,11 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public void recieveText(String text ){
-        final String text1 = text;
+    public void recieveText(final String text , final String username){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                sendMessage(new ChatMessage(text1,"","String",userName));
+                sendMessage(new ChatMessage(text, username));
             }
         });
     }

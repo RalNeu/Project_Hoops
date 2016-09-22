@@ -48,9 +48,10 @@ public class ChatClient extends Thread {
         }
     }
 
-    public void processMessage(String message){
+    public void processMessage(String message,String username){
         try{
             dout.writeUTF(message);
+            dout.writeUTF(username);
         } catch(IOException e){
             System.out.println(e);
         }
@@ -58,8 +59,8 @@ public class ChatClient extends Thread {
     }
 
 
-public void recieveText(String msg){
-    cA.recieveText(msg);
+public void recieveText(String msg,String username){
+    cA.recieveText(msg,username);
 }
 
 
@@ -72,7 +73,9 @@ public void recieveText(String msg){
 
             while (true){
                 String message = din.readUTF();
-                recieveText(message);
+                String username = din.readUTF();
+                recieveText(message,username);
+
             }
         }catch(IOException e){
             System.out.println(e);
