@@ -112,19 +112,20 @@ public class GameActivity extends Activity{
                             mVelocityTracker.computeCurrentVelocity(1000);
                             break;
                         case MotionEvent.ACTION_DOWN:
-                            ok = false;
-                            x = event.getX();
-                            y = event.getY();
-                            if(mVelocityTracker == null) {
-                                // Retrieve a new VelocityTracker object to watch the velocity of a motion.
-                                mVelocityTracker = VelocityTracker.obtain();
+                            if(ok) {
+                                ok = false;
+                                x = event.getX();
+                                y = event.getY();
+                                if (mVelocityTracker == null) {
+                                    // Retrieve a new VelocityTracker object to watch the velocity of a motion.
+                                    mVelocityTracker = VelocityTracker.obtain();
+                                } else {
+                                    // Reset the velocity tracker back to its initial state.
+                                    mVelocityTracker.clear();
+                                }
+                                // Add a user's movement to the tracker.
+                                mVelocityTracker.addMovement(event);
                             }
-                            else {
-                                // Reset the velocity tracker back to its initial state.
-                                mVelocityTracker.clear();
-                            }
-                            // Add a user's movement to the tracker.
-                            mVelocityTracker.addMovement(event);
                             break;
                         case MotionEvent.ACTION_CANCEL:
                             // Return a VelocityTracker object back to be re-used by others.
@@ -220,24 +221,24 @@ public class GameActivity extends Activity{
                 yCenter = heightScreen - 2 * RADIUS;
                 yVelocity = -yVelocity * FACTOR_BOUNCEBACK;
                 if(xVelocity < 0){
-                    xVelocity +=2;
+                    xVelocity+=1;
                 }else if(xVelocity > 0){
-                    xVelocity -=2;
+                    xVelocity-=1;
                 }
             }
 
             if(xVelocity < 2 && xVelocity > -2){
                 xVelocity = 0;
             }
-            if(xVelocity == 0){
-                angle += 0;
+            if(xVelocity == 0 && yVelocity > -2.5f){
+                ok = false;
+                setCenter(500, 500);
             }else
                 angle += xVelocity/8;
 
             return true;
         }
 
-        boolean roll = false;
         float angle = 0;
 
         // update the canvas
@@ -246,9 +247,15 @@ public class GameActivity extends Activity{
             if(canvas != null){
                 canvas.drawColor(getResources().getColor(android.R.color.white));
                 Bitmap rotatedBitmap = RotateBitmap(ball.getBitmap(), angle);
+                Paint alphaPaint = new Paint();
+                if(xVelocity < 25){
+                    alphaPaint.setAlpha((int)xVelocity*4);
+                }else if(xVelocity > -25){
+                    alphaPaint.setAlpha((int)xVelocity*4*(-1));
+                }
                 rotatedBallHalfWidth = rotatedBitmap.getWidth()/2;
                 rotatedBallHalfHeight = rotatedBitmap.getHeight()/2;
-                canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, null);
+                canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alphaPaint);
                 Paint p = new Paint();
                 p.setColor(getResources().getColor(android.R.color.holo_red_dark));
                 canvas.drawRect(widthScreen, heightScreen /2, widthScreen - 500 , heightScreen /2 + 50, p);
