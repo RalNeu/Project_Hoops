@@ -59,7 +59,7 @@ public class GameActivity extends Activity{
     // the view that renders the ball
     private class ShapeView extends SurfaceView implements SurfaceHolder.Callback{
 
-        private int RADIUS = 96;
+        private int RADIUS = 88;
         private int rotatedBallHalfWidth = 96;
         private int rotatedBallHalfHeight = 96;
         private final float FACTOR_BOUNCEBACK = 0.75f;
@@ -71,6 +71,12 @@ public class GameActivity extends Activity{
         private float xVelocity;
         private float yVelocity;
         private float x, y;
+
+        Paint alpha = new Paint();
+
+        private int basketColisFront = widthScreen - 500;
+        private int basketColisBack = widthScreen;
+        private int poleColisFront = widthScreen - 50;
 
         private VelocityTracker mVelocityTracker = null;
 
@@ -86,33 +92,33 @@ public class GameActivity extends Activity{
             setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    int index = event.getActionIndex();
-                    int pointerId = event.getPointerId(index);
-                    switch(event.getAction()){
-                        case MotionEvent.ACTION_UP:
-                            ok = true;
-                            xVelocity = (event.getX() - x)/5;
-                            yVelocity = (event.getY() - y)/5;
+                    if(!ok) {
+                        int index = event.getActionIndex();
+                        int pointerId = event.getPointerId(index);
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_UP:
+                                ok = true;
+                                xVelocity = (event.getX() - x) / 5;
+                                yVelocity = (event.getY() - y) / 5;
 
 
-                            // xVelocity = VelocityTrackerCompat.getXVelocity(mVelocityTracker,
-                            //        pointerId)/50;
-                            // yVelocity = VelocityTrackerCompat.getYVelocity(mVelocityTracker,
-                            //         pointerId)/50;
+                                // xVelocity = VelocityTrackerCompat.getXVelocity(mVelocityTracker,
+                                //        pointerId)/50;
+                                // yVelocity = VelocityTrackerCompat.getYVelocity(mVelocityTracker,
+                                //         pointerId)/50;
 
-                            //mAy = GRAVITY;
-                            //mAx = Math.signum(mAx) * Math.abs(mAx) * (1 - FACTOR_FRICTION * Math.abs(0) / GRAVITY);
-                            //mAy = Math.signum(mAy) * Math.abs(mAy) * (1 - FACTOR_FRICTION * Math.abs(0) / GRAVITY);
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            //xCenter = (int)event.getX()-rotatedBallHalfWidth;
-                            //yCenter = (int)event.getY()-rotatedBallHalfHeight;
+                                //mAy = GRAVITY;
+                                //mAx = Math.signum(mAx) * Math.abs(mAx) * (1 - FACTOR_FRICTION * Math.abs(0) / GRAVITY);
+                                //mAy = Math.signum(mAy) * Math.abs(mAy) * (1 - FACTOR_FRICTION * Math.abs(0) / GRAVITY);
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+                                //xCenter = (int)event.getX()-rotatedBallHalfWidth;
+                                //yCenter = (int)event.getY()-rotatedBallHalfHeight;
 
-                            mVelocityTracker.addMovement(event);
-                            mVelocityTracker.computeCurrentVelocity(1000);
-                            break;
-                        case MotionEvent.ACTION_DOWN:
-                            if(ok) {
+                                mVelocityTracker.addMovement(event);
+                                mVelocityTracker.computeCurrentVelocity(1000);
+                                break;
+                            case MotionEvent.ACTION_DOWN:
                                 ok = false;
                                 x = event.getX();
                                 y = event.getY();
@@ -125,12 +131,12 @@ public class GameActivity extends Activity{
                                 }
                                 // Add a user's movement to the tracker.
                                 mVelocityTracker.addMovement(event);
-                            }
-                            break;
-                        case MotionEvent.ACTION_CANCEL:
-                            // Return a VelocityTracker object back to be re-used by others.
-                            mVelocityTracker.recycle();
-                            break;
+                                break;
+                            case MotionEvent.ACTION_CANCEL:
+                                // Return a VelocityTracker object back to be re-used by others.
+                                mVelocityTracker.recycle();
+                                break;
+                        }
                     }
                     return true;
                 }
@@ -199,7 +205,7 @@ public class GameActivity extends Activity{
             yVelocity += GRAVITY * deltaT;
 
             xCenter += (int)(deltaT * (xVelocity));
-            yCenter += (int)(deltaT * (yVelocity + GRAVITY* deltaT));
+            yCenter += (int)(deltaT * (yVelocity + GRAVITY * deltaT));
 
             if(xCenter < RADIUS)
             {
@@ -225,16 +231,24 @@ public class GameActivity extends Activity{
                 }else if(xVelocity > 0){
                     xVelocity-=1;
                 }
+                if(xVelocity < 25 && xVelocity > 0){
+                    alpha.setAlpha((int)xVelocity*4);
+                }else if(xVelocity > -25 && xVelocity < 0){
+                    alpha.setAlpha((int)xVelocity*4*(-1));
+                }
+            }
+
+            if(xVelocity == 0 && yVelocity > -2.5f){
+                ok = false;
+                setCenter(500, 500);
+                alpha.setAlpha(255);
+            }else {
+                angle += xVelocity / 8;
             }
 
             if(xVelocity < 2 && xVelocity > -2){
                 xVelocity = 0;
             }
-            if(xVelocity == 0 && yVelocity > -2.5f){
-                ok = false;
-                setCenter(500, 500);
-            }else
-                angle += xVelocity/8;
 
             return true;
         }
@@ -247,22 +261,16 @@ public class GameActivity extends Activity{
             if(canvas != null){
                 canvas.drawColor(getResources().getColor(android.R.color.white));
                 Bitmap rotatedBitmap = RotateBitmap(ball.getBitmap(), angle);
-                Paint alphaPaint = new Paint();
-                if(xVelocity < 25){
-                    alphaPaint.setAlpha((int)xVelocity*4);
-                }else if(xVelocity > -25){
-                    alphaPaint.setAlpha((int)xVelocity*4*(-1));
-                }
                 rotatedBallHalfWidth = rotatedBitmap.getWidth()/2;
                 rotatedBallHalfHeight = rotatedBitmap.getHeight()/2;
-                canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alphaPaint);
+                canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alpha);
                 Paint p = new Paint();
                 p.setColor(getResources().getColor(android.R.color.holo_red_dark));
-                canvas.drawRect(widthScreen, heightScreen /2, widthScreen - 500 , heightScreen /2 + 50, p);
+                canvas.drawRect(widthScreen - 500, heightScreen /2, widthScreen, heightScreen /2 + 50, p);
 
                 Paint p2 = new Paint();
                 p2.setColor(getResources().getColor(android.R.color.darker_gray));
-                canvas.drawRect(widthScreen, heightScreen, widthScreen - 50 , heightScreen /2 - 100, p2);
+                canvas.drawRect(widthScreen - 50, heightScreen /2 - 100, widthScreen, heightScreen, p2);
             }
         }
 

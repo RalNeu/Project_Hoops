@@ -59,7 +59,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgHair"
+                    android:id="@+id/imgBackground"
                     android:background="@drawable/avatarhairunderhat"
                     android:layout_gravity="center"
                     android:layout_margin="15dp" />
@@ -141,8 +141,9 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Haare"
-                        android:id="@+id/btnHair" />
+                        android:text="Mund"
+                        android:id="@+id/btnMouth" />
+
                 </FrameLayout>
 
                 <FrameLayout
@@ -153,8 +154,8 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Mund"
-                        android:id="@+id/btnMouth" />
+                        android:text="Körper"
+                        android:id="@+id/btnBody" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -184,8 +185,9 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Körper"
-                        android:id="@+id/btnBody" />
+                        android:text="Hintergrund"
+                        android:id="@+id/btnBackground"
+                        android:layout_gravity="center" />
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>

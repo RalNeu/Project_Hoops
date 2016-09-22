@@ -14,8 +14,8 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 public class AvatarItems {
 
-    private int hatIndex, eyesIndex, hairIndex, mouthIndex, skinIndex, bodyIndex;
-    private ArrayList<Integer> hats, hair, eyes, mouth, skin, body;
+    private int hatIndex, eyesIndex, backgroundIndex, mouthIndex, skinIndex, bodyIndex;
+    private ArrayList<Integer> hats, background, eyes, mouth, skin, body;
     private static AvatarItems aItems;
 
     private AvatarItems() {
@@ -31,7 +31,7 @@ public class AvatarItems {
 
     private void fillItemArrays() {
         hats = new ArrayList<>();
-        hair = new ArrayList<>();
+        background = new ArrayList<>();
         eyes = new ArrayList<>();
         mouth = new ArrayList<>();
         skin = new ArrayList<>();
@@ -44,9 +44,19 @@ public class AvatarItems {
 
         eyes.add(R.drawable.avatareyes);
         eyes.add(R.drawable.avatareyes2);
+        eyes.add(R.drawable.avatareyes3);
+        eyes.add(R.drawable.avatareyes4);
+        eyes.add(R.drawable.avatareyes5);
+        eyes.add(R.drawable.avatareyes6);
+        eyes.add(R.drawable.avatareyes7);
+        eyes.add(R.drawable.avatareyes8);
+        eyes.add(R.drawable.avatareyes9);
+        eyes.add(R.drawable.avatareyes10);
+        eyes.add(R.drawable.avatareyes11);
+        eyes.add(R.drawable.avatareyes12);
 
-        hair.add(R.drawable.avatarhairunderhat);
-        hair.add(R.drawable.avatarhairunderhat2);
+        background.add(R.drawable.avatarhairunderhat);
+        background.add(R.drawable.avatarhairunderhat2);
 
         mouth.add(R.drawable.avatarmouth);
         mouth.add(R.drawable.avatarmouth2);
@@ -72,9 +82,9 @@ public class AvatarItems {
             case "eyes":
                 eyesIndex = Integer.parseInt(itemsString.substring(2, 4));
                 return eyes.get(eyesIndex);
-            case "hair":
-                hairIndex = Integer.parseInt(itemsString.substring(4, 6));
-                return hair.get(hairIndex);
+            case "background":
+                backgroundIndex = Integer.parseInt(itemsString.substring(4, 6));
+                return background.get(backgroundIndex);
             case "mouth":
                 mouthIndex = Integer.parseInt(itemsString.substring(6, 8));
                 return mouth.get(mouthIndex);
@@ -94,8 +104,8 @@ public class AvatarItems {
                 return hats;
             case "eyes":
                 return eyes;
-            case "hair":
-                return hair;
+            case "background":
+                return background;
             case "mouth":
                 return mouth;
             case "skin":
@@ -112,8 +122,8 @@ public class AvatarItems {
                 return hatIndex;
             case "eyes":
                 return eyesIndex;
-            case "hair":
-                return hairIndex;
+            case "background":
+                return backgroundIndex;
             case "mouth":
                 return mouthIndex;
             case "skin":

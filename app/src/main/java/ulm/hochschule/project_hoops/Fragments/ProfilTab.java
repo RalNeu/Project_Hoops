@@ -36,7 +36,7 @@ public class ProfilTab extends Fragment {
     private TextView lbl_Coins, lbl_Ranking, lbl_Highscore, lbl_Username, lbl_Name, lbl_GebDat, lbl_AboutMe;
     private Notificator notif;
     private View layout, view_Name, view_GebDat, view_AboutMe;
-    private ImageView imgHat, imgHair, imgEyes, imgMouth, imgSkin, imgBody;
+    private ImageView imgHat, imgBackground, imgEyes, imgMouth, imgSkin, imgBody;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,7 +124,7 @@ public class ProfilTab extends Fragment {
         aItems = AvatarItems.getInstance();
 
         imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
-        imgHair.setBackgroundResource(aItems.getAccountItemByID("hair"));
+        imgBackground.setBackgroundResource(aItems.getAccountItemByID("background"));
         imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
         imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth"));
         imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin"));
@@ -147,7 +147,7 @@ public class ProfilTab extends Fragment {
         lbl_AboutMe = (TextView) layout.findViewById(R.id.lbl_AboutMe);
 
         imgHat = (ImageView) layout.findViewById(R.id.imgHat);
-        imgHair = (ImageView) layout.findViewById(R.id.imgHair);
+        imgBackground = (ImageView) layout.findViewById(R.id.imgBackground);
         imgEyes = (ImageView) layout.findViewById(R.id.imgEyes);
         imgMouth = (ImageView) layout.findViewById(R.id.imgMouth);
         imgSkin = (ImageView) layout.findViewById(R.id.imgSkin);
