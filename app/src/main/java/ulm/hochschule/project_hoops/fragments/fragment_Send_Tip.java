@@ -141,7 +141,6 @@ public class fragment_Send_Tip extends Fragment {
                                 changeFragment();
                             } catch (TimeoutException e) {
                                 s = "Es können momentan keine Tipps entgegen genommen werden. Versuchen Sie es bitte später erneut.";
-                                System.out.println("Es können momentan keine Tipps entgegen genommen werden. Versuchen Sie es bitte später erneut.");
                             }
                         } catch(ServerException e) {
                             e.printStackTrace();

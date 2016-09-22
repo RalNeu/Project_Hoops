@@ -128,7 +128,7 @@ public class UserProfile {
 
     public void updateCoins(int c) {
         coins.updateCoins(c);
-        SqlManager.getInstance().updateCoins(coins, username);
+        //SqlManager.getInstance().updateCoins(coins, username);
     }
 
     public int getRanking() {

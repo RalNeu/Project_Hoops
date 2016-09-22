@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops.fragments;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -64,6 +65,8 @@ public class ProfilTab extends Fragment {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+
+        updateData();
 
         return layout;
     }
@@ -187,6 +190,18 @@ public class ProfilTab extends Fragment {
                 iViewHighscore.requestLayout();
             }
         });
+
+        final FrameLayout avatar_field = (FrameLayout) layout.findViewById(R.id.avatar_field);
+
+        avatar_field.post(new Runnable() {
+            @Override
+            public void run() {
+                avatar_field.getLayoutParams().height = avatar_field.getLayoutParams().width;
+                avatar_field.requestLayout();
+            }
+        });
+
+
     }
 
 

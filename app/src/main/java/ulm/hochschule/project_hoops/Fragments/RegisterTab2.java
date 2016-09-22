@@ -126,7 +126,6 @@ public class RegisterTab2 extends Fragment {
     }
 
     public void login(String username){
-        notifyManager.sendNotify(1000, "Registrierung", "Sie haben 500 Coins erhalten!", getActivity(), R.drawable.coin);
         UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username, getActivity());
         try {
@@ -134,7 +133,6 @@ public class RegisterTab2 extends Fragment {
         } catch (ServerException e) {
             e.printStackTrace();
         }
-        user.updateCoins(500);
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(true);
     }
@@ -170,6 +168,10 @@ public class RegisterTab2 extends Fragment {
         }
         if(manager.userExist(et_Username.getText().toString())){
             et_Username.setError(getString(R.string.username_already_exists));
+            isok = false;
+        }
+        if(et_Username.getText().toString().length() > 12){
+            et_Username.setError(getString(R.string.username_too_long));
             isok = false;
         }
         if(et_Password.getText().toString().trim().equals("") || et_Password.getText().toString().contains(" ")){

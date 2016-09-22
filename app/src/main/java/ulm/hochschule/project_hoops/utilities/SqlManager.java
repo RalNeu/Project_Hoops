@@ -151,14 +151,15 @@ public class SqlManager {
             }
 
             //create Account
-            query ="insert into account(username, password, pID, eID, lastlogin, achievements) values (?, ?, ?, ?, NOW(), ?)";
+            query ="insert into account(username, coins, password, pID, eID, lastlogin, achievements) values (?, ?, ?, ?, ?, NOW(), ?)";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, userName);
-            preparedStmt.setString(2,password);
-            preparedStmt.setInt(3,personID);
+            preparedStmt.setInt(2, 500);
+            preparedStmt.setString(3,password);
+            preparedStmt.setInt(4,personID);
 
-            preparedStmt.setInt(4,erstellDatumID);
-            preparedStmt.setString(5, achievements);
+            preparedStmt.setInt(5,erstellDatumID);
+            preparedStmt.setString(6, achievements);
             preparedStmt.execute();
 
         }catch(Exception e){

@@ -67,6 +67,7 @@ public class TipTab extends Fragment {
 
         btn_Vote = (Button) layout.findViewById(R.id.btn_Vote);
         tv_information_vote = (TextView) layout.findViewById(R.id.tv_vote_information);
+
         update();
 
 

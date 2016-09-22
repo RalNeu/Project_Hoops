@@ -7,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.AvatarItems;
@@ -279,6 +282,26 @@ public class EditAvatarTab extends Fragment {
         mouth = aItems.getList("mouth");
         skin = aItems.getList("skin");
         body = aItems.getList("body");
+
+        final FrameLayout fl = (FrameLayout) layout.findViewById(R.id.avatar_field_edit);
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                fl.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("aöd");
+                        System.out.println(fl.getLayoutParams().height);
+                        System.out.println(fl.getLayoutParams().width);
+
+                        fl.getLayoutParams().height = fl.getLayoutParams().width;
+                        fl.requestLayout();
+                    }
+                });
+            }
+        }, 1000, 1000);
+
     }
 
     private void setItemView() throws SQLException {
