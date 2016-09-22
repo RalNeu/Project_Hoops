@@ -27,17 +27,23 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/imgBackground"
+                    android:layout_margin="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imgBody"
                     android:layout_margin="15dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatarbody" />
+                    android:background="@drawable/avatar_body_2" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgSkin"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatarskin"
+                    android:background="@drawable/avatar_skin_3"
                     android:layout_margin="15dp"
                     android:visibility="visible" />
 
@@ -47,14 +53,7 @@
                     android:id="@+id/imgEyes"
                     android:layout_margin="15dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatareyes" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imgBackground"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/avatarhairunderhat" />
+                    android:background="@drawable/avatareyes2" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -62,7 +61,7 @@
                     android:id="@+id/imgHat"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
-                    android:background="@drawable/avatarhat"
+                    android:background="@drawable/avatar_hat_15"
                     android:visibility="visible" />
 
                 <ImageView
@@ -70,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgMouth"
                     android:layout_margin="15dp"
-                    android:background="@drawable/avatarmouth" />
+                    android:background="@drawable/avatar_mouth_14" />
+
             </FrameLayout>
 
             <LinearLayout

@@ -38,9 +38,21 @@ public class AvatarItems {
         body = new ArrayList<>();
 
 
-        hats.add(R.drawable.avatarhat);
-        hats.add(R.drawable.avatarhat2);
-        hats.add(R.drawable.skyrim_helmet);
+        hats.add(R.drawable.avatar_hat_1);
+        hats.add(R.drawable.avatar_hat_2);
+        hats.add(R.drawable.avatar_hat_3);
+        hats.add(R.drawable.avatar_hat_4);
+        hats.add(R.drawable.avatar_hat_5);
+        hats.add(R.drawable.avatar_hat_6);
+        hats.add(R.drawable.avatar_hat_7);
+        hats.add(R.drawable.avatar_hat_8);
+        hats.add(R.drawable.avatar_hat_9);
+        hats.add(R.drawable.avatar_hat_11);
+        hats.add(R.drawable.avatar_hat_12);
+        hats.add(R.drawable.avatar_hat_13);
+        hats.add(R.drawable.avatar_hat_14);
+        hats.add(R.drawable.avatar_hat_15);
+        hats.add(R.drawable.avatar_hat_16);
 
         eyes.add(R.drawable.avatareyes);
         eyes.add(R.drawable.avatareyes2);
@@ -55,17 +67,41 @@ public class AvatarItems {
         eyes.add(R.drawable.avatareyes11);
         eyes.add(R.drawable.avatareyes12);
 
-        background.add(R.drawable.avatarhairunderhat);
-        background.add(R.drawable.avatarhairunderhat2);
+        background.add(R.drawable.avatar_background_1);
+        background.add(R.drawable.avatar_background_2);
+        background.add(R.drawable.avatar_background_3);
+        background.add(R.drawable.avatar_background_4);
 
-        mouth.add(R.drawable.avatarmouth);
-        mouth.add(R.drawable.avatarmouth2);
+        mouth.add(R.drawable.avatar_mouth_1);
+        mouth.add(R.drawable.avatar_mouth_2);
+        mouth.add(R.drawable.avatar_mouth_3);
+        mouth.add(R.drawable.avatar_mouth_4);
+        mouth.add(R.drawable.avatar_mouth_5);
+        mouth.add(R.drawable.avatar_mouth_6);
+        mouth.add(R.drawable.avatar_mouth_7);
+        mouth.add(R.drawable.avatar_mouth_8);
+        mouth.add(R.drawable.avatar_mouth_9);
+        mouth.add(R.drawable.avatar_mouth_10);
+        mouth.add(R.drawable.avatar_mouth_11);
+        mouth.add(R.drawable.avatar_mouth_12);
+        mouth.add(R.drawable.avatar_mouth_13);
+        mouth.add(R.drawable.avatar_mouth_14);
+        mouth.add(R.drawable.avatar_mouth_15);
+        mouth.add(R.drawable.avatar_mouth_16);
 
-        skin.add(R.drawable.avatarskin);
-        skin.add(R.drawable.avatarskin2);
+        skin.add(R.drawable.avatar_skin_1);
+        skin.add(R.drawable.avatar_skin_2);
+        skin.add(R.drawable.avatar_skin_3);
 
-        body.add(R.drawable.avatarbody);
-        body.add(R.drawable.avatarbody2);
+        body.add(R.drawable.avatar_body_1);
+        body.add(R.drawable.avatar_body_2);
+        body.add(R.drawable.avatar_body_3);
+        body.add(R.drawable.avatar_body_4);
+        body.add(R.drawable.avatar_body_5);
+        body.add(R.drawable.avatar_body_6);
+        body.add(R.drawable.avatar_body_7);
+        body.add(R.drawable.avatar_body_8);
+
 
     }
 

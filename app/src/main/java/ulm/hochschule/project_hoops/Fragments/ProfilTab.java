@@ -191,17 +191,6 @@ public class ProfilTab extends Fragment {
             }
         });
 
-        final FrameLayout avatar_field = (FrameLayout) layout.findViewById(R.id.avatar_field);
-
-        avatar_field.post(new Runnable() {
-            @Override
-            public void run() {
-                avatar_field.getLayoutParams().height = avatar_field.getLayoutParams().width;
-                avatar_field.requestLayout();
-            }
-        });
-
-
     }
 
 

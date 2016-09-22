@@ -34,17 +34,25 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/imgBackground"
+
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imgBody"
                     android:layout_margin="15dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatarbody" />
+                    android:background="@drawable/avatar_body_2" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgSkin"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatarskin"
+                    android:background="@drawable/avatar_skin_3"
                     android:layout_margin="15dp"
                     android:visibility="visible" />
 
@@ -53,24 +61,16 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgEyes"
                     android:focusableInTouchMode="false"
-                    android:background="@drawable/avatareyes"
+                    android:background="@drawable/avatareyes2"
                     android:layout_margin="15dp"
                     android:layout_gravity="center" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgBackground"
-                    android:background="@drawable/avatarhairunderhat"
-                    android:layout_gravity="center"
-                    android:layout_margin="15dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/imgHat"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatarhat"
+                    android:background="@drawable/avatar_hat_15"
                     android:visibility="visible"
                     android:layout_margin="15dp" />
 
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgMouth"
-                    android:background="@drawable/avatarmouth"
+                    android:background="@drawable/avatar_mouth_14"
                     android:layout_margin="15dp" />
 
             </FrameLayout>

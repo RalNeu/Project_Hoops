@@ -125,16 +125,16 @@ public class EditAvatarTab extends Fragment {
 
                 switch (selectedBtn.getId()) {
                     case R.id.btnHat:
-                        if(hatIndex == 0) {
-                            imgHat.setBackgroundResource(0);
-                            hatIndex--;
-                        } else {
-                            imgHat.setBackgroundResource(hats.get(--hatIndex));
-                        }
+                        imgHat.setBackgroundResource(hats.get(--hatIndex));
                         handleArrowEnable(hats, hatIndex);
                         break;
                     case R.id.btnBackground:
-                        imgBackground.setBackgroundResource(background.get(--backgroundIndex));
+                        if(backgroundIndex == 0) {
+                            imgBackground.setBackgroundResource(0);
+                            backgroundIndex--;
+                        } else {
+                            imgBackground.setBackgroundResource(background.get(--backgroundIndex));
+                        }
                         handleArrowEnable(background, backgroundIndex);
                         break;
                     case R.id.btnEyes:
@@ -195,7 +195,7 @@ public class EditAvatarTab extends Fragment {
             enableNext();
 
         //Bei hats kann noch 1 Schritt weiter zurückgegangen werden um den Hut zu entfernen
-        if(list == hats) {
+        if(list == background) {
             if(itemIndex == -1 )
                 disablePrev();
             else
