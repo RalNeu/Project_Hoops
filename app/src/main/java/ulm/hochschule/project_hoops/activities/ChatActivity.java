@@ -85,7 +85,7 @@ public class ChatActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                sendMessage(new ChatMessage(text1,"","String"));
+                sendMessage(new ChatMessage(text1,"","String",userName));
             }
         });
     }

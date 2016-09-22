@@ -216,6 +216,7 @@ public class GameActivity extends Activity{
 
             if(yCenter > heightScreen - 2 * RADIUS)
             {
+                angle += xVelocity/8;
                 yCenter = heightScreen - 2 * RADIUS;
                 yVelocity = -yVelocity * FACTOR_BOUNCEBACK;
                 if(xVelocity < 0){
@@ -225,14 +226,18 @@ public class GameActivity extends Activity{
                 }
             }
 
-            System.out.println("yCenter: " + yCenter + "      2*RADIUS: " + 2*RADIUS);
-            //angle += xVelocity/15;
-            angle += 1;
-            if(angle > 360)
-                angle=1;
+            if(xVelocity < 2 && xVelocity > -2){
+                xVelocity = 0;
+            }
+            if(xVelocity == 0){
+                angle += 0;
+            }else
+                angle += xVelocity/8;
+
             return true;
         }
 
+        boolean roll = false;
         float angle = 0;
 
         // update the canvas

@@ -23,6 +23,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     //TextMessage
     private TextView textView;
     private TextView time;
+    private TextView name;
     private List<ChatMessage> messages = new ArrayList<ChatMessage>();
 
     //image Layout
@@ -50,8 +51,13 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
 
             row = inflater.inflate(R.layout.string_message_left, parent, false);
             textView = (TextView) row.findViewById(R.id.msgr);
+            name = (TextView) row.findViewById(R.id.name);
             time = (TextView) row.findViewById(R.id.time);
             time.setText(obj.getTime());
+            if(obj.getUserName().length() > 10){
+                name.setText("~" + obj.getUserName().substring(0,10) + "...");
+            }else
+                name.setText("~" + obj.getUserName());
             String mes;
             if(obj.getMessage().charAt(0) == '.'){
                 mes = obj.getMessage().replaceFirst(".", "");

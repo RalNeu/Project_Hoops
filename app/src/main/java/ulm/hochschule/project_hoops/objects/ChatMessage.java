@@ -11,11 +11,17 @@ public class ChatMessage {
     private String message;
     private String time;
     private String kind;
+    private String userName;
 
-    public ChatMessage(String message, String time, String kind){
+    public ChatMessage(String message, String time, String kind, String userName){
         this.message = message;
         this.time = time;
+        this.userName = userName;
         this.kind = kind;
+    }
+
+    public String getUserName(){
+        return userName;
     }
 
     public String getKind(){
