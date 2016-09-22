@@ -52,14 +52,16 @@ public class GameActivity extends Activity{
 
         // initializing the view that renders the ball
         mShapeView = new ShapeView(this);
-        mShapeView.setCenter((int)(widthScreen * 0.6), (int)(heightScreen * 0.6));
+        mShapeView.setCenter((int)(widthScreen * 0.5), (int)(heightScreen * 0.5));
         setContentView(mShapeView);
     }
 
     // the view that renders the ball
     private class ShapeView extends SurfaceView implements SurfaceHolder.Callback{
 
-        private final int RADIUS = 180;
+        private int RADIUS = 96;
+        private int rotatedBallHalfWidth = 96;
+        private int rotatedBallHalfHeight = 96;
         private final float FACTOR_BOUNCEBACK = 0.75f;
 
         private int xCenter;
@@ -103,8 +105,8 @@ public class GameActivity extends Activity{
                             //mAy = Math.signum(mAy) * Math.abs(mAy) * (1 - FACTOR_FRICTION * Math.abs(0) / GRAVITY);
                             break;
                         case MotionEvent.ACTION_MOVE:
-                            //xCenter = (int)event.getX()-RADIUS;
-                            //yCenter = (int)event.getY()-RADIUS;
+                            //xCenter = (int)event.getX()-rotatedBallHalfWidth;
+                            //yCenter = (int)event.getY()-rotatedBallHalfHeight;
 
                             mVelocityTracker.addMovement(event);
                             mVelocityTracker.computeCurrentVelocity(1000);
@@ -144,22 +146,22 @@ public class GameActivity extends Activity{
             pX += (int)(deltaT * (xVelocity));
             pY += (int)(deltaT * (yVelocity + 0.5f*GRAVITY* deltaT));
 
-            if(pX < RADIUS)
+            if(pX < rotatedBallHalfWidth)
             {
-                pX = RADIUS;
+                pX = rotatedBallHalfWidth;
                 pVx = -pVx * FACTOR_BOUNCEBACK;
             }
 
 
-            if(pX > widthScreen - RADIUS)
+            if(pX > widthScreen - rotatedBallHalfWidth)
             {
-                pX = widthScreen - RADIUS;
+                pX = widthScreen - rotatedBallHalfWidth;
                 pVx = -pVx * FACTOR_BOUNCEBACK;
             }
 
-            if(pY > heightScreen - RADIUS)
+            if(pY > heightScreen - rotatedBallHalfHeight)
             {
-                pY = heightScreen - RADIUS;
+                pY = heightScreen - rotatedBallHalfHeight;
                 pVy = -pVy * FACTOR_BOUNCEBACK;
             }
         }
@@ -196,7 +198,7 @@ public class GameActivity extends Activity{
             yVelocity += GRAVITY * deltaT;
 
             xCenter += (int)(deltaT * (xVelocity));
-            yCenter += (int)(deltaT * (yVelocity + 0.5f*GRAVITY* deltaT));
+            yCenter += (int)(deltaT * (yVelocity + GRAVITY* deltaT));
 
             if(xCenter < RADIUS)
             {
@@ -211,6 +213,7 @@ public class GameActivity extends Activity{
                 xVelocity = -xVelocity * FACTOR_BOUNCEBACK;
             }
 
+
             if(yCenter > heightScreen - 2 * RADIUS)
             {
                 yCenter = heightScreen - 2 * RADIUS;
@@ -222,7 +225,11 @@ public class GameActivity extends Activity{
                 }
             }
 
-            angle += xVelocity/15;
+            System.out.println("yCenter: " + yCenter + "      2*RADIUS: " + 2*RADIUS);
+            //angle += xVelocity/15;
+            angle += 1;
+            if(angle > 360)
+                angle=1;
             return true;
         }
 
@@ -233,14 +240,17 @@ public class GameActivity extends Activity{
         {
             if(canvas != null){
                 canvas.drawColor(getResources().getColor(android.R.color.white));
-                canvas.drawBitmap(RotateBitmap(ball.getBitmap(), angle), xCenter, yCenter, null);
+                Bitmap rotatedBitmap = RotateBitmap(ball.getBitmap(), angle);
+                rotatedBallHalfWidth = rotatedBitmap.getWidth()/2;
+                rotatedBallHalfHeight = rotatedBitmap.getHeight()/2;
+                canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, null);
                 Paint p = new Paint();
                 p.setColor(getResources().getColor(android.R.color.holo_red_dark));
-                canvas.drawRect(widthScreen, heightScreen /2, widthScreen -500 , heightScreen /2 + 50, p);
+                canvas.drawRect(widthScreen, heightScreen /2, widthScreen - 500 , heightScreen /2 + 50, p);
 
                 Paint p2 = new Paint();
                 p2.setColor(getResources().getColor(android.R.color.darker_gray));
-                canvas.drawRect(widthScreen, heightScreen, widthScreen -50 , heightScreen /2 - 100, p2);
+                canvas.drawRect(widthScreen, heightScreen, widthScreen - 50 , heightScreen /2 - 100, p2);
             }
         }
 
