@@ -59,7 +59,7 @@ public class GameActivity extends Activity{
     // the view that renders the ball
     private class ShapeView extends SurfaceView implements SurfaceHolder.Callback{
 
-        private final int RADIUS = 180;
+        private final int RADIUS = 185;
         private final float FACTOR_BOUNCEBACK = 0.75f;
 
         private int xCenter;
