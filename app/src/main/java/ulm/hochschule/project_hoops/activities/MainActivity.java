@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
     private Fragment houseView = new HouseViewTab();
+    private Fragment chatFragment = new ChatActivity();
 
     private AchievementTab achievementTab = new AchievementTab();
 
@@ -294,7 +295,7 @@ public class MainActivity extends AppCompatActivity
         } else if(id == R.id.achievement) {
             changeFragment(achievementTab);
         }else if(id == R.id.nav_chat) {
-            startActivity(new Intent(getApplicationContext(), ChatActivity.class));
+            changeFragment(chatFragment);
         }else if(id == R.id.basketball) {
             startActivity(new Intent(getApplicationContext(), GameActivity.class));
 

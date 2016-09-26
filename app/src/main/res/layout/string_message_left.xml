@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="name"
+            android:clickable="true"
             android:textColor="#000"
             android:textSize="18dp" />
 
@@ -30,7 +31,7 @@
             android:id="@+id/msgr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="left"
             android:text="klfsjglkfjglkfdjglkfdjglkfdgjkdlfgjlkfdflkgjflkgjlfkdgjlkj"
             android:textSize="18dp"
             android:textColor="#000"

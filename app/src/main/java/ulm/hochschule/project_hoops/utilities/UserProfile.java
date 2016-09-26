@@ -21,7 +21,7 @@ public class UserProfile {
 
     private static boolean userFound = false;
 
-    private UserProfile(String sqlUSER, Activity a) {
+    public UserProfile(String sqlUSER, Activity a) {
         Object[] userInfo;
         try {
             userInfo = SqlManager.getInstance().getUser(sqlUSER);
