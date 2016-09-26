@@ -74,8 +74,10 @@ public class GameActivity extends Activity{
 
         Paint alpha = new Paint();
 
-        private int basketColisFront = widthScreen - 500;
-        private int basketColisBack = widthScreen;
+        private int xBasketColisFront = widthScreen - 500;
+        private int xBasketColisBack = widthScreen;
+        private int yBasketColisTop = heightScreen / 2;
+        private int yBasketColisBot = (heightScreen / 2) + 50;
         private int poleColisFront = widthScreen - 50;
 
         private VelocityTracker mVelocityTracker = null;
@@ -86,7 +88,7 @@ public class GameActivity extends Activity{
             getHolder().addCallback(this);
             thread = new ShapeThread(getHolder(), this);
             setFocusable(true);
-            ball =(BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
+            ball = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
             mAx = 0;
             mAy = 0;
             setOnTouchListener(new OnTouchListener() {
@@ -250,7 +252,29 @@ public class GameActivity extends Activity{
                 xVelocity = 0;
             }
 
+            //Kollision
+            checkCollision();
+
             return true;
+        }
+
+        private void checkCollision() {
+            /*float distance = (float) Math.sqrt(Math.pow(xBasketColisFront - xCenter, 2) + Math.pow(yBasketColisTop - yCenter, 2));
+            if(distance < RADIUS) {
+                xVelocity -=  (xVelocity * (xBasketColisFront - xCenter) / distance);
+                yVelocity *= (yBasketColisTop - yCenter) / distance * -1;
+            }*/
+
+
+            if(yCenter + RADIUS > yBasketColisTop && yCenter - RADIUS < yBasketColisBot && xCenter > xBasketColisFront && xCenter < xBasketColisFront + 50)
+                yVelocity *= -1;
+            else if (xCenter + RADIUS > xBasketColisFront && xCenter - RADIUS < xBasketColisFront && yCenter > yBasketColisTop && yCenter < yBasketColisBot)
+                xVelocity *= -1;
+            else if(Math.sqrt(Math.pow(xBasketColisFront + 25 - xCenter, 2) + Math.pow(yBasketColisTop + 25 - yCenter, 2)) < RADIUS + 25) {
+                xVelocity *= -1;
+                yVelocity *= -1;
+            }
+
         }
 
         float angle = 0;
@@ -266,7 +290,12 @@ public class GameActivity extends Activity{
                 canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alpha);
                 Paint p = new Paint();
                 p.setColor(getResources().getColor(android.R.color.holo_red_dark));
+                p.setAlpha(150);
                 canvas.drawRect(widthScreen - 500, heightScreen /2, widthScreen, heightScreen /2 + 50, p);
+
+                Paint p3 = new Paint();
+                p3.setColor(getResources().getColor(android.R.color.holo_red_dark));
+                canvas.drawRect(widthScreen - 500, heightScreen /2, widthScreen - 450, heightScreen /2 + 50, p3);
 
                 Paint p2 = new Paint();
                 p2.setColor(getResources().getColor(android.R.color.darker_gray));
