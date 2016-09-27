@@ -25,23 +25,31 @@ public class Ball {
     public float widthScreen, heightScreen;
     private static final float GRAVITY = 9.81f;
     private static final float deltaT = 0.5f;
-    private static final float FACTOR_BOUNCEBACK = 0.75f;
+    public static final float FACTOR_BOUNCEBACK = 0.75f;
     public BitmapDrawable bitmap;
+
+    public boolean nothingBelow;
 
     public Ball(float widthScreen, float heightScreen, Context context){
         bitmap = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
         this.widthScreen = widthScreen;
         this.heightScreen = heightScreen;
         alphaPaint = new Paint();
+        nothingBelow = true;
     }
 
     public boolean update()
     {
         //xVelocity -= 5f * deltaT;
-        yVelocity += GRAVITY * deltaT;
+
 
         xCenter += (int)(deltaT * (xVelocity));
-        yCenter += (int)(deltaT * (yVelocity + GRAVITY* deltaT));
+
+        if(nothingBelow) {
+            yCenter += (int) (deltaT * (yVelocity + GRAVITY * deltaT));
+            yVelocity += GRAVITY * deltaT;
+        } else if (yVelocity > 0)
+            yVelocity = 0;
 
         if(xCenter < RADIUS)
         {
@@ -57,10 +65,10 @@ public class Ball {
         }
 
 
-        if(yCenter > heightScreen - 2 * RADIUS)
+        if(yCenter > heightScreen - RADIUS)
         {
             angle += xVelocity/8;
-            yCenter = heightScreen - 2 * RADIUS;
+            yCenter = heightScreen - RADIUS;
             yVelocity = -yVelocity * FACTOR_BOUNCEBACK;
             if(xVelocity < 0){
                 xVelocity+=1;
@@ -72,7 +80,7 @@ public class Ball {
         if(xVelocity < 2 && xVelocity > -2){
             xVelocity = 0;
         }
-        if(xVelocity == 0 && yVelocity > -2.5f){
+        if(xVelocity == 0 && yVelocity > -2.5f && yCenter + RADIUS == heightScreen){
             ok = false;
             setCenter(500, 500);
         }else

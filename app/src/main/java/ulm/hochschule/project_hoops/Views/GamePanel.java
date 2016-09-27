@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.Views;
+package ulm.hochschule.project_hoops.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import ulm.hochschule.project_hoops.objects.Ball;
+import ulm.hochschule.project_hoops.objects.Hoop;
 import ulm.hochschule.project_hoops.sonstige.GameThread;
 
 /**
@@ -19,15 +20,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread thread;
     private Ball ball;
+    private Hoop hoop;
 
     private float x,y,x2,y2;
     private float xP = 500, yP = 500;
     private float xV, yV;
     private boolean drawPoint = false;
 
+
     public GamePanel(Context context, float width, float height){
         super(context);
         ball = new Ball(width, height, context);
+        hoop = new Hoop(width, height, context);
 
         getHolder().addCallback(this);
         setOnTouchListener(new OnTouchListener() {
@@ -46,6 +50,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             drawPoint = false;
                             ball.xVelocity = (x - event.getX()) / 5;
                             ball.yVelocity = (y - event.getY()) / 5;
+                            //ball.xVelocity = 75.6f;
+                            //ball.yVelocity = -92.4f;
                             break;
                         case MotionEvent.ACTION_MOVE:
                             x2 = event.getX();
@@ -87,29 +93,76 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void update(){
         if(ball.ok){
             ball.update();
+            checkCollisionBasket(hoop.xBasketCollFront, hoop.yBasketCollFront, hoop.basketCollRadius);
+            checkCollisionBasket(hoop.xBasketCollBack, hoop.yBasketCollBack, hoop.basketCollRadius);
+            checkCollisionBBoard();
+            checkCollisionPole();
         }
         xV = (x - x2) / 5;
         yV = (y - y2) / 5;
     }
 
-    private void checkCollision() {
-            /*float distance = (float) Math.sqrt(Math.pow(xBasketColisFront - xCenter, 2) + Math.pow(yBasketColisTop - yCenter, 2));
-            if(distance < RADIUS) {
-                xVelocity -=  (xVelocity * (xBasketColisFront - xCenter) / distance);
-                yVelocity *= (yBasketColisTop - yCenter) / distance * -1;
-            }*/
+    private void checkCollisionBasket(float xBasketColl, float yBasketColl, float basketCollRadius) {
 
-        /*
-        if(yCenter + RADIUS > yBasketColisTop && yCenter - RADIUS < yBasketColisBot && xCenter > xBasketColisFront && xCenter < xBasketColisFront + 50)
-            yVelocity *= -1;
-        else if (xCenter + RADIUS > xBasketColisFront && xCenter - RADIUS < xBasketColisFront && yCenter > yBasketColisTop && yCenter < yBasketColisBot)
-            xVelocity *= -1;
-        else if(Math.sqrt(Math.pow(xBasketColisFront + 25 - xCenter, 2) + Math.pow(yBasketColisTop + 25 - yCenter, 2)) < RADIUS + 25) {
-            xVelocity *= -1;
-            yVelocity *= -1;
+        float xBasketColVector;
+        float yBasketColVector;
+        float basketColAngle;
+        float collisionAngle = 0;
+        float velocity = (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2));
+
+        if(xBasketColl - ball.xCenter != 0) {
+            basketColAngle = (float) Math.atan((yBasketColl - ball.yCenter) / (xBasketColl - ball.xCenter));
+            xBasketColVector = (float) Math.cos(basketColAngle) * -1;
+            yBasketColVector = (float) Math.sin(basketColAngle) * -1;
+            if(ball.xCenter > xBasketColl){
+                xBasketColVector *= -1;
+                yBasketColVector *= -1;
+            }
+
+            collisionAngle = (float) Math.acos((ball.xVelocity * xBasketColVector + ball.yVelocity * yBasketColVector) / (float) (Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * Math.sqrt(Math.pow(xBasketColVector, 2) + Math.pow(yBasketColVector, 2))));
         }
-        */
 
+        if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
+            ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+        }
+
+        if ((ball.xCenter + ball.RADIUS < hoop.xBasketCollFront - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollFront + basketCollRadius) &&
+                (ball.xCenter + ball.RADIUS < hoop.xBasketCollBack - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollBack + basketCollRadius))
+            ball.nothingBelow = true;
+            //else if (ball.yCenter + ball.RADIUS < yBasketColl - basketCollRadius && ball.yCenter + ball.RADIUS > yBasketColl + basketCollRadius)
+        else if (Math.sqrt(Math.pow(hoop.xBasketCollFront - ball.xCenter, 2) + Math.pow(hoop.yBasketCollFront - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius && ball.xVelocity < 5 && ball.yVelocity >= -2) {
+            if (ball.xCenter > hoop.xBasketCollFront)
+                ball.xVelocity += 2;
+            else
+                ball.xVelocity -= 2;
+            if (ball.xCenter - hoop.xBasketCollFront == 0)
+                ball.xVelocity++;
+            ball.nothingBelow = false;
+        } else if (Math.sqrt(Math.pow(hoop.xBasketCollBack - ball.xCenter, 2) + Math.pow(hoop.yBasketCollBack - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius && ball.xVelocity < 5 && ball.yVelocity >= -2) {
+            ball.xVelocity -= 2;
+            if (ball.xCenter - hoop.xBasketCollBack == 0)
+                ball.xVelocity -= 2;
+            ball.nothingBelow = false;
+        } else
+            ball.nothingBelow = true;
+        System.out.println("yVelocity: " + ball.yVelocity);
+    }
+
+    private void checkCollisionBBoard() {
+        if(ball.xCenter + ball.RADIUS > hoop.xBackboardTop && ball.yCenter - ball.RADIUS < hoop.yBackboardBot)
+        {
+            ball.xCenter = hoop.xBackboardTop - ball.RADIUS;
+            ball.xVelocity = -ball.xVelocity * ball.FACTOR_BOUNCEBACK;
+        }
+    }
+
+    private void checkCollisionPole() {
+        if(ball.xCenter + ball.RADIUS > hoop.xPoleCollTop && ball.yCenter - ball.RADIUS > hoop.yPoleCollTop)
+        {
+            ball.xCenter = hoop.xPoleCollTop - ball.RADIUS;
+            ball.xVelocity = -ball.xVelocity * ball.FACTOR_BOUNCEBACK;
+        }
     }
 
     @Override
@@ -120,6 +173,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             super.draw(canvas);
             canvas.drawColor(Color.WHITE);
             ball.myDraw(canvas);
+            hoop.myDraw(canvas);
+
+
             if(drawPoint) {
                 for (int i = 0; i < 25; i++) {
                     yV += 9.81f * 0.5f;
@@ -140,9 +196,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     }
 
 
-                    if(yP > ball.heightScreen - 2 * ball.RADIUS)
+                    if(yP > ball.heightScreen - ball.RADIUS)
                     {
-                        yP = ball.heightScreen - 2 * ball.RADIUS;
+                        yP = ball.heightScreen - ball.RADIUS;
                         yV = -yV * 0.75f;
                         if(xV < 0){
                             xV+=1;
