@@ -1,21 +1,18 @@
 package ulm.hochschule.project_hoops.fragments;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Observer;
 
 import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 import ulm.hochschule.project_hoops.objects.AvatarItems;
@@ -34,7 +31,6 @@ public class ProfilTabChat extends Fragment {
     private UserProfile user;
     private AvatarItems aItems;
 
-    private Button btn_EditProfile;
     private TextView lbl_Coins, lbl_Ranking, lbl_Highscore, lbl_Username, lbl_Name, lbl_GebDat, lbl_AboutMe;
     private Notificator notif;
     private View layout, view_Name, view_GebDat, view_AboutMe;
@@ -46,7 +42,8 @@ public class ProfilTabChat extends Fragment {
     }
 
     public void setUsername(String username){
-        this.username = username;
+        this.username = username.replace(":","");
+
     }
 
     @Nullable
@@ -54,8 +51,8 @@ public class ProfilTabChat extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_profile_chat, container, false);
 
-        UserProfile user1 = new UserProfile(this.username,getActivity());
-        user = user1.getInstance(this.username,getActivity());
+        user = new UserProfile(this.username,getActivity());
+
         instatiateUiObjects();
         mapUser();
         updateData();
@@ -85,12 +82,12 @@ public class ProfilTabChat extends Fragment {
 
     public void updateAvatar() throws SQLException{
         aItems = AvatarItems.getInstance();
-        imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
-        imgBackground.setBackgroundResource(aItems.getAccountItemByID("background"));
-        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
-        imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth"));
-        imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin"));
-        imgBody.setBackgroundResource(aItems.getAccountItemByID("body"));
+        imgHat.setBackgroundResource(aItems.getAccountItemByID("hat",this.username));
+        imgBackground.setBackgroundResource(aItems.getAccountItemByID("background",this.username));
+        imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes",this.username));
+        imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth",this.username));
+        imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin",this.username));
+        imgBody.setBackgroundResource(aItems.getAccountItemByID("body",this.username));
 
     }
 

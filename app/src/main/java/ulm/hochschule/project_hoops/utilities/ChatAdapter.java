@@ -40,7 +40,6 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private TextView text;
     private ListView listView;
     private FragmentManager fsm = null;
-    private ProfilTabChat profile = new ProfilTabChat();
     private ChatActivity cA = new ChatActivity();
 
     public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm, ChatActivity cA){
@@ -64,10 +63,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
             row = inflater.inflate(R.layout.string_message_left, parent, false);
             textView = (TextView) row.findViewById(R.id.msgr);
             name = (TextView) row.findViewById(R.id.name);
-            if(obj.getUserName().length() > 10){
-                name.setText(obj.getUserName().substring(0,10) + "...:");
-            }else
-                name.setText(obj.getUserName()+":");
+            name.setText(obj.getUserName()+":");
             String mes;
             if(obj.getMessage().charAt(0) == '.'){
                 mes = obj.getMessage().replaceFirst(".", "");
@@ -81,10 +77,12 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
             @Override
             public void onClick(View v) {
                 cA.closeCon();
+                ProfilTabChat profile = new ProfilTabChat();
                 FragmentManager fm = fsm;
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.contentPanel, profile).addToBackStack(profile.getTag()).commit();
                 profile.setUsername(tv.getText().toString());
+                ft.replace(R.id.contentPanel, profile).addToBackStack(profile.getTag()).commit();
+
 
             }
         });
