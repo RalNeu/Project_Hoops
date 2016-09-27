@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/backBtn"
+            android:title="Accountshop verlassen"/>
+    </group>
+
+    <item android:title="Item-Kategorien">
+    <menu>
+        <item
+            android:id="@+id/nav_eyes"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Augen" />
+        <item
+            android:id="@+id/nav_mouths"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Münder" />
+        <item
+            android:id="@+id/nav_hats"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Hüte" />
+        <item
+            android:id="@+id/nav_skins"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Hautfarben" />
+        <item
+            android:id="@+id/nav_bodies"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Körper" />
+        <item
+            android:id="@+id/nav_backgrounds"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Hintergründe" />
+    </menu>
+    </item>
+</menu>

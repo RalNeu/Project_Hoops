@@ -21,8 +21,10 @@ public class ServerCommunicate {
     private double quoteUlm, quoteOther, oddsUlm, oddsOther;
     private int maxCoinsUlm, maxCoinsOther;
 
-    private ServerCommunicate() {
+    String ipAdress = "141.59.26.107";
 
+    private ServerCommunicate() {
+        ipAdress = "141.59.82.195";
     }
 
     public static ServerCommunicate getInstance() {
@@ -32,23 +34,21 @@ public class ServerCommunicate {
         return instance;
     }
 
-    public String[] getAch() throws ServerException {
+    public String getAch() throws ServerException {
 
-        String[] retString = new String[3];
+        String retString = "";
 
         boolean access = false;
 
         try {
             Socket s = new Socket();
-            s.connect(new InetSocketAddress("141.59.26.107", 21399), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21399), 3000);
             access = true;
 
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
-            retString[0] = (String) ois.readObject();
-            retString[1] = (String) ois.readObject();
-            retString[2] = (String) ois.readObject();
+            retString = (String) ois.readObject();
 
             s.close();
         } catch (IOException ex) {
@@ -66,7 +66,7 @@ public class ServerCommunicate {
         try {
 
             Socket s = new Socket();
-            s.connect(new InetSocketAddress("141.59.26.107", 21395), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21395), 3000);
             access = true;
 
             ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
@@ -114,7 +114,7 @@ public class ServerCommunicate {
         try {
 
             Socket s = new Socket();
-            s.connect(new InetSocketAddress("141.59.26.107", 21400), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21400), 3000);
 
             if(s.getInputStream().read() == 0) {
                 res = true;
@@ -183,22 +183,17 @@ public class ServerCommunicate {
         try {
 
             Socket s = new Socket();
-            s.connect(new InetSocketAddress("141.59.26.107", 21396), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21396), 3000);
             access = true;
 
             OutputStream os= s.getOutputStream();
             ObjectInputStream is = new ObjectInputStream(s.getInputStream());
 
             quoteUlm = (Double) is.readObject();
-            os.write(0);
             maxCoinsUlm = (Integer) is.readObject();
-            os.write(maxCoinsUlm);
             maxCoinsOther = (Integer) is.readObject();
-            os.write(0);
             oddsUlm = (Double)is.readObject();
-            os.write(0);
             oddsOther = (Double) is.readObject();
-            os.write(1);
 
             s.close();
 
@@ -216,7 +211,7 @@ public class ServerCommunicate {
     public void deleteTipps() {
         try {
             Socket s = new Socket();
-            s.connect(new InetSocketAddress("141.59.26.107", 21397), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21397), 3000);
             s.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -228,7 +223,7 @@ public class ServerCommunicate {
         boolean access = false;
         try {
             Socket s = new Socket();
-            s.connect(new InetSocketAddress("141.59.26.107", 21398), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21398), 3000);
             access = true;
 
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -240,7 +235,6 @@ public class ServerCommunicate {
 
             s.close();
         } catch (IOException e) {
-            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

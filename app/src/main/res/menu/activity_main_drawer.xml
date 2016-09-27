@@ -50,6 +50,10 @@
                 android:id="@+id/achievement"
                 android:icon="@drawable/ic_achievement"
                 android:title="Achievements"/>
+            <item
+                android:id="@+id/accountshop"
+                android:title="Accountshop"/>
+
         </menu>
     </item>
 

@@ -97,7 +97,6 @@ public class LoginTab extends Fragment {
 
     public void login() {
         if (!check()) {
-
             onLoginFailed();
             return;
         }
@@ -116,7 +115,6 @@ public class LoginTab extends Fragment {
             public void run() {
                 onLoginSuccess();
                 progressDialog.cancel();
-                System.out.println("test");
             }
         };
         progressRunnable.run();

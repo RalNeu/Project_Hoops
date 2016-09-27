@@ -20,12 +20,14 @@ public class ExampleUnitTest {
 
 
 
-    //@Test
+    @Test
     public void testServerSendTip1() throws Exception {
         ServerCommunicate sc = ServerCommunicate.getInstance();
         sc.deleteTipps();
 
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
+
+
 
         if(!s.userExist("a"))
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "a", "11111111");
@@ -49,42 +51,52 @@ public class ExampleUnitTest {
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "j", "11111111");
 
         UserProfile.logoffUser();
+        s.updateAchievements(7, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("a", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
+        s.updateAchievements(8, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("b", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
+        s.updateAchievements(9, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("c", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
+        s.updateAchievements(10, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("d", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
+        s.updateAchievements(11, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("e", new Activity());
         sc.sendTip(10, 0);
 
         UserProfile.logoffUser();
+        s.updateAchievements(12, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("f", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
+        s.updateAchievements(13, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("g", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
+        s.updateAchievements(14, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("h", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
+        s.updateAchievements(15, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("i", new Activity());
         sc.sendTip(10, 1);
 
         UserProfile.logoffUser();
+        s.updateAchievements(16, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("j", new Activity());
         sc.sendTip(10, 1);
 
@@ -96,10 +108,9 @@ public class ExampleUnitTest {
         assertEquals(50, sc.getQuoteOther(), 0.01);
     }
 
-    //@Test
+    @Test
     public void readWinGameNotFinished() throws Exception{
         ServerCommunicate sc = ServerCommunicate.getInstance();
-        sc.deleteTipps();
 
         SqlManager s = SqlManager.getInstanceWithoutStrictMode();
 
@@ -109,97 +120,19 @@ public class ExampleUnitTest {
             s.getInstance().createUser("Vorname", "Nachname", "test@example.com", "b", "11111111");
 
         UserProfile.logoffUser();
+        s.updateAchievements(7, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("a", new Activity());
         sc.sendTip(10,0);
 
         assertEquals(-2, sc.getWin());
 
         UserProfile.logoffUser();
+        s.updateAchievements(8, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
         UserProfile.getInstance("b", new Activity());
-        assertEquals(-1, sc.getWin());
+        assertEquals(-2, sc.getWin());
 
     }
 
-    @Test
-    public void checkAchievementsFehlt() throws ServerException {
-        UserProfile.logoffUser();
-        SqlManager s = SqlManager.getInstanceWithoutStrictMode();
-        if(!s.userExist("AchUser1"))
-            s.createUser("test", "test", "email@example.de", "AchUser1", "11111111", "0/0/5/2/1/1/1/9/3/2/0/0/4/478/1967/463", 1);
-        UserProfile.getInstance("AchUser1", new Activity());
-
-        AchievementHandler ah = AchievementHandler.getInstance();
-
-        AchievementObject ao;
-
-        for(int i = 0; i<16;i++) {
-            ao = ah.getAchievement(i);
-            assertEquals(0, ao.getEmblem());
-        }
-    }
-
-    @Test
-    public void checkAchievementsBronze() throws ServerException {
-        UserProfile.logoffUser();
-        SqlManager s = SqlManager.getInstanceWithoutStrictMode();
-        if(!s.userExist("AchUser2"))
-            s.createUser("test", "test", "email@example.de", "AchUser2", "11111111", "1/1/10/3/5/5/1/20/5/5/2/2/10/2000/5000/4999", 1);
-        UserProfile.getInstance("AchUser2", new Activity());
-
-        AchievementHandler ah = AchievementHandler.getInstance();
-
-        AchievementObject ao;
-
-        for(int i = 0; i<16;i++) {
-            if(i != 0 && i != 1 && i != 6) {
-                ao = ah.getAchievement(i);
-                assertEquals(1, ao.getEmblem());
-            }
-        }
-    }
-
-    @Test
-    public void checkAchievementsSilber() throws ServerException {
-        UserProfile.logoffUser();
-        SqlManager s = SqlManager.getInstanceWithoutStrictMode();
-        if(!s.userExist("AchUser3"))
-            s.createUser("test", "test", "email@example.de", "AchUser3", "11111111", "1/1/50/7/30/10/1/50/15/15/10/10/21/9999/10000/10000", 1);
-        UserProfile.getInstance("AchUser3", new Activity());
-
-        AchievementHandler ah = AchievementHandler.getInstance();
-
-        AchievementObject ao;
-
-        for(int i = 0; i<16;i++) {
-            if(i != 0 && i != 1 && i != 6) {
-                ao = ah.getAchievement(i);
-                assertEquals(2, ao.getEmblem());
-            }
-        }
-    }
-
-    @Test
-    public void checkAchievementsGold() {
-        UserProfile.logoffUser();
-        SqlManager s = SqlManager.getInstanceWithoutStrictMode();
-        if(!s.userExist("AchUser4"))
-            s.createUser("test", "test", "email@example.de", "AchUser4", "11111111", "1/1/75/15/50/15/3/100/30/30/30/30/50/10000/20000/15000", 1);
-        UserProfile.getInstance("AchUser4", new Activity());
-
-        AchievementHandler ah = null;
-        try {
-            ah = AchievementHandler.getInstance();
-        } catch (ServerException e) {
-            e.printStackTrace();
-        }
-
-        AchievementObject ao;
-
-        for(int i = 0; i<16;i++) {
-            ao = ah.getAchievement(i);
-            assertEquals(3, ao.getEmblem());
-        }
-    }
 
 
 }

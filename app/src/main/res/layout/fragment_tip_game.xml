@@ -16,10 +16,11 @@ android:layout_height="match_parent"
         android:layout_weight="5"
         android:weightSum="3">
 
-        <FrameLayout
+        <ulm.hochschule.project_hoops.views.SquareLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -27,7 +28,7 @@ android:layout_height="match_parent"
                 android:id="@+id/img_Team"
                 android:background="@drawable/logoratiopharm"
                 android:layout_gravity="center" />
-        </FrameLayout>
+        </ulm.hochschule.project_hoops.views.SquareLayout>
 
         <FrameLayout
             android:layout_width="0dp"
@@ -44,10 +45,11 @@ android:layout_height="match_parent"
                 android:layout_gravity="center" />
         </FrameLayout>
 
-        <FrameLayout
+        <ulm.hochschule.project_hoops.views.SquareLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -58,7 +60,7 @@ android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center" />
-        </FrameLayout>
+        </ulm.hochschule.project_hoops.views.SquareLayout>
     </LinearLayout>
 
     <LinearLayout

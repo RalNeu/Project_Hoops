@@ -67,5 +67,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="what_apos_s_hoops_chat">What\'s Hoops Chat</string>
     <string name="username_too_long">Nicht mehr als 12 Zeichen!</string>
+    <string name="title_activity_accountshop">Hoops shop</string>
 
 </resources>

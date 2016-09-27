@@ -18,7 +18,7 @@
             android:weightSum="2"
             android:background="@drawable/bgprofiletop">
 
-            <FrameLayout
+            <ulm.hochschule.project_hoops.views.SquareLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -72,7 +72,7 @@
                     android:layout_margin="15dp"
                     android:background="@drawable/avatar_mouth_14" />
 
-            </FrameLayout>
+            </ulm.hochschule.project_hoops.views.SquareLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -115,7 +115,7 @@
                         android:layout_gravity="center_vertical|end"
                         android:textAlignment="viewEnd"></TextView>
 
-                    <FrameLayout
+                    <ulm.hochschule.project_hoops.views.SquareLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -129,7 +129,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="12dp"
                             android:layout_gravity="center_horizontal" />
-                    </FrameLayout>
+                    </ulm.hochschule.project_hoops.views.SquareLayout>
 
                 </LinearLayout>
 
@@ -151,7 +151,7 @@
                         android:layout_gravity="center_vertical|end"
                         android:textAlignment="viewEnd" />
 
-                    <FrameLayout
+                    <ulm.hochschule.project_hoops.views.SquareLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1" >
@@ -164,7 +164,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="12dp"
                             android:layout_gravity="center_horizontal" />
-                    </FrameLayout>
+                    </ulm.hochschule.project_hoops.views.SquareLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -185,7 +185,7 @@
                         android:layout_gravity="center_vertical|end"
                         android:textAlignment="viewEnd" />
 
-                    <FrameLayout
+                    <ulm.hochschule.project_hoops.views.SquareLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1" >
@@ -198,7 +198,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="12dp"
                             android:layout_gravity="center_horizontal" />
-                    </FrameLayout>
+                    </ulm.hochschule.project_hoops.views.SquareLayout>
                 </LinearLayout>
 
             </LinearLayout>
