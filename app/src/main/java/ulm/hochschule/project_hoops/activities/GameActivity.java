@@ -59,7 +59,7 @@ public class GameActivity extends Activity{
     // the view that renders the ball
     private class ShapeView extends SurfaceView implements SurfaceHolder.Callback{
 
-        private int RADIUS = 88;
+        private int ballRadius = 88;
         private int rotatedBallHalfWidth = 96;
         private int rotatedBallHalfHeight = 96;
         private final float FACTOR_BOUNCEBACK = 0.75f;
@@ -72,13 +72,16 @@ public class GameActivity extends Activity{
         private float yVelocity;
         private float x, y;
 
+        float angle = 0;
+
         Paint alpha = new Paint();
 
-        private int xBasketColisFront = widthScreen - 500;
-        private int xBasketColisBack = widthScreen;
-        private int yBasketColisTop = heightScreen / 2;
-        private int yBasketColisBot = (heightScreen / 2) + 50;
-        private int poleColisFront = widthScreen - 50;
+        private float xBasketCollFront = widthScreen - 500;
+        private float xBasketColisBack = widthScreen;
+        private float basketCollRadius = 25;
+        private float yBasketCollTop = heightScreen / 2;
+        private float yBasketColisBot = (heightScreen / 2) + 50;
+        private float poleColisFront = widthScreen - 50;
 
         private VelocityTracker mVelocityTracker = null;
 
@@ -102,7 +105,6 @@ public class GameActivity extends Activity{
                                 ok = true;
                                 xVelocity = (event.getX() - x) / 5;
                                 yVelocity = (event.getY() - y) / 5;
-
 
                                 // xVelocity = VelocityTrackerCompat.getXVelocity(mVelocityTracker,
                                 //        pointerId)/50;
@@ -209,24 +211,24 @@ public class GameActivity extends Activity{
             xCenter += (int)(deltaT * (xVelocity));
             yCenter += (int)(deltaT * (yVelocity + GRAVITY * deltaT));
 
-            if(xCenter < RADIUS)
+            if(xCenter < ballRadius)
             {
-                xCenter = RADIUS;
+                xCenter = ballRadius;
                 xVelocity = -xVelocity * FACTOR_BOUNCEBACK;
             }
 
 
-            if(xCenter > widthScreen - RADIUS)
+            if(xCenter > widthScreen - ballRadius)
             {
-                xCenter = widthScreen - RADIUS;
+                xCenter = widthScreen - ballRadius;
                 xVelocity = -xVelocity * FACTOR_BOUNCEBACK;
             }
 
 
-            if(yCenter > heightScreen - 2 * RADIUS)
+            if(yCenter > heightScreen - 2 * ballRadius)
             {
                 angle += xVelocity/8;
-                yCenter = heightScreen - 2 * RADIUS;
+                yCenter = heightScreen - 2 * ballRadius;
                 yVelocity = -yVelocity * FACTOR_BOUNCEBACK;
                 if(xVelocity < 0){
                     xVelocity+=1;
@@ -259,25 +261,32 @@ public class GameActivity extends Activity{
         }
 
         private void checkCollision() {
-            /*float distance = (float) Math.sqrt(Math.pow(xBasketColisFront - xCenter, 2) + Math.pow(yBasketColisTop - yCenter, 2));
-            if(distance < RADIUS) {
-                xVelocity -=  (xVelocity * (xBasketColisFront - xCenter) / distance);
-                yVelocity *= (yBasketColisTop - yCenter) / distance * -1;
-            }*/
 
+            float xBasketColVector;
+            float yBasketColVector;
+            float basketColAngle;
+            float collisionAngle = 0;
+            float velocity = (float) Math.sqrt(Math.pow(xVelocity, 2) + Math.pow(yVelocity, 2));
 
-            if(yCenter + RADIUS > yBasketColisTop && yCenter - RADIUS < yBasketColisBot && xCenter > xBasketColisFront && xCenter < xBasketColisFront + 50)
-                yVelocity *= -1;
-            else if (xCenter + RADIUS > xBasketColisFront && xCenter - RADIUS < xBasketColisFront && yCenter > yBasketColisTop && yCenter < yBasketColisBot)
-                xVelocity *= -1;
-            else if(Math.sqrt(Math.pow(xBasketColisFront + 25 - xCenter, 2) + Math.pow(yBasketColisTop + 25 - yCenter, 2)) < RADIUS + 25) {
-                xVelocity *= -1;
-                yVelocity *= -1;
+            if(xBasketCollFront + basketCollRadius - xCenter != 0) {
+                basketColAngle = (float) Math.atan(((yBasketCollTop + basketCollRadius) - yCenter) / ((xBasketCollFront + basketCollRadius) - xCenter));
+                xBasketColVector = (float) Math.cos(basketColAngle) * -1;
+                yBasketColVector = (float) Math.sin(basketColAngle) * -1;
+                if(xCenter > xBasketCollFront + basketCollRadius){
+                    xBasketColVector *= -1;
+                    yBasketColVector *= -1;
+                }
+
+                collisionAngle = (float) Math.acos((xVelocity * xBasketColVector + yVelocity * yBasketColVector) / (float) (Math.sqrt(Math.pow(xVelocity, 2) + Math.pow(yVelocity, 2)) * Math.sqrt(Math.pow(xBasketColVector, 2) + Math.pow(yBasketColVector, 2))));
             }
 
-        }
+            if(Math.sqrt(Math.pow(xBasketCollFront + basketCollRadius - xCenter, 2) + Math.pow(yBasketCollTop + basketCollRadius - yCenter, 2)) < ballRadius + basketCollRadius) {
+                xVelocity = ((xVelocity * (float) Math.cos(collisionAngle) + yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(xVelocity, 2) + Math.pow(yVelocity, 2));
+                yVelocity = ((yVelocity * (float) Math.cos(collisionAngle) + xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(xVelocity, 2) + Math.pow(yVelocity, 2));
+            }
 
-        float angle = 0;
+
+        }
 
         // update the canvas
         protected void onDraww(Canvas canvas)
@@ -290,12 +299,12 @@ public class GameActivity extends Activity{
                 canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alpha);
                 Paint p = new Paint();
                 p.setColor(getResources().getColor(android.R.color.holo_red_dark));
-                p.setAlpha(150);
-                canvas.drawRect(widthScreen - 500, heightScreen /2, widthScreen, heightScreen /2 + 50, p);
+                p.setAlpha(100);
+                canvas.drawRect(widthScreen - 475, heightScreen /2, widthScreen, heightScreen /2 + 50, p);
 
                 Paint p3 = new Paint();
                 p3.setColor(getResources().getColor(android.R.color.holo_red_dark));
-                canvas.drawRect(widthScreen - 500, heightScreen /2, widthScreen - 450, heightScreen /2 + 50, p3);
+                canvas.drawCircle(widthScreen - 475, heightScreen / 2 + 25, 25, p3);
 
                 Paint p2 = new Paint();
                 p2.setColor(getResources().getColor(android.R.color.darker_gray));
