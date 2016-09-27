@@ -299,7 +299,9 @@ public class MainActivity extends AppCompatActivity
         }else if(id == R.id.basketball) {
             startActivity(new Intent(getApplicationContext(), GameActivity.class));
 
-    }
+    } else if(id == R.id.accountshop) {
+            startActivity(new Intent(getApplicationContext(), AccountshopActivity.class));
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -47,7 +47,6 @@ public class UserProfile {
                 ah.performEvent(2, 1, a);
                 checkDateYesterday(a, ah);
             } catch (ServerException e) {
-                e.printStackTrace();
             }
             userFound = true;
         } catch (SQLException e) {

@@ -31,12 +31,14 @@
         <activity
             android:name=".activities.TippspielActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-        <activity android:name=".activities.ChatActivity"
-            android:label="What's Hoops"></activity>
-
-
-        <activity android:name=".activities.GameActivity"></activity>
+        <activity
+            android:name=".activities.ChatActivity"
+            android:label="What&apos;s Hoops" />
+        <activity android:name=".activities.GameActivity" />
+        <activity
+            android:name=".activities.AccountshopActivity"
+            android:label="@string/title_activity_accountshop"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

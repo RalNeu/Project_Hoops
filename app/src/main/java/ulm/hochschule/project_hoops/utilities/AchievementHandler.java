@@ -35,38 +35,15 @@ public class AchievementHandler {
 
 
     private void instantiateVariables() throws ServerException{
-        String[] items;
 
-        items = ServerCommunicate.getInstance().getAch();
-
-       /* String reference =
-                "1/1/1/" +
-                "1/1/1/" +
-                "10/30/75/" +
-                "3/7/15/" +
-                "5/20/50/" +
-                "3/8/15/" +
-                "3/3/3/" +
-                "10/30/100/" +
-                "5/15/30/" +
-                "5/15/30/" +
-                "1/10/30/" +
-                "1/10/30/" +
-                "5/20/50/" +
-                "500/3000/10000/" +
-                "2000/8000/20000/" +
-                "1000/5000/15000";
-*/
-
-        String[] referenceString = items[0].split("/");
+        String[] referenceString = ServerCommunicate.getInstance().getAch().split("/");
         achievementreference = new int[referenceString.length];
         for(int i = 0;i < referenceString.length;i++) {
+            System.out.println(i);
             achievementreference[i] = Integer.parseInt(referenceString[i]);
         }
 
-        descriptions = items[1].split("#");
-        titles = items[2].split("#");
-        /*descriptions = new String[N];
+        descriptions = new String[N];
         descriptions[0] = "Sie haben sich erfolgreich registriert!";
         descriptions[1] = "Sie haben Ihr Profil verifiziert!";
         descriptions[2] = "Sie haben sich öfter als / mal eingeloggt!";
@@ -101,7 +78,7 @@ public class AchievementHandler {
         titles[12] = "Ich kenn mich halt aus";
         titles[13] = "All in";
         titles[14] = "Ein lukratives Geschäft";
-        titles[15] = "Ich will der Allerbeste sein!";*/
+        titles[15] = "Ich will der Allerbeste sein!";
     }
 
     public static AchievementHandler getInstance() throws ServerException{
