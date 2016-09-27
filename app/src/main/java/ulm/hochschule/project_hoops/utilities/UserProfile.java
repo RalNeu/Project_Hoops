@@ -55,6 +55,7 @@ public class UserProfile {
         }
     }
 
+
     private void checkDateYesterday(Activity a, AchievementHandler ah) {
         Date now = SqlManager.getInstance().getNow();
         long l = now.getTime() - lastLogin.getTime();

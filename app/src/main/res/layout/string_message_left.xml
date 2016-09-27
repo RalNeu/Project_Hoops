@@ -27,6 +27,7 @@
             android:textColor="#000"
             android:textSize="18dp" />
 
+
         <TextView
             android:id="@+id/msgr"
             android:layout_width="wrap_content"

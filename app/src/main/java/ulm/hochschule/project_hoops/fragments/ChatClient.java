@@ -78,6 +78,14 @@ public void recieveText(String msg,String username){
         }
 
     }
+
+    public void closeCon(){
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

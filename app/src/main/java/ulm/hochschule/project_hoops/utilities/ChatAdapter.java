@@ -2,6 +2,7 @@ package ulm.hochschule.project_hoops.utilities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.activities.ChatActivity;
 import ulm.hochschule.project_hoops.activities.EditProfilActivity;
+import ulm.hochschule.project_hoops.fragments.ChatClient;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTabChat;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
@@ -38,11 +41,13 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private ListView listView;
     private FragmentManager fsm = null;
     private ProfilTabChat profile = new ProfilTabChat();
+    private ChatActivity cA = new ChatActivity();
 
-    public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm){
+    public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm, ChatActivity cA){
         super(context, r);
         this.listView = listView;
         this.fsm = fm;
+        this.cA = cA;
     }
 
     @Override
@@ -71,14 +76,16 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
             textView.setText(mes);
 
         final TextView tv = (TextView) row.findViewById(R.id.name);
+        tv.setPaintFlags(tv.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cA.closeCon();
                 FragmentManager fm = fsm;
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.contentPanel, profile).addToBackStack(profile.getTag()).commit();
-                profile.name(tv.getText().toString());
+                profile.setUsername(tv.getText().toString());
+
             }
         });
         return row;

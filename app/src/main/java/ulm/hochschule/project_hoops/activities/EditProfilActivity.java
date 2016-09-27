@@ -27,7 +27,6 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.EditAvatarTab;
 import ulm.hochschule.project_hoops.fragments.EditProfileFragment;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
-import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;

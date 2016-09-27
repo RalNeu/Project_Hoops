@@ -323,7 +323,6 @@ public class SqlManager {
         personID = rs.getInt("pID");
 
 
-
         query = "select * from person where pID = ?";
         preparedStmt = con.prepareStatement(query);
         preparedStmt.setInt(1,personID);
