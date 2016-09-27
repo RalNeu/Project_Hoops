@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
 
 
         tipgame.setEnabled(false);
-        profile.setEnabled(false);
+       profile.setEnabled(false);
         achievements.setEnabled(false);
         chatClientMenuItem.setEnabled(false);
         //mi.setEnabled(false);
