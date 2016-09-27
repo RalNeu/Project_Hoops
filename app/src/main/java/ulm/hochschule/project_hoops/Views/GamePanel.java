@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.Views;
+package ulm.hochschule.project_hoops.views;
 
 import android.content.Context;
 import android.graphics.Canvas;

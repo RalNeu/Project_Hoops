@@ -18,8 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import Enums.AvatarItems;
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.objects.AvatarItemDescription;
 import ulm.hochschule.project_hoops.views.ItemView;
 
 public class AccountshopActivity extends AppCompatActivity
@@ -30,6 +33,71 @@ public class AccountshopActivity extends AppCompatActivity
     private LinearLayout content_Items;
     private TextView tv_Coins;
 
+    ArrayList<AvatarItemDescription> hat_ids, eyes_ids, skins_ids, bodies_ids, background_ids, mouths_ids;
+
+    private void initIds() {
+        hat_ids = new ArrayList<AvatarItemDescription>();
+        eyes_ids = new ArrayList<AvatarItemDescription>();
+        skins_ids = new ArrayList<AvatarItemDescription>();
+        bodies_ids = new ArrayList<AvatarItemDescription>();
+        background_ids = new ArrayList<AvatarItemDescription>();
+        mouths_ids = new ArrayList<AvatarItemDescription>();
+
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_1,400,"Blonde Zöpfe"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_2,600,"Schwarze Locken"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_4,1250,"Hasenohren"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_5,1250,"Teufelshörner"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_6,1750,"Schlafmütze"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_7,1250,"Alienantennen"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_8,1750,"Zauberer"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_9,1000,"Partyhut"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_10,1000,"Wintermütze"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_12,2250,"Vikingerhelm"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_13,1250,"Blonde Frisur"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_14,1250,"Rote Frisur"));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_16,1250,"Schwarze Frisur"));
+
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes4,500,"Verschmitzte Augen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes5,750,"Cyborgaugen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes6,750,"Haselnussbraune Augen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes7,1000,"Roboteraugen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes8,600,"Normale Augen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes9,1250,"Insektenaugen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes10,1250,"Zyklopenauge"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes11,800,"Animeaugen"));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes12,1000,"Sonnenbrille"));
+
+        skins_ids.add(new AvatarItemDescription(R.drawable.avatar_skin_2,1500,"Alienfarbe"));
+
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_1,750,"Rote Farbe, schwarze Schrift"));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_3,750,"Blaue Farbe, schwarze Schrift"));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_4,750,"Rote Farbe, orangene Schrift"));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_5,750,"Grüne Farbe, orangene Schrift"));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_6,750,"Blaue Farbe, orangene Schrift"));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_8,750,"Weiße Farbe"));
+
+        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_1,750,"Orange auf Grün"));
+        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_2,750,"Orange auf Blau"));
+        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_4,1500,"Stadtleben"));
+
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_1,750,"Irres Lachen"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_2,1000,"Verschlossen"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_3,1250,"Holzzähne"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_4,750,"Knutschmund"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_5,750,"Zunge raus"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_6,1250,"Vampir mit Schnauzer"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_7,1000,"Verschmitztes Lächeln"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_8,1250,"Monsterfänge"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_9,750,"Unglücklich"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_10,850,"Rufend"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_11,850,"Zähneknirschend"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_13,1250,"Vollbart"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_15,1250,"Playboy"));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_16,1250,"Vergrauter Bart"));
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +107,9 @@ public class AccountshopActivity extends AppCompatActivity
 
         tv_Coins = (TextView) findViewById(R.id.tv_Coins);
         content_Items = (LinearLayout) findViewById(R.id.contentItems);
-        addItem();
-        addItem();
-        addItem();
-        addItem();
-        addItem();
-        addItem();
 
-        addItem();
-        addItem();
-        addItem();
-
-        addItem();
-        addItem();
-        addItem();
-
+        initIds();
+        changeItems();
 
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,13 +131,39 @@ public class AccountshopActivity extends AppCompatActivity
     }
 
     private void changeItems() {
+        content_Items.removeAllViews();
+        ArrayList<AvatarItemDescription> cur = new ArrayList<>();
+        switch (currentSelected) {
+            case HATS:
+                cur = hat_ids;
+                break;
+            case EYES:
+                cur = eyes_ids;
+                break;
+            case SKINS:
+                cur = skins_ids;
+                break;
+            case BODIES:
+                cur = bodies_ids;
+                break;
+            case BACKGROUNDS:
+                cur = background_ids;
+                break;
+            case MOUTHS:
+                cur = mouths_ids;
+                break;
+        }
+
+        for(int i = 0;i< cur.size();i++) {
+            addItem(cur.get(i));
+        }
 
     }
 
-    private void addItem() {
+    private void addItem(AvatarItemDescription ad) {
         //TODO
         ItemView i = new ItemView(getApplicationContext());
-        i.setItem(R.drawable.avatar_hat_12, "Ein Helm der alten Vikinger", 3000, false);
+        i.setItem(ad.getId(), ad.getDescription(), ad.getPrice(), false);
         content_Items.addView(i);
     }
 

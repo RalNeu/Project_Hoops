@@ -134,6 +134,34 @@ public class AvatarItems {
         return 0;
     }
 
+    public int getAccountItemByID(String item, String username) throws java.sql.SQLException {
+        SqlManager sqlManager = SqlManager.getInstance();
+        String itemsString = sqlManager.getAvatarItems(username);
+        switch (item) {
+            case "hat":
+                hatIndex = Integer.parseInt(itemsString.substring(0, 2));
+                if(hatIndex == -1)
+                    return 0;
+                return hats.get(hatIndex);
+            case "eyes":
+                eyesIndex = Integer.parseInt(itemsString.substring(2, 4));
+                return eyes.get(eyesIndex);
+            case "background":
+                backgroundIndex = Integer.parseInt(itemsString.substring(4, 6));
+                return background.get(backgroundIndex);
+            case "mouth":
+                mouthIndex = Integer.parseInt(itemsString.substring(6, 8));
+                return mouth.get(mouthIndex);
+            case "skin":
+                skinIndex = Integer.parseInt(itemsString.substring(8, 10));
+                return skin.get(skinIndex);
+            case "body":
+                bodyIndex = Integer.parseInt(itemsString.substring(10, 12));
+                return body.get(bodyIndex);
+        }
+        return 0;
+    }
+
     public ArrayList getList(String item) {
         switch (item) {
             case "hat":

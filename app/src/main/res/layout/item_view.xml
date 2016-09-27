@@ -105,12 +105,22 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical">
 
-            <Button
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Kaufen"
-                android:id="@+id/btn_Buy"
-                android:layout_gravity="center_vertical" />
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Kaufen"
+                    android:id="@+id/btn_Buy"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
+
+            </FrameLayout>
+
         </ulm.hochschule.project_hoops.views.SquareLayout>
+
     </FrameLayout>
 </LinearLayout>
