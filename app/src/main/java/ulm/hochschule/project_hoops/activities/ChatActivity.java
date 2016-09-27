@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -35,7 +36,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 public class ChatActivity extends Fragment {
 
-    private Button button;
+    private FloatingActionButton button;
     private EditText et_Text;
 
     private ChatClient myClient;
@@ -53,7 +54,7 @@ public class ChatActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.activity_chat, container, false);
-        button = (Button) layout.findViewById(R.id.btn_send);
+        button = (FloatingActionButton) layout.findViewById(R.id.btn_send);
         et_Text  = (EditText)layout.findViewById(R.id.tv_message);
         listView = (ListView) layout.findViewById(R.id.listView);
         listView.setClipToPadding(false);
@@ -102,7 +103,7 @@ public class ChatActivity extends Fragment {
                 }
             }
 
-        });
+       });
     }
 
 

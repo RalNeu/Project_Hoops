@@ -3,7 +3,7 @@ package ulm.hochschule.project_hoops.sonstige;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import ulm.hochschule.project_hoops.Views.GamePanel;
+import ulm.hochschule.project_hoops.views.GamePanel;
 
 /**
  * Created by Johann on 19.09.2016.
