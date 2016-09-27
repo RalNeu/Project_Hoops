@@ -48,15 +48,13 @@
 
     </LinearLayout>
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_send"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background = "@android:drawable/ic_menu_send"
-        android:layout_marginRight="5dp"
+        android:src = "@android:drawable/ic_menu_send"
+        android:layout_marginRight="10dp"
         android:layout_alignTop="@+id/messageLayout"
-        android:layout_alignParentRight="true" />
-
-
-
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"/>
 </RelativeLayout>

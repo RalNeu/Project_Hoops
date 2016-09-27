@@ -2,6 +2,6 @@
 <resources>
     <color name="colorPrimary">#FF7500</color>
     <color name="colorPrimaryDark">#E66900</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF7500</color>
     <color name="orange">#FF7500</color>
 </resources>
