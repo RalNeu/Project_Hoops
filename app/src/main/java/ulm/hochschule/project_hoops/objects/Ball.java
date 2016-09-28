@@ -16,7 +16,7 @@ public class Ball {
 
     public float xCenter = 500;
     public float yCenter = 500;
-    public int RADIUS = 96;
+    public int RADIUS;
     public float yVelocity = 0, xVelocity = 0;
     public float angle = 0;
     public boolean ok;
@@ -26,16 +26,19 @@ public class Ball {
     private static final float GRAVITY = 9.81f;
     private static final float deltaT = 0.5f;
     public static final float FACTOR_BOUNCEBACK = 0.75f;
-    public BitmapDrawable bitmap;
+    public BitmapDrawable bitmapD;
+    Bitmap bitmap;
 
     public boolean nothingBelow;
 
     public Ball(float widthScreen, float heightScreen, Context context){
-        bitmap = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
+        bitmapD = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
+        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) widthScreen / 15, (int) widthScreen / 15, true);
         this.widthScreen = widthScreen;
         this.heightScreen = heightScreen;
         alphaPaint = new Paint();
         nothingBelow = true;
+        RADIUS = bitmap.getWidth() / 2;
     }
 
     public boolean update()
@@ -89,14 +92,14 @@ public class Ball {
         return true;
     }
 
-    private void setCenter(float x, float y){
+    public void setCenter(float x, float y){
         xCenter = x;
         yCenter = y;
     }
 
     public void myDraw(Canvas canvas){
 
-        Bitmap rotatedBitmap = RotateBitmap(bitmap.getBitmap(), angle);
+        Bitmap rotatedBitmap = RotateBitmap(bitmap, angle);
         /*if(xVelocity < 25){
             alphaPaint.setAlpha((int)xVelocity*4);
         }else if(xVelocity > -25){
@@ -111,7 +114,6 @@ public class Ball {
     {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
-
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }

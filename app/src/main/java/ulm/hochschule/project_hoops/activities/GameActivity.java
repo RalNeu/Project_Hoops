@@ -2,6 +2,7 @@ package ulm.hochschule.project_hoops.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,14 +16,19 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.views.GamePanel;
 
-public class GameActivity extends Activity{
+public class GameActivity extends Activity implements View.OnClickListener{
     // screen size
     private int widthScreen;
     private int heightScreen;
+    private GamePanel gamePanel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,35 @@ public class GameActivity extends Activity{
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         widthScreen = displaymetrics.widthPixels;
         heightScreen = displaymetrics.heightPixels - getStatusBarHeight();
-        setContentView(new GamePanel(getApplicationContext(), widthScreen, heightScreen));
+        //setContentView(new GamePanel(getApplicationContext(), widthScreen, heightScreen));
+
+
+        FrameLayout game = new FrameLayout(this);
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen);
+        LinearLayout gameWidgets = new LinearLayout (this);
+
+        Button endGameButton = new Button(this);
+        TextView myText = new TextView(this);
+
+        endGameButton.setWidth(300);
+        endGameButton.setText("Restart");
+        myText.setText("rIZ..i");
+
+        gameWidgets.addView(myText);
+        gameWidgets.addView(endGameButton);
+
+        game.addView(gamePanel);
+        game.addView(gameWidgets);
+
+        setContentView(game);
+        endGameButton.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
+        // re-starts this activity from game-view. add this.finish(); to remove from stack
+        gamePanel.restartGame();
     }
 
     public int getStatusBarHeight() {

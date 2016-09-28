@@ -102,6 +102,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         yV = (y - y2) / 5;
     }
 
+    public void restartGame() {
+        ball.ok = false;
+        ball.setCenter(500, 500);
+    }
+
     private void checkCollisionBasket(float xBasketColl, float yBasketColl, float basketCollRadius) {
 
         float xBasketColVector;
@@ -125,28 +130,34 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
             ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
             ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            if(ball.xCenter < xBasketColl)
+                ball.xCenter -= 2;
+            else
+                ball.xCenter += 2;
+            if(ball.yCenter < yBasketColl)
+                ball.yCenter -= 2;
+            else
+                ball.yCenter += 2;
         }
 
-        if ((ball.xCenter + ball.RADIUS < hoop.xBasketCollFront - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollFront + basketCollRadius) &&
+        /*if ((ball.xCenter + ball.RADIUS < hoop.xBasketCollFront - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollFront + basketCollRadius) &&
                 (ball.xCenter + ball.RADIUS < hoop.xBasketCollBack - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollBack + basketCollRadius))
             ball.nothingBelow = true;
-            //else if (ball.yCenter + ball.RADIUS < yBasketColl - basketCollRadius && ball.yCenter + ball.RADIUS > yBasketColl + basketCollRadius)
         else if (Math.sqrt(Math.pow(hoop.xBasketCollFront - ball.xCenter, 2) + Math.pow(hoop.yBasketCollFront - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius && ball.xVelocity < 5 && ball.yVelocity >= -2) {
             if (ball.xCenter > hoop.xBasketCollFront)
-                ball.xVelocity += 2;
+                ball.xCenter += 2;
             else
-                ball.xVelocity -= 2;
+                ball.xCenter -= 2;
             if (ball.xCenter - hoop.xBasketCollFront == 0)
-                ball.xVelocity++;
+                ball.xCenter += 2;
             ball.nothingBelow = false;
         } else if (Math.sqrt(Math.pow(hoop.xBasketCollBack - ball.xCenter, 2) + Math.pow(hoop.yBasketCollBack - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius && ball.xVelocity < 5 && ball.yVelocity >= -2) {
-            ball.xVelocity -= 2;
+            ball.xCenter -= 2;
             if (ball.xCenter - hoop.xBasketCollBack == 0)
-                ball.xVelocity -= 2;
+                ball.xCenter -= 2;
             ball.nothingBelow = false;
         } else
-            ball.nothingBelow = true;
-        System.out.println("yVelocity: " + ball.yVelocity);
+            ball.nothingBelow = true;*/
     }
 
     private void checkCollisionBBoard() {
