@@ -82,89 +82,75 @@ public class SqlManager {
         return instance;
     }
 
-    public void createUser(String firstName, String lastName, String email, String userName, String password) {
-        createUser(firstName, lastName, email, userName, password, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
+    public int createUser(String firstName, String lastName, String email, String userName, String password) {
+        return createUser(firstName, lastName, email, userName, password, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
     }
 
-    public void createUser(String firstName, String lastName, String email, String userName, String password, String achievements, int mod){
-        createUser(firstName, lastName, email, userName, password, achievements);
-    }
 
-    private void createUser(String firstName, String lastName, String email, String userName, String password, String achievements){
-        Calendar calendar = Calendar.getInstance();
+    private int createUser(String firstName, String lastName, String email, String username, String password, String achievements){
 
-        Calendar c = Calendar.getInstance();
-        c.set(2000, 1, 1);
-
-
-        int personID=0, spielerID=0, erstellDatumID=0;
+        int ret = 2, personID;
         String query;
 
         try {
-            //create Lieblingsspieler
-            query = "insert into lieblingsspieler()" + "values ()";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.execute();
-            //get the primeKey from the Lieblingsspieler
-            query ="select lID from lieblingsspieler where lID = (Select Max(lID)from lieblingsspieler)";
-            preparedStmt = con.prepareStatement(query);
-            rs = preparedStmt.executeQuery();
-            rs.beforeFirst();
-            while(rs.next()) {
-                spielerID = rs.getInt("lID");
-                rs.next();
-            }
-            preparedStmt.execute();
-
-            //Create
-            query = "insert into erstelldatum(eDatum)" + "value(Now())";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.execute();
-            //get Erstelldatum ID
-            query = "select eID from erstelldatum where eID = (Select MAX(eID) from erstelldatum)";
-            preparedStmt = con.prepareStatement(query);
-            rs= preparedStmt.executeQuery();
-            while(rs.next()) {
-                erstellDatumID = rs.getInt("eID");
-                rs.next();
-            }
 
             // create the mysql insert for person
-            query = "insert into person ( email, vorname, nachname,lID, geburtsdatum, hobbies)"
-                    + " values (?, ?, ?, ?, ?, ?)";
+            query = "insert into person ( email, vorname, nachname, geburtsdatum, hobbies)"
+                    + " values (?, ?, ?, ?, ?)";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, email);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
-            preparedStmt.setInt(4,spielerID);
-            preparedStmt.setDate(5, new Date(100,1,1)); //TODO
-            preparedStmt.setString(6, "");
+            preparedStmt.setDate(4, new Date(100,1,1)); //TODO
+            preparedStmt.setString(5, "");
             preparedStmt.execute();
+            ret--;
 
             //get the primeKey from the person
-            query ="select pID from person where pID = (Select MAX(pID) from person)";
+            query ="select pID from person where email='" + email + "'";
             preparedStmt = con.prepareStatement(query);
             rs= preparedStmt.executeQuery();
-            while(rs.next()) {
-                personID = rs.getInt("pID");
-                rs.next();
-            }
+            rs.first();
+            personID = rs.getInt("pID");
 
             //create Account
-            query ="insert into account(username, coins, password, pID, eID, lastlogin, achievements) values (?, ?, ?, ?, ?, NOW(), ?)";
+            query ="insert into account(username, coins, password, pID, lastlogin, achievements) values (?, ?, ?, ?, NOW(), ?)";
             preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, userName);
+            preparedStmt.setString(1, username);
             preparedStmt.setInt(2, 500);
             preparedStmt.setString(3,password);
             preparedStmt.setInt(4,personID);
+            preparedStmt.setString(5, achievements);
+            preparedStmt.execute();
+            ret--;
 
-            preparedStmt.setInt(5,erstellDatumID);
-            preparedStmt.setString(6, achievements);
+            query ="select aID from account where username ='" + username + "'";
+            preparedStmt = con.prepareStatement(query);
+            rs= preparedStmt.executeQuery();
+            rs.first();
+            int aID = rs.getInt("aID");
+
+            query ="insert into bought_items(aID) values (" + aID + ")";
+            preparedStmt = con.prepareStatement(query);
             preparedStmt.execute();
 
         }catch(Exception e){
+            System.err.println("Errorcode: " + ret);
             e.printStackTrace();
+            //If user exists already, delete the person just created.
+            if(ret == 1) {
+                try {
+
+                    query = "delete from person where email='" + email + "'";
+                    preparedStmt = con.prepareStatement(query);
+                    preparedStmt.executeUpdate();
+                } catch(SQLException err) {
+                    err.printStackTrace();
+                    System.err.println("Unable to delete from table person.");
+                }
+            }
         }
+        return ret;
     }
 
     public void updateAchievements(int aID, String achievements) {
