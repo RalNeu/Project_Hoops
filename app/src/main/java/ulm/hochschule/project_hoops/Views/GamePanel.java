@@ -8,6 +8,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import ulm.hochschule.project_hoops.objects.Ball;
 import ulm.hochschule.project_hoops.objects.Hoop;
@@ -27,11 +30,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private float xV, yV;
     private boolean drawPoint = false;
 
+    private boolean inHoopZone = false;
+    private int score = 0;
+    private TextView textView;
 
-    public GamePanel(Context context, float width, float height){
+    public GamePanel(Context context, float width, float height, TextView textView){
         super(context);
         ball = new Ball(width, height, context);
         hoop = new Hoop(width, height, context);
+        this.textView = textView;
 
         getHolder().addCallback(this);
         setOnTouchListener(new OnTouchListener() {
@@ -97,6 +104,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             checkCollisionBasket(hoop.xBasketCollBack, hoop.yBasketCollBack, hoop.basketCollRadius);
             checkCollisionBBoard();
             checkCollisionPole();
+            checkGoal();
+
         }
         xV = (x - x2) / 5;
         yV = (y - y2) / 5;
@@ -105,6 +114,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void restartGame() {
         ball.ok = false;
         ball.setCenter(500, 500);
+    }
+
+    private void checkGoal() {
+        if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50) {
+            score++;
+            textView.setText("Score: " + score + " ...noob");
+            restartGame();
+            inHoopZone = false;
+        }
+        if(ball.xCenter > hoop.xBasketCollFront && ball.xCenter < hoop.xBasketCollBack && ball.yCenter > hoop.yBasketCollFront - 50 && ball.yCenter < hoop.yBasketCollFront + 50)
+            inHoopZone = true;
+        else
+            inHoopZone = false;
+
     }
 
     private void checkCollisionBasket(float xBasketColl, float yBasketColl, float basketCollRadius) {

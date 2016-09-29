@@ -29,6 +29,7 @@ public class GameActivity extends Activity implements View.OnClickListener{
     private int widthScreen;
     private int heightScreen;
     private GamePanel gamePanel;
+    private int score = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,17 +42,18 @@ public class GameActivity extends Activity implements View.OnClickListener{
         heightScreen = displaymetrics.heightPixels - getStatusBarHeight();
         //setContentView(new GamePanel(getApplicationContext(), widthScreen, heightScreen));
 
-
+        TextView myText = new TextView(this);
+        myText.setText("Score: " + score + " ...noob");
         FrameLayout game = new FrameLayout(this);
-        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen);
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, myText);
         LinearLayout gameWidgets = new LinearLayout (this);
 
-        Button endGameButton = new Button(this);
-        TextView myText = new TextView(this);
 
+
+        Button endGameButton = new Button(this);
         endGameButton.setWidth(300);
         endGameButton.setText("Restart");
-        myText.setText("rIZ..i");
+
 
         gameWidgets.addView(myText);
         gameWidgets.addView(endGameButton);
@@ -68,6 +70,10 @@ public class GameActivity extends Activity implements View.OnClickListener{
         //startActivity(intent);
         // re-starts this activity from game-view. add this.finish(); to remove from stack
         gamePanel.restartGame();
+    }
+
+    public void updateScore() {
+        
     }
 
     public int getStatusBarHeight() {

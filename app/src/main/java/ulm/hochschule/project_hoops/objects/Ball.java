@@ -33,7 +33,7 @@ public class Ball {
 
     public Ball(float widthScreen, float heightScreen, Context context){
         bitmapD = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
-        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) widthScreen / 15, (int) widthScreen / 15, true);
+        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) widthScreen / 12, (int) widthScreen / 12, true);
         this.widthScreen = widthScreen;
         this.heightScreen = heightScreen;
         alphaPaint = new Paint();
