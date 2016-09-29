@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import ulm.hochschule.project_hoops.fragments.ChatFragment;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment registerTab = new RegisterTab2();
     private Fragment loginTab = new LoginTab();
     private Fragment houseView = new HouseViewTab();
-    private Fragment chatFragment = new ChatActivity();
+    private Fragment chatFragment = new ChatFragment();
 
     private AchievementTab achievementTab = new AchievementTab();
 

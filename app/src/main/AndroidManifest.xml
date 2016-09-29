@@ -32,7 +32,7 @@
             android:name=".activities.TippspielActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".activities.ChatActivity"
+            android:name=".fragments.ChatFragment"
             android:label="What&apos;s Hoops" />
         <activity android:name=".activities.GameActivity" />
         <activity

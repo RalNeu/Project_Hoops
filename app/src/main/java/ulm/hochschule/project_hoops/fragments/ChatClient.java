@@ -13,8 +13,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import ulm.hochschule.project_hoops.activities.ChatActivity;
-
 
 public class ChatClient extends Thread {
 
@@ -29,10 +27,10 @@ public class ChatClient extends Thread {
     private DataOutputStream dout;
     private DataInputStream din;
     private Socket socket;
-    private ChatActivity cA;
+    private ChatFragment cA;
 
 
-    public ChatClient(ChatActivity ca) {
+    public ChatClient(ChatFragment ca) {
         host =  "141.59.26.107";
         port = 21401;
        cA = ca;

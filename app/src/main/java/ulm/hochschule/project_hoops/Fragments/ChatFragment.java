@@ -1,40 +1,27 @@
-package ulm.hochschule.project_hoops.activities;
+package ulm.hochschule.project_hoops.fragments;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.fragments.HouseViewTab;
-import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.utilities.ChatAdapter;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
-import ulm.hochschule.project_hoops.fragments.ChatClient;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
-public class ChatActivity extends Fragment {
+public class ChatFragment extends Fragment {
 
     private FloatingActionButton button;
     private EditText et_Text;

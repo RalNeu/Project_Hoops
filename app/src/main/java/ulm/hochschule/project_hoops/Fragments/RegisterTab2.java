@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,7 @@ public class RegisterTab2 extends Fragment {
 
     //Patrick für tastatur schließen
     private LinearLayout lLayout;
+    private FragmentManager fsm = null;
 
 
     @Override
@@ -70,6 +73,8 @@ public class RegisterTab2 extends Fragment {
         btn_Register = (Button) layout.findViewById(R.id.btn_Register);
         txt_Link = (TextView) layout.findViewById(R.id.link_Login);
         lLayout = (LinearLayout) layout.findViewById(R.id.register2Layout);
+
+
         return layout;
     }
 
@@ -82,6 +87,15 @@ public class RegisterTab2 extends Fragment {
                 register();
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromInputMethod(lLayout.getWindowToken(),0);
+            }
+        });
+
+        txt_Link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.contentPanel, new LoginTab()).commit();
             }
         });
     }

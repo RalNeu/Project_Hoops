@@ -63,7 +63,7 @@ public class LoginTab extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.contentPanel, new RegisterTab2());
+                ft.replace(R.id.contentPanel, new RegisterTab2()).commit();
             }
         });
     }

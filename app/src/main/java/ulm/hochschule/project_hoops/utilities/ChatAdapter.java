@@ -1,9 +1,7 @@
 package ulm.hochschule.project_hoops.utilities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -18,10 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.activities.ChatActivity;
-import ulm.hochschule.project_hoops.activities.EditProfilActivity;
-import ulm.hochschule.project_hoops.fragments.ChatClient;
-import ulm.hochschule.project_hoops.fragments.ProfilTab;
+import ulm.hochschule.project_hoops.fragments.ChatFragment;
 import ulm.hochschule.project_hoops.fragments.ProfilTabChat;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
 
@@ -40,9 +35,9 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private TextView text;
     private ListView listView;
     private FragmentManager fsm = null;
-    private ChatActivity cA = new ChatActivity();
+    private ChatFragment cA = new ChatFragment();
 
-    public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm, ChatActivity cA){
+    public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm, ChatFragment cA){
         super(context, r);
         this.listView = listView;
         this.fsm = fm;
