@@ -4,6 +4,9 @@ import android.app.Activity;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import ulm.hochschule.project_hoops.objects.Coins;
 
@@ -20,6 +23,8 @@ public class UserProfile {
     private Date gebDat, lastLogin;
 
     private static boolean userFound = false;
+
+    private char[][] boughtAvatarItems;
 
     public UserProfile(String sqlUSER, Activity a) {
         Object[] userInfo;
@@ -41,6 +46,9 @@ public class UserProfile {
             achievements = (String) userInfo[12];
             lastLogin =     (Date)  userInfo[13];
             AchievementHandler ah = null;
+
+            mapBoughtAvatarItems();
+
             try {
                 ah = AchievementHandler.getInstance();
                 ah.mapAchievements(userID, achievements);
@@ -53,6 +61,77 @@ public class UserProfile {
             System.err.println("User not found.");
             e.printStackTrace();
         }
+    }
+
+    private void mapBoughtAvatarItems() {
+        ArrayList<String> items = SqlManager.getInstance().readBoughtAvatarItems(userID);
+
+        boughtAvatarItems = new char[6][20];
+
+        for(int i = 0;i<6;i++) {
+            String cur = items.get(i);
+            for(int j = 0; j< cur.length();j++) {
+                boughtAvatarItems[i][j] = cur.charAt(j);
+            }
+        }
+
+    }
+
+    public char getItemAt(int item, int idx) {
+        return boughtAvatarItems[item][idx];
+    }
+
+    public int getMaxItems(int item) {
+        return boughtAvatarItems[item].length;
+    }
+
+    public int getHighestItemAvailable(int item) {
+        int ret = 0;
+        for(int i = boughtAvatarItems[item].length-1;i>= 0; i--) {
+            if(boughtAvatarItems[item][i] == 'y') {
+                ret = i;
+                i = -1;
+            }
+        }
+        return ret;
+    }
+
+    public void buyItem(int id, int idx, int price) {
+        if(coins.getCoins() >= price) {
+
+            String[] columnNames = {"hats", "eyes", "backgrounds", "mouths", "skins", "bodies"};
+
+            try {
+                SqlManager.getInstance().buyItem(userID, coins.getCoins()-price, columnNames[id], getNewAvatarString(id,idx));
+                boughtAvatarItems[id][idx] = 'y';
+                coins.updateCoins(price * -1);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getNewAvatarString(int id, int idx) {
+        String ret = "";
+        for(int i = 0; i < boughtAvatarItems[id].length;i++) {
+            if(i == idx) {
+                ret += 'y';
+            } else
+                ret += boughtAvatarItems[id][i];
+        }
+
+        return ret;
+    }
+
+    public int getLowestItemAvailable(int item) {
+        int ret = boughtAvatarItems[item].length-1;
+        for(int i = 0; i< boughtAvatarItems[item].length;i++) {
+            if(boughtAvatarItems[item][i] == 'y') {
+                ret = i;
+                i = boughtAvatarItems[item].length;
+            }
+        }
+        return ret;
     }
 
 
@@ -128,7 +207,6 @@ public class UserProfile {
 
     public void updateCoins(int c) {
         coins.updateCoins(c);
-        //SqlManager.getInstance().updateCoins(coins, username);
     }
 
     public int getRanking() {

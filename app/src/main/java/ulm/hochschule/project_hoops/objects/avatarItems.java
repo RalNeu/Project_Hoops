@@ -37,6 +37,7 @@ public class AvatarItems {
         skin = new ArrayList<>();
         body = new ArrayList<>();
 
+        UserProfile u = UserProfile.getInstance();
 
         hats.add(R.drawable.avatar_hat_1);
         hats.add(R.drawable.avatar_hat_2);
@@ -47,6 +48,7 @@ public class AvatarItems {
         hats.add(R.drawable.avatar_hat_7);
         hats.add(R.drawable.avatar_hat_8);
         hats.add(R.drawable.avatar_hat_9);
+        hats.add(R.drawable.avatar_hat_10);
         hats.add(R.drawable.avatar_hat_11);
         hats.add(R.drawable.avatar_hat_12);
         hats.add(R.drawable.avatar_hat_13);
@@ -101,8 +103,6 @@ public class AvatarItems {
         body.add(R.drawable.avatar_body_6);
         body.add(R.drawable.avatar_body_7);
         body.add(R.drawable.avatar_body_8);
-
-
     }
 
     public int getAccountItemByID(String item) throws java.sql.SQLException {
@@ -118,7 +118,7 @@ public class AvatarItems {
                 return eyes.get(eyesIndex);
             case "background":
                 backgroundIndex = Integer.parseInt(itemsString.substring(4, 6));
-                if(hatIndex == -1)
+                if(backgroundIndex == -1)
                     return 0;
                 return background.get(backgroundIndex);
             case "mouth":
