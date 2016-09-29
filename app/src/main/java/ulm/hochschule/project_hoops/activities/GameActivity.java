@@ -43,7 +43,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
 
         final TextView scoreText = new TextView(this);
-        scoreText.setText("Score: " + score + " ...noob");
+        scoreText.setText("Score: " + score);
         FrameLayout game = new FrameLayout(this);
         this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText);
         LinearLayout gameWidgets = new LinearLayout (this);

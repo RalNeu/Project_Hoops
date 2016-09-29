@@ -75,6 +75,8 @@ public class Hoop {
         canvas.drawCircle(xBackboardBot, yBackboardBot, basketCollRadius, p);
         canvas.drawCircle(xPoleCollTop, yPoleCollTop, basketCollRadius, p);
         canvas.drawCircle(xPoleCollBot, yPoleCollBot, basketCollRadius, p);
-
+        p.setColor(Color.GREEN);
+        p.setAlpha(50);
+        canvas.drawRect(xBasketCollFront, yBasketCollFront-50, xBasketCollBack, yBasketCollFront+50, p);
     }
 }

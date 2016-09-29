@@ -156,14 +156,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
             ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
             ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
-            if(ball.xCenter < xBasketColl)
-                ball.xCenter -= 2;
-            else
-                ball.xCenter += 2;
-            if(ball.yCenter < yBasketColl)
-                ball.yCenter -= 2;
-            else
-                ball.yCenter += 2;
+            if(ball.xCenter < xBasketColl) {
+                ball.xVelocity -= 2;
+                ball.xCenter--;
+            }
+            else {
+                ball.xVelocity += 2;
+                ball.xCenter++;
+            }
+            if(ball.yCenter < yBasketColl) {
+                ball.yVelocity -= 2;
+                ball.yCenter--;
+            }
+            else {
+                ball.yVelocity += 2;
+                ball.yCenter++;
+            }
         }
 
         /*if ((ball.xCenter + ball.RADIUS < hoop.xBasketCollFront - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollFront + basketCollRadius) &&
@@ -211,7 +219,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawColor(Color.WHITE);
             ball.myDraw(canvas);
             hoop.myDraw(canvas);
-
 
             if(drawPoint) {
                 for (int i = 0; i < 25; i++) {
