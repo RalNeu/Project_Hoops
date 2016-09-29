@@ -24,7 +24,7 @@ public class ServerCommunicate {
     String ipAdress = "141.59.26.107";
 
     private ServerCommunicate() {
-        ipAdress = "141.59.82.195";
+
     }
 
     public static ServerCommunicate getInstance() {

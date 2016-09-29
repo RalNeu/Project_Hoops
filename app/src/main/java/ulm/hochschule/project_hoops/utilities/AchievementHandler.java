@@ -39,7 +39,6 @@ public class AchievementHandler {
         String[] referenceString = ServerCommunicate.getInstance().getAch().split("/");
         achievementreference = new int[referenceString.length];
         for(int i = 0;i < referenceString.length;i++) {
-            System.out.println(i);
             achievementreference[i] = Integer.parseInt(referenceString[i]);
         }
 

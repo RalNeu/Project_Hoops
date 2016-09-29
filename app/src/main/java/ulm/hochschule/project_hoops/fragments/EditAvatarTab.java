@@ -48,41 +48,41 @@ public class EditAvatarTab extends Fragment {
             @Override
             public void onClick(View v) {
                 disableButton(btnBackground);
-                handleArrowEnable(background, backgroundIndex);
+                handleArrowEnable(2, backgroundIndex);
             }
         });
         btnEyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 disableButton(btnEyes);
-                handleArrowEnable(eyes, eyesIndex);
+                handleArrowEnable(1, eyesIndex);
             }
         });
         btnHat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleArrowEnable(hats, hatIndex);
+                handleArrowEnable(0, hatIndex);
                 disableButton(btnHat);
             }
         });
         btnMouth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleArrowEnable(mouth, mouthIndex);
+                handleArrowEnable(3, mouthIndex);
                 disableButton(btnMouth);
             }
         });
         btnSkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleArrowEnable(skin, skinIndex);
+                handleArrowEnable(4, skinIndex);
                 disableButton(btnSkin);
             }
         });
         btnBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleArrowEnable(body, bodyIndex);
+                handleArrowEnable(5, bodyIndex);
                 disableButton(btnBody);
             }
         });
@@ -92,28 +92,34 @@ public class EditAvatarTab extends Fragment {
 
                 switch (selectedBtn.getId()) {
                     case R.id.btnHat:
-                        imgHat.setBackgroundResource(hats.get(++hatIndex));
-                        handleArrowEnable(hats, hatIndex);
+                        hatIndex = getNextIdx(0, hatIndex);
+                        imgHat.setBackgroundResource(hats.get(hatIndex));
+                        handleArrowEnable(0, hatIndex);
                         break;
                     case R.id.btnBackground:
-                        imgBackground.setBackgroundResource(background.get(++backgroundIndex));
-                        handleArrowEnable(background, backgroundIndex);
+                        backgroundIndex = getNextIdx(2, backgroundIndex);
+                        imgBackground.setBackgroundResource(background.get(backgroundIndex));
+                        handleArrowEnable(2, backgroundIndex);
                         break;
                     case R.id.btnEyes:
-                        imgEyes.setBackgroundResource(eyes.get(++eyesIndex));
-                        handleArrowEnable(eyes, eyesIndex);
+                        eyesIndex = getNextIdx(1, eyesIndex);
+                        imgEyes.setBackgroundResource(eyes.get(eyesIndex));
+                        handleArrowEnable(1, eyesIndex);
                         break;
                     case R.id.btnMouth:
-                        imgMouth.setBackgroundResource(mouth.get(++mouthIndex));
-                        handleArrowEnable(mouth, mouthIndex);
+                        mouthIndex = getNextIdx(3, mouthIndex);
+                        imgMouth.setBackgroundResource(mouth.get(mouthIndex));
+                        handleArrowEnable(3, mouthIndex);
                         break;
                     case R.id.btnSkin:
-                        imgSkin.setBackgroundResource(skin.get(++skinIndex));
-                        handleArrowEnable(skin, skinIndex);
+                        skinIndex = getNextIdx(4, skinIndex);
+                        imgSkin.setBackgroundResource(skin.get(skinIndex));
+                        handleArrowEnable(4, skinIndex);
                         break;
                     case R.id.btnBody:
-                        imgBody.setBackgroundResource(body.get(++bodyIndex));
-                        handleArrowEnable(body, bodyIndex);
+                        bodyIndex = getNextIdx(5, bodyIndex);
+                        imgBody.setBackgroundResource(body.get(bodyIndex));
+                        handleArrowEnable(5, bodyIndex);
                         break;
                 }
 
@@ -125,33 +131,38 @@ public class EditAvatarTab extends Fragment {
 
                 switch (selectedBtn.getId()) {
                     case R.id.btnHat:
-                        imgHat.setBackgroundResource(hats.get(--hatIndex));
-                        handleArrowEnable(hats, hatIndex);
+                        hatIndex = getPrevIdx(0, hatIndex);
+                        imgHat.setBackgroundResource(hats.get(hatIndex));
+                        handleArrowEnable(0, hatIndex);
                         break;
                     case R.id.btnBackground:
-                        if(backgroundIndex == 0) {
+                        backgroundIndex = getPrevIdx(2, backgroundIndex);
+                        if(backgroundIndex == -1) {
                             imgBackground.setBackgroundResource(0);
-                            backgroundIndex--;
                         } else {
-                            imgBackground.setBackgroundResource(background.get(--backgroundIndex));
+                            imgBackground.setBackgroundResource(background.get(backgroundIndex));
                         }
-                        handleArrowEnable(background, backgroundIndex);
+                        handleArrowEnable(2, backgroundIndex);
                         break;
                     case R.id.btnEyes:
-                        imgEyes.setBackgroundResource(eyes.get(--eyesIndex));
-                        handleArrowEnable(eyes, eyesIndex);
+                        eyesIndex = getPrevIdx(1, eyesIndex);
+                        imgEyes.setBackgroundResource(eyes.get(eyesIndex));
+                        handleArrowEnable(1, eyesIndex);
                         break;
                     case R.id.btnMouth:
-                        imgMouth.setBackgroundResource(mouth.get(--mouthIndex));
-                        handleArrowEnable(mouth, mouthIndex);
+                        mouthIndex = getPrevIdx(3, mouthIndex);
+                        imgMouth.setBackgroundResource(mouth.get(mouthIndex));
+                        handleArrowEnable(3, mouthIndex);
                         break;
                     case R.id.btnSkin:
-                        imgSkin.setBackgroundResource(skin.get(--skinIndex));
-                        handleArrowEnable(skin, skinIndex);
+                        skinIndex = getPrevIdx(4, skinIndex);
+                        imgSkin.setBackgroundResource(skin.get(skinIndex));
+                        handleArrowEnable(4, skinIndex);
                         break;
                     case R.id.btnBody:
-                        imgBody.setBackgroundResource(body.get(--bodyIndex));
-                        handleArrowEnable(body, bodyIndex);
+                        bodyIndex = getPrevIdx(5, bodyIndex);
+                        imgBody.setBackgroundResource(body.get(bodyIndex));
+                        handleArrowEnable(5, bodyIndex);
                         break;
                 }
 
@@ -166,6 +177,33 @@ public class EditAvatarTab extends Fragment {
             }
         });
 
+    }
+
+    private int getNextIdx(int item, int idx) {
+        for(int i = idx + 1;i< uProfile.getMaxItems(item); i++) {
+            if(uProfile.getItemAt(item, i) == 'y') {
+                idx = i;
+                i = uProfile.getMaxItems(item);
+            }
+        }
+        return idx;
+    }
+
+    private int getPrevIdx(int item, int idx) {
+        boolean found = false;
+        for(int i = idx - 1;i >= 0;i--) {
+            if(uProfile.getItemAt(item, i) == 'y') {
+                idx = i;
+                i = -1;
+                found = true;
+            }
+        }
+
+        if(!found && item == 2) {
+            idx = -1;
+        }
+
+        return idx;
     }
 
     public void save() {
@@ -187,21 +225,21 @@ public class EditAvatarTab extends Fragment {
         selectedBtn = btn;
     }
 
-    public void handleArrowEnable(ArrayList list, int itemIndex) {
+    public void handleArrowEnable(int item , int itemIndex) {
 
-        if (itemIndex == list.size()-1)
+        if (itemIndex == uProfile.getHighestItemAvailable(item))
             disableNext();
         else
             enableNext();
 
-        //Bei hats kann noch 1 Schritt weiter zurückgegangen werden um den Hintergrund zu entfernen
-        if(list == background) {
+        //Bei hats kann noch 1 Schritt weiter zurückgegangen werden um den Hut zu entfernen
+        if(item == 2) {
             if(itemIndex == -1 )
                 disablePrev();
             else
                 enablePrev();
         } else {
-            if(itemIndex == 0 )
+            if(itemIndex == uProfile.getLowestItemAvailable(item) )
                 disablePrev();
             else
                 enablePrev();

@@ -3,12 +3,7 @@ package ulm.hochschule.project_hoops.utilities;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.StrictMode;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -19,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
+import java.util.ArrayList;
 
 import ulm.hochschule.project_hoops.objects.Coins;
 
@@ -86,6 +81,30 @@ public class SqlManager {
         return createUser(firstName, lastName, email, userName, password, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
     }
 
+    public ArrayList<String> readBoughtAvatarItems(int aID) {
+        ArrayList<String> ret = new ArrayList<>();
+
+        String query = "select * from bought_items where aID='" + aID + "'";
+
+        try {
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+
+            rs.first();
+
+            ret.add(rs.getString("hats"));
+            ret.add(rs.getString("eyes"));
+            ret.add(rs.getString("backgrounds"));
+            ret.add(rs.getString("mouths"));
+            ret.add(rs.getString("skins"));
+            ret.add(rs.getString("bodies"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
 
     private int createUser(String firstName, String lastName, String email, String username, String password, String achievements){
 
@@ -165,47 +184,36 @@ public class SqlManager {
 
     public void remove(String accnametodelete){
         try {
-            int pID = 0;
-            int erstellID = 0;
-            int lieblingsID = 0;
+            int pID, aID;
             //Gette die pID des zu löschendes Datensatzes um zu wissen, zu welcher Person dieser
             //gehört. Danach kann man die pID verwenden um die Person zu löschen!
-            String hilfsquery = "SELECT pID,eID from account where username=?";
+            String hilfsquery = "SELECT aID, pID from account where username=?";
             preparedStmt = con.prepareStatement(hilfsquery);
             preparedStmt.setString(1, accnametodelete);
             rs=preparedStmt.executeQuery();
             rs.next();
             pID=rs.getInt("pID");
-            erstellID = rs.getInt("eID");
+            aID=rs.getInt("aID");
 
+            String query = "delete from bought_items where aID = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,aID);
+            preparedStmt.executeUpdate();
 
-            String query = "delete from account where username = ?";
+            query = "delete from tipps where aID = ?";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,aID);
+            preparedStmt.executeUpdate();
+
+            query = "delete from account where username = ?";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1,accnametodelete);
-            preparedStmt.execute();
-
-            hilfsquery = "select lID from person where pID=?";
-            preparedStmt = con.prepareStatement(hilfsquery);
-            preparedStmt.setInt(1,pID);
-            rs = preparedStmt.executeQuery();
-            rs.next();
-            lieblingsID = rs.getInt("lID");
-
+            preparedStmt.executeUpdate();
 
             query = "delete from person where pID=?";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1,pID);
-            preparedStmt.execute();
-
-            query = "delete from erstelldatum where eID=?";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1,erstellID);
-            preparedStmt.execute();
-
-            query = "delete from lieblingsspieler where lID=?";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1,lieblingsID);
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -277,6 +285,13 @@ public class SqlManager {
         }
         return response;
     }
+
+    public void buyItem(int aID, int coins, String item, String newItems) throws SQLException{
+        String query = "UPDATE account a INNER JOIN bought_items b ON (a.aID = b.aID) SET a.coins = " + coins + ", b." + item + " = '" + newItems + "' WHERE a.aID = " + aID + " AND b.aID = " + aID;
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.executeUpdate();
+    }
+
 
     public boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
