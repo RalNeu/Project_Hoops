@@ -13,27 +13,27 @@
     <menu>
         <item
             android:id="@+id/nav_eyes"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_eyes"
             android:title="Augen" />
         <item
             android:id="@+id/nav_mouths"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_mouth"
             android:title="Münder" />
         <item
             android:id="@+id/nav_hats"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_hat"
             android:title="Hüte" />
         <item
             android:id="@+id/nav_skins"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_skin"
             android:title="Hautfarben" />
         <item
             android:id="@+id/nav_bodies"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_body"
             android:title="Körper" />
         <item
             android:id="@+id/nav_backgrounds"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_background"
             android:title="Hintergründe" />
     </menu>
     </item>

@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops.tasks;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -20,14 +21,17 @@ import ulm.hochschule.project_hoops.R;
 public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 
     private final WeakReference<ImageView> imageViewReference;
+    private int id;
 
-    public ImageDownloaderTask(ImageView imageView) {
+    public ImageDownloaderTask(ImageView imageView, int id) {
         imageViewReference = new WeakReference<ImageView>(imageView);
+        this.id = id;
     }
 
     @Override
     protected Bitmap doInBackground(String... params) {
-        return downloadBitmap(params[0]);
+        System.out.println("doInBack");
+        return BitmapFactory.decodeResource(Resources.getSystem(), id);//downloadBitmap(params[0]);
     }
 
     @Override
@@ -41,9 +45,13 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
             if (imageView != null) {
                 if (bitmap != null) {
                     imageView.setImageBitmap(bitmap);
+                    System.out.println("id = " + id);
                 } else {
+                    System.out.println("id1 = " + id);
                     Drawable placeholder = imageView.getContext().getResources().getDrawable(R.drawable.ic_menu_camera);
-                    imageView.setImageDrawable(placeholder);
+                   // imageView.setImageDrawable(placeholder);
+                        imageView.setImageResource(id);
+                    //imageView.setImageBitmap(BitmapFactory.decodeResource(Resources.getSystem(), id));
                 }
             }
 

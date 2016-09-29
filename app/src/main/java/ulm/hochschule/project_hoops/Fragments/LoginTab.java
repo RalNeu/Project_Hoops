@@ -36,6 +36,7 @@ public class LoginTab extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager = SqlManager.getInstance();
+
     }
 
     @Nullable

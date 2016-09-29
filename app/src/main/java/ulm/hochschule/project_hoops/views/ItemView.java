@@ -1,7 +1,14 @@
 package ulm.hochschule.project_hoops.views;
 
+import android.accounts.Account;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.util.AttributeSet;
@@ -14,19 +21,27 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.activities.AccountshopActivity;
 import ulm.hochschule.project_hoops.objects.AvatarItemDescription;
+import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
+import ulm.hochschule.project_hoops.tasks.ImageDownloaderTask;
+import ulm.hochschule.project_hoops.tasks.ImageLoader;
+import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
  * Created by Ralph on 27.09.2016.
  */
-public class ItemView extends LinearLayout{
+public class ItemView extends LinearLayout {
 
     private SquareImage img_Item;
     private TextView tv_ItemDesciption, tv_ItemPrice;
-    private Button btn_Buy;
-    private TextView coinCounter;
+    private ChargingButton btn_Buy;
+    private Notificator nf;
 
     public ItemView(Context context) {
         super(context);
@@ -50,7 +65,7 @@ public class ItemView extends LinearLayout{
         img_Item = (SquareImage) this.findViewById(R.id.img_Item);
         tv_ItemDesciption = (TextView) this.findViewById(R.id.tv_ItemDescription);
         tv_ItemPrice = (TextView) this.findViewById(R.id.tv_ItemPrice);
-        btn_Buy = (Button) this.findViewById(R.id.btn_Buy);
+        btn_Buy = (ChargingButton) this.findViewById(R.id.btn_Buy);
     }
 
     private void init(Context context) {
@@ -59,40 +74,55 @@ public class ItemView extends LinearLayout{
         inflater.inflate(R.layout.item_view, this);
     }
 
+    public void setObserver(Observer obs) {
+        nf = new Notificator();
+        nf.addObserver(obs);
+    }
+
     public void checkIfBought(AvatarItemDescription ad) {
 
         btn_Buy.setEnabled(!ad.getBought());
 
         if (ad.getBought()) {
-
-        } else {
-
+            btn_Buy.setBackgroundResource(R.drawable.haeckchen_full);
+            btn_Buy.setText("Gekauft!");
+            btn_Buy.setTextColor(Color.RED);
         }
     }
 
-    public void setItem(AvatarItemDescription ad, TextView coinCounter) {
+   public void setItem(AvatarItemDescription ad) {
         final AvatarItemDescription avd = ad;
-        this.coinCounter = coinCounter;
-        img_Item.setImageResource(ad.getId());
+        //ImageDownloaderTask il = new ImageDownloaderTask(img_Item, ad.getId());
+        //il.execute();
+
+        img_Item.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), ad.getId(), 200,200));
+        //
         tv_ItemDesciption.setText(ad.getDescription());
         tv_ItemPrice.setText("" + ad.getPrice());
+
+        btn_Buy.setTask(new Runnable() {
+            @Override
+            public void run() {
+                UserProfile.getInstance().buyItem(avd.getItem(), avd.getIdx(), avd.getPrice());
+                checkIfBought(avd);
+                nf.notifObs();
+            }
+        });
 
         checkIfBought(ad);
         btn_Buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserProfile.getInstance().buyItem(avd.getItem(), avd.getIdx(), avd.getPrice());
-                checkIfBought(avd);
-                updateCoinCounter();
+
+
             }
         });
 
     }
 
-    public void updateCoinCounter() {
-        coinCounter.setText("" + UserProfile.getInstance().getCoins());
+    public void onTouch(OnTouchListener otl) {
+        btn_Buy.setOnTouchListener(otl);
     }
-
 
 
 }

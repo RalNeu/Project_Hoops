@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 
 /**
  * TODO: document your custom view class.
@@ -82,20 +83,22 @@ public class Achievement extends LinearLayout {
     }
 
     private void mapUIObjects() {
+        int id = 0;
         switch (emblem) {
             case 1:
-                img_Emblem.setImageResource(R.drawable.achievement_bronze);
+                id = R.drawable.achievement_bronze;
                 break;
             case 2:
-                img_Emblem.setImageResource(R.drawable.achievement_silber);
+                id = R.drawable.achievement_silber;
                 break;
             case 3:
-                img_Emblem.setImageResource(R.drawable.achievement_gold);
+                id = R.drawable.achievement_gold;
                 break;
             default:
-                img_Emblem.setImageResource(R.drawable.achievement_grau_transparent);
+                id = R.drawable.achievement_grau_transparent;
                 break;
         }
+        img_Emblem.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), id, 200,200));
 
         tv_Description.setText(description);
         tv_Title.setText(title);

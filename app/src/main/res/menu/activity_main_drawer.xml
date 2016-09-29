@@ -48,10 +48,11 @@
                 android:title="@string/profile"/>
             <item
                 android:id="@+id/achievement"
-                android:icon="@drawable/ic_achievement"
+                android:icon="@drawable/achievement_icon"
                 android:title="Achievements"/>
             <item
                 android:id="@+id/accountshop"
+                android:icon="@drawable/coinsack1"
                 android:title="Accountshop"/>
 
         </menu>

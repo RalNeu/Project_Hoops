@@ -1,5 +1,7 @@
 package ulm.hochschule.project_hoops.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import Enums.AvatarItems;
 import ulm.hochschule.project_hoops.R;
@@ -27,7 +31,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 import ulm.hochschule.project_hoops.views.ItemView;
 
 public class AccountshopActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Observer {
 
 
     private AvatarItems currentSelected = AvatarItems.EYES;
@@ -164,7 +168,8 @@ public class AccountshopActivity extends AppCompatActivity
     private void addItem(AvatarItemDescription ad) {
 
         ItemView i = new ItemView(getApplicationContext());
-        i.setItem(ad, tv_Coins);
+        i.setItem(ad);
+        i.setObserver(this);
         content_Items.addView(i);
     }
 
@@ -212,7 +217,7 @@ public class AccountshopActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.backBtn) {
-
+            finish();
         } else if (id == R.id.nav_eyes) {
             currentSelected = AvatarItems.EYES;
         } else if (id == R.id.nav_mouths) {
@@ -230,5 +235,10 @@ public class AccountshopActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        updateCoinCounter();
     }
 }
