@@ -10,8 +10,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import ulm.hochschule.project_hoops.objects.Ball;
 import ulm.hochschule.project_hoops.objects.Hoop;
 import ulm.hochschule.project_hoops.sonstige.GameThread;
@@ -32,13 +30,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private boolean inHoopZone = false;
     private int score = 0;
-    private TextView textView;
+    private TextView scoreText;
 
     public GamePanel(Context context, float width, float height, TextView textView){
         super(context);
         ball = new Ball(width, height, context);
         hoop = new Hoop(width, height, context);
-        this.textView = textView;
+        this.scoreText = textView;
 
         getHolder().addCallback(this);
         setOnTouchListener(new OnTouchListener() {
@@ -119,8 +117,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private void checkGoal() {
         if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50) {
             score++;
-            textView.setText("Score: " + score + " ...noob");
             restartGame();
+
+            scoreText.post(new Runnable() {
+                              public void run() {
+                                  scoreText.setText("Score: " + score);
+                              }
+                          });
             inHoopZone = false;
         }
         if(ball.xCenter > hoop.xBasketCollFront && ball.xCenter < hoop.xBasketCollBack && ball.yCenter > hoop.yBasketCollFront - 50 && ball.yCenter < hoop.yBasketCollFront + 50)

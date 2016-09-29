@@ -24,7 +24,7 @@ import android.widget.TextView;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.views.GamePanel;
 
-public class GameActivity extends Activity implements View.OnClickListener{
+public class GameActivity extends Activity implements View.OnClickListener {
     // screen size
     private int widthScreen;
     private int heightScreen;
@@ -40,14 +40,13 @@ public class GameActivity extends Activity implements View.OnClickListener{
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         widthScreen = displaymetrics.widthPixels;
         heightScreen = displaymetrics.heightPixels - getStatusBarHeight();
-        //setContentView(new GamePanel(getApplicationContext(), widthScreen, heightScreen));
 
-        TextView myText = new TextView(this);
-        myText.setText("Score: " + score + " ...noob");
+
+        final TextView scoreText = new TextView(this);
+        scoreText.setText("Score: " + score + " ...noob");
         FrameLayout game = new FrameLayout(this);
-        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, myText);
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText);
         LinearLayout gameWidgets = new LinearLayout (this);
-
 
 
         Button endGameButton = new Button(this);
@@ -55,7 +54,7 @@ public class GameActivity extends Activity implements View.OnClickListener{
         endGameButton.setText("Restart");
 
 
-        gameWidgets.addView(myText);
+        gameWidgets.addView(scoreText);
         gameWidgets.addView(endGameButton);
 
         game.addView(gamePanel);
@@ -63,6 +62,8 @@ public class GameActivity extends Activity implements View.OnClickListener{
 
         setContentView(game);
         endGameButton.setOnClickListener(this);
+
+
     }
 
     public void onClick(View v) {
@@ -70,10 +71,6 @@ public class GameActivity extends Activity implements View.OnClickListener{
         //startActivity(intent);
         // re-starts this activity from game-view. add this.finish(); to remove from stack
         gamePanel.restartGame();
-    }
-
-    public void updateScore() {
-        
     }
 
     public int getStatusBarHeight() {
