@@ -69,7 +69,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         //Intent intent = new Intent(this, MainActivity.class);
         //startActivity(intent);
-        // re-starts this activity from game-view. add this.finish(); to remove from stack
         gamePanel.restartGame();
     }
 

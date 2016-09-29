@@ -38,7 +38,8 @@
         <activity
             android:name=".activities.AccountshopActivity"
             android:label="@string/title_activity_accountshop"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.GameMenuActivity"></activity>
     </application>
 
 </manifest>

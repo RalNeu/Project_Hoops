@@ -298,9 +298,8 @@ public class MainActivity extends AppCompatActivity
         }else if(id == R.id.nav_chat) {
             changeFragment(chatFragment);
         }else if(id == R.id.basketball) {
-            startActivity(new Intent(getApplicationContext(), GameActivity.class));
-
-    } else if(id == R.id.accountshop) {
+            startActivity(new Intent(getApplicationContext(), GameMenuActivity.class));
+        } else if(id == R.id.accountshop) {
             startActivity(new Intent(getApplicationContext(), AccountshopActivity.class));
         }
 

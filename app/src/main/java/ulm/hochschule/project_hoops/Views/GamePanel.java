@@ -55,8 +55,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             drawPoint = false;
                             ball.xVelocity = (x - event.getX()) / 5;
                             ball.yVelocity = (y - event.getY()) / 5;
-                            //ball.xVelocity = 75.6f;
-                            //ball.yVelocity = -92.4f;
+                            //ball.xVelocity = 40.6f;
+                            //ball.yVelocity = -174.6f;
+                            System.out.println("xVel: " + ball.xVelocity);
+                            System.out.println("yVel: " + ball.yVelocity);
                             break;
                         case MotionEvent.ACTION_MOVE:
                             x2 = event.getX();
@@ -126,10 +128,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                           });
             inHoopZone = false;
         }
-        if(ball.xCenter > hoop.xBasketCollFront && ball.xCenter < hoop.xBasketCollBack && ball.yCenter > hoop.yBasketCollFront - 50 && ball.yCenter < hoop.yBasketCollFront + 50)
+        if(ball.xCenter > hoop.xBasketCollFront && ball.xCenter < hoop.xBasketCollBack && ball.yCenter >= hoop.yBasketCollFront - 50 && ball.yCenter <= hoop.yBasketCollFront + 50) {
             inHoopZone = true;
-        else
+        }
+        else {
             inHoopZone = false;
+        }
 
     }
 
