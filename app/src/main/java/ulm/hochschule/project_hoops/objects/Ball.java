@@ -21,7 +21,8 @@ public class Ball {
     public float angle = 0;
     public boolean ok;
     public float rotatedBallHalfWidth, rotatedBallHalfHeight;
-    public Paint alphaPaint;
+    private Paint alphaPaint;
+    public int alphaValue = 255;
     public float widthScreen, heightScreen;
     private static final float GRAVITY = 9.81f;
     private static final float deltaT = 0.5f;
@@ -107,6 +108,7 @@ public class Ball {
         }*/
         rotatedBallHalfWidth = rotatedBitmap.getWidth()/2;
         rotatedBallHalfHeight = rotatedBitmap.getHeight()/2;
+        alphaPaint.setAlpha(alphaValue);
         canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alphaPaint);
     }
 

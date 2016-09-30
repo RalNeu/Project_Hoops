@@ -72,7 +72,7 @@ public class ChargingButton extends Button {
 
                         }
                     }, 17,17);
-                } else {//if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     charger.cancel();
                     distance = 0;
                     alpha = 20;

@@ -31,6 +31,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private boolean inHoopZone = false;
     private int score = 0;
     private TextView scoreText;
+    private boolean scored = false;
 
     public GamePanel(Context context, float width, float height, TextView textView){
         super(context);
@@ -104,7 +105,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             checkCollisionBasket(hoop.xBasketCollBack, hoop.yBasketCollBack, hoop.basketCollRadius);
             checkCollisionBBoard();
             checkCollisionPole();
+            checkCollisionNet();
             checkGoal();
+            fadeOut();
 
         }
         xV = (x - x2) / 5;
@@ -114,12 +117,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void restartGame() {
         ball.ok = false;
         ball.setCenter(500, 500);
+        scored = false;
+        ball.alphaValue = 255;
     }
 
     private void checkGoal() {
         if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50) {
             score++;
-            restartGame();
+            scored = true;
 
             scoreText.post(new Runnable() {
                               public void run() {
@@ -135,6 +140,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             inHoopZone = false;
         }
 
+    }
+
+    private void fadeOut() {
+        if(scored) {
+            ball.alphaValue -= 3;
+            if (ball.alphaValue <= 0) {
+                restartGame();
+            }
+        }
     }
 
     private void checkCollisionBasket(float xBasketColl, float yBasketColl, float basketCollRadius) {
@@ -177,25 +191,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 ball.yCenter++;
             }
         }
-
-        /*if ((ball.xCenter + ball.RADIUS < hoop.xBasketCollFront - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollFront + basketCollRadius) &&
-                (ball.xCenter + ball.RADIUS < hoop.xBasketCollBack - basketCollRadius || ball.xCenter - ball.RADIUS > hoop.xBasketCollBack + basketCollRadius))
-            ball.nothingBelow = true;
-        else if (Math.sqrt(Math.pow(hoop.xBasketCollFront - ball.xCenter, 2) + Math.pow(hoop.yBasketCollFront - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius && ball.xVelocity < 5 && ball.yVelocity >= -2) {
-            if (ball.xCenter > hoop.xBasketCollFront)
-                ball.xCenter += 2;
-            else
-                ball.xCenter -= 2;
-            if (ball.xCenter - hoop.xBasketCollFront == 0)
-                ball.xCenter += 2;
-            ball.nothingBelow = false;
-        } else if (Math.sqrt(Math.pow(hoop.xBasketCollBack - ball.xCenter, 2) + Math.pow(hoop.yBasketCollBack - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius && ball.xVelocity < 5 && ball.yVelocity >= -2) {
-            ball.xCenter -= 2;
-            if (ball.xCenter - hoop.xBasketCollBack == 0)
-                ball.xCenter -= 2;
-            ball.nothingBelow = false;
-        } else
-            ball.nothingBelow = true;*/
     }
 
     private void checkCollisionBBoard() {
@@ -211,6 +206,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         {
             ball.xCenter = hoop.xPoleCollTop - ball.RADIUS;
             ball.xVelocity = -ball.xVelocity * ball.FACTOR_BOUNCEBACK;
+        }
+    }
+
+    private void checkCollisionNet() {
+        if(ball.xCenter - ball.RADIUS < hoop.xBasketCollFront && scored && ball.yCenter > hoop.yBasketCollFront && ball.yCenter < hoop.yBasketCollFront + 200 && ball.xCenter > hoop.xBasketCollFront) {
+            ball.xVelocity += Math.pow(hoop.xBasketCollFront - ball.xCenter - ball.RADIUS, 2) / 50;
+            ball.yVelocity += 2;
+            if(ball.xVelocity > 10)
+                ball.xVelocity = 10;
+        }
+        else if(ball.xCenter + ball.RADIUS > hoop.xBasketCollBack && scored && ball.yCenter > hoop.yBasketCollFront && ball.yCenter < hoop.yBasketCollFront + 200 && ball.xCenter < hoop.xBasketCollBack) {
+            ball.xVelocity -= Math.pow(ball.xCenter + ball.RADIUS - hoop.xBasketCollFront, 2) / 50;
+            ball.yVelocity += 2;
+            if(ball.xVelocity < -10)
+                ball.xVelocity = -10;
         }
     }
 
