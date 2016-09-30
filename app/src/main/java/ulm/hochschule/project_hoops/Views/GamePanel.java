@@ -33,6 +33,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private TextView scoreText;
     private boolean scored = false;
 
+    private float lastBasketColAngle = 90;
+    private float lastXBasketColVector;
+    private float lastYBasketColVector;
+
     public GamePanel(Context context, float width, float height, TextView textView){
         super(context);
         ball = new Ball(width, height, context);
@@ -56,8 +60,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             drawPoint = false;
                             ball.xVelocity = (x - event.getX()) / 5;
                             ball.yVelocity = (y - event.getY()) / 5;
-                            //ball.xVelocity = 40.6f;
-                            //ball.yVelocity = -174.6f;
+                            //ball.xVelocity = 146.12389f;
+                            //ball.yVelocity = -71.73358f;
                             System.out.println("xVel: " + ball.xVelocity);
                             System.out.println("yVel: " + ball.yVelocity);
                             break;
@@ -155,14 +159,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         float xBasketColVector;
         float yBasketColVector;
-        float basketColAngle;
+        float basketColAngle = 90;
         float collisionAngle = 0;
         float velocity = (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2));
 
         if(xBasketColl - ball.xCenter != 0) {
             basketColAngle = (float) Math.atan((yBasketColl - ball.yCenter) / (xBasketColl - ball.xCenter));
-            xBasketColVector = (float) Math.cos(basketColAngle) * -1;
-            yBasketColVector = (float) Math.sin(basketColAngle) * -1;
+            if(lastBasketColAngle == 90)
+                lastBasketColAngle = basketColAngle;
+            xBasketColVector = (float) Math.cos(lastBasketColAngle) * -1;
+            yBasketColVector = (float) Math.sin(lastBasketColAngle) * -1;
             if(ball.xCenter > xBasketColl){
                 xBasketColVector *= -1;
                 yBasketColVector *= -1;
@@ -170,10 +176,27 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
             collisionAngle = (float) Math.acos((ball.xVelocity * xBasketColVector + ball.yVelocity * yBasketColVector) / (float) (Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * Math.sqrt(Math.pow(xBasketColVector, 2) + Math.pow(yBasketColVector, 2))));
         }
-
+//        System.out.println("ballX: " + ball.xCenter + "         ballY: " + ball.yCenter);
+//        System.out.println("baskX: " + hoop.xBasketCollFront + "            baskY: " + hoop.yBasketCollFront);
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
+//            System.out.println("xC: " + ball.xCenter);
+//            System.out.println("yC: " + ball.yCenter);
+//            System.out.println(basketColAngle);
+//            System.out.println("yBask - ballY: " + (yBasketColl - ball.yCenter));
+//            System.out.println("xBask - ballX: " + (xBasketColl - ball.xCenter));
+//commentfdf
+            if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS/2)) {
+                ball.xCenter = xBasketColl - (float) Math.cos(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
+                ball.yCenter = yBasketColl - (float) Math.sin(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
+            } else if (Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS)/2) {
+                ball.xCenter = xBasketColl + (float) Math.cos(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
+                ball.yCenter = yBasketColl + (float) Math.sin(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
+            }
+
             ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
             ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+//            System.out.println("xC: " + ball.xCenter);
+//            System.out.println("yC: " + ball.yCenter);
             if(ball.xCenter < xBasketColl) {
                 ball.xVelocity -= 2;
                 ball.xCenter--;
@@ -191,6 +214,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 ball.yCenter++;
             }
         }
+        lastBasketColAngle = basketColAngle;
+//        lastXBasketColVector = (float) Math.cos(lastBasketColAngle) * -1;
+//        lastYBasketColVector = (float) Math.sin(lastBasketColAngle) * -1;
+//        if(ball.xCenter > xBasketColl){
+//            lastXBasketColVector *= -1;
+//            lastYBasketColVector *= -1;
+//        }
     }
 
     private void checkCollisionBBoard() {
