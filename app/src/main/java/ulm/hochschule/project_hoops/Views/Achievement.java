@@ -98,7 +98,7 @@ public class Achievement extends LinearLayout {
                 id = R.drawable.achievement_grau_transparent;
                 break;
         }
-        img_Emblem.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), id, 200,200));
+        img_Emblem.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), id, 150,150));
 
         tv_Description.setText(description);
         tv_Title.setText(title);

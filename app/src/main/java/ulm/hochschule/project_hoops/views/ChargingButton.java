@@ -50,6 +50,12 @@ public class ChargingButton extends Button {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
+
+                System.out.println(event.getAction());
+
+                if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    System.out.println("test");
+                }
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     charger = new Timer();
                     charger.schedule(new TimerTask() {
@@ -72,7 +78,8 @@ public class ChargingButton extends Button {
 
                         }
                     }, 17,17);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else if (event.getAction() == 3 || event.getAction() == 1) {//MotionEvent.ACTION_UP) {
+
                     charger.cancel();
                     distance = 0;
                     alpha = 20;

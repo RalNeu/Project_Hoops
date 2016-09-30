@@ -95,7 +95,7 @@ public class ItemView extends LinearLayout {
         //ImageDownloaderTask il = new ImageDownloaderTask(img_Item, ad.getId());
         //il.execute();
 
-        img_Item.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), ad.getId(), 200,200));
+        img_Item.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), ad.getId(), 150,150));
         //
         tv_ItemDesciption.setText(ad.getDescription());
         tv_ItemPrice.setText("" + ad.getPrice());
