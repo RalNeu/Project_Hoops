@@ -1,5 +1,6 @@
 package ulm.hochschule.project_hoops.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import java.util.HashMap;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.activities.MainActivity;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.AchievementObject;
 import ulm.hochschule.project_hoops.utilities.ServerException;

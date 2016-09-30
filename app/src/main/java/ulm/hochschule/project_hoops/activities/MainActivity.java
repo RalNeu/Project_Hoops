@@ -19,7 +19,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ulm.hochschule.project_hoops.fragments.ChatFragment;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
     private EditText et_username;
     private EditText et_password;
+    private ImageButton imageButton;
+    private Button buttonAds;
 
     private SqlManager manager;
 
@@ -127,10 +133,58 @@ public class MainActivity extends AppCompatActivity
         });
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        openTab();
         manager = SqlManager.getInstance();
 
+
+        buttonAds = (Button) findViewById(R.id.btn_Ads);
+        buttonAds.setVisibility(View.INVISIBLE);
+        imageButton = (ImageButton)  findViewById(R.id.ibtn_Ads);
+        imageButton.setVisibility(View.INVISIBLE);
+        //btn close the Ads
+        buttonAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageButton.setVisibility(View.INVISIBLE);
+                        buttonAds.setVisibility(View.INVISIBLE);
+                        System.out.print("ich bin in der onlick view");
+                        timer();
+                    }
+                });
+            }
+        });
+        openTab();
+        timer();
+
     }
+
+
+
+
+
+    //Timer for the ads
+    private void timer(){
+        Timer timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageButton.bringToFront();
+                        imageButton.setVisibility(View.VISIBLE);
+                        buttonAds.bringToFront();
+                        buttonAds.setVisibility(View.VISIBLE);
+                    }
+                });
+
+            }
+        },20*1000);
+    }
+
 
     private void openTab() {
         changeFragment(new LoginTab());
@@ -146,7 +200,17 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contentPanel, f).addToBackStack( f.getTag()).commit();
+        if(imageButton.VISIBLE == View.VISIBLE) {
+            imageButton.post(new Runnable() {
+                @Override
+                public void run() {
+                    imageButton.bringToFront();
+                    buttonAds.bringToFront();
+                }
+            });
+        }
     }
+
 
     private void logIn() {
         // TODO: 20.05.2016
