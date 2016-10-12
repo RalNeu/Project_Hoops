@@ -14,8 +14,8 @@ import ulm.hochschule.project_hoops.R;
  */
 public class Ball {
 
-    public float xCenter = 500;
-    public float yCenter = 500;
+    public float xCenter;
+    public float yCenter;
     public int RADIUS;
     public float yVelocity = 0, xVelocity = 0;
     public float angle = 0;
@@ -30,16 +30,30 @@ public class Ball {
     public BitmapDrawable bitmapD;
     Bitmap bitmap;
 
-    public boolean nothingBelow;
+    public float distance;
 
     public Ball(float widthScreen, float heightScreen, Context context){
+        distance = 1;
         bitmapD = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
         bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) widthScreen / 12, (int) widthScreen / 12, true);
         this.widthScreen = widthScreen;
         this.heightScreen = heightScreen;
         alphaPaint = new Paint();
-        nothingBelow = true;
         RADIUS = bitmap.getWidth() / 2;
+        xCenter = widthScreen / 4;
+        yCenter = heightScreen / 2;
+        resetBall();
+    }
+
+    public Ball(float widthScreen, float heightScreen, Context context, float distance){
+        this.distance = distance;
+        bitmapD = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_small);
+        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) (widthScreen / 12 * distance), (int) (widthScreen / 12 * distance), true);
+        this.widthScreen = widthScreen;
+        this.heightScreen = heightScreen;
+        alphaPaint = new Paint();
+        RADIUS = bitmap.getWidth() / 2;
+        resetBall();
     }
 
     public boolean update()
@@ -49,11 +63,8 @@ public class Ball {
 
         xCenter += (int)(deltaT * (xVelocity));
 
-        if(nothingBelow) {
-            yCenter += (int) (deltaT * (yVelocity + GRAVITY * deltaT));
-            yVelocity += GRAVITY * deltaT;
-        } else if (yVelocity > 0)
-            yVelocity = 0;
+        yCenter += (int) (deltaT * (yVelocity + GRAVITY * deltaT));
+        yVelocity += GRAVITY * deltaT;
 
         if(xCenter < RADIUS)
         {
@@ -84,11 +95,8 @@ public class Ball {
         if(xVelocity < 2 && xVelocity > -2){
             xVelocity = 0;
         }
-        if(xVelocity == 0 && yVelocity > -2.5f && yCenter + RADIUS == heightScreen){
-            ok = false;
-            setCenter(500, 500);
-        }else
-            angle += xVelocity/8;
+
+        angle += xVelocity/8;
 
         return true;
     }
@@ -96,6 +104,13 @@ public class Ball {
     public void setCenter(float x, float y){
         xCenter = x;
         yCenter = y;
+    }
+
+    public void resetBall() {
+        xCenter = widthScreen / 4 * distance;
+        yCenter = heightScreen / 2 * (1/distance);
+        if(yCenter > heightScreen - RADIUS - 100)
+            yCenter = heightScreen - RADIUS - 100;
     }
 
     public void myDraw(Canvas canvas){

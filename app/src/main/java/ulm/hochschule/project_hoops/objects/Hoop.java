@@ -36,15 +36,30 @@ public class Hoop {
     public float xPoleCollBot;
     public float yPoleCollBot;
 
+    public float yNetCollBot;
+
     public BitmapDrawable bitmapD;
     public Bitmap bitmap;
 
     public Hoop(float widthScreen, float heightScreen, Context context){
         bitmapD = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_hoop);
-        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) widthScreen * 5 / 20, (int) heightScreen-10, true);
+        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) widthScreen * 5 / 20, (int) heightScreen * 9 / 10, true);
         this.widthScreen = widthScreen;
         this.heightScreen = heightScreen;
 
+        initCollPos();
+    }
+
+    public Hoop(float widthScreen, float heightScreen, Context context, float distance){
+        bitmapD = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basketball_hoop);
+        bitmap = Bitmap.createScaledBitmap(bitmapD.getBitmap(), (int) (widthScreen * 5 / 20 * distance), (int) (heightScreen * 9 / 10 * distance), true);
+        this.widthScreen = widthScreen;
+        this.heightScreen = heightScreen;
+
+        initCollPos();
+    }
+
+    private void initCollPos() {
         xBasketCollFront = widthScreen - bitmap.getWidth() + 5;
         yBasketCollFront = heightScreen - bitmap.getHeight()*80/121;
 
@@ -62,6 +77,8 @@ public class Hoop {
         yPoleCollTop = yBackboardBot;
         xPoleCollBot = xPoleCollTop;
         yPoleCollBot = heightScreen;
+
+        yNetCollBot = heightScreen - bitmap.getHeight() *11/ 24;
     }
 
     public void myDraw(Canvas canvas){
@@ -78,6 +95,6 @@ public class Hoop {
         canvas.drawRect(xBasketCollFront, yBasketCollFront-50, xBasketCollBack, yBasketCollFront+50, p);
         p.setColor(Color.YELLOW);
         p.setAlpha(50);
-        canvas.drawRect(xBasketCollFront, yBasketCollFront, xBasketCollBack, yBasketCollFront+200, p);
+        canvas.drawRect(xBasketCollFront, yBasketCollFront, xBasketCollBack, yNetCollBot, p);
     }
 }
