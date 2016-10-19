@@ -1,18 +1,24 @@
 package ulm.hochschule.project_hoops.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 
+import ulm.hochschule.project_hoops.activities.GameActivity;
+import ulm.hochschule.project_hoops.activities.GameEndActivity;
+import ulm.hochschule.project_hoops.activities.GameMenuActivity;
 import ulm.hochschule.project_hoops.objects.Ball;
 import ulm.hochschule.project_hoops.objects.Hoop;
 import ulm.hochschule.project_hoops.sonstige.GameThread;
+import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
  * Created by Johann on 19.09.2016.
@@ -28,9 +34,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private float xV, yV;
     private boolean drawPoint = false;
 
+    private int attempt;
+
     private boolean inHoopZone = false;
     private int score = 0;
     private TextView scoreText;
+    private TextView attemptText;
     private boolean scored = false;
     private boolean justBounced = false;
 
@@ -40,8 +49,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private float distance = 1;
 
     private Context context;
+    private Intent intent;
 
-    public GamePanel(Context context, float width, float height, TextView textView){
+    public GamePanel(Context context, float width, float height, TextView scoreText, TextView attemptText){
         super(context);
         this.width = width;
         this.height = height;
@@ -50,7 +60,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         hoop = new Hoop(width, height, context);
         xP = ball.xCenter;
         yP = ball.yCenter;
-        this.scoreText = textView;
+        this.scoreText = scoreText;
+        this.attemptText = attemptText;
+        attempt = 1;
+
+        this.intent = new Intent(context, GameEndActivity.class);
 
         getHolder().addCallback(this);
         setOnTouchListener(new OnTouchListener() {
@@ -141,6 +155,23 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         ball.resetBall();
         scored = false;
         ball.alphaValue = 255;
+
+        attemptText.post(new Runnable() {
+            public void run() {
+                attemptText.setText("    attempt: " + attempt++ + "/10");
+            }
+        });
+        System.out.println(attempt);
+        if(attempt > 10) {
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Bundle b = new Bundle();
+            b.putInt("key", score); //Your id
+            intent.putExtras(b); //Put your id to your next Intent
+            thread.interrupt();
+            context.startActivity(intent);
+        }
+
     }
 
     private void increaseDistance() {
