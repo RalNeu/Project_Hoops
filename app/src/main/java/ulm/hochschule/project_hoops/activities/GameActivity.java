@@ -30,6 +30,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private int heightScreen;
     private GamePanel gamePanel;
     private int score = 0;
+    private int attempt = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,12 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         final TextView scoreText = new TextView(this);
         scoreText.setText("Score: " + score);
+        final TextView attemptText = new TextView(this);
+        attemptText.setText("    attempt: " + attempt + "/10");
+
+
         FrameLayout game = new FrameLayout(this);
-        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText);
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText);
         LinearLayout gameWidgets = new LinearLayout (this);
 
 
@@ -55,6 +60,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
 
         gameWidgets.addView(scoreText);
+        gameWidgets.addView(attemptText);
         gameWidgets.addView(endGameButton);
 
         game.addView(gamePanel);

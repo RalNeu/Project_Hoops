@@ -39,7 +39,8 @@
             android:name=".activities.AccountshopActivity"
             android:label="@string/title_activity_accountshop"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.GameMenuActivity"></activity>
+        <activity android:name=".activities.GameMenuActivity" />
+        <activity android:name=".activities.GameEndActivity"></activity>
     </application>
 
 </manifest>
