@@ -21,6 +21,8 @@ public class ServerCommunicate {
     private double quoteUlm, quoteOther, oddsUlm, oddsOther;
     private int maxCoinsUlm, maxCoinsOther;
 
+    private int timeout = 2000;
+
     String ipAdress = "141.59.26.107";
 
     private ServerCommunicate() {
@@ -42,7 +44,7 @@ public class ServerCommunicate {
 
         try {
             Socket s = new Socket();
-            s.connect(new InetSocketAddress(ipAdress, 21399), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21399), timeout);
             access = true;
 
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -59,14 +61,14 @@ public class ServerCommunicate {
         return retString; //TODO
         }
 
-    public boolean sendTip(int coins, int team) throws ServerException, TimeoutException {
+    public boolean sendTip(int coins, int team) throws ServerException {
         boolean retVal = true;
 
         boolean access = false;
         try {
 
             Socket s = new Socket();
-            s.connect(new InetSocketAddress(ipAdress, 21395), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21395), timeout);
             access = true;
 
             ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
@@ -97,13 +99,8 @@ public class ServerCommunicate {
 
         } catch (IOException ex) {
 
-            if(!access) {
-                throw new TimeoutException();
-            } else {
-
                 retVal = false;
                 throw new ServerException("No answer from Server");
-            }
         }
 
         return retVal;
@@ -114,7 +111,7 @@ public class ServerCommunicate {
         try {
 
             Socket s = new Socket();
-            s.connect(new InetSocketAddress(ipAdress, 21400), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21400), timeout);
 
             if(s.getInputStream().read() == 0) {
                 res = true;
@@ -211,19 +208,19 @@ public class ServerCommunicate {
     public void deleteTipps() {
         try {
             Socket s = new Socket();
-            s.connect(new InetSocketAddress(ipAdress, 21397), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21397), timeout);
             s.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public int getWin() {
+    public int getWin() throws ServerException {
         int retVal = -4;
         boolean access = false;
         try {
             Socket s = new Socket();
-            s.connect(new InetSocketAddress(ipAdress, 21398), 3000);
+            s.connect(new InetSocketAddress(ipAdress, 21398), timeout);
             access = true;
 
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -235,6 +232,9 @@ public class ServerCommunicate {
 
             s.close();
         } catch (IOException e) {
+            if(!access) {
+                throw new ServerException("Timeout");
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

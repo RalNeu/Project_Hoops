@@ -45,15 +45,13 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgBody"
                     android:layout_margin="15dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/avatar_body_2" />
+                    android:layout_gravity="center" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgSkin"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatar_skin_3"
                     android:layout_margin="15dp"
                     android:visibility="visible" />
 
@@ -62,7 +60,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgEyes"
                     android:focusableInTouchMode="false"
-                    android:background="@drawable/avatareyes2"
                     android:layout_margin="15dp"
                     android:layout_gravity="center" />
 
@@ -71,7 +68,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgHat"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatar_hat_15"
                     android:visibility="visible"
                     android:layout_margin="15dp" />
 
@@ -79,7 +75,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgMouth"
-                    android:background="@drawable/avatar_mouth_14"
                     android:layout_margin="15dp" />
 
             </ulm.hochschule.project_hoops.views.SquareLayout>
@@ -112,7 +107,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Hut"
+                        android:text="@string/avatar_hat"
                         android:id="@+id/btnHat" />
                 </FrameLayout>
 
@@ -124,7 +119,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Augen"
+                        android:text="@string/avatar_eyes"
                         android:id="@+id/btnEyes" />
                 </FrameLayout>
             </LinearLayout>
@@ -143,7 +138,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Mund"
+                        android:text="@string/avatar_mouth"
                         android:id="@+id/btnMouth" />
 
                 </FrameLayout>
@@ -156,7 +151,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Körper"
+                        android:text="@string/avatar_body"
                         android:id="@+id/btnBody" />
                 </FrameLayout>
             </LinearLayout>
@@ -175,7 +170,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Hautfarbe"
+                        android:text="@string/avatar_skin"
                         android:id="@+id/btnSkin" />
                 </FrameLayout>
 
@@ -187,7 +182,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="Hintergrund"
+                        android:text="@string/avatar_background"
                         android:id="@+id/btnBackground"
                         android:layout_gravity="center" />
                 </FrameLayout>
@@ -202,7 +197,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Speichern"
+                android:text="@string/save"
                 android:id="@+id/btnSave" />
         </FrameLayout>
 

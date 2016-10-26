@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Ihre Coins:"
+                android:text="@string/accountshop_yourcoins"
                 android:id="@+id/tv_YourCoins"
                 android:layout_gravity="left|center_vertical"
                 android:layout_weight="0.4" />

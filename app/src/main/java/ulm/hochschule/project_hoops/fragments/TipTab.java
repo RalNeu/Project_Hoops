@@ -3,9 +3,11 @@ package ulm.hochschule.project_hoops.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.interfaces.DataPassListener;
+import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 
@@ -33,15 +37,21 @@ public class TipTab extends Fragment {
     private Button btn_Vote;
     private TextView tv_information_vote;
 
+    private String message = "";
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private DataPassListener mCallback;
+
+
+
+
     public TipTab() {
         // Required empty public constructor
     }
 
-    private void changeFragment(Fragment f) {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.view_TipGame, f).addToBackStack( f.getTag() ).commit();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,22 +100,46 @@ public class TipTab extends Fragment {
         btn_Vote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            changeFragment(new fragment_Send_Tip());
-
+                mCallback.passData("");
             }
         });
+
+
+        if(!message.equals("")) {
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
+            dlgAlert.setMessage(message);
+            dlgAlert.setTitle("Tippspiel");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+            message = "";
+        }
+
         return layout;
     }
 
-    private void update() {
+    public void setDataPassListener(DataPassListener dpl) {
+        mCallback = dpl;
+    }
+
+    public void update() {
         try {
-            boolean rdy = sc.getRdyToTipp();
-            btn_Vote.setEnabled(rdy);
+            int win = sc.getWin();
+            boolean rdy = sc.getRdyToTipp() && win != -2;
+            //btn_Vote.setEnabled(rdy);
             if(!rdy) {
-                tv_information_vote.setText("Es können momentan keine Tipps/Quote entgegen genommen werden.\nBitte versuchen Sie es später erneut.");
-                tv_Prozent_Ulm.setText("0");
-                tv_Prozent_Other.setText("0");
-                sb_SeekBar.setProgress(50);
+                if(win == -2) {
+                    tv_information_vote.setText("Sie haben bereits einen Tipp abgegeben. Bitte warten Sie erst auf das Ergebnis.");
+                    sc.readQuote();
+                    tv_Prozent_Ulm.setText("" + Math.round(sc.getQuoteUlm()));
+                    tv_Prozent_Other.setText("" + (100 - Math.round(sc.getQuoteUlm())));
+                    sb_SeekBar.setProgress((int) sc.getQuoteOther());
+                } else {
+                    tv_information_vote.setText("Es können momentan keine Tipps/Quote entgegen genommen werden. Bitte versuchen Sie es später erneut.");
+                    tv_Prozent_Ulm.setText("0");
+                    tv_Prozent_Other.setText("0");
+                    sb_SeekBar.setProgress(50);
+                }
             } else {
                 sc.readQuote();
                 tv_Prozent_Ulm.setText("" + Math.round(sc.getQuoteUlm()));
@@ -115,12 +149,14 @@ public class TipTab extends Fragment {
             }
 
 
-            System.out.println("a");
-            int win = sc.getWin();
-            System.out.println("b");
 
             if(win > 0) {
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Sie haben im letzten Tippspiel " + win + " Coins gewonnen! Glückwunsch!", Toast.LENGTH_SHORT);
+                try {
+                    AchievementHandler.getInstance().performEvent(14, win, getActivity());
+                } catch (ServerException e) {
+                    e.printStackTrace();
+                }
                 toast.show();
             } else if(win == 0) {
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Sie haben im letzten Tippspiel leider nichts gewonnen, aber probieren Sie es doch ruhig noch einmal!", Toast.LENGTH_SHORT);
@@ -129,7 +165,11 @@ public class TipTab extends Fragment {
 
 
         } catch (ServerException e) {
-            e.printStackTrace();
+            btn_Vote.setEnabled(false);
+            tv_information_vote.setText("Es können momentan keine Tipps/Quote entgegen genommen werden. Bitte versuchen Sie es später erneut.");
+            tv_Prozent_Ulm.setText("0");
+            tv_Prozent_Other.setText("0");
+            sb_SeekBar.setProgress(50);
         }
     }
 

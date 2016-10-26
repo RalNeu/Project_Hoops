@@ -60,7 +60,7 @@
     <string name="what_apos_s_hoops_chat">What\'s Hoops Chat</string>
     <string name="username_too_long">Nicht mehr als 12 Zeichen!</string>
     <string name="title_activity_accountshop">Hoops shop</string>
-    
+
     <string name="gamemenu_play">Spielen</string>
     <string name="gamemenu_settings">Einstellungen</string>
     <string name="gamemenu_end">Beenden</string>
@@ -95,6 +95,61 @@
     <string name="bettingGame">Tippspiel</string>
     <string name="basketball">Basketballspiel</string>
 
+<!-- neeeeeeeeeeeeeeeeeeeeeeeeeeeeeew -->
 
-</resources>
 
+    <string name="hat_1">Blonde Zöpfe</string>
+    <string name="hat_2">Schwarze Locken</string>
+    <string name="hat_3">Hasenohren</string>
+    <string name="hat_4">Teufelshörner</string>
+    <string name="hat_5">Schlafmütze</string>
+    <string name="hat_6">Alienantennen</string>
+    <string name="hat_7">Zauberer</string>
+    <string name="hat_8">Partyhut</string>
+    <string name="hat_9">Wintermütze</string>
+    <string name="hat_10">Vikingerhelm</string>
+    <string name="hat_11">Blonde Haare</string>
+    <string name="hat_12">Rote Haare</string>
+    <string name="hat_13">Schwarze Haare</string>
+
+    <string name="eyes_1">Verschmitzte Augen</string>
+    <string name="eyes_2">Cyborgaugen</string>
+    <string name="eyes_3">Western-Augen</string>
+    <string name="eyes_4">Roboteraugen</string>
+    <string name="eyes_5">Normale Augen</string>
+    <string name="eyes_6">Insektenaugen</string>
+    <string name="eyes_7">Zyklopenauge</string>
+    <string name="eyes_8">Animeaugen</string>
+    <string name="eyes_9">Sonnenbrille</string>
+
+    <string name="skin_1">Alienfarbe</string>
+
+    <string name="body_1">Rote Farbe, schwarze Schrift</string>
+    <string name="body_2">Blaue Farbe, schwarze Schrift</string>
+    <string name="body_3">Rote Farbe, orangene Schrift</string>
+    <string name="body_4">Grüne Farbe, orangene Schrift</string>
+    <string name="body_5">Blaue Farbe, orangene Schrift</string>
+    <string name="body_6">Weiße Farbe</string>
+
+    <string name="back_1">Orange auf Grün</string>
+    <string name="back_2">Orange auf Blau</string>
+    <string name="back_3">Stadtleben</string>
+
+    <string name="mouth_1">Irres Lachen</string>
+    <string name="mouth_2">Verschlossen</string>
+    <string name="mouth_3">Holzzähne</string>
+    <string name="mouth_4">Knutschmund</string>
+    <string name="mouth_5">Zunge raus</string>
+    <string name="mouth_6">Vampir mit Schnauzer</string>
+    <string name="mouth_7">Verschmitztes Lächeln</string>
+    <string name="mouth_8">Monsterfänge</string>
+    <string name="mouth_9">Unglücklich</string>
+    <string name="mouth_10">Rufend</string>
+    <string name="mouth_11">Zähneknirschend</string>
+    <string name="mouth_12">Vollbart</string>
+    <string name="mouth_13">Playboy</string>
+    <string name="mouth_14">Vergrauter Bart</string>
+
+
+
+    </resources>

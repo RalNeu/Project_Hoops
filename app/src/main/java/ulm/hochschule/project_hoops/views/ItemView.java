@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,6 +73,15 @@ public class ItemView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_view, this);
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+
+                return false;
+            }
+        });
     }
 
     public void setObserver(Observer obs) {
@@ -84,11 +94,14 @@ public class ItemView extends LinearLayout {
         btn_Buy.setEnabled(!ad.getBought());
 
         if (ad.getBought()) {
+            btn_Buy.disableOrange();
             btn_Buy.setBackgroundResource(R.drawable.haeckchen_full);
             btn_Buy.setText("Gekauft!");
             btn_Buy.setTextColor(Color.RED);
         }
     }
+
+
 
    public void setItem(AvatarItemDescription ad) {
         final AvatarItemDescription avd = ad;

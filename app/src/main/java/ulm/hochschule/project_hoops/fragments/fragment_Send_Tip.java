@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.interfaces.DataPassListener;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
@@ -32,8 +34,13 @@ public class fragment_Send_Tip extends Fragment {
     private Button btn_Inc, btn_IncStrong, btn_Dec, btn_DecStrong, btn_VoteUlm, btn_VoteOther;
     private TextView tv_Coins;
     private UserProfile user;
+    private DataPassListener mCallback;
 
     private int team = 0;
+
+    public void setDataPassListener(DataPassListener dpl) {
+        mCallback = dpl;
+    }
 
 
     public fragment_Send_Tip() {
@@ -51,6 +58,8 @@ public class fragment_Send_Tip extends Fragment {
         btn_VoteOther = (Button) layout.findViewById(R.id.btn_VoteOther);
 
         tv_Coins = (TextView) layout.findViewById(R.id.tv_Coins);
+        tv_Coins.setText("0");
+        chosenCoins = 0;
 
         user = UserProfile.getInstance();
 
@@ -107,6 +116,7 @@ public class fragment_Send_Tip extends Fragment {
     private void changeFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+
         ft.replace(R.id.view_TipGame, new TipTab()).commit();
     }
 
@@ -124,41 +134,28 @@ public class fragment_Send_Tip extends Fragment {
 
                 @Override
                 public void run() {
-                   String s = "";
                     Looper.prepare();
                     if(chosenCoins > 0) {
-                        try {
+
                             ServerCommunicate sc = ServerCommunicate.getInstance();
                             try {
                                 sc.sendTip(chosenCoins, team);
-                                s = "Tipp gesendet!";
                                 if(team == 0) {
                                     AchievementHandler.getInstance().performEvent(10, 1, getActivity());
                                 } else {
                                     AchievementHandler.getInstance().performEvent(11, 1, getActivity());
                                 }
                                 AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
-                                changeFragment();
-                            } catch (TimeoutException e) {
-                                s = "Es können momentan keine Tipps entgegen genommen werden. Versuchen Sie es bitte später erneut.";
-                            }
+                                mCallback.passData("Ihr Tipp wurde erfolgreich gesendet!");
+                                //changeFragment();
                         } catch(ServerException e) {
-                            e.printStackTrace();
-                            s = "Es ist ein Fehler aufgetreten! Bitte versuchen Sie es erneut.";
+                                mCallback.passData("Tipp senden schlug fehl. Bitte versuchen Sie es später erneut.");
                         }
-                    } else {
-                        s = "Bitte Geben Sie einen Tipp über 0 an!";
                     }
                     progressDialog.cancel();
-                    showToast(s);
                 }
             });
         t.start();
-    }
-
-    public void showToast(String s) {
-        Toast toast = Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     public void addToCoins(int amount) {

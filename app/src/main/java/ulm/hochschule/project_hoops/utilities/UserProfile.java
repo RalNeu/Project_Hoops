@@ -24,6 +24,8 @@ public class UserProfile {
 
     private static boolean userFound = false;
 
+    private Activity a;
+
     private char[][] boughtAvatarItems;
 
     public UserProfile(String sqlUSER, Activity a) {
@@ -46,7 +48,7 @@ public class UserProfile {
             achievements = (String) userInfo[12];
             lastLogin =     (Date)  userInfo[13];
             AchievementHandler ah = null;
-
+            this.a = a;
             mapBoughtAvatarItems();
 
             try {
@@ -96,7 +98,7 @@ public class UserProfile {
         return ret;
     }
 
-    public void buyItem(int id, int idx, int price) {
+    public void buyItem(int id, int idx, int price){
         if(coins.getCoins() >= price) {
 
             String[] columnNames = {"hats", "eyes", "backgrounds", "mouths", "skins", "bodies"};
@@ -105,7 +107,11 @@ public class UserProfile {
                 SqlManager.getInstance().buyItem(userID, coins.getCoins()-price, columnNames[id], getNewAvatarString(id,idx));
                 boughtAvatarItems[id][idx] = 'y';
                 coins.updateCoins(price * -1);
+                AchievementHandler ah = AchievementHandler.getInstance();
+                ah.performEvent(8, 1, a);
             } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ServerException e) {
                 e.printStackTrace();
             }
         }
@@ -133,7 +139,6 @@ public class UserProfile {
         }
         return ret;
     }
-
 
     private void checkDateYesterday(Activity a, AchievementHandler ah) {
         Date now = SqlManager.getInstance().getNow();

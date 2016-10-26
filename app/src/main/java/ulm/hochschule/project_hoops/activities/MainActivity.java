@@ -2,6 +2,7 @@ package ulm.hochschule.project_hoops.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,7 @@ import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
 import ulm.hochschule.project_hoops.fragments.WebView2;
+import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 public class MainActivity extends AppCompatActivity
@@ -111,10 +113,12 @@ public class MainActivity extends AppCompatActivity
 
 
         tipgame.setEnabled(false);
-       profile.setEnabled(false);
+        profile.setEnabled(false);
         achievements.setEnabled(false);
         chatClientMenuItem.setEnabled(false);
         accountshop.setEnabled(false);
+
+        setIcons(navDrawer);
         //mi.setEnabled(false);
 
         drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -185,6 +189,31 @@ public class MainActivity extends AppCompatActivity
         },20*1000);
     }
 
+
+    private void setIcons(Menu navDrawer) {
+
+        MenuItem news = navDrawer.findItem(R.id.nav_news);
+        MenuItem ticket = navDrawer.findItem(R.id.nav_ticket);
+        MenuItem chat = navDrawer.findItem(R.id.nav_chat);
+        MenuItem map = navDrawer.findItem(R.id.hausansicht);
+        MenuItem login = navDrawer.findItem(R.id.login);
+        MenuItem register = navDrawer.findItem(R.id.register);
+        MenuItem game = navDrawer.findItem(R.id.basketball);
+
+        int res = 40;
+
+        news.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_news, res, res)));
+        ticket.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_ticket_icon, res, res)));
+        map.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.icmap, res, res)));
+        login.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.mipmap.ic_login, res, res)));
+        game.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_bettinggame, res, res)));
+        tipgame.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_bettinggame, res, res)));
+        profile.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_stat_name, res, res)));
+        achievements.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.achievement_icon, res, res)));
+        chat.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_chat, 100,100)));//res, res)));
+        accountshop.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.coinsack1, res, res)));
+        register.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.mipmap.ic_register, res, res)));
+    }
 
     private void openTab() {
         changeFragment(new LoginTab());
@@ -281,6 +310,36 @@ public class MainActivity extends AppCompatActivity
             imV.getLayoutParams().width = (int) (h*ratio);
         }
 
+        //btn_Register = (Button) findViewById(R.id.btn_Register);
+        //btn_login = (Button) findViewById(R.id.bt_Login);
+
+       // dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+       // MenuView.ItemView i = (MenuView.ItemView) dLayout.findViewById(R.id.profile);
+        //i.setEnabled(false);
+
+       // et_username = (EditText) findViewById(R.id.et_UserName_nav);
+        //et_password = (EditText) findViewById(R.id.et_Password_nav);
+
+/*        btn_Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRegister();
+            }
+        });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if (check()) {
+                     Toast.makeText(getApplicationContext(), "eingeloggt", Toast.LENGTH_LONG).show();
+                     onBackPressed();
+                 } else
+                     Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
+             }
+         }
+        );*/
+
         return true;
     }
 
@@ -297,7 +356,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -315,10 +373,10 @@ public class MainActivity extends AppCompatActivity
 
         Fragment f = null;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_news) {
             //currTab = newsTab;
            // changeFragment(newsTab);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_ticket) {
             changeFragment(new WebView2());
         }else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();
