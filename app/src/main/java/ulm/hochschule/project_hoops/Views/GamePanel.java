@@ -34,7 +34,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private float xV, yV;
     private boolean drawPoint = false;
 
-    private int attempt;
+    private int attempt = 1;
 
     private boolean inHoopZone = false;
     private int score = 0;
@@ -62,7 +62,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         yP = ball.yCenter;
         this.scoreText = scoreText;
         this.attemptText = attemptText;
-        attempt = 1;
 
         this.intent = new Intent(context, GameEndActivity.class);
 
@@ -81,12 +80,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         case MotionEvent.ACTION_UP:
                             ball.ok = true;
                             drawPoint = false;
-                            ball.xVelocity = (x - event.getX()) / 5;
-                            ball.yVelocity = (y - event.getY()) / 5;
+                            ball.xVelocity = (x - event.getX()) / 5 * distance;
+                            ball.yVelocity = (y - event.getY()) / 5 * distance;
 //                            ball.xVelocity = 92.551796f;
 //                            ball.yVelocity = -95.311745f;
                             System.out.println("xVel: " + ball.xVelocity);
                             System.out.println("yVel: " + ball.yVelocity);
+                            System.out.println("dist: " + distance);
                             break;
                         case MotionEvent.ACTION_MOVE:
                             x2 = event.getX();
@@ -142,8 +142,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             }
 
         }
-        xV = (x - x2) / 5;
-        yV = (y - y2) / 5;
+        xV = (x - x2) / 5 * distance;
+        yV = (y - y2) / 5 * distance;
     }
 
     public void restartGame() {
@@ -151,17 +151,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             increaseDistance();
         else
             resetDistance();
-        ball.ok = false;
-        ball.resetBall();
-        scored = false;
-        ball.alphaValue = 255;
 
-        attemptText.post(new Runnable() {
-            public void run() {
-                attemptText.setText("    attempt: " + attempt++ + "/10");
-            }
-        });
-        System.out.println(attempt);
+        attempt++;
+
+
         if(attempt > 10) {
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -171,11 +164,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             thread.interrupt();
             context.startActivity(intent);
         }
+        attemptText.post(new Runnable() {
+            public void run() {
+                attemptText.setText("    attempt: " + attempt + "/10");
+            }
+        });
+
+        ball.ok = false;
+        ball.resetBall();
+        scored = false;
+        ball.alphaValue = 255;
 
     }
 
     private void increaseDistance() {
-        if(distance > 0.5)
+        if(distance > 0.3)
             distance *= 0.9;
         ball = new Ball(width, height, context, distance);
         hoop = new Hoop(width, height, context, distance);
@@ -188,8 +191,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void checkGoal() {
-        if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50) {
-            score++;
+        if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50 && !scored) {
+            score += (1/(distance*distance*distance));
             scored = true;
 
             scoreText.post(new Runnable() {
@@ -325,9 +328,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
             if(drawPoint) {
                 for (int i = 0; i < 25; i++) {
-                    yV += 9.81f * 0.5f;
+                    yV += ball.gravity * 0.5f;
                     xP += (int) (0.5f * (xV));
-                    yP += (int) (0.5f * (yV + 9.81f * 0.5f));
+                    yP += (int) (0.5f * (yV + ball.gravity * 0.5f));
 
                     if(xP < ball.RADIUS)
                     {

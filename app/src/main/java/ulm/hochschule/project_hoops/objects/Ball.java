@@ -24,7 +24,7 @@ public class Ball {
     private Paint alphaPaint;
     public int alphaValue = 255;
     public float widthScreen, heightScreen;
-    private static final float GRAVITY = 9.81f;
+    public static float gravity;
     private static final float deltaT = 0.5f;
     public static final float FACTOR_BOUNCEBACK = 0.75f;
     public BitmapDrawable bitmapD;
@@ -42,6 +42,7 @@ public class Ball {
         RADIUS = bitmap.getWidth() / 2;
         xCenter = widthScreen / 4;
         yCenter = heightScreen / 2;
+        gravity = 9.81f;
         resetBall();
     }
 
@@ -53,6 +54,7 @@ public class Ball {
         this.heightScreen = heightScreen;
         alphaPaint = new Paint();
         RADIUS = bitmap.getWidth() / 2;
+        gravity = 9.81f * distance;
         resetBall();
     }
 
@@ -63,8 +65,8 @@ public class Ball {
 
         xCenter += (int)(deltaT * (xVelocity));
 
-        yCenter += (int) (deltaT * (yVelocity + GRAVITY * deltaT));
-        yVelocity += GRAVITY * deltaT;
+        yCenter += (int) (deltaT * (yVelocity + gravity * deltaT));
+        yVelocity += gravity * deltaT;
 
         if(xCenter < RADIUS)
         {
