@@ -15,6 +15,11 @@
             android:icon="@drawable/ic_menu_send"
             android:title="Chat" />
 
+        <item
+            android:id="@+id/nav_sozialMedia"
+            android:icon="@drawable/ic_menu_share"
+            android:title="SozialMedia" />
+
        <!-- <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"

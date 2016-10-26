@@ -27,7 +27,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
     compile files('src/main/java/libs/mysql-connector-java-3.1.14-bin.jar')
     compile files('src/main/java/libs/mail.jar')
     compile files('src/main/java/libs/additionnal.jar')
@@ -36,5 +35,5 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'com.android.support:support-v4:23.0.0'
+    testCompile 'junit:junit:4.12'
 }

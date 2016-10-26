@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.objects.ChatClient;
 import ulm.hochschule.project_hoops.utilities.ChatAdapter;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
 import ulm.hochschule.project_hoops.utilities.UserProfile;

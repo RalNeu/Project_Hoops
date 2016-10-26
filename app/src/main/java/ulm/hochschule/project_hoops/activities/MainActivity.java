@@ -26,6 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ulm.hochschule.project_hoops.fragments.ChatFragment;
+import ulm.hochschule.project_hoops.fragments.SocialMedia;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment loginTab = new LoginTab();
     private Fragment houseView = new HouseViewTab();
     private Fragment chatFragment = new ChatFragment();
+    private Fragment sozialMediaFragment = new SocialMedia();
 
     private AchievementTab achievementTab = new AchievementTab();
 
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     private MenuItem achievements;
     private MenuItem chatClientMenuItem;
     private MenuItem accountshop;
+    private MenuItem sozialMediaMenuItem;
 
     //For closeKeyboard
     private ActionBarDrawerToggle mDrawerToggle;
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -103,6 +107,7 @@ public class MainActivity extends AppCompatActivity
         achievements = navDrawer.findItem(R.id.achievement);
         chatClientMenuItem = navDrawer.findItem(R.id.nav_chat);
         accountshop = navDrawer.findItem(R.id.accountshop);
+
 
 
         tipgame.setEnabled(false);
@@ -149,7 +154,6 @@ public class MainActivity extends AppCompatActivity
                     public void run() {
                         imageButton.setVisibility(View.INVISIBLE);
                         buttonAds.setVisibility(View.INVISIBLE);
-                        System.out.print("ich bin in der onlick view");
                         timer();
                     }
                 });
@@ -159,10 +163,6 @@ public class MainActivity extends AppCompatActivity
         timer();
 
     }
-
-
-
-
 
     //Timer for the ads
     private void timer(){
@@ -281,36 +281,6 @@ public class MainActivity extends AppCompatActivity
             imV.getLayoutParams().width = (int) (h*ratio);
         }
 
-        //btn_Register = (Button) findViewById(R.id.btn_Register);
-        //btn_login = (Button) findViewById(R.id.bt_Login);
-
-       // dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-
-       // MenuView.ItemView i = (MenuView.ItemView) dLayout.findViewById(R.id.profile);
-        //i.setEnabled(false);
-
-       // et_username = (EditText) findViewById(R.id.et_UserName_nav);
-        //et_password = (EditText) findViewById(R.id.et_Password_nav);
-
-/*        btn_Register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRegister();
-            }
-        });
-        btn_login.setOnClickListener(new View.OnClickListener() {
-                                         @Override
-                                         public void onClick(View view) {
-                                             if (check()) {
-                                                 Toast.makeText(getApplicationContext(), "eingeloggt", Toast.LENGTH_LONG).show();
-                                                 onBackPressed();
-                                             } else
-                                                 Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
-                                         }
-                                     }
-        );*/
-
         return true;
     }
 
@@ -322,9 +292,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         closeKeyboard();
 
+
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -363,6 +336,8 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new HouseViewTab());
         } else if(id == R.id.achievement) {
             changeFragment(achievementTab);
+        } else if(id == R.id.nav_sozialMedia) {
+            changeFragment(sozialMediaFragment);
         }else if(id == R.id.nav_chat) {
             changeFragment(chatFragment);
         }else if(id == R.id.basketball) {
