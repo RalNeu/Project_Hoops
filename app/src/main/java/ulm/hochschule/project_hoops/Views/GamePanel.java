@@ -163,17 +163,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             intent.putExtras(b); //Put your id to your next Intent
             thread.interrupt();
             context.startActivity(intent);
-        }
-        attemptText.post(new Runnable() {
-            public void run() {
-                attemptText.setText("    attempt: " + attempt + "/10");
-            }
-        });
+        } else {
+            attemptText.post(new Runnable() {
+                public void run() {
+                    attemptText.setText("    attempt: " + attempt + "/10");
+                }
+            });
 
-        ball.ok = false;
-        ball.resetBall();
-        scored = false;
-        ball.alphaValue = 255;
+            ball.ok = false;
+            ball.resetBall();
+            scored = false;
+            ball.alphaValue = 255;
+        }
 
     }
 
