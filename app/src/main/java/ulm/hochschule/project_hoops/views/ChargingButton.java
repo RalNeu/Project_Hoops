@@ -22,6 +22,7 @@ public class ChargingButton extends Button {
     int alpha = 20;
     private Runnable task;
     private Timer charger;
+    private boolean orange = true;
 
     public ChargingButton(Context context) {
         super(context);
@@ -43,6 +44,9 @@ public class ChargingButton extends Button {
         task = r;
     }
 
+
+
+
     private void init() {
         charger = new Timer();
 
@@ -50,12 +54,6 @@ public class ChargingButton extends Button {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-
-                System.out.println(event.getAction());
-
-                if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                    System.out.println("test");
-                }
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     charger = new Timer();
                     charger.schedule(new TimerTask() {
@@ -124,16 +122,27 @@ public class ChargingButton extends Button {
         return true;
     }
 
+    public void disableOrange() {
+        orange = false;
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
+        if(orange) {
+            Paint paint1 = new Paint();
+            paint1.setColor(Color.argb(255, 236, 116, 4));
+            canvas.drawRect(new Rect(0, 0, getWidth(), getHeight()), paint1);
+        }
+
         Paint paint = new Paint();
         paint.setColor(Color.GREEN);
         paint.setAlpha(alpha);
         int start = (getWidth()/2) - distance;
-        start = start < 12 ? 12 : start;
+        //start = start < 12 ? 12 : start;
         int end = (getWidth()/2) + distance;
-        end = end > getWidth() - 12 ? getWidth() - 12 : end;
-        canvas.drawRect(new Rect(start, 17, end, getHeight() - 17), paint);
+        //end = end > getWidth() - 12 ? getWidth() - 12 : end;
+        canvas.drawRect(new Rect(start, /*17*/0, end, getHeight() /*- 17*/), paint);
         super.onDraw(canvas);
     }
 

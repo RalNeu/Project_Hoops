@@ -24,21 +24,21 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Spielen"
+            android:text="@string/gamemenu_play"
             android:id="@+id/btnPlay"
             android:layout_weight="1" />
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Einstellungen"
+            android:text="@string/gamemenu_settings"
             android:id="@+id/button2"
             android:layout_weight="1" />
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Beenden"
+            android:text="@string/gamemenu_end"
             android:id="@+id/btnExit"
             android:layout_weight="1" />
 

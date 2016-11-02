@@ -3,17 +3,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_news"
-            android:title="Neuigkeiten" />
+            android:id="@+id/nav_news"
+            android:title="@string/news" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_ticket_icon"
-            android:title="Ticketshop" />
+            android:id="@+id/nav_ticket"
+            android:title="@string/ticket" />
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Chat" />
+            android:title="@string/chat" />
 
         <item
             android:id="@+id/nav_sozialMedia"
@@ -33,46 +30,38 @@
             android:title="Tests" /> -->
         <item
             android:id="@+id/hausansicht"
-            android:icon="@drawable/icmap"
-            android:title="Gebäudeansicht"/>
+            android:title="@string/building"/>
     </group>
 
     <item android:title="Account">
         <menu>
             <item
                 android:id="@+id/login"
-                android:icon="@mipmap/ic_login"
-                android:title="Login" />
+                android:title= "@string/login" />
             <item
                 android:id="@+id/register"
-                android:icon="@mipmap/ic_register"
-                android:title="Register" />
+                android:title="@string/register" />
             <item
                 android:id="@+id/profile"
-                android:icon="@drawable/ic_stat_name"
                 android:title="@string/profile"/>
             <item
                 android:id="@+id/achievement"
-                android:icon="@drawable/achievement_icon"
-                android:title="Achievements"/>
+                android:title= "@string/achievements"/>
             <item
                 android:id="@+id/accountshop"
-                android:icon="@drawable/coinsack1"
-                android:title="Accountshop"/>
+                android:title="@string/accountshop"/>
 
         </menu>
     </item>
 
-    <item android:title="Games">
+    <item android:title="@string/games">
         <menu>
             <item
                 android:id="@+id/tipGame"
-                android:icon="@drawable/ic_bettinggame"
-                android:title="Tippspiel"/>
+                android:title="@string/bettingGame"/>
             <item
                 android:id="@+id/basketball"
-                android:icon="@drawable/ic_bettinggame"
-                android:title="Basketball"/>
+                android:title="@string/basketball"/>
         </menu>
     </item>
 

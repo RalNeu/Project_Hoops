@@ -60,7 +60,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Preis:"
+                    android:text="@string/price"
                     android:id="@+id/tv_PriceLabel"
                     android:layout_gravity="left|center_vertical"
                     android:textColor="#000000"
@@ -112,11 +112,14 @@
                 <ulm.hochschule.project_hoops.views.ChargingButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Kaufen"
+                    android:text="@string/buy"
                     android:id="@+id/btn_Buy"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_margin="10dp"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black" />
 
             </FrameLayout>
 

@@ -1,0 +1,151 @@
+<resources>
+    //English
+    <string name="app_name">Project Hoops</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="email">E-Mail</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="btn_Register">Register</string>
+    <string name="btn_Login">Login</string>
+    <string name="et_UserName">Username</string>
+    <string name="alter_string">Age</string>
+    <string name="meine_hobbys"><u>My hobbies</u></string>
+
+    <string name="enter_your_firstname">Insert your name</string>
+    <string name="enter_your_lastname">Insert your surname</string>
+    <string name="enter_your_email">Insert your e-mail address</string>
+    <string name="check_email_standard">Please use the e-mail standard(name@example.com)</string>
+    <string name="no_whitespaces_allowed">No whitespaces allowed</string>
+    <string name="username_already_exists">Username already in use</string>
+    <string name="password_too_short">Password too short. It has to be at least 8 characters</string>
+    <string name="passwords_arent_equal">The passwords don\'t match</string>
+
+    <string name="wrong_password">Wrong password</string>
+    <string name="wrong_username">Wrong username</string>
+
+    <string name="configure_profile">Edit profile</string>
+    <string name="birthdate">Date of birth:</string>
+    <string name="points">...</string>
+    <string name="save">Save</string>
+
+    <string name="lbl_AboutMe"><u>About me</u></string>
+
+    <string name="lbl_AboutMe1">About me</string>
+    <string name="editProfile">Edit profile</string>
+    <string name="profile">My profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="reqCode">New code</string>
+    <string name="yourcode">Your code</string>
+    <string name="send">Send</string>
+    <string name="deactivateaccount">Deactivate account</string>
+    <string name="btn_deactivateaccount">Deactivate Account</string>
+    <string name="beAware">Be aware that you can only bet once per game.</string>
+    <string name="opponent">Opponent</string>
+    <string name="achieved_on">Achieved on:</string>
+
+    <string name="Project_Hoops">Project Hoops</string>
+
+    <string name="title_activity_tipp_spiel">Bettinggame</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="what_apos_s_hoops_chat">What\'s Hoops Chat</string>
+    <string name="username_too_long">Not more than 12 characters!</string>
+    <string name="title_activity_accountshop">Hoops shop</string>
+
+    <string name="gamemenu_play">Play</string>
+    <string name="gamemenu_settings">Settings</string>
+    <string name="gamemenu_end">Quit</string>
+    <string name="accountshop_yourcoins">Your coins:</string>
+
+    <string name="avatar_hat">Hat</string>
+    <string name="avatar_hats">Hats</string>
+    <string name="avatar_mouth">Mouth</string>
+    <string name="avatar_mouths">Mouths</string>
+    <string name="avatar_eyes">Eyes</string>
+    <string name="avatar_skin">Skin colour</string>
+    <string name="avatar_skins">Skin colours</string>
+    <string name="avatar_background">Background</string>
+    <string name="avatar_backgrounds">Backgrounds</string>
+    <string name="avatar_body">Body</string>
+    <string name="avatar_bodies">Bodies</string>
+
+    <string name="no_account_yet">No account yet? Create one here!</string>
+    <string name="just_name">Name</string>
+    <string name="buy">Buy</string>
+    <string name="price">Price:</string>
+
+    <string name="news">News</string>
+    <string name="ticket">Ticketshop</string>
+    <string name="chat">Chat</string>
+    <string name="building">Map</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="achievements">Achievements</string>
+    <string name="accountshop">Accountshop</string>
+    <string name="games">Games</string>
+    <string name="bettingGame">Bettinggame</string>
+    <string name="basketball">Basketballgame</string>
+
+    <string name="hat_1">Fair bunches</string>
+    <string name="hat_2">Black curls</string>
+    <string name="hat_3">Bunny ears</string>
+    <string name="hat_4">Devil horns</string>
+    <string name="hat_5">Bedcap</string>
+    <string name="hat_6">Alien antennas</string>
+    <string name="hat_7">Wizard</string>
+    <string name="hat_8">Partyhat</string>
+    <string name="hat_9">Toque</string>
+    <string name="hat_10">Vikings helmet</string>
+    <string name="hat_11">Fair hair</string>
+    <string name="hat_12">Red hair</string>
+    <string name="hat_13">Black hair</string>
+
+    <string name="eyes_1">Mischievous eyes</string>
+    <string name="eyes_2">Cyborgeyes</string>
+    <string name="eyes_3">Western eyes</string>
+    <string name="eyes_4">Roboteyes</string>
+    <string name="eyes_5">Normal eyes</string>
+    <string name="eyes_6">Insecteyes</string>
+    <string name="eyes_7">Cyclopseye</string>
+    <string name="eyes_8">Animeeyes</string>
+    <string name="eyes_9">Sunglasses</string>
+
+    <string name="skin_1">Aliencolour</string>
+
+    <string name="body_1">Red colour, black writing</string>
+    <string name="body_2">Blue colour, black writing</string>
+    <string name="body_3">Red colour, orange writing</string>
+    <string name="body_4">Green colour, orange writing</string>
+    <string name="body_5">Blue colour, orange writing</string>
+    <string name="body_6">White colour</string>
+
+    <string name="back_1">Orange on green</string>
+    <string name="back_2">Orange on blue</string>
+    <string name="back_3">Citylife</string>
+
+    <string name="mouth_1">Mad laughter</string>
+    <string name="mouth_2">Closed</string>
+    <string name="mouth_3">Wooden teeth</string>
+    <string name="mouth_4">Smooch mouth</string>
+    <string name="mouth_5">Tongue out</string>
+    <string name="mouth_6">Vampire with moustache</string>
+    <string name="mouth_7">Mischievous smile</string>
+    <string name="mouth_8">Monstermouth</string>
+    <string name="mouth_9">Unhappy</string>
+    <string name="mouth_10">Shouting</string>
+    <string name="mouth_11">Teeth-gnashling</string>
+    <string name="mouth_12">Full beard</string>
+    <string name="mouth_13">Playboy</string>
+    <string name="mouth_14">Grey beard</string>
+
+</resources>
+

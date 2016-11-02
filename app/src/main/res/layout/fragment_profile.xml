@@ -36,15 +36,13 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgBody"
                     android:layout_margin="15dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/avatar_body_2" />
+                    android:layout_gravity="center" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgSkin"
                     android:layout_gravity="center"
-                    android:background="@drawable/avatar_skin_3"
                     android:layout_margin="15dp"
                     android:visibility="visible" />
 
@@ -53,8 +51,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgEyes"
                     android:layout_margin="15dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/avatareyes2" />
+                    android:layout_gravity="center" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -62,15 +59,13 @@
                     android:id="@+id/imgHat"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
-                    android:background="@drawable/avatar_hat_15"
                     android:visibility="visible" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgMouth"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/avatar_mouth_14" />
+                    android:layout_margin="15dp" />
 
             </ulm.hochschule.project_hoops.views.SquareLayout>
 
@@ -232,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Name"
+                            android:text="@string/just_name"
                             android:layout_margin="10dp" />
 
                         <TextView
@@ -259,7 +254,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:layout_margin="10dp"
                             android:id="@+id/textView4"
-                            android:text="Geburtsdatum" />
+                            android:text="@string/birthdate" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -285,7 +280,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:layout_margin="10dp"
                             android:id="@+id/textView9"
-                            android:text="Über mich" />
+                            android:text="@string/lbl_AboutMe1" />
 
                         <TextView
                             android:layout_width="wrap_content"

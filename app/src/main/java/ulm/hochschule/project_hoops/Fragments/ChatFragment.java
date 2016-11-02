@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.ChatClient;
@@ -35,6 +36,7 @@ public class ChatFragment extends Fragment {
     private String username;
 
     private View layout;
+
 
 
 
@@ -65,33 +67,45 @@ public class ChatFragment extends Fragment {
         myClient = new ChatClient(this);
         myClient.start();
 
-        et_Text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId==EditorInfo.IME_ACTION_DONE){
-                    if(textSize()&& textSize0()){
+        if(user.getVerifStatus() == true) {
+
+            et_Text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        if (textSize() && textSize0()) {
+                            myClient.processMessage(et_Text.getText().toString(), username);
+                            et_Text.setText("");
+                        } else {
+                            et_Text.setError("Es können nur 1-80 Zeichen verwendet werden");
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (textSize() && textSize0()) {
                         myClient.processMessage(et_Text.getText().toString(), username);
                         et_Text.setText("");
-                    }else{
+                    } else {
                         et_Text.setError("Es können nur 1-80 Zeichen verwendet werden");
                     }
                 }
-                return false;
-            }
-        });
 
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if(textSize()&& textSize0()){
-                    myClient.processMessage(et_Text.getText().toString(), username);
-                    et_Text.setText("");
-                }else{
-                    et_Text.setError("Es können nur 1-80 Zeichen verwendet werden");
+            });
+        }else{
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(), "Du muss dich Verifizieren um Chaten zu können",Toast.LENGTH_SHORT ).show();
                 }
-            }
 
-       });
+            });
+
+        }
     }
 
 

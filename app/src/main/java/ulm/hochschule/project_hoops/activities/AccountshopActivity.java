@@ -2,6 +2,7 @@ package ulm.hochschule.project_hoops.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,7 @@ import java.util.Observer;
 import Enums.AvatarItems;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.objects.AvatarItemDescription;
+import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 import ulm.hochschule.project_hoops.views.ItemView;
 
@@ -37,6 +39,7 @@ public class AccountshopActivity extends AppCompatActivity
     private AvatarItems currentSelected = AvatarItems.EYES;
     private LinearLayout content_Items;
     private TextView tv_Coins;
+    private NavigationView navigationView;
 
     ArrayList<AvatarItemDescription> hat_ids, eyes_ids, skins_ids, bodies_ids, background_ids, mouths_ids;
 
@@ -48,57 +51,57 @@ public class AccountshopActivity extends AppCompatActivity
         background_ids = new ArrayList<AvatarItemDescription>();
         mouths_ids = new ArrayList<AvatarItemDescription>();
 
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_1,400,"Blonde Zöpfe",0,0));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_2,600,"Schwarze Locken",0,1));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_4,1250,"Hasenohren",0,3));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_5,1250,"Teufelshörner",0,4));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_6,1750,"Schlafmütze",0,5));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_7,1250,"Alienantennen",0,6));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_8,1750,"Zauberer",0,7));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_9,1000,"Partyhut",0,8));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_10,1000,"Wintermütze",0,9));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_12,2250,"Vikingerhelm",0,11));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_13,1250,"Blonde Frisur",0,12));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_14,1250,"Rote Frisur",0,13));
-        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_16,1250,"Schwarze Frisur",0,15));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_1,400,getResources().getString(R.string.hat_1),0,0));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_2,600,getResources().getString(R.string.hat_2),0,1));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_4,1250,getResources().getString(R.string.hat_3),0,3));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_5,1250,getResources().getString(R.string.hat_4),0,4));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_6,1750,getResources().getString(R.string.hat_5),0,5));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_7,1250,getResources().getString(R.string.hat_6),0,6));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_8,1750,getResources().getString(R.string.hat_7),0,7));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_9,1000,getResources().getString(R.string.hat_8),0,8));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_10,1000,getResources().getString(R.string.hat_9),0,9));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_12,2250,getResources().getString(R.string.hat_10),0,11));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_13,1250,getResources().getString(R.string.hat_11),0,12));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_14,1250,getResources().getString(R.string.hat_12),0,13));
+        hat_ids.add(new AvatarItemDescription(R.drawable.avatar_hat_16,1250,getResources().getString(R.string.hat_13),0,15));
 
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes4,500,"Verschmitzte Augen",1,3));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes5,750,"Cyborgaugen",1,4));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes6,750,"Haselnussbraune Augen",1,5));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes7,1000,"Roboteraugen",1,6));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes8,600,"Normale Augen",1,7));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes9,1250,"Insektenaugen",1,8));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes10,1250,"Zyklopenauge",1,9));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes11,800,"Animeaugen",1,10));
-        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes12,1000,"Sonnenbrille",1,11));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes4,500,getResources().getString(R.string.eyes_1),1,3));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes5,750,getResources().getString(R.string.eyes_2),1,4));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes6,750,getResources().getString(R.string.eyes_3),1,5));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes7,1000,getResources().getString(R.string.eyes_4),1,6));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes8,600,getResources().getString(R.string.eyes_5),1,7));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes9,1250,getResources().getString(R.string.eyes_6),1,8));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes10,1250,getResources().getString(R.string.eyes_7),1,9));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes11,800,getResources().getString(R.string.eyes_8),1,10));
+        eyes_ids.add(new AvatarItemDescription(R.drawable.avatareyes12,1000,getResources().getString(R.string.eyes_9),1,11));
 
-        skins_ids.add(new AvatarItemDescription(R.drawable.avatar_skin_2,1500,"Alienfarbe",4,1));
+        skins_ids.add(new AvatarItemDescription(R.drawable.avatar_skin_2,1500,getResources().getString(R.string.skin_1),4,1));
 
-        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_1,750,"Rote Farbe, schwarze Schrift",5,0));
-        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_3,750,"Blaue Farbe, schwarze Schrift",5,2));
-        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_4,750,"Rote Farbe, orangene Schrift",5,3));
-        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_5,750,"Grüne Farbe, orangene Schrift",5,4));
-        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_6,750,"Blaue Farbe, orangene Schrift",5,5));
-        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_8,750,"Weiße Farbe",5,7));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_1,750,getResources().getString(R.string.body_1),5,0));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_3,750,getResources().getString(R.string.body_2),5,2));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_4,750,getResources().getString(R.string.body_3),5,3));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_5,750,getResources().getString(R.string.body_4),5,4));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_6,750,getResources().getString(R.string.body_5),5,5));
+        bodies_ids.add(new AvatarItemDescription(R.drawable.avatar_body_8,750,getResources().getString(R.string.body_6),5,7));
 
-        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_1,750,"Orange auf Grün",0,0));
-        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_2,750,"Orange auf Blau",0,1));
-        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_4,1500,"Stadtleben",0,3));
+        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_1,750,getResources().getString(R.string.back_1),2,0));
+        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_2,750,getResources().getString(R.string.back_2),2,1));
+        background_ids.add(new AvatarItemDescription(R.drawable.avatar_background_4,1500,getResources().getString(R.string.back_3),2,3));
 
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_1,750,"Irres Lachen",3,0));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_2,1000,"Verschlossen",3,1));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_3,1250,"Holzzähne",3,2));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_4,750,"Knutschmund",3,3));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_5,750,"Zunge raus",3,4));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_6,1250,"Vampir mit Schnauzer",3,5));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_7,1000,"Verschmitztes Lächeln",3,6));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_8,1250,"Monsterfänge",3,7));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_9,750,"Unglücklich",3,8));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_10,850,"Rufend",3,9));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_11,850,"Zähneknirschend",3,10));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_13,1250,"Vollbart",3,12));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_15,1250,"Playboy",3,14));
-        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_16,1250,"Vergrauter Bart",3,15));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_1,750,getResources().getString(R.string.mouth_1),3,0));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_2,1000,getResources().getString(R.string.mouth_2),3,1));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_3,1250,getResources().getString(R.string.mouth_3),3,2));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_4,750,getResources().getString(R.string.mouth_4),3,3));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_5,750,getResources().getString(R.string.mouth_5),3,4));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_6,1250,getResources().getString(R.string.mouth_6),3,5));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_7,1000,getResources().getString(R.string.mouth_7),3,6));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_8,1250,getResources().getString(R.string.mouth_8),3,7));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_9,750,getResources().getString(R.string.mouth_9),3,8));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_10,850,getResources().getString(R.string.mouth_10),3,9));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_11,850,getResources().getString(R.string.mouth_11),3,10));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_13,1250,getResources().getString(R.string.mouth_12),3,12));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_15,1250,getResources().getString(R.string.mouth_13),3,14));
+        mouths_ids.add(new AvatarItemDescription(R.drawable.avatar_mouth_16,1250,getResources().getString(R.string.mouth_14),3,15));
 
     }
 
@@ -116,6 +119,13 @@ public class AccountshopActivity extends AppCompatActivity
         initIds();
         changeItems();
         updateCoinCounter();
+
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view_acc);
+        navigationView.setNavigationItemSelectedListener(this);
+        setIcons();
+
+
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,8 +141,28 @@ public class AccountshopActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setIcons() {
+
+        Menu navDrawer = navigationView.getMenu();
+
+        MenuItem hats = navDrawer.findItem(R.id.nav_hats);
+        MenuItem eyes = navDrawer.findItem(R.id.nav_eyes);
+        MenuItem mouths = navDrawer.findItem(R.id.nav_mouths);
+        MenuItem skins = navDrawer.findItem(R.id.nav_skins);
+        MenuItem bodies = navDrawer.findItem(R.id.nav_bodies);
+        MenuItem backgrounds = navDrawer.findItem(R.id.nav_backgrounds);
+
+        int res = 40;
+
+        hats.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_hat, res, res)));
+        eyes.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_eyes, res, res)));
+        mouths.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_mouth, res, res)));
+        skins.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_skin, res, res)));
+        bodies.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_body, res, res)));
+        backgrounds.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_background, res, res)));
+
     }
 
     private void changeItems() {

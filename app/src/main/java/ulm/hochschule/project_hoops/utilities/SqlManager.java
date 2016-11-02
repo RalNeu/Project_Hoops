@@ -106,7 +106,7 @@ public class SqlManager {
         return ret;
     }
 
-    private int createUser(String firstName, String lastName, String email, String username, String password, String achievements){
+    public int createUser(String firstName, String lastName, String email, String username, String password, String achievements){
 
         int ret = 2, personID;
         String query;

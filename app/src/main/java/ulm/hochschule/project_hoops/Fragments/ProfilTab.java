@@ -19,6 +19,7 @@ import java.util.Observer;
 
 import ulm.hochschule.project_hoops.activities.EditProfilActivity;
 import ulm.hochschule.project_hoops.objects.AvatarItems;
+import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
@@ -126,12 +127,19 @@ public class ProfilTab extends Fragment {
     public void updateAvatar() throws SQLException{
         aItems = AvatarItems.getInstance();
 
-        imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
-        imgBackground.setBackgroundResource(aItems.getAccountItemByID("background"));
+
+        imgHat.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), aItems.getAccountItemByID("hat"), 300,300));
+        imgBackground.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), aItems.getAccountItemByID("background"), 300,300));
+        imgEyes.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), aItems.getAccountItemByID("eyes"), 300,300));
+        imgMouth.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), aItems.getAccountItemByID("mouth"), 300,300));
+        imgSkin.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), aItems.getAccountItemByID("skin"), 300,300));
+        imgBody.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), aItems.getAccountItemByID("body"), 300,300));
+        //imgHat.setBackgroundResource(aItems.getAccountItemByID("hat"));
+        /*imgBackground.setBackgroundResource(aItems.getAccountItemByID("background"));
         imgEyes.setBackgroundResource(aItems.getAccountItemByID("eyes"));
         imgMouth.setBackgroundResource(aItems.getAccountItemByID("mouth"));
         imgSkin.setBackgroundResource(aItems.getAccountItemByID("skin"));
-        imgBody.setBackgroundResource(aItems.getAccountItemByID("body"));
+        imgBody.setBackgroundResource(aItems.getAccountItemByID("body"));*/
 
     }
 

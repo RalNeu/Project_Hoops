@@ -13,28 +13,22 @@
     <menu>
         <item
             android:id="@+id/nav_eyes"
-            android:icon="@drawable/ic_eyes"
-            android:title="Augen" />
+            android:title="@string/avatar_eyes" />
         <item
             android:id="@+id/nav_mouths"
-            android:icon="@drawable/ic_mouth"
-            android:title="Münder" />
+            android:title="@string/avatar_mouths" />
         <item
             android:id="@+id/nav_hats"
-            android:icon="@drawable/ic_hat"
-            android:title="Hüte" />
+            android:title="@string/avatar_hats" />
         <item
             android:id="@+id/nav_skins"
-            android:icon="@drawable/ic_skin"
-            android:title="Hautfarben" />
+            android:title="@string/avatar_skins" />
         <item
             android:id="@+id/nav_bodies"
-            android:icon="@drawable/ic_body"
-            android:title="Körper" />
+            android:title="@string/avatar_bodies" />
         <item
             android:id="@+id/nav_backgrounds"
-            android:icon="@drawable/ic_background"
-            android:title="Hintergründe" />
+            android:title="@string/avatar_backgrounds" />
     </menu>
     </item>
 </menu>
