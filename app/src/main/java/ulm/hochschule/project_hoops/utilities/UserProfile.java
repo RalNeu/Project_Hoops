@@ -21,6 +21,7 @@ public class UserProfile {
     private Coins coins;
     private int ranking, highscore, userID, personID, settings;
     private Date gebDat, lastLogin;
+    private boolean isVerified;
 
     private static boolean userFound = false;
 
@@ -47,6 +48,7 @@ public class UserProfile {
             userID      = (int)     userInfo[11];
             achievements = (String) userInfo[12];
             lastLogin =     (Date)  userInfo[13];
+            isVerified = SqlManager.getInstance().getVerifStatus(sqlUSER);
             AchievementHandler ah = null;
             this.a = a;
             mapBoughtAvatarItems();
@@ -251,5 +253,8 @@ public class UserProfile {
     public int getUserID() {
         return userID;
     }
-
+    public boolean getVerifStatus(){
+        return this.isVerified;
+    }
 }
+
