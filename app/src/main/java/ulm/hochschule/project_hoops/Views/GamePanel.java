@@ -44,6 +44,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private boolean justBounced = false;
 
     private float lastBasketColAngle = 90;
+    private float lastXCenter = 0;
     private float width;
     private float height;
     private float distance = 1;
@@ -82,8 +83,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             drawPoint = false;
                             ball.xVelocity = (x - event.getX()) / 5 * distance;
                             ball.yVelocity = (y - event.getY()) / 5 * distance;
-//                            ball.xVelocity = 92.551796f;
-//                            ball.yVelocity = -95.311745f;
+                            if(x-event.getX() < 0) {
+                                ball.xVelocity = 92.551796f;
+                                ball.yVelocity = -74.53099f;
+                            }
                             System.out.println("xVel: " + ball.xVelocity);
                             System.out.println("yVel: " + ball.yVelocity);
                             System.out.println("dist: " + distance);
@@ -127,6 +130,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update(){
         if(ball.ok){
+
             ball.update();
             checkCollisionBasket(hoop.xBasketCollFront, hoop.yBasketCollFront, hoop.basketCollRadius);
             checkCollisionBasket(hoop.xBasketCollBack, hoop.yBasketCollBack, hoop.basketCollRadius);
@@ -244,39 +248,53 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
+            System.out.println("Col detected:");
+            System.out.println("Angle: " + lastBasketColAngle + " new angle: " + basketColAngle);
+            System.out.println("ball x: " + ball.xCenter);
+            System.out.println("ball y: " + ball.yCenter);
+            System.out.println("xBasketColl: " + xBasketColl);
+            System.out.println("yBasketColl: " + yBasketColl);
+            //lastBasketColAngle durch collisionAngle ersetzt
+            //Idee: lastXCenter speichern, checken ob nun hinter basketColl, dann lastBasketColAngle benutzen. das gleiche mit Y
+            if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius) * 4/6) {
+                ball.xCenter = xBasketColl - (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
+                ball.yCenter = yBasketColl - (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
+            } else if (Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius) * 4/6) {
 
-
-            if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)*2/3) {
-                ball.xCenter = xBasketColl - (float) Math.cos(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
-                ball.yCenter = yBasketColl - (float) Math.sin(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
-            } else if (Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)*2/3) {
-                ball.xCenter = xBasketColl + (float) Math.cos(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
-                ball.yCenter = yBasketColl + (float) Math.sin(lastBasketColAngle) * (ball.RADIUS + hoop.basketCollRadius);
+                ball.xCenter = xBasketColl + (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
+                ball.yCenter = yBasketColl + (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
             }
+
+            System.out.println("ball x: " + ball.xCenter);
+            System.out.println("ball y: " + ball.yCenter);
+            System.out.println("ball velx: " + ball.xVelocity);
+            System.out.println("ball vely: " + ball.yVelocity);
 
             ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
             ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            System.out.println("ball velx: " + ball.xVelocity);
+            System.out.println("ball vely: " + ball.yVelocity);
 
-
-            if(ball.xCenter < xBasketColl) {
-                ball.xVelocity -= 2;
+            /*if(ball.xCenter < xBasketColl) {
+                //ball.xVelocity -= 2;
                 ball.xCenter -= 1;
             }
             else {
-                ball.xVelocity += 2;
+                //ball.xVelocity += 2;
                 ball.xCenter += 1;
             }
             if(ball.yCenter < yBasketColl) {
-                ball.yVelocity -= 2;
+                //ball.yVelocity -= 2;
                 ball.yCenter--;
             }
             else {
-                ball.yVelocity += 2;
+                //ball.yVelocity += 2;
                 ball.yCenter++;
-            }
+            }*/
 
         }
         lastBasketColAngle = basketColAngle;
+        lastXCenter = ball.xCenter;
 //        lastXBasketColVector = (float) Math.cos(lastBasketColAngle) * -1;
 //        lastYBasketColVector = (float) Math.sin(lastBasketColAngle) * -1;
 //        if(ball.xCenter > xBasketColl){
