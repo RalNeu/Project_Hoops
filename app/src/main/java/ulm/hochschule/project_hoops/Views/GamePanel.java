@@ -12,13 +12,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 
-import ulm.hochschule.project_hoops.activities.GameActivity;
 import ulm.hochschule.project_hoops.activities.GameEndActivity;
-import ulm.hochschule.project_hoops.activities.GameMenuActivity;
 import ulm.hochschule.project_hoops.objects.Ball;
 import ulm.hochschule.project_hoops.objects.Hoop;
 import ulm.hochschule.project_hoops.sonstige.GameThread;
-import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
  * Created by Johann on 19.09.2016.
@@ -40,19 +37,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private int score = 0;
     private TextView scoreText;
     private TextView attemptText;
+    private final TextView velocityText;
     private boolean scored = false;
-    private boolean justBounced = false;
 
     private float lastBasketColAngle = 90;
-    private float lastXCenter = 0;
     private float width;
     private float height;
     private float distance = 1;
+    private float xVel;
+    private float yVel;
 
     private Context context;
     private Intent intent;
 
-    public GamePanel(Context context, float width, float height, TextView scoreText, TextView attemptText){
+    public GamePanel(Context context, float width, float height, TextView scoreText, TextView attemptText, TextView velocityText){
         super(context);
         this.width = width;
         this.height = height;
@@ -63,6 +61,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         yP = ball.yCenter;
         this.scoreText = scoreText;
         this.attemptText = attemptText;
+        this.velocityText = velocityText;
 
         this.intent = new Intent(context, GameEndActivity.class);
 
@@ -83,10 +82,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             drawPoint = false;
                             ball.xVelocity = (x - event.getX()) / 5 * distance;
                             ball.yVelocity = (y - event.getY()) / 5 * distance;
-                            if(x-event.getX() < 0) {
-                                ball.xVelocity = 92.551796f;
-                                ball.yVelocity = -74.53099f;
-                            }
+                            xVel = ball.xVelocity;
+                            yVel = ball.yVelocity;
+                            //Für tests: bei Wurf nach hinten wird der gespeicherte Wurf ausgeführt
+                            /*if(x-event.getX() < 0) {
+                                ball.xVelocity = 58.138115f * 1.5f;
+                                ball.yVelocity = -66.63801f * 1.5f;
+                            }*/
+
                             System.out.println("xVel: " + ball.xVelocity);
                             System.out.println("yVel: " + ball.yVelocity);
                             System.out.println("dist: " + distance);
@@ -150,11 +153,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         yV = (y - y2) / 5 * distance;
     }
 
+
+    //setzt den Ball auf Anfangsposition zurück
+    //wenn gepunktet wurde wird die Distanz erhöht
+    //wenn man über den 10. Versuch hinaus ist, wird der Endscreen geöffnet
     public void restartGame() {
+        velocityText.post(new Runnable() {
+            public void run() {
+                velocityText.setText("     xVel: " + xVel + "   yVel: " + yVel);
+            }
+        });
         if(scored)
             increaseDistance();
         else
-            resetDistance();
+            decreaseDistance();
 
         attempt++;
 
@@ -163,12 +175,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Bundle b = new Bundle();
-            b.putInt("key", score); //Your id
-            intent.putExtras(b); //Put your id to your next Intent
-            thread.interrupt();
+            b.putInt("key", score); //score wird an GameEndActivity weitergegeben
+            intent.putExtras(b);
+            thread.interrupt(); //Thread wird interupptet, weiß nicht ob wirklich gelöscht
             context.startActivity(intent);
         } else {
-            attemptText.post(new Runnable() {
+            attemptText.post(new Runnable() { //so setzt man den Text in der Activity von diesem GamePanel aus
                 public void run() {
                     attemptText.setText("    attempt: " + attempt + "/10");
                 }
@@ -182,6 +194,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    //erhöht Distanz bis maximal 0.3 Faktor, erstellt Objekte neu
     private void increaseDistance() {
         if(distance > 0.3)
             distance *= 0.9;
@@ -189,15 +202,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         hoop = new Hoop(width, height, context, distance);
     }
 
-    private void resetDistance() {
-        distance = 1;
-        ball = new Ball(width, height, context);
-        hoop = new Hoop(width, height, context);
+    //verringert Distanz um gleiche Menge wie die Erhöhung, erstellt Objekte neu
+    private void decreaseDistance() {
+        distance += distance/9;
+        if(distance > 1)
+            distance = 1;
+        ball = new Ball(width, height, context, distance);
+        hoop = new Hoop(width, height, context, distance);
     }
 
+    //wenn Ball in der grünen Zone ist, wird beim nächsten mal geprüft ob er unter der grünen Zone ist => Scored = true
     private void checkGoal() {
         if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50 && !scored) {
-            score += (1/(distance*distance*distance));
+            score += (1/(Math.pow(distance, 4)));
             scored = true;
 
             scoreText.post(new Runnable() {
@@ -216,6 +233,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    //falls scored = true wird Ball langsam durchsichtiger
     private void fadeOut() {
         if(scored) {
             ball.alphaValue -= 3;
@@ -225,6 +243,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    //checkt die Kollision mit dem Korb, setzt die Ballgeschwindigkeit und Ballposition bei Kollision
     private void checkCollisionBasket(float xBasketColl, float yBasketColl, float basketCollRadius) {
 
         float xBasketColVector;
@@ -248,32 +267,34 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
-            System.out.println("Col detected:");
+            /*System.out.println("Col detected:");
             System.out.println("Angle: " + lastBasketColAngle + " new angle: " + basketColAngle);
+
+            System.out.println("ball velx: " + ball.xVelocity);
+            System.out.println("ball vely: " + ball.yVelocity);*/
+
+            ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            /*System.out.println("ball velx: " + ball.xVelocity);
+            System.out.println("ball vely: " + ball.yVelocity);
+
             System.out.println("ball x: " + ball.xCenter);
             System.out.println("ball y: " + ball.yCenter);
             System.out.println("xBasketColl: " + xBasketColl);
-            System.out.println("yBasketColl: " + yBasketColl);
+            System.out.println("yBasketColl: " + yBasketColl);*/
             //lastBasketColAngle durch collisionAngle ersetzt
             //Idee: lastXCenter speichern, checken ob nun hinter basketColl, dann lastBasketColAngle benutzen. das gleiche mit Y
-            if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius) * 4/6) {
+            if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)) {
                 ball.xCenter = xBasketColl - (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
                 ball.yCenter = yBasketColl - (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
-            } else if (Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius) * 4/6) {
+            } else if (Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)) {
 
                 ball.xCenter = xBasketColl + (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
                 ball.yCenter = yBasketColl + (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
             }
 
-            System.out.println("ball x: " + ball.xCenter);
-            System.out.println("ball y: " + ball.yCenter);
-            System.out.println("ball velx: " + ball.xVelocity);
-            System.out.println("ball vely: " + ball.yVelocity);
-
-            ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
-            ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
-            System.out.println("ball velx: " + ball.xVelocity);
-            System.out.println("ball vely: " + ball.yVelocity);
+            /*System.out.println("ball x: " + ball.xCenter);
+            System.out.println("ball y: " + ball.yCenter);*/
 
             /*if(ball.xCenter < xBasketColl) {
                 //ball.xVelocity -= 2;
@@ -294,7 +315,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         }
         lastBasketColAngle = basketColAngle;
-        lastXCenter = ball.xCenter;
 //        lastXBasketColVector = (float) Math.cos(lastBasketColAngle) * -1;
 //        lastYBasketColVector = (float) Math.sin(lastBasketColAngle) * -1;
 //        if(ball.xCenter > xBasketColl){
@@ -304,14 +324,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    //checkt Kollision mit Backboard, setzt Ballgeschwindigkeit
     private void checkCollisionBBoard() {
         if(ball.xCenter + ball.RADIUS > hoop.xBackboardTop && ball.yCenter - ball.RADIUS < hoop.yBackboardBot)
         {
             ball.xCenter = hoop.xBackboardTop - ball.RADIUS;
-            ball.xVelocity = -ball.xVelocity * ball.FACTOR_BOUNCEBACK;
+            if(ball.xVelocity > 0)
+                ball.xVelocity = -ball.xVelocity * ball.FACTOR_BOUNCEBACK;
         }
     }
 
+    //checkt Kollision mit Stange, setzt Ballgeschwindigkeit
     private void checkCollisionPole() {
         if(ball.xCenter + ball.RADIUS > hoop.xPoleCollTop && ball.yCenter - ball.RADIUS > hoop.yPoleCollTop)
         {
@@ -320,6 +343,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    //checkt Kollision mit Netz, versucht Ball realistisch vom Netzrand wegzubewegen. Ändert Ballgeschwindigkeit
     private void checkCollisionNet() {
         if(ball.xCenter - ball.RADIUS < hoop.xBasketCollFront && scored && ball.yCenter > hoop.yBasketCollFront && ball.yCenter < hoop.yNetCollBot && ball.xCenter > hoop.xBasketCollFront) {
             ball.xVelocity += Math.pow(hoop.xBasketCollFront - ball.xCenter - ball.RADIUS, 2) / 50;
@@ -335,6 +359,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    //Zeichnet Ball, Korb und ballTrajectory
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();

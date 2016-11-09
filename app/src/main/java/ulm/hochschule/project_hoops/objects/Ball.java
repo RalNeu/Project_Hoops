@@ -94,7 +94,7 @@ public class Ball {
             }
         }
 
-        if(xVelocity < 2 && xVelocity > -2){
+        if(xVelocity < 2 && xVelocity > -2 && yCenter >= heightScreen - RADIUS){
             xVelocity = 0;
         }
 

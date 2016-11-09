@@ -47,10 +47,12 @@ public class GameActivity extends Activity implements View.OnClickListener {
         scoreText.setText("Score: " + score);
         final TextView attemptText = new TextView(this);
         attemptText.setText("    attempt: " + attempt + "/10");
+        final TextView velocityText = new TextView(this);
+        attemptText.setText("    xVel: 0 yVel: 0");
 
 
         FrameLayout game = new FrameLayout(this);
-        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText);
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText, velocityText);
         LinearLayout gameWidgets = new LinearLayout (this);
 
 
@@ -61,6 +63,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         gameWidgets.addView(scoreText);
         gameWidgets.addView(attemptText);
+        gameWidgets.addView(velocityText);
         gameWidgets.addView(endGameButton);
 
         game.addView(gamePanel);
