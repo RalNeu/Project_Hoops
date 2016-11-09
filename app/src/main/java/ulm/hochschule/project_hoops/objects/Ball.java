@@ -103,6 +103,7 @@ public class Ball {
         return true;
     }
 
+    //set Random TODO
     public void setCenter(float x, float y){
         xCenter = x;
         yCenter = y;

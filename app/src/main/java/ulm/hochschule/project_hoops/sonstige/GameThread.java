@@ -12,12 +12,14 @@ public class GameThread extends Thread {
 
     private SurfaceHolder holder;
     private GamePanel gamePanel;
+    private GameModel model;
     private boolean running;
 
-    public GameThread(SurfaceHolder holder, GamePanel gamePanel){
+    public GameThread(SurfaceHolder holder, GamePanel gamePanel, GameModel model){
         super();
         this.holder = holder;
         this.gamePanel = gamePanel;
+        this.model = model;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class GameThread extends Thread {
         Canvas c;
         while (running) {
             gamePanel.update();
+            model.update();
             c = null;
             try {
                 c = holder.lockCanvas(null);

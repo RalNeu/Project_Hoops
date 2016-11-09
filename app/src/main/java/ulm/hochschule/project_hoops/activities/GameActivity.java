@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.sonstige.GameModel;
 import ulm.hochschule.project_hoops.views.GamePanel;
 
 public class GameActivity extends Activity implements View.OnClickListener {
@@ -41,7 +42,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         widthScreen = displaymetrics.widthPixels;
         heightScreen = displaymetrics.heightPixels - getStatusBarHeight();
-
 
         final TextView scoreText = new TextView(this);
         scoreText.setText("Score: " + score);
@@ -78,7 +78,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         //Intent intent = new Intent(this, MainActivity.class);
         //startActivity(intent);
-        gamePanel.restartGame();
+        gamePanel.model.restartGame();
     }
 
     public int getStatusBarHeight() {
