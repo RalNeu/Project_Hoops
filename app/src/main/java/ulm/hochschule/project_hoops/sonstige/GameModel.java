@@ -23,13 +23,13 @@ public class GameModel {
     public int attempt = 1;
 
     private boolean inHoopZone = false;
-    private int score = 0;
+    public int score = 0;
     private boolean scored = false;
 
     private float lastBasketColAngle = 90;
     private float width;
     private float height;
-    private float distance = 1;
+    public float distance = 1;
 
     private Context context;
     private Intent intent;
@@ -183,6 +183,13 @@ public class GameModel {
 
                 ball.xCenter = xBasketColl + (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
                 ball.yCenter = yBasketColl + (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
+            }
+
+            if(ball.xVelocity < 3 && ball.xVelocity > -3 && ball.yVelocity < 3 && ball.yVelocity > -3) {
+                if(ball.xCenter < xBasketColl)
+                    ball.xVelocity--;
+                else
+                    ball.xVelocity++;
             }
 
             /*System.out.println("ball x: " + ball.xCenter);
