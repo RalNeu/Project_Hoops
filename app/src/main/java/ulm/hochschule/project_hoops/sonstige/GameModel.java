@@ -96,6 +96,8 @@ public class GameModel {
     private void increaseDistance() {
         if(distance > 0.3)
             distance *= 0.9;
+        //für Testzwecke
+        //distance = 0.81f;
         ball = new Ball(width, height, context, distance);
         hoop = new Hoop(width, height, context, distance);
     }
@@ -105,6 +107,8 @@ public class GameModel {
         distance += distance/9;
         if(distance > 1)
             distance = 1;
+        //für Textzwecke
+        //distance = 0.81f;
         ball = new Ball(width, height, context, distance);
         hoop = new Hoop(width, height, context, distance);
     }
@@ -144,18 +148,18 @@ public class GameModel {
         float collisionAngle = 0;
         float velocity = (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2));
 
-        if(xBasketColl - ball.xCenter != 0) {
+        if(ball.xCenter != xBasketColl) {
             basketColAngle = (float) Math.atan((yBasketColl - ball.yCenter) / (xBasketColl - ball.xCenter));
             if(lastBasketColAngle == 90)
                 lastBasketColAngle = basketColAngle;
-            xBasketColVector = (float) Math.cos(lastBasketColAngle) * -1;
-            yBasketColVector = (float) Math.sin(lastBasketColAngle) * -1;
+            xBasketColVector = (float) Math.sin(basketColAngle) * -1;
+            yBasketColVector = (float) Math.cos(basketColAngle) * -1;
             if(ball.xCenter > xBasketColl){
                 xBasketColVector *= -1;
                 yBasketColVector *= -1;
             }
 
-            collisionAngle = (float) Math.acos((ball.xVelocity * xBasketColVector + ball.yVelocity * yBasketColVector) / (float) (Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * Math.sqrt(Math.pow(xBasketColVector, 2) + Math.pow(yBasketColVector, 2))));
+            collisionAngle = (float) Math.acos((ball.xVelocity * xBasketColVector + ball.yVelocity * yBasketColVector) / (float) (velocity * Math.sqrt(Math.pow(xBasketColVector, 2) + Math.pow(yBasketColVector, 2))));
         }
 
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
@@ -164,9 +168,11 @@ public class GameModel {
 
             System.out.println("ball velx: " + ball.xVelocity);
             System.out.println("ball vely: " + ball.yVelocity);*/
-
-            ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
-            ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            System.out.println("velo: " + velocity);
+            if(velocity > 20 || velocity < -20) {
+                ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+                ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+            }
             /*System.out.println("ball velx: " + ball.xVelocity);
             System.out.println("ball vely: " + ball.yVelocity);
 
@@ -177,20 +183,22 @@ public class GameModel {
             //lastBasketColAngle durch collisionAngle ersetzt
             //Idee: lastXCenter speichern, checken ob nun hinter basketColl, dann lastBasketColAngle benutzen. das gleiche mit Y
             if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)) {
-                ball.xCenter = xBasketColl - (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
+                if(velocity > 20 || velocity < -20)
+                    ball.xCenter = xBasketColl - (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
                 ball.yCenter = yBasketColl - (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
             } else if (Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)) {
-
-                ball.xCenter = xBasketColl + (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
+                if(velocity > 20 || velocity < -20)
+                    ball.xCenter = xBasketColl + (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
                 ball.yCenter = yBasketColl + (float) Math.sin(basketColAngle) * (ball.RADIUS + basketCollRadius);
             }
 
-            if(ball.xVelocity < 3 && ball.xVelocity > -3 && ball.yVelocity < 3 && ball.yVelocity > -3) {
+            if(velocity < 20 && velocity > -20) {
                 if(ball.xCenter < xBasketColl)
-                    ball.xVelocity--;
+                    ball.xVelocity -= 0.2f;
                 else
-                    ball.xVelocity++;
+                    ball.xVelocity += 0.2f;
             }
+            System.out.println("velo: " + velocity);
 
             /*System.out.println("ball x: " + ball.xCenter);
             System.out.println("ball y: " + ball.yCenter);*/

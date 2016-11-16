@@ -35,7 +35,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private TextView attemptText;
     private final TextView velocityText;
 
-    private float distance = 1;
     private float xVel;
     private float yVel;
 
@@ -63,16 +62,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         case MotionEvent.ACTION_UP:
                             model.ball.ok = true;
                             drawPoint = false;
-                            model.ball.xVelocity = (x - event.getX()) / 5 * distance;
-                            model.ball.yVelocity = (y - event.getY()) / 5 * distance;
+                            model.ball.xVelocity = (x - event.getX()) / 5 * model.distance;
+                            model.ball.yVelocity = (y - event.getY()) / 5 * model.distance;
                             xVel = model.ball.xVelocity;
                             yVel = model.ball.yVelocity;
                             //Für tests: bei Wurf nach hinten wird der gespeicherte Wurf ausgeführt
-                            /*if(x-event.getX() < 0) {
-                                ball.xVelocity = 58.138115f * 1.5f;
-                                ball.yVelocity = -66.63801f * 1.5f;
-                            }*/
+                            if(x-event.getX() < 0) {
+                                model.ball.xVelocity = 67.68638f;
+                                model.ball.yVelocity = -101.455536f;
+                                //model.ball.xVelocity = 83.625f;
+                                //model.ball.yVelocity = -102.02344f;
 
+                            }
+
+                            System.out.println("xVel: " + model.ball.xVelocity);
+                            System.out.println("yVel: " + model.ball.yVelocity);
+                            System.out.println("dist: " + model.distance);
 
                             break;
                         case MotionEvent.ACTION_MOVE:
@@ -88,8 +93,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update(){
-        xV = (x - x2) / 5 * distance;
-        yV = (y - y2) / 5 * distance;
+        xV = (x - x2) / 5 * model.distance;
+        yV = (y - y2) / 5 * model.distance;
     }
 
     @Override
@@ -127,6 +132,25 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawColor(Color.WHITE);
             model.ball.myDraw(canvas);
             model.hoop.myDraw(canvas);
+
+            velocityText.post(new Runnable() {
+                public void run() {
+                    velocityText.setText("     xVel: " + xVel + "   yVel: " + yVel);
+                }
+            });
+
+            attemptText.post(new Runnable() {
+                public void run() {
+                    attemptText.setText("    attempt: " + model.attempt + "/10");
+                }
+            });
+
+            scoreText.post(new Runnable() {
+                public void run() {
+                    scoreText.setText("Score: " + model.score);
+                }
+            });
+
 
             if(drawPoint) {
                 for (int i = 0; i < 25; i++) {
