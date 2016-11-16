@@ -100,7 +100,7 @@ public class ChatFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "Du muss dich Verifizieren um Chaten zu können",Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(getContext(), "Sie müssen sich Verifizieren um Chaten zu können",Toast.LENGTH_SHORT ).show();
                 }
 
             });
