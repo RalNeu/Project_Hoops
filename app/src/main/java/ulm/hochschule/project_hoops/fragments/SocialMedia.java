@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import ulm.hochschule.project_hoops.R;
@@ -18,9 +19,9 @@ public class SocialMedia extends Fragment {
 
 
     // buttons
-    private ImageButton ibtnFacebook ;
-    private ImageButton ibtnTwitter;
-    private ImageButton ibtnInstagram;
+    private Button ibtnFacebook ;
+    private Button ibtnTwitter;
+    private Button ibtnInstagram;
     private View layout;
 
     @Override
@@ -33,11 +34,10 @@ public class SocialMedia extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
           layout = inflater.inflate(R.layout.fragment_social_media, container, false);
-          ibtnFacebook = (ImageButton) layout.findViewById(R.id.ibtn_facebook);
-          ibtnInstagram = (ImageButton) layout.findViewById(R.id.ibtn_instagram);
-          ibtnTwitter = (ImageButton) layout.findViewById(R.id.ibtn_twitter);
-          ibtnInstagram = (ImageButton) layout.findViewById(R.id.ibtn_instagram);
-
+          ibtnFacebook = (Button) layout.findViewById(R.id.ibtn_facebook);
+          ibtnInstagram = (Button) layout.findViewById(R.id.ibtn_instagram);
+          ibtnTwitter = (Button) layout.findViewById(R.id.ibtn_twitter);
+          ibtnInstagram = (Button) layout.findViewById(R.id.ibtn_instagram);
         return layout;
     }
 

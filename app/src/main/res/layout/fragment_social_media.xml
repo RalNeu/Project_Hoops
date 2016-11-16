@@ -5,33 +5,32 @@
     android:layout_height="match_parent"
     tools:context="ulm.hochschule.project_hoops.fragments.SocialMedia">
 
-
-    <ImageButton
-        android:id="@+id/ibtn_instagram"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/instagram_logo"
-        android:layout_marginBottom="96dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/ibtn_twitter" />
-
-    <ImageButton
-        android:id="@+id/ibtn_twitter"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/twitter_logo"
-        android:layout_marginBottom="21dp"
-        android:layout_above="@+id/ibtn_instagram"
-        android:layout_centerHorizontal="true" />
-
-    <ImageButton
+    <Button
         android:id="@+id/ibtn_facebook"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/facebook_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/facebook_logo"
         android:layout_above="@+id/ibtn_twitter"
         android:layout_alignStart="@+id/ibtn_twitter"
         android:layout_marginBottom="29dp"
         android:layout_alignEnd="@+id/ibtn_twitter" />
+
+    <Button
+        android:id="@+id/ibtn_instagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/instagram_logo"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/ibtn_twitter" />
+
+    <Button
+        android:id="@+id/ibtn_twitter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/twitter_logo"
+        android:layout_marginBottom="19dp"
+        android:layout_above="@+id/ibtn_instagram"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
