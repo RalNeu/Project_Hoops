@@ -56,7 +56,7 @@ public class TestTab extends Fragment {
                 XMLReader xml = new XMLReader();*/
 
 
-                m.sendNotify(1, "HAllo", "nein", getActivity(), R.drawable.ic_ticket_icon);
+                m.sendNotify(1, "Hallo", "nein", getActivity(), R.drawable.ic_ticket_icon);
 
 
             }

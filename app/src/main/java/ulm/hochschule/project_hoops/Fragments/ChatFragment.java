@@ -91,23 +91,32 @@ public class ChatFragment extends Fragment {
                         myClient.processMessage(et_Text.getText().toString(), username);
                         et_Text.setText("");
                     } else {
-                        et_Text.setError("Es können nur 1-80 Zeichen verwendet werden");
+                        et_Text.setError(getResources().getString(R.string.one80Chars));
                     }
                 }
-
             });
         }else{
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "Sie müssen sich Verifizieren um Chaten zu können",Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(getContext(), "Du muss dich Verifizieren um Chaten zu können",Toast.LENGTH_SHORT ).show();
+
+                    button.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            if (textSize() && textSize0()) {
+                                myClient.processMessage(et_Text.getText().toString(), username);
+                                et_Text.setText("");
+                            } else {
+                                et_Text.setError(getResources().getString(R.string.one80Chars));
+                            }
+                        }
+                    });
+
                 }
-
             });
-
         }
     }
-
 
     @Override
     public void onDestroy() {

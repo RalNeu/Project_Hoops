@@ -55,7 +55,7 @@
 
     <string name="Project_Hoops">Project Hoops</string>
 
-    <string name="title_activity_tipp_spiel">TippSpiel</string>
+    <string name="title_activity_tipp_spiel">Tippspiel</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="what_apos_s_hoops_chat">What\'s Hoops Chat</string>
     <string name="username_too_long">Nicht mehr als 12 Zeichen!</string>
@@ -94,9 +94,6 @@
     <string name="games">Spiele</string>
     <string name="bettingGame">Tippspiel</string>
     <string name="basketball">Basketballspiel</string>
-
-<!-- neeeeeeeeeeeeeeeeeeeeeeeeeeeeeew -->
-
 
     <string name="hat_1">Blonde Zöpfe</string>
     <string name="hat_2">Schwarze Locken</string>
@@ -151,5 +148,23 @@
     <string name="mouth_14">Vergrauter Bart</string>
 
 
+    <!-- neeeeeeeeeeeeeeeeeeeeeeeeeeeeeew -->
 
+<string name="one80Chars">Es können nur 1-80 Zeichen verwendet werden</string>
+    <string name="verSucc">Verifizierung erfolgreich</string>
+    <string name="wCode">Falscher Code!</string>
+    <string name="tippSucc">Ihr Tipp wurde erfolgreich gesendet!</string>
+    <string name="tippFail">Tipp senden schlug fehl. Bitte versuchen Sie es später erneut.</string>
+    <string name="wait">Bitte warten Sie einen Moment</string>
+    <string name="commitTipp">Tipp abgeben</string>
+    <string name="verifRem">Vergessen Sie Ihre Verifikation nicht!</string>
+    <string name="loginSucc">Login erfolgreich</string>
+    <string name="loginFail">Login fehlgeschlagen</string>
+    <string name="loginWait">Login...</string>
+    <string name="tippedAlready">Sie haben bereits einen Tipp abgegeben. Bitte warten Sie erst auf das Ergebnis.</string>
+    <string name="noTipps">Es können momentan keine Tipps/Quote entgegen genommen werden. Bitte versuchen Sie es später erneut.</string>
+<string name="won1">Sie haben im letzten Tippspiel </string>
+    <string name="won2"> Coins gewonnen! Glückwunsch!</string>
+    <string name="won3">Sie haben im letzten Tippspiel leider nichts gewonnen, aber probieren Sie es doch ruhig noch einmal!</string>
+<string name="newAch">"Sie haben ein neues Achievement!"</string>
     </resources>

@@ -38,8 +38,6 @@ public class NewsTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.tippspiel_listview, container, false);
         listView = (ListView) layout.findViewById(R.id.listView);
-        //swipeRefresh = (SwipeRefreshLayout) layout.findViewById(R.id.swiperefresh);
-       // imageView = (ImageView) layout.findViewById(R.id.img);
         return layout;
     }
 

@@ -164,7 +164,7 @@ public class EditProfileFragment extends Fragment {
         if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())) {
             sm.setVerif_Status(0, user.getUserID());
             hideVerify();
-            Toast toast = Toast.makeText(getActivity(), "Verifizierung erfolgreich", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getActivity(), getResources().getString(R.string.verSucc), Toast.LENGTH_SHORT);
             try {
                 AchievementHandler.getInstance().performEvent(1, 1, getActivity());
             } catch (ServerException e) {
@@ -172,7 +172,7 @@ public class EditProfileFragment extends Fragment {
             }
             toast.show();
         } else {
-            et_Code.setError("Falscher Code!");
+            et_Code.setError(getResources().getString(R.string.wCode));
         }
     }
 

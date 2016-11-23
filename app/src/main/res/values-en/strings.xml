@@ -147,5 +147,23 @@
     <string name="mouth_13">Playboy</string>
     <string name="mouth_14">Grey beard</string>
 
+    <string name="one80Chars">You can only use up to 80 characters</string>
+    <string name="verSucc">Verification succeded</string>
+    <string name="wCode">Wrong code!</string>
+    <string name="tippSucc">Your bet was sent successfully!</string>
+    <string name="tippFail">Sending went wrong. Please try again later.</string>
+    <string name="wait">Please hold on</string>
+    <string name="commitTipp">Sending bet</string>
+    <string name="verifRem">Do not forget your verification!</string>
+    <string name="loginSucc">Login successful</string>
+    <string name="loginFail">Login failed</string>
+    <string name="loginWait">Login...</string>
+    <string name="tippedAlready">You already betted. Please wait for the result.</string>
+    <string name="noTipps">It is not possible to receive the quotas or send bets. Please try again later.</string>
+    <string name="won1">You have won </string>
+    <string name="won2"> coins in the last game! Congratulations!</string>
+    <string name="won3">Unfortunately, you did not win any coins in the last game. But give it another try!</string>
+    <string name="newAch">"You have gotten a new achievements!"</string>
+
 </resources>
 

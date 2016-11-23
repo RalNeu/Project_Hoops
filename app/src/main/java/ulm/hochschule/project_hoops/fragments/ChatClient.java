@@ -38,7 +38,6 @@ public class ChatClient extends Thread {
 
         try {
             socket = new Socket(host, port);
-            System.out.println("connected to" + socket);
             din = new DataInputStream(socket.getInputStream());
             dout = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {

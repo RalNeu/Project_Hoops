@@ -272,6 +272,20 @@ public class SqlManager {
         return response;
     }
 
+    public boolean passwordMatches(String name, String passw){
+        boolean response = false;
+        try {
+            String query = "select case WHEN (select count(*) from account where username='"+ name+ "' and password='" + passw + "') > 0  THEN 1 ELSE 0 END AS Abfrage;";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.next();
+            response = rs.getBoolean("Abfrage");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     public boolean emailExist(String email){ //TODO : testen obs geht
         boolean response = false;
         try {

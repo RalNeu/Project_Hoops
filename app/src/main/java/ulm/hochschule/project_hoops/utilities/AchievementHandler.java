@@ -23,6 +23,7 @@ public class AchievementHandler {
     private String[] titles;
     private int aID;
     private int tageHintereinander = 0;
+    private boolean achievementsMapped = false;
 
     private AchievementHandler () throws ServerException{
         achievements = new HashMap<Integer, Integer>();
@@ -93,6 +94,10 @@ public class AchievementHandler {
 
     public void performEvent(int event, int val, Activity context) {
 
+        if(!achievementsMapped) {
+            mapAchievements(UserProfile.getInstance().getUserID(), UserProfile.getInstance().getAchievements());
+        }
+
         if(achiementStatus[event] != 3) {
             //int newVal = achievements.get(event) + val;
             int newVal = AchievementStrategyHandler.getStrategy(event).changeValue(achievements.get(event), val, achievementreference[event*3+2]);
@@ -102,7 +107,7 @@ public class AchievementHandler {
             
             achievements.put(event, newVal);
             if(checkForAchievement(event)) {
-                new NotifyManager().sendNotify(event, "Sie haben ein neues Achievement!", titles[event], context, R.drawable.achievement_icon);
+                new NotifyManager().sendNotify(event, context.getResources().getString(R.string.newAch), titles[event], context, R.drawable.achievement_icon);
             }
             saveAchievements();
         }
@@ -122,6 +127,7 @@ public class AchievementHandler {
 
         }
         checkForAchievement();
+        achievementsMapped = true;
     }
 
     private void checkForAchievement() {

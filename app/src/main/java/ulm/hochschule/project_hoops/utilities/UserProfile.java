@@ -67,6 +67,10 @@ public class UserProfile {
         }
     }
 
+    public String getAchievements() {
+        return achievements;
+    }
+
     private void mapBoughtAvatarItems() {
         ArrayList<String> items = SqlManager.getInstance().readBoughtAvatarItems(userID);
 

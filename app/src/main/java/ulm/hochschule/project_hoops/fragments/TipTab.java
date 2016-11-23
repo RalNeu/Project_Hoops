@@ -108,7 +108,7 @@ public class TipTab extends Fragment {
         if(!message.equals("")) {
             AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
             dlgAlert.setMessage(message);
-            dlgAlert.setTitle("Tippspiel");
+            dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
             dlgAlert.setPositiveButton("OK", null);
             dlgAlert.setCancelable(true);
             dlgAlert.create().show();
@@ -129,13 +129,13 @@ public class TipTab extends Fragment {
             //btn_Vote.setEnabled(rdy);
             if(!rdy) {
                 if(win == -2) {
-                    tv_information_vote.setText("Sie haben bereits einen Tipp abgegeben. Bitte warten Sie erst auf das Ergebnis.");
+                    tv_information_vote.setText(getResources().getString(R.string.tippedAlready));
                     sc.readQuote();
                     tv_Prozent_Ulm.setText("" + Math.round(sc.getQuoteUlm()));
                     tv_Prozent_Other.setText("" + (100 - Math.round(sc.getQuoteUlm())));
                     sb_SeekBar.setProgress((int) sc.getQuoteOther());
                 } else {
-                    tv_information_vote.setText("Es können momentan keine Tipps/Quote entgegen genommen werden. Bitte versuchen Sie es später erneut.");
+                    tv_information_vote.setText(getResources().getString(R.string.noTipps));
                     tv_Prozent_Ulm.setText("0");
                     tv_Prozent_Other.setText("0");
                     sb_SeekBar.setProgress(50);
@@ -151,7 +151,7 @@ public class TipTab extends Fragment {
 
 
             if(win > 0) {
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Sie haben im letzten Tippspiel " + win + " Coins gewonnen! Glückwunsch!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.won1) + win + getResources().getString(R.string.won2), Toast.LENGTH_SHORT);
                 try {
                     AchievementHandler.getInstance().performEvent(14, win, getActivity());
                 } catch (ServerException e) {
@@ -159,14 +159,14 @@ public class TipTab extends Fragment {
                 }
                 toast.show();
             } else if(win == 0) {
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Sie haben im letzten Tippspiel leider nichts gewonnen, aber probieren Sie es doch ruhig noch einmal!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.won3), Toast.LENGTH_SHORT);
                 toast.show();
             }
 
 
         } catch (ServerException e) {
             btn_Vote.setEnabled(false);
-            tv_information_vote.setText("Es können momentan keine Tipps/Quote entgegen genommen werden. Bitte versuchen Sie es später erneut.");
+            tv_information_vote.setText(getResources().getString(R.string.noTipps));
             tv_Prozent_Ulm.setText("0");
             tv_Prozent_Other.setText("0");
             sb_SeekBar.setProgress(50);

@@ -90,17 +90,17 @@ public class LoginTab extends Fragment {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contentPanel, new NewsTab()).commit();
-        Toast.makeText(getContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.loginSucc), Toast.LENGTH_SHORT).show();
     }
 
     public void verifReminder(){
-        Toast.makeText(getContext(), "Vergessen Sie Ihre Verifikation nicht, Ihnen bleiben noch: ", Toast.LENGTH_SHORT).show();//TODO //verbleibende tage einfügen
+        Toast.makeText(getContext(), getResources().getString(R.string.verifRem), Toast.LENGTH_SHORT).show();
     }
 
     private void onLoginFailed() {
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(false);
-        Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.loginFail), Toast.LENGTH_LONG).show();
 
         btn_Login.setEnabled(true);
     }
@@ -115,7 +115,7 @@ public class LoginTab extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AppTheme_PopupOverlay);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Login...");
+        progressDialog.setMessage(getResources().getString(R.string.loginWait));
         progressDialog.getWindow().setLayout(600,400);
         progressDialog.show();
 
@@ -135,9 +135,7 @@ public class LoginTab extends Fragment {
         boolean ok = true;
         try {
             if(manager.userExist(et_Username.getText().toString())){
-                if (!et_Password.getText().toString().equals(manager.getUser(et_Username.getText().toString())[1])){
-                    //TODO
-
+                if (!SqlManager.getInstance().passwordMatches(et_Username.getText().toString(),et_Password.getText().toString())){
                     ok = false;
                 }
             }else{

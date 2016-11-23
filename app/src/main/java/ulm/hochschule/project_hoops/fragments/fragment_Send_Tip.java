@@ -123,8 +123,8 @@ public class fragment_Send_Tip extends Fragment {
     public void vote() {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Bitte warten Sie einen Moment");
-            progressDialog.setMessage("Tipp abgeben");
+            progressDialog.setTitle(getResources().getString(R.string.wait));
+            progressDialog.setMessage(getResources().getString(R.string.commitTipp));
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.show();
 
@@ -146,10 +146,10 @@ public class fragment_Send_Tip extends Fragment {
                                     AchievementHandler.getInstance().performEvent(11, 1, getActivity());
                                 }
                                 AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
-                                mCallback.passData("Ihr Tipp wurde erfolgreich gesendet!");
+                                mCallback.passData(getResources().getString(R.string.tippSucc));
                                 //changeFragment();
                         } catch(ServerException e) {
-                                mCallback.passData("Tipp senden schlug fehl. Bitte versuchen Sie es später erneut.");
+                                mCallback.passData(getResources().getString(R.string.tippFail));
                         }
                     }
                     progressDialog.cancel();

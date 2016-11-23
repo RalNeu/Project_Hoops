@@ -250,28 +250,23 @@ public class MainActivity extends AppCompatActivity
         try {
             if (manager.userExist(et_username.getText().toString())) {
                 if (!et_password.getText().toString().equals(manager.getUser(et_username.getText().toString())[3])) {
-                    et_password.setError("Passwort falsch");
-                    et_username.setError("Benutzer existiert nicht");
+                    et_password.setError(getResources().getString(R.string.wrong_password));
+                    et_username.setError(getResources().getString(R.string.wrong_username));
                     ok = false;
                 }
             } else if (manager.emailExist(et_username.getText().toString())) {
                 if (!et_password.getText().toString().equals(manager.getPassword(et_username.getText().toString()))) {
-                    et_password.setError("Passwort falsch");
-                    et_username.setError("Benutzer existiert nicht");
+                    et_password.setError(getResources().getString(R.string.wrong_password));
+                    et_username.setError(getResources().getString(R.string.wrong_username));
                     ok = false;
                 }
             } else {
-                et_password.setError("Passwort falsch");
-                et_username.setError("Benutzer existiert nicht");
+                et_password.setError(getResources().getString(R.string.wrong_password));
+                et_username.setError(getResources().getString(R.string.wrong_username));
                 ok = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        try {
-            System.out.println((manager.getPassword(et_username.getText().toString())));
-        } catch (Exception e) {
-
         }
         return ok;
     }
