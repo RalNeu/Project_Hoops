@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import ulm.hochschule.project_hoops.Tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 

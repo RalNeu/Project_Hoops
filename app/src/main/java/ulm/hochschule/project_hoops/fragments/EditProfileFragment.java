@@ -25,7 +25,7 @@ import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
-import ulm.hochschule.project_hoops.Tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 
 /**
  * A simple {@link Fragment} subclass.

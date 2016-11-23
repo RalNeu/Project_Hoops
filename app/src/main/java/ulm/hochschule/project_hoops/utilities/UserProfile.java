@@ -183,6 +183,12 @@ public class UserProfile {
         return user;
     }
 
+    public static boolean isLoggedIn() {
+        if(user == null)
+            return false;
+        return true;
+    }
+
     public static boolean getUserFound() {
         return userFound;
     }

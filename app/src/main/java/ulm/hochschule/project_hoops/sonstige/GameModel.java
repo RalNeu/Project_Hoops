@@ -155,7 +155,7 @@ public class GameModel {
             xBasketColVector = (float) Math.sin(basketColAngle) * -1;
             yBasketColVector = (float) Math.cos(basketColAngle) * -1;
             if(ball.xCenter > xBasketColl){
-                xBasketColVector *= -1;
+                //xBasketColVector *= -1;
                 yBasketColVector *= -1;
             }
 
@@ -170,8 +170,8 @@ public class GameModel {
             System.out.println("ball vely: " + ball.yVelocity);*/
             System.out.println("velo: " + velocity);
             if(velocity > 20 || velocity < -20) {
-                ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
-                ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) Math.sqrt(Math.pow(ball.xVelocity, 2) + Math.pow(ball.yVelocity, 2)) * ball.FACTOR_BOUNCEBACK;
+                ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) velocity * ball.FACTOR_BOUNCEBACK;
+                ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) velocity * ball.FACTOR_BOUNCEBACK;
             }
             /*System.out.println("ball velx: " + ball.xVelocity);
             System.out.println("ball vely: " + ball.yVelocity);

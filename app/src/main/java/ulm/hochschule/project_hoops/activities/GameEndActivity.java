@@ -10,6 +10,8 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import ulm.hochschule.project_hoops.R;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
+import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 public class GameEndActivity extends AppCompatActivity {
 
@@ -29,6 +31,14 @@ public class GameEndActivity extends AppCompatActivity {
             score = b.getInt("key");
             scoreText.setText("Score: " + score);
         }
+
+        if(UserProfile.isLoggedIn()){
+            UserProfile user = UserProfile.getInstance();
+            user.updateCoins(score);
+            SqlManager sqlMan = SqlManager.getInstance();
+            sqlMan.updateCoins();
+        }
+
 
         btnTryAgain.setOnClickListener(new View.OnClickListener() {
             @Override

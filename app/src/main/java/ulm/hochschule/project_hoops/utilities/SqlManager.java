@@ -492,8 +492,11 @@ public class SqlManager {
         return retVal;
     }
 
-    public void updateCoins(Coins c, String username) {
-        String query = "update account set coins = '" + c.getCoins() + "' where username = '" + username + "'";
+    public void updateCoins() {
+        if(!UserProfile.isLoggedIn())
+            throw new RuntimeException("Please login a user in the first place.");
+        UserProfile user = UserProfile.getInstance();
+        String query = "update account set coins = '" + user.getCoins() + "' where username = '" + user.getUsername() + "'";
 
         try {
             preparedStmt = con.prepareStatement(query);

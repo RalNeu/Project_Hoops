@@ -52,7 +52,14 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
 
         FrameLayout game = new FrameLayout(this);
-        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText, velocityText);
+
+        Bundle b = getIntent().getExtras();
+        String mode = "";
+        if(b != null) {
+            mode = b.getString("key");
+        } else
+            throw new RuntimeException("No mode chosen");
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText, velocityText, mode);
         LinearLayout gameWidgets = new LinearLayout (this);
 
 

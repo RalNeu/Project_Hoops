@@ -38,7 +38,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private float xVel;
     private float yVel;
 
-    public GamePanel(Context context, float width, float height, TextView scoreText, TextView attemptText, TextView velocityText){
+    public GamePanel(Context context, float width, float height, TextView scoreText, TextView attemptText, TextView velocityText, String mode){
         super(context);
         model = new GameModel(context, width, height);
         xP = model.ball.xCenter;
