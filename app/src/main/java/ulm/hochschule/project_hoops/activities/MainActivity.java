@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity
 
         this.adsImage = null;
         try{
-            Socket s = new Socket("85.216.96.153",8000);
+            Socket s = new Socket("141.59.26.107",21403);
 
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
@@ -214,11 +214,16 @@ public class MainActivity extends AppCompatActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        imageView.setImageBitmap(bitmap);
-                        imageView.bringToFront();
-                        imageView.setVisibility(View.VISIBLE);
-                        buttonAds.bringToFront();
-                        buttonAds.setVisibility(View.VISIBLE);
+                        if(bitmap != null) {
+                            imageView.setImageBitmap(bitmap);
+                            imageView.bringToFront();
+                            imageView.setVisibility(View.VISIBLE);
+                            buttonAds.bringToFront();
+                            buttonAds.setVisibility(View.VISIBLE);
+                        } else{
+                            downloadImage();
+                        }
+
                     }
                 });
 
