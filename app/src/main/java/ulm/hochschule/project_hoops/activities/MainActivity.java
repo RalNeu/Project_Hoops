@@ -2,7 +2,11 @@ package ulm.hochschule.project_hoops.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,6 +27,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,8 +59,12 @@ public class MainActivity extends AppCompatActivity
 
     private EditText et_username;
     private EditText et_password;
-    private ImageButton imageButton;
+
+    //For Server downloading the ads
+    private ImageView imageView;
     private Button buttonAds;
+    private Image adsImage;
+    private Bitmap bitmap;
 
     private SqlManager manager;
 
@@ -145,10 +158,10 @@ public class MainActivity extends AppCompatActivity
         manager = SqlManager.getInstance();
 
 
-        buttonAds = (Button) findViewById(R.id.btn_Ads);
+        buttonAds = (Button) findViewById(R.id.btn_Ads );
         buttonAds.setVisibility(View.INVISIBLE);
-        imageButton = (ImageButton)  findViewById(R.id.ibtn_Ads);
-        imageButton.setVisibility(View.INVISIBLE);
+        imageView = (ImageView)  findViewById(R.id.imageView_Ads);
+        imageView.setVisibility(View.INVISIBLE);
         //btn close the Ads
         buttonAds.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        imageButton.setVisibility(View.INVISIBLE);
+                        imageView.setVisibility(View.INVISIBLE);
                         buttonAds.setVisibility(View.INVISIBLE);
                         timer();
                     }
@@ -164,22 +177,46 @@ public class MainActivity extends AppCompatActivity
             }
         });
         openTab();
+       downloadImage();
         timer();
 
     }
 
+    private void downloadImage(){
+
+        this.adsImage = null;
+        try{
+            Socket s = new Socket("85.216.96.153",8000);
+
+            ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+
+            try{
+                byte[] buffer = (byte[]) ois.readObject();
+                bitmap = BitmapFactory.decodeByteArray(buffer,0,buffer.length);
+
+            }catch(ClassNotFoundException e){
+                e.printStackTrace();
+            }
+            ois.close();
+            s.close();
+        }catch(Exception e){
+             e.printStackTrace();
+        }
+    }
+
     //Timer for the ads
     private void timer(){
-        Timer timer = new Timer();
 
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        imageButton.bringToFront();
-                        imageButton.setVisibility(View.VISIBLE);
+                        imageView.setImageBitmap(bitmap);
+                        imageView.bringToFront();
+                        imageView.setVisibility(View.VISIBLE);
                         buttonAds.bringToFront();
                         buttonAds.setVisibility(View.VISIBLE);
                     }
@@ -229,11 +266,11 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contentPanel, f).addToBackStack( f.getTag()).commit();
-        if(imageButton.VISIBLE == View.VISIBLE) {
-            imageButton.post(new Runnable() {
+        if(imageView.VISIBLE == View.VISIBLE) {
+            imageView.post(new Runnable() {
                 @Override
                 public void run() {
-                    imageButton.bringToFront();
+                    imageView.bringToFront();
                     buttonAds.bringToFront();
                 }
             });
@@ -389,7 +426,7 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new HouseViewTab());
         } else if(id == R.id.achievement) {
             changeFragment(achievementTab);
-        } else if(id == R.id.nav_sozialMedia) {
+        } else if(id == R.id.nav_socialMedia) {
             changeFragment(sozialMediaFragment);
         }else if(id == R.id.nav_chat) {
             changeFragment(chatFragment);
