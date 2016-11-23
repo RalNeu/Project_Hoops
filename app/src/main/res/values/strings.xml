@@ -164,6 +164,7 @@
     <string name="won2"> coins in the last game! Congratulations!</string>
     <string name="won3">Unfortunately, you did not win any coins in the last game. But give it another try!</string>
     <string name="newAch">"You have gotten a new achievements!"</string>
+    <string name="HasToBeVerified">You have to be verified to be able to chat</string>
 
 </resources>
 

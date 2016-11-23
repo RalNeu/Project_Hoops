@@ -77,7 +77,7 @@ public class ChatFragment extends Fragment {
                             myClient.processMessage(et_Text.getText().toString(), username);
                             et_Text.setText("");
                         } else {
-                            et_Text.setError("Es können nur 1-80 Zeichen verwendet werden");
+                            et_Text.setError(getResources().getString(R.string.one80Chars));
                         }
                     }
                     return false;
@@ -99,7 +99,7 @@ public class ChatFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "Du muss dich Verifizieren um Chaten zu können",Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.HasToBeVerified),Toast.LENGTH_SHORT ).show();
 
                     button.setOnClickListener(new View.OnClickListener(){
                         @Override

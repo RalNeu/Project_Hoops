@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.activities.MainActivity;
-import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
+import ulm.hochschule.project_hoops.Tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.NotifyManager;
 import ulm.hochschule.project_hoops.utilities.ServerException;
@@ -46,7 +46,7 @@ public class RegisterTab2 extends Fragment {
 
     private SqlManager manager;
     private NotifyManager notifyManager;
-    private ulm.hochschule.project_hoops.tasks.MailVerifierTask mailVerifierTask;
+    private MailVerifierTask mailVerifierTask;
 
     //Patrick für tastatur schließen
     private LinearLayout lLayout;

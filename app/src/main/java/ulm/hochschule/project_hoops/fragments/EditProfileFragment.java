@@ -20,12 +20,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 import ulm.hochschule.project_hoops.R;
-import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
+import ulm.hochschule.project_hoops.Tasks.MailVerifierTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -215,7 +215,6 @@ public class EditProfileFragment extends Fragment {
             achProfileEdited = true;
         }
 
-        System.out.println(oldAboutMe);
         if (!oldAboutMe.equals(et_AboutMe.getText().toString())) {
             oldAboutMe = et_AboutMe.getText().toString();
             manager.updatePerson(personID, "hobbies", oldAboutMe);
@@ -232,6 +231,9 @@ public class EditProfileFragment extends Fragment {
         }
 
         Calendar c = Calendar.getInstance();
+
+        System.out.println(np_Month.getValue());
+
         c.set(np_Year.getValue(), np_Month.getValue(), np_Day.getValue());
 
         Date d = new Date(c.getTimeInMillis());

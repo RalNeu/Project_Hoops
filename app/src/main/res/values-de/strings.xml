@@ -153,7 +153,7 @@
 <string name="one80Chars">Es können nur 1-80 Zeichen verwendet werden</string>
     <string name="verSucc">Verifizierung erfolgreich</string>
     <string name="wCode">Falscher Code!</string>
-    <string name="tippSucc">Ihr Tipp wurde erfolgreich gesendet!</string>
+    <string name="tippSucc">Ihr Tipp wurde erfolg-reich gesendet!</string>
     <string name="tippFail">Tipp senden schlug fehl. Bitte versuchen Sie es später erneut.</string>
     <string name="wait">Bitte warten Sie einen Moment</string>
     <string name="commitTipp">Tipp abgeben</string>
@@ -166,5 +166,6 @@
 <string name="won1">Sie haben im letzten Tippspiel </string>
     <string name="won2"> Coins gewonnen! Glückwunsch!</string>
     <string name="won3">Sie haben im letzten Tippspiel leider nichts gewonnen, aber probieren Sie es doch ruhig noch einmal!</string>
-<string name="newAch">"Sie haben ein neues Achievement!"</string>
+<string name="newAch">Sie haben ein neues Achievement!</string>
+    <string name="HasToBeVerified">Du muss dich Verifizieren um Chaten zu können</string>
     </resources>

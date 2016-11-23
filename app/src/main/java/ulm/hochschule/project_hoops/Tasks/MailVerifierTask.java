@@ -1,4 +1,4 @@
-package ulm.hochschule.project_hoops.tasks;
+package ulm.hochschule.project_hoops.Tasks;
 
         import android.app.ProgressDialog;
         import android.content.Context;
@@ -23,11 +23,6 @@ package ulm.hochschule.project_hoops.tasks;
  */
 public class MailVerifierTask extends AsyncTask<Void,Void,Void> {
 
-
-
-    /**
-     * Created by Belal on 10/30/2015.
-     */
 
 //Class is extending AsyncTask because this class is going to perform a networking operation
 
