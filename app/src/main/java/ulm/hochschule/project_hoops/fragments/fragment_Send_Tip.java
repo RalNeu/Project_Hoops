@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.interfaces.DataPassListener;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
+import ulm.hochschule.project_hoops.utilities.NotBettableException;
 import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
 import ulm.hochschule.project_hoops.utilities.ServerException;
+import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.TimeoutException;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
@@ -51,6 +54,7 @@ public class fragment_Send_Tip extends Fragment {
         layout = inflater.inflate(R.layout.fragment_send_tip, container, false);
 
         btn_Inc = (Button) layout.findViewById(R.id.btn_Inc);
+        System.out.println("test");
         btn_IncStrong = (Button) layout.findViewById(R.id.btn_IncStrong);
         btn_Dec = (Button) layout.findViewById(R.id.btn_Dec);
         btn_DecStrong = (Button) layout.findViewById(R.id.btn_DecStrong);
@@ -137,9 +141,8 @@ public class fragment_Send_Tip extends Fragment {
                     Looper.prepare();
                     if(chosenCoins > 0) {
 
-                            ServerCommunicate sc = ServerCommunicate.getInstance();
                             try {
-                                sc.sendTip(chosenCoins, team);
+                                SqlManager.getInstance().sendTip(chosenCoins, team);
                                 if(team == 0) {
                                     AchievementHandler.getInstance().performEvent(10, 1, getActivity());
                                 } else {
@@ -148,7 +151,8 @@ public class fragment_Send_Tip extends Fragment {
                                 AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
                                 mCallback.passData(getResources().getString(R.string.tippSucc));
                                 //changeFragment();
-                        } catch(ServerException e) {
+                        } catch(Exception e) {
+                                e.printStackTrace();
                                 mCallback.passData(getResources().getString(R.string.tippFail));
                         }
                     }

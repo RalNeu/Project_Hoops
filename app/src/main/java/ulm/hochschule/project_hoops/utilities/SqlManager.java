@@ -524,4 +524,229 @@ public class SqlManager {
         }
         return result;
     }
+
+    public int getActiveGame() throws NotBettableException {
+        int result = -1;
+
+        try{
+            String query= "SELECT min(spielID) as minVal from spiel WHERE datum > now() order by spielID";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            if(!rs.next()) {
+                throw new NotBettableException();
+            }
+            result = rs.getInt("minVal");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private double addOdds(int coins, int game, int team) throws NotBettableException{
+        double ret = 0;
+        try{
+            int coinsUlm = getMaxCoinsUlm(game);
+            int coinsOther = getMaxCoinsOther(game);
+
+            double coinsIns = coinsUlm + coinsOther + 1;
+
+            double coinsTeam = (team == 0 ? coinsUlm : coinsOther) + 1;
+
+            ret = (double) coins * (2.5 - (coinsTeam/coinsIns));
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public void alreadyBetted(int game) throws SQLException, AlreadyBettedException {
+        String query= "SELECT * FROM tipp WHERE spielID = " + game + " AND spielID IN (select spielID from tipp where aID = " + UserProfile.getInstance().getUserID() + ")";
+        preparedStmt = con.prepareStatement(query);
+        rs = preparedStmt.executeQuery();
+        rs.beforeFirst();
+        if(rs.next()) {
+            throw new AlreadyBettedException();
+        }
+    }
+
+    public boolean sendTip(int coins, int team) throws AlreadyBettedException, NotBettableException{
+        boolean result = true;
+        try{
+            int game = getActiveGame();
+
+            alreadyBetted(game);
+
+            coins = (int) addOdds(coins, game, team);
+
+            String query = "INSERT INTO tipp(aID, spielID, coins, team) VALUES(?, ?, ?, ?)";
+            preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1, UserProfile.getInstance().getUserID());
+            preparedStmt.setInt(2, game);
+            preparedStmt.setInt(3, coins);
+            preparedStmt.setInt(4, team);
+            preparedStmt.executeUpdate();
+
+        } catch(SQLException e){
+            result = false;
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void getRdyToTipp() throws AlreadyBettedException {
+        try {
+            alreadyBetted(getActiveGame());
+        } catch (NotBettableException e) {
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public double getQuoteUlm(){
+        double ret = 50;
+        try{
+            int game = getActiveGame();
+
+            String query= "SELECT count(team) AS ins from tipp where spielID = " + game;
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            if(!rs.next()) {
+                throw new NotBettableException();
+            }
+            int insBets = rs.getInt("ins");
+
+            if(insBets == 0) {
+                ret = 50;
+            } else {
+                query = "SELECT count(team) AS teamBets from tipp where team = 0 and spielID = " + game;
+                preparedStmt = con.prepareStatement(query);
+                rs = preparedStmt.executeQuery();
+                rs.beforeFirst();
+                if (!rs.next()) {
+                    throw new NotBettableException();
+                }
+                double teamBets = rs.getInt("teamBets");
+
+                ret = (teamBets / insBets) * 100;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        } catch(NotBettableException ex) {
+        }
+        return ret;
+    }
+
+    public double getQuoteOther() {
+        return 100 - getQuoteUlm();
+    }
+
+    public int getMaxCoinsUlm(int game) throws NotBettableException{
+        int result = 0;
+        try{
+            String query= "SELECT sum(coins) AS teamCoins from tipp where team = 0 and spielID = " + game;
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            if(!rs.next()) {
+                throw new NotBettableException();
+            }
+            result = rs.getInt("teamCoins");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    public int getMaxCoinsOther(int game) throws NotBettableException{
+        int result = 0;
+        try{
+            String query= "SELECT sum(coins) AS teamCoins from tipp where team = 1 and spielID = " + game;
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            if(!rs.next()) {
+                throw new NotBettableException();
+            }
+            result = rs.getInt("teamCoins");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int getWin() throws NotBettableException {
+        int result = -1;
+        try{
+            int aID = UserProfile.getInstance().getUserID();
+            String query = "SELECT * from tipp inner join spiel on tipp.spielID = spiel.spielID where aID = " +
+                                        + aID + " and finished is null and gewonnen is not null";
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            if(rs.next()) {
+                result = 0;
+                query= "SELECT sum(coins) AS wonCoins from tipp inner join spiel on tipp.spielID = spiel.spielID where aID = "
+                        + aID + " and (tipp.team = spiel.gewonnen or spiel.gewonnen = 2) and finished is null and gewonnen is not null";
+                preparedStmt = con.prepareStatement(query);
+                rs = preparedStmt.executeQuery();
+                rs.beforeFirst();
+                rs.next();
+
+                result = rs.getInt("wonCoins");
+
+                query= "SELECT spielID from spiel where gewonnen is not null";
+                preparedStmt = con.prepareStatement(query);
+                rs = preparedStmt.executeQuery();
+                ArrayList<Integer> finishedGames = new ArrayList<>();
+
+                rs.beforeFirst();
+                while(rs.next()) {
+                    finishedGames.add(rs.getInt("spielID"));
+                }
+
+                for(Integer spielID : finishedGames) {
+                    query = "update tipp set finished = 1 where spielID = " + spielID + " and aID = " + aID;
+                    preparedStmt = con.prepareStatement(query);
+                    preparedStmt.executeUpdate();
+                }
+                UserProfile.getInstance().updateCoins(result);
+
+                updateCoins();
+
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String getOpponentName() {
+        String result = "";
+        try{
+            String query= "SELECT gegner from spiel where spielID = " + getActiveGame();
+            preparedStmt = con.prepareStatement(query);
+            rs = preparedStmt.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+            result = rs.getString("gegner");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        } catch(NotBettableException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
 }

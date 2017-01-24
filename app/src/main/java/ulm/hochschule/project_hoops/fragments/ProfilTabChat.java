@@ -176,7 +176,7 @@ public class ProfilTabChat extends Fragment {
             Date d = user.getGebDat();
             String[] s = d.toString().split("-");
 
-            gebDat = s[2] + "." + d.getMonth() + "." + s[0];
+            gebDat = s[2] + "." + (d.getMonth() + 1) + "." + s[0];
 
             lbl_GebDat.setText(gebDat);
             view_GebDat.setVisibility(View.VISIBLE);

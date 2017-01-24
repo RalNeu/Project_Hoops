@@ -10,57 +10,58 @@ android:layout_height="match_parent"
     android:weightSum="16">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:weightSum="3">
 
-        <ulm.hochschule.project_hoops.views.SquareLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/img_Team"
-                android:background="@drawable/logoratiopharm"
-                android:layout_gravity="center" />
-        </ulm.hochschule.project_hoops.views.SquareLayout>
-
         <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:background="@drawable/versus"
-                android:layout_above="@+id/sb_SeekBar"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center" />
-        </FrameLayout>
-
-        <ulm.hochschule.project_hoops.views.SquareLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical">
-
-            <ImageView
+            <TextView
+                android:text="Ulm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/avatarframe"
-                android:id="@+id/iv_Team2"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center" />
-        </ulm.hochschule.project_hoops.views.SquareLayout>
+                android:id="@+id/ulmView"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:gravity="center_vertical|center_horizontal|center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="@string/against"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/againstLbl"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:gravity="center_vertical|center_horizontal|center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:text="Opponent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/gastView"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:gravity="center_vertical|center_horizontal|center" />
+        </FrameLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -144,18 +145,6 @@ android:layout_height="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView2"
-                android:layout_above="@+id/btn_Vote"
-                android:layout_alignRight="@+id/btn_Vote"
-                android:layout_alignEnd="@+id/btn_Vote"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/basketv2"
-                android:layout_weight="1"
-                android:layout_gravity="center" />
         </FrameLayout>
 
         <FrameLayout
@@ -177,17 +166,6 @@ android:layout_height="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView3"
-                android:background="@drawable/basketv2"
-                android:layout_alignTop="@+id/imageView2"
-                android:layout_alignRight="@+id/iv_Team2"
-                android:layout_alignEnd="@+id/iv_Team2"
-                android:layout_alignLeft="@+id/iv_Team2"
-                android:layout_alignStart="@+id/iv_Team2"
-                android:layout_weight="1" />
         </FrameLayout>
     </LinearLayout>
 

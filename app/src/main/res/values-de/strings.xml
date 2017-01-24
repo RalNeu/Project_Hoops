@@ -168,4 +168,5 @@
     <string name="won3">Sie haben im letzten Tippspiel leider nichts gewonnen, aber probieren Sie es doch ruhig noch einmal!</string>
 <string name="newAch">Sie haben ein neues Achievement!</string>
     <string name="HasToBeVerified">Du muss dich Verifizieren um Chaten zu können</string>
+    <string name="against">gegen</string>
     </resources>

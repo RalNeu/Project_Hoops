@@ -16,12 +16,9 @@ import android.widget.Toast;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Observable;
-import java.util.Observer;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
-import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
@@ -234,7 +231,7 @@ public class EditProfileFragment extends Fragment {
 
         System.out.println(np_Month.getValue());
 
-        c.set(np_Year.getValue(), np_Month.getValue(), np_Day.getValue());
+        c.set(np_Year.getValue(), np_Month.getValue() - 1, np_Day.getValue());
 
         Date d = new Date(c.getTimeInMillis());
 
@@ -302,7 +299,7 @@ public class EditProfileFragment extends Fragment {
                 Calendar c = Calendar.getInstance();
                 c.setTime(oldGebDat);
                 np_Day.setValue(c.get(Calendar.DAY_OF_MONTH));
-                np_Month.setValue(c.get(Calendar.MONTH));
+                np_Month.setValue(c.get(Calendar.MONTH) + 1);
                 np_Year.setValue(c.get(Calendar.YEAR));
             } else {
                 np_Day.setValue(1);

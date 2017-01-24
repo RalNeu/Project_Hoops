@@ -69,9 +69,11 @@ public class TippspielActivity extends AppCompatActivity implements DataPassList
         frag = !frag;
         if(frag) {
             tippTab.setMessage(data);
+            System.out.println("In TippspielActivity: frag = true");
             changeFragment(tippTab);
         }
         else {
+            System.out.println("In TippspielActivity: frag = false");
             changeFragment(sendTipp);
         }
     }
