@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity
     private MenuItem chatClientMenuItem;
     private MenuItem accountshop;
     private MenuItem sozialMediaMenuItem;
+    private boolean requestingImage = false;
 
     //For closeKeyboard
     private ActionBarDrawerToggle mDrawerToggle;
@@ -179,31 +180,41 @@ public class MainActivity extends AppCompatActivity
             }
         });
         openTab();
-       downloadImage();
+        downloadImage();
         timer();
 
     }
 
     private void downloadImage(){
 
-        this.adsImage = null;
-        try{
-            Socket s = new Socket("141.59.26.107",21403);
+        Thread d = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                requestingImage = true;
+                adsImage = null;
+                try{
+                    System.out.println(1);
+                    Socket s = new Socket("141.59.26.107", 21403);
 
-            ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+                    System.out.println(2);
+                    ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
-            try{
-                byte[] buffer = (byte[]) ois.readObject();
-                bitmap = BitmapFactory.decodeByteArray(buffer,0,buffer.length);
+                    try{
+                        byte[] buffer = (byte[]) ois.readObject();
+                        bitmap = BitmapFactory.decodeByteArray(buffer,0,buffer.length);
 
-            }catch(ClassNotFoundException e){
-                e.printStackTrace();
+                    }catch(ClassNotFoundException e){
+                        e.printStackTrace();
+                    }
+                    ois.close();
+                    s.close();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                requestingImage = false;
             }
-            ois.close();
-            s.close();
-        }catch(Exception e){
-             e.printStackTrace();
-        }
+        });
+        d.start();
     }
 
     //Timer for the ads
@@ -223,7 +234,8 @@ public class MainActivity extends AppCompatActivity
                             buttonAds.bringToFront();
                             buttonAds.setVisibility(View.VISIBLE);
                         } else{
-                            downloadImage();
+                            if(!requestingImage)
+                                downloadImage();
                         }
 
                     }

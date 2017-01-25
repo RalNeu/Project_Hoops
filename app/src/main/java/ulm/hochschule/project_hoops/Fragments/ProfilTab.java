@@ -79,6 +79,9 @@ public class ProfilTab extends Fragment {
         return tab;
     }
 
+    /**
+     * Je nach Konfigurationscode werden hier die Elemente eingeschaltet oder verborgen.
+     */
     public void updateData() {
 
         String name = "", gebDat = "";
@@ -124,6 +127,10 @@ public class ProfilTab extends Fragment {
 
     }
 
+    /**
+     * Hier wird der Avatar zusammengestellt und die eingestellten Items werden geholt
+     * @throws SQLException
+     */
     public void updateAvatar() throws SQLException{
         aItems = AvatarItems.getInstance();
 

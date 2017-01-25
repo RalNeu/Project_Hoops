@@ -32,6 +32,9 @@ import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 import ulm.hochschule.project_hoops.views.ItemView;
 
+/**
+ * Die Activity, die den Accountshop hostet
+ */
 public class AccountshopActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Observer {
 
@@ -142,6 +145,9 @@ public class AccountshopActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Skaliert die Icons runter und setzt Sie dann in den Navigation Drawer
+     */
     private void setIcons() {
 
         Menu navDrawer = navigationView.getMenu();
@@ -164,6 +170,9 @@ public class AccountshopActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Wechselt die Item-Kategorie
+     */
     private void changeItems() {
         content_Items.removeAllViews();
         ArrayList<AvatarItemDescription> cur = new ArrayList<>();
@@ -194,6 +203,10 @@ public class AccountshopActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Fügt ein neues Item hinzu
+     * @param ad Das hinzu zu fügende Item
+     */
     private void addItem(AvatarItemDescription ad) {
 
         ItemView i = new ItemView(getApplicationContext());

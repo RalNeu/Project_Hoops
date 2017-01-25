@@ -31,7 +31,7 @@ public class UserProfile {
     private char[][] boughtAvatarItems;
 
     /**
-     *
+     *  Lädt alle Informationen aus der Datenbank und speichert sie ab. Danach werden auch gleich die Achievements gemapt.
      * @param sqlUSER
      * @param a
      */
@@ -77,6 +77,10 @@ public class UserProfile {
         return achievements;
     }
 
+
+    /**
+     * lädt die bereits gekauften Avatar-Items aus der Datenbank.
+     */
     private void mapBoughtAvatarItems() {
         ArrayList<String> items = SqlManager.getInstance().readBoughtAvatarItems(userID);
 
@@ -91,6 +95,12 @@ public class UserProfile {
 
     }
 
+    /**
+     * Zum lesen eines speziellen Items
+     * @param item Die Kategorie des Items
+     * @param idx Die Item-ID
+     * @return entweder y oder n, je nachdem ob der User das Item besitzt oder nicht
+     */
     public char getItemAt(int item, int idx) {
         return boughtAvatarItems[item][idx];
     }
@@ -110,6 +120,12 @@ public class UserProfile {
         return ret;
     }
 
+    /**
+     * Falls das Item gekauft werden kann (Falls man genug Coins hat) wird das in der Datenbank aktualisiert und das Item wird als gekauft gekennzeichnet
+     * @param id Item-Kategorie
+     * @param idx Item-ID
+     * @param price Item-Preis
+     */
     public void buyItem(int id, int idx, int price){
         if(coins.getCoins() >= price) {
 
@@ -129,6 +145,13 @@ public class UserProfile {
         }
     }
 
+    /**
+     * Bildet einen neuen Konfigurationsstring, in dem der zu kaufende Artikel als y gesetzt wird. Grund dafür, dass man die Variable nicht vorher setzt, liegt daran, dass
+     * Die SQL-Anweisung fehlschlagen könnte. Deswegen wird das Item lokal erst gesetzt wenn die SQL-Anweisung erfolgreich war.
+     * @param id Item-Kategorie
+     * @param idx Item-ID
+     * @return Neuen Konfigurationsstring für die angegebene Kategorie
+     */
     private String getNewAvatarString(int id, int idx) {
         String ret = "";
         for(int i = 0; i < boughtAvatarItems[id].length;i++) {
@@ -141,6 +164,11 @@ public class UserProfile {
         return ret;
     }
 
+    /**
+     * Liefert von allen gekauften Artikeln den niedrigsten Index zurück. Zum Anzeigen beim Avatargestalten, damit der Pfeil zum vorgehen verschwindet wenn man den niedrigsten Index erreicht.
+     * @param item Item-Kategorie
+     * @return Den niedrigsten Index von allen gekauften Artikeln
+     */
     public int getLowestItemAvailable(int item) {
         int ret = boughtAvatarItems[item].length-1;
         for(int i = 0; i< boughtAvatarItems[item].length;i++) {
@@ -152,6 +180,11 @@ public class UserProfile {
         return ret;
     }
 
+    /**
+     * Überprüft ob der letzte Login gestern war. Für ein Achievement notwendig
+     * @param a Für die Push-Notification
+     * @param ah Der AchievementHandler
+     */
     private void checkDateYesterday(Activity a, AchievementHandler ah) {
         Date now = SqlManager.getInstance().getNow();
         long l = now.getTime() - lastLogin.getTime();
@@ -169,6 +202,12 @@ public class UserProfile {
         return settings;
     }
 
+    /**
+     * Um die Instanz des Singletons zu bekommen
+     * @param userName Da man sich über den Username einloggt wird dieser zur Identifikation gebraucht
+     * @param a Für die Push-Notification
+     * @return Die Instanz
+     */
     public static UserProfile getInstance(String userName, Activity a) {
 
         if(user == null) {
@@ -181,6 +220,10 @@ public class UserProfile {
         return user;
     }
 
+    /**
+     * Um den eingeloggten User zu bekommen. Wirft eine RuntimeException wenn kein User eingeloggt ist.
+     * @return Den eingeloggten User
+     */
     public static UserProfile getInstance() {
 
         if(user == null) {
@@ -189,6 +232,10 @@ public class UserProfile {
         return user;
     }
 
+    /**
+     * Um zu prüfen ob ein User eingeloggt ist.
+     * @return Ist ein User eingeloggt
+     */
     public static boolean isLoggedIn() {
         if(user == null)
             return false;
@@ -197,13 +244,6 @@ public class UserProfile {
 
     public static boolean getUserFound() {
         return userFound;
-    }
-
-    public static void logoffUser() {
-        //TODO
-        if(user != null)
-            SqlManager.getInstance().writeUser(user);
-        user = null;
     }
 
     public Date getGebDat() {

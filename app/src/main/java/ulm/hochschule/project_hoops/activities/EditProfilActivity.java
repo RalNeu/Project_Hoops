@@ -32,6 +32,9 @@ import ulm.hochschule.project_hoops.utilities.SqlManager;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 import ulm.hochschule.project_hoops.utilities.ViewPagerAdapter;
 
+/**
+ * Hostet die Accountänderungsseite und die Avatar-gestaltungs-Seite
+ */
 public class EditProfilActivity extends AppCompatActivity {
     private TabLayout tabLayout;
 

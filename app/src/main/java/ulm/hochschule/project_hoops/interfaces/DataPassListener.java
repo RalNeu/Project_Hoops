@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops.interfaces;
 
 /**
+ * Zum Übertragen zwischen den Fragments SendTip and TipTab
  * Created by Ralph on 30.09.2016.
  */
 

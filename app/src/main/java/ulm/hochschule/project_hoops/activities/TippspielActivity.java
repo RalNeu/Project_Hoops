@@ -27,6 +27,7 @@ import ulm.hochschule.project_hoops.fragments.fragment_Send_Tip;
 import ulm.hochschule.project_hoops.interfaces.DataPassListener;
 
 /**
+ * Hostet das Tippspiel
  * Created by Johann on 10.06.2016.
  */
 public class TippspielActivity extends AppCompatActivity implements DataPassListener{

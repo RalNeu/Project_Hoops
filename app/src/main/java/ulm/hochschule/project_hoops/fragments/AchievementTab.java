@@ -17,6 +17,9 @@ import ulm.hochschule.project_hoops.utilities.AchievementObject;
 import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.views.Achievement;
 
+/**
+ * Listet die erreichten Achievements auf
+ */
 public class AchievementTab extends Fragment {
 
     private View layout;
@@ -59,6 +62,7 @@ public class AchievementTab extends Fragment {
         achievements = new HashMap<Integer, Achievement>();
 
 
+        // Setzt alle Achievementobjekte
         for(int i = 0;i< 16;i++) {
             AchievementObject ao = null;
             try {
@@ -71,5 +75,4 @@ public class AchievementTab extends Fragment {
 
         return layout;
     }
-
 }

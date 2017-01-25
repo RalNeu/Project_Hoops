@@ -24,7 +24,7 @@ import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Hier werden der aktuelle Stand und der aktuelle Gegner dargestellt
  */
 public class TipTab extends Fragment {
 
@@ -42,9 +42,6 @@ public class TipTab extends Fragment {
     }
 
     private DataPassListener mCallback;
-
-
-
 
     public TipTab() {
         // Required empty public constructor
@@ -87,15 +84,17 @@ public class TipTab extends Fragment {
         });
 
         if(!message.equals("")) {
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
-            dlgAlert.setMessage(message);
-            dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
-            dlgAlert.setPositiveButton("OK", null);
-            dlgAlert.setCancelable(true);
-            dlgAlert.create().show();
+            if(message.charAt(0) == '!') {
+                message = message.substring(1);
+                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
+                dlgAlert.setMessage(message);
+                dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+            }
             message = "";
         }
-
         return layout;
     }
 
@@ -103,6 +102,9 @@ public class TipTab extends Fragment {
         mCallback = dpl;
     }
 
+    /**
+     * Holt die neuen Werte von der Datenbank
+     */
     public void update() {
         try {
             int win = sqlManager.getWin();

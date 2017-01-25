@@ -8,26 +8,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.interfaces.DataPassListener;
 import ulm.hochschule.project_hoops.utilities.AchievementHandler;
-import ulm.hochschule.project_hoops.utilities.NotBettableException;
-import ulm.hochschule.project_hoops.utilities.ServerCommunicate;
-import ulm.hochschule.project_hoops.utilities.ServerException;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
-import ulm.hochschule.project_hoops.utilities.TimeoutException;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
-
+/**
+ * Fragment zum Versenden eines Tipps.
+ */
 public class fragment_Send_Tip extends Fragment {
 
     private View layout;
@@ -54,7 +49,6 @@ public class fragment_Send_Tip extends Fragment {
         layout = inflater.inflate(R.layout.fragment_send_tip, container, false);
 
         btn_Inc = (Button) layout.findViewById(R.id.btn_Inc);
-        System.out.println("test");
         btn_IncStrong = (Button) layout.findViewById(R.id.btn_IncStrong);
         btn_Dec = (Button) layout.findViewById(R.id.btn_Dec);
         btn_DecStrong = (Button) layout.findViewById(R.id.btn_DecStrong);
@@ -73,6 +67,9 @@ public class fragment_Send_Tip extends Fragment {
         return layout;
     }
 
+    /**
+     * Setzt die Click-Listeners für die Addier- und Subtrahier-Buttons.
+     */
     private void setOnCLickListeners() {
         btn_Inc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +121,9 @@ public class fragment_Send_Tip extends Fragment {
         ft.replace(R.id.view_TipGame, new TipTab()).commit();
     }
 
+    /**
+     * Sendet den Tipp an die Datenbank und wechselt anschließend auf TipTab um
+     */
     public void vote() {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
@@ -149,11 +149,11 @@ public class fragment_Send_Tip extends Fragment {
                                     AchievementHandler.getInstance().performEvent(11, 1, getActivity());
                                 }
                                 AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
-                                mCallback.passData(getResources().getString(R.string.tippSucc));
+                                mCallback.passData("!" + getResources().getString(R.string.tippSucc));
                                 //changeFragment();
                         } catch(Exception e) {
                                 e.printStackTrace();
-                                mCallback.passData(getResources().getString(R.string.tippFail));
+                                mCallback.passData("!" + getResources().getString(R.string.tippFail));
                         }
                     }
                     progressDialog.cancel();
@@ -162,6 +162,10 @@ public class fragment_Send_Tip extends Fragment {
         t.start();
     }
 
+    /**
+     * Addiert zum Zählerstand die Coins je nachdem ob man genug Coins hat
+     * @param amount Anzahl an Coins die man hinzufügen will. Auch zum Abziehen
+     */
     public void addToCoins(int amount) {
         int tmp = chosenCoins + amount;
 

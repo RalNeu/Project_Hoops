@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 /**
+ * Da die Bilder auf dem Handy sehr klein dargstellt werden, kann die Auflösung entsprechend verringert werden, damit die APp flüssiger läuft
  * Created by Ralph on 29.09.2016.
  */
 public class BitmapResolver {
+
 
     public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -32,6 +34,14 @@ public class BitmapResolver {
         return inSampleSize;
     }
 
+    /**
+     * Verringert die Auflösungen eines Bildes
+     * @param res Die App-Resourcen
+     * @param resId Die Bild-ID
+     * @param reqWidth Die gewünschte Breite
+     * @param reqHeight Die gewünschte Höhe
+     * @return das runterskalierte Bild
+     */
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int reqWidth, int reqHeight) {
 

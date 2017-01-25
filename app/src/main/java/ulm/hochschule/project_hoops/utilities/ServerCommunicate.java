@@ -16,6 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * Spricht mit dem Applikationsserver. Vorher wurde hier das Tippspiel abgewickelt bevor es in SQL umgelagert wurde. Jetzt kann man hier nur noch die Achievement-Requirements per HTTP runterladen.
  * Created by Ralph on 10.06.2016.
  */
 public class ServerCommunicate {
@@ -37,6 +38,11 @@ public class ServerCommunicate {
         return instance;
     }
 
+    /**
+     * Öffnet eine HTTP-Verbindung mit dem Webserver und holt sich per GET die Achivement-Informationen.
+     * @return
+     * @throws ServerException
+     */
     public String getAch() throws ServerException {
 
         String returnString = "";
@@ -59,8 +65,6 @@ public class ServerCommunicate {
             br.close();
         } catch (IOException e) {
         }
-        System.out.println(returnString);
         return returnString;
-
     }
 }

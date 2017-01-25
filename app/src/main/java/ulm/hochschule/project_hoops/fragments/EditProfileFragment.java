@@ -25,7 +25,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 import ulm.hochschule.project_hoops.tasks.MailVerifierTask;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Das Fragment zum Ändern der Profildaten.
  */
 public class EditProfileFragment extends Fragment {
 
@@ -156,7 +156,9 @@ public class EditProfileFragment extends Fragment {
     }
 
 
-
+    /**
+     * Beim Eingeben des Verifizierungscodes prüft man mit dieser Methode ob es erfolgreich war und zeigt dann einen Toast an.
+     */
     private void checkVerified() {
         if (et_Code.getText().toString().equalsIgnoreCase(user.getVerifCode())) {
             sm.setVerif_Status(0, user.getUserID());
@@ -173,11 +175,19 @@ public class EditProfileFragment extends Fragment {
         }
     }
 
+    /**
+     * Versteckt das Verifikationsfeld falls man erfolgreich verifiziert ist
+     */
     private void hideVerify() {
         View l = (View) layout.findViewById(R.id.lay_Verify);
         l.setVisibility(View.GONE);
     }
 
+    /**
+     * Zum korrekten Darstellen der Tage
+     * @param year Zu prüfendes Jahr
+     * @return Ist das Jahr ein Schaltjahr?
+     */
     private boolean isLeapYear(int year) {
         boolean retVal = false;
         if (year % 4 == 0) {
@@ -192,6 +202,9 @@ public class EditProfileFragment extends Fragment {
         return retVal;
     }
 
+    /**
+     * Speichert die eingegeben Daten in der Datenbank ab
+     */
     public void save()  {
         int personID = user.getPersonID();
         SqlManager manager = SqlManager.getInstance();
@@ -229,7 +242,6 @@ public class EditProfileFragment extends Fragment {
 
         Calendar c = Calendar.getInstance();
 
-        System.out.println(np_Month.getValue());
 
         c.set(np_Year.getValue(), np_Month.getValue() - 1, np_Day.getValue());
 
@@ -264,6 +276,10 @@ public class EditProfileFragment extends Fragment {
         ProfilTab.getInstance().updateData();
     }
 
+    /**
+     * Errechnet anhand der Einstellungen einen binären Code zum Speichern in der Datenbank
+     * @return Einstellungscode
+     */
     private int calcSettings() {
         int retVal = 0;
 
@@ -278,6 +294,9 @@ public class EditProfileFragment extends Fragment {
         return retVal;
     }
 
+    /**
+     * Mapt den User auf die UI-Elemente
+     */
     private void mapUser() {
         if (UserProfile.getUserFound()) {
             oldForename = user.getForename();

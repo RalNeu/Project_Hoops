@@ -140,7 +140,6 @@ public class RegisterTab2 extends Fragment {
     }
 
     public void login(String username){
-        UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username, getActivity());
         try {
             AchievementHandler.getInstance().performEvent(0, 1, getActivity());

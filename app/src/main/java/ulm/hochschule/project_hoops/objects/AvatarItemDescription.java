@@ -3,6 +3,7 @@ package ulm.hochschule.project_hoops.objects;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
+ * Beschreibt ein Avataritem, also der Preis, die ID, die Beschreibung und weiteres.
  * Created by Ralph on 27.09.2016.
  */
 public class AvatarItemDescription {

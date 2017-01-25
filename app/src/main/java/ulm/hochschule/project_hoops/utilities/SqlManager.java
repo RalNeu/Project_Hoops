@@ -7,6 +7,8 @@ import android.os.StrictMode;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -138,7 +140,7 @@ public class SqlManager {
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, username);
             preparedStmt.setInt(2, 500);
-            preparedStmt.setString(3,password);
+            preparedStmt.setString(3,sha1(password));
             preparedStmt.setInt(4,personID);
             preparedStmt.setString(5, achievements);
             preparedStmt.execute();
@@ -276,7 +278,7 @@ public class SqlManager {
     public boolean passwordMatches(String name, String passw){
         boolean response = false;
         try {
-            String query = "select case WHEN (select count(*) from account where username='"+ name+ "' and password='" + passw + "') > 0  THEN 1 ELSE 0 END AS Abfrage;";
+            String query = "select case WHEN (select count(*) from account where username='"+ name+ "' and password='" + sha1(passw) + "') > 0  THEN 1 ELSE 0 END AS Abfrage;";
             preparedStmt = con.prepareStatement(query);
             rs = preparedStmt.executeQuery();
             rs.next();
@@ -285,6 +287,21 @@ public class SqlManager {
             e.printStackTrace();
         }
         return response;
+    }
+
+    static String sha1(String input) throws NoSuchAlgorithmException {
+        StringBuffer sb = new StringBuffer();
+        for(int j = 0; j < 1000; j++) {
+        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+        byte[] result = mDigest.digest(input.getBytes());
+            for (int i = 0; i < result.length; i++) {
+                sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            input = sb.toString();
+            sb = new StringBuffer();
+        }
+
+        return input;
     }
 
     public boolean emailExist(String email){ //TODO : testen obs geht
@@ -403,11 +420,6 @@ public class SqlManager {
             e.printStackTrace();
         }
         return retVal;
-    }
-
-
-    public void writeUser(UserProfile user) {
-        //TODO
     }
 
     public void updatePerson(int personID, String col, String val) {

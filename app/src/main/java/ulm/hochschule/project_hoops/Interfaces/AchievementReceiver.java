@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops.interfaces;
 
 /**
+ * Ein Interface um der Acievement-View neue Achievements hinzuzufügen
  * Created by Ralph on 26.07.2016.
  */
 public interface AchievementReceiver {
