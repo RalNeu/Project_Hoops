@@ -14,6 +14,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * Ist eine Form des Buttons, den man aber länger drücken muss, bevor ein Klick festgestellt wird. Während des Haltens lädt sich der Button auf,
+ * indem er langsam immer grüner wird.
  * Created by Ralph on 29.09.2016.
  */
 public class ChargingButton extends Button {
@@ -24,17 +26,26 @@ public class ChargingButton extends Button {
     private Timer charger;
     private boolean orange = true;
 
+    /**
+     * Konstruktor nötig um die View darstellen lassen zu können
+     */
     public ChargingButton(Context context) {
         super(context);
         init();
     }
 
+    /**
+     * Konstruktor nötig um die View darstellen lassen zu können
+     */
     public ChargingButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
 
     }
 
+    /**
+     * Konstruktor nötig um die View darstellen lassen zu können
+     */
     public ChargingButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
@@ -45,8 +56,9 @@ public class ChargingButton extends Button {
     }
 
 
-
-
+    /**
+     * Initialisiert den Timer, der für das Aufladen zuständig ist
+     */
     private void init() {
         charger = new Timer();
 
@@ -93,9 +105,13 @@ public class ChargingButton extends Button {
         });
     }
 
+    /**
+     * Sorgt für eine Neuauslegung des Layouts
+     */
     private void reqLay() {
         requestLayout();
     }
+
     private boolean charge() {
         if(distance <= getWidth()/2 ) {
             distance += 1;

@@ -1,6 +1,7 @@
 package ulm.hochschule.project_hoops.utilities;
 
 /**
+ * Repräsentiert ein Achievement
  * Created by Ralph on 27.07.2016.
  */
 public class AchievementObject {

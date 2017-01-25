@@ -7,6 +7,7 @@ import java.util.HashMap;
 import ulm.hochschule.project_hoops.R;
 
 /**
+ * Überwacht die Achievement-Events und übernimmt dann den Rest, wie die Datenbank zu aktualisieren und eine Pushnachricht zu versenden.
  * Created by Ralph on 26.07.2016.
  */
 public class AchievementHandler {
@@ -34,7 +35,11 @@ public class AchievementHandler {
         instantiateVariables();
     }
 
-
+    /**
+     * Holt zuerst vom Server die Achievement-Kriterien, also welche Bedingungen erfüllt sein müssen, damit ein Achievement erreicht wird
+     * und dann setzt er die Beschreibungen und Titel der Achievements.
+     * @throws ServerException
+     */
     private void instantiateVariables() throws ServerException{
 
         String[] referenceString = ServerCommunicate.getInstance().getAch().split("/");
@@ -92,7 +97,16 @@ public class AchievementHandler {
         return tageHintereinander;
     }
 
-    public void performEvent(int event, int val, Activity context) {
+
+    /**
+     * Da AchievementHandler ein Singleton ist, kann jede Klasse jederzeit ein Event auslösen. Der Handler kümmert sich dann darum.
+     * @param event Die ID des Achievements, das ausgelöst werden soll
+     * @param val Den Wert um den sich das Achievement ändern soll. Hier gibt es unterschiedliche Strategien. Bei manchen Achievements bedeutet val,
+     *            dass der Wert aufaddiert werden soll, bei manchen wird der alte Wert durch val ersetzt. Dazu gibt es ein Strategy-Pattern,
+     *            das anhand der ID die richtige Strategie ausführt.
+     * @param context Nötig um eine Pushnachricht zu versenden
+     */
+    public synchronized void performEvent(int event, int val, Activity context) {
 
         if(!achievementsMapped) {
             mapAchievements(UserProfile.getInstance().getUserID(), UserProfile.getInstance().getAchievements());
@@ -113,6 +127,11 @@ public class AchievementHandler {
         }
     }
 
+    /**
+     * Beim Einloggen werden die Achievements aus der Datenbank geladen und hier eingefügt.
+     * @param aID Speicherung der User-ID
+     * @param achievements Die Achievements
+     */
     public void mapAchievements(int aID, String achievements) {
         this.aID = aID;
         String[] s = achievements.split("/");
@@ -130,12 +149,20 @@ public class AchievementHandler {
         achievementsMapped = true;
     }
 
+    /**
+     * prüft beim mappen, ob die Achievements bereits erreicht wurden oder nicht
+     */
     private void checkForAchievement() {
         for(int i = 0;i<16;i++) {
             checkForAchievement(i);
         }
     }
 
+    /**
+     * Prüft für ein Achievement ob es bereits erreicht ist und in welchem Grad(Bronze, Silber, Gold)
+     * @param i Die Position des Achievements
+     * @return ob das Achievement erreicht wurde.
+     */
     private boolean checkForAchievement(int i) {
         int cur = achievements.get(i);
         int temp = achiementStatus[i];
@@ -150,10 +177,18 @@ public class AchievementHandler {
         return temp < achiementStatus[i];
     }
 
+    /**
+     * Speichert die Aschievements ab
+     */
     private void saveAchievements() {
         SqlManager.getInstance().updateAchievements(aID, formAchievementString());
     }
 
+    /**
+     * Gibt das gwünschte Achievements zurück
+     * @param i Nummer des Achievements
+     * @return Ein Objekt dass das Achievement repräsentiert
+     */
     public AchievementObject getAchievement(int i) {
         checkForAchievement(i);
         int e = achiementStatus[i];
@@ -176,6 +211,10 @@ public class AchievementHandler {
         return new AchievementObject(e,d,t);
     }
 
+    /**
+     * Bildet anhand der Achievements einen Konfiurationsstring, der in der Datenbank abgespeichert wird.
+     * @return Der Achievement-String
+     */
     private String formAchievementString() {
         String ret = "";
 
@@ -191,5 +230,4 @@ public class AchievementHandler {
 
         return ret;
     }
-
 }

@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import ulm.hochschule.project_hoops.R;
 
 /**
+ * Erbt das FrameLayout, verhält sein Größe aber immer so, dass Breite und Höhe gleich sind.
  * Created by Ralph on 27.09.2016.
  */
 public class SquareLayout extends FrameLayout{

@@ -11,6 +11,7 @@ import java.util.Set;
 import ulm.hochschule.project_hoops.objects.Coins;
 
 /**
+ * Repräsentiert einen eingeloggten User
  * Created by Ralph on 18.05.2016.
  */
 public class UserProfile {
@@ -29,6 +30,11 @@ public class UserProfile {
 
     private char[][] boughtAvatarItems;
 
+    /**
+     *
+     * @param sqlUSER
+     * @param a
+     */
     public UserProfile(String sqlUSER, Activity a) {
         Object[] userInfo;
         try {

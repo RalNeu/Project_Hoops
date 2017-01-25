@@ -35,6 +35,7 @@ import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.UserProfile;
 
 /**
+ * Zeigt ein Avatar-Item im Shop an, mit Preis und Beschreibung
  * Created by Ralph on 27.09.2016.
  */
 public class ItemView extends LinearLayout {
@@ -76,9 +77,6 @@ public class ItemView extends LinearLayout {
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-
-
                 return false;
             }
         });
@@ -89,6 +87,10 @@ public class ItemView extends LinearLayout {
         nf.addObserver(obs);
     }
 
+    /**
+     * Prüft ob das übergebene Item bereits gekauft wurde und setzt es grün wenn ja.
+     * @param ad Die Informationen über das Item.
+     */
     public void checkIfBought(AvatarItemDescription ad) {
 
         btn_Buy.setEnabled(!ad.getBought());
@@ -102,7 +104,10 @@ public class ItemView extends LinearLayout {
     }
 
 
-
+    /**
+     * Setzt das Item auf diese View
+     * @param ad Die Information über das Item
+     */
    public void setItem(AvatarItemDescription ad) {
         final AvatarItemDescription avd = ad;
         //ImageDownloaderTask il = new ImageDownloaderTask(img_Item, ad.getId());

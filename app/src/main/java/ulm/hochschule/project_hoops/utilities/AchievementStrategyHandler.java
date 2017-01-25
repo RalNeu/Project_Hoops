@@ -3,6 +3,9 @@ package ulm.hochschule.project_hoops.utilities;
 import ulm.hochschule.project_hoops.interfaces.AchievementStrategy;
 
 /**
+ * Prüft anhand der Achievement-ID das Vorgehen, wie mit dem value umgegangen werden soll. Bei manchen
+ * Achievements ist es nötig den Value zu überschreiben, zum Beispiel wenn ein neuer Highscore erreicht wurde, oder den Value aufzuaddieren,
+ * wenn zum Beispiel die insgesamt gewonnen Coins gemessen werden wollen.
  * Created by Ralph on 28.07.2016.
  */
 public class AchievementStrategyHandler {
@@ -51,19 +54,23 @@ public class AchievementStrategyHandler {
                 as = strat1();
                 break;
             case 13:
-                as = strat3();
+                as = strat2();
                 break;
             case 14:
                 as = strat1();
                 break;
             case 15:
-                as = strat3();
+                as = strat2();
                 break;
         }
 
         return as;
     }
 
+    /**
+     * Die Strategie um val dem alten Wert hinzuzufügen
+     * @return Die Strategie
+     */
     private static AchievementStrategy strat1() {
         return new AchievementStrategy() {
             @Override
@@ -73,6 +80,10 @@ public class AchievementStrategyHandler {
         };
     }
 
+    /**
+     * Die Strategie um val zu ersetzen, falls es größer ist als der alte Wert
+     * @return Die Strategie
+     */
     private static AchievementStrategy strat2() {
         return new AchievementStrategy() {
             @Override
@@ -82,18 +93,6 @@ public class AchievementStrategyHandler {
                 } else {
                     return old;
                 }
-            }
-        };
-    }
-
-    private static AchievementStrategy strat3() {
-        return new AchievementStrategy() {
-            @Override
-            public int changeValue(int old, int val, int max) {
-                if(val > old) {
-                    return val > max ? max : val;
-                } else
-                    return old;
             }
         };
     }

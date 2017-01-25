@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import ulm.hochschule.project_hoops.R;
 
 /**
+ * Ähnlich wie SquareLayout, allerding speziell für Bilder die gleichproportinal sind
  * Created by Ralph on 27.09.2016.
  */
 public class SquareImage extends ImageView {

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import ulm.hochschule.project_hoops.objects.Coins;
 
 /**
+ * Bildet einen einheitlichen Zugriff auf die Datenbank an einer koordinierten Stelle.
  * Created by Johann on 14.05.2016.
  */
 public class SqlManager {

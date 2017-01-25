@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
         openTab();
-       //downloadImage();
+       downloadImage();
         timer();
 
     }
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity
     //Timer for the ads
     private void timer(){
 
-       /* Timer timer = new Timer();
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity
                 });
 
             }
-        },20*1000);*/
+        },20*1000);
     }
 
 

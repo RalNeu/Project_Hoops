@@ -34,6 +34,9 @@ public class Achievement extends LinearLayout {
     String description = "???";
     String title = "???";
 
+    /**
+     * Konstruktor nötig um die View darstellen lassen zu können
+     */
     public Achievement(Context context) {
         super(context);
         init(context);
@@ -41,6 +44,9 @@ public class Achievement extends LinearLayout {
         mapUIObjects();
     }
 
+    /**
+     * Konstruktor nötig um die View darstellen lassen zu können
+     */
     public Achievement(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
@@ -48,6 +54,9 @@ public class Achievement extends LinearLayout {
         mapUIObjects();
     }
 
+    /**
+     * Konstruktor nötig um die View darstellen lassen zu können
+     */
     public Achievement(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
@@ -66,6 +75,12 @@ public class Achievement extends LinearLayout {
         super.onFinishInflate();
     }
 
+    /**
+     * Setzt die Achievementinformation für dieses Achievement
+     * @param emblem Der Status des Achievements, also grau, bronze, silber oder gold
+     * @param description Die Beschreibung des Achievements
+     * @param title Der Titel des Achievements
+     */
     public void setAchievement(int emblem, String description, String title) {
 
         this.emblem = emblem;
@@ -74,6 +89,9 @@ public class Achievement extends LinearLayout {
         mapUIObjects();
     }
 
+    /**
+     * Holt die UI-Elemente aus dem Layout
+     */
     private void instantiateUIObjects() {
         img_Emblem = (ImageView) this.findViewById(R.id.img_Emblem);
         tv_Description = (TextView) this.findViewById(R.id.tv_Description);
@@ -82,6 +100,9 @@ public class Achievement extends LinearLayout {
         setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
     }
 
+    /**
+     * Setzt die UI-Elemente anhand der Achievement-Informationen
+     */
     private void mapUIObjects() {
         int id = 0;
         switch (emblem) {
