@@ -37,6 +37,11 @@ public class ChatFragment extends Fragment {
 
     private View layout;
 
+
+
+
+//Layout wird erstellt
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class ChatFragment extends Fragment {
         listView.setAdapter(adapter);
         return layout;
     }
-
+//Wenn die Activity erstellt wird müssen diese folgende Regeln beachtet werden
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -65,7 +70,7 @@ public class ChatFragment extends Fragment {
         myClient.start();
 
         if(user.getVerifStatus() == true) {
-
+            //Fehler meldung wenn es mehr als 80 Zeichen eingetragen wurden
             et_Text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -80,7 +85,7 @@ public class ChatFragment extends Fragment {
                     return false;
                 }
             });
-
+            //Fehler meldung wenn es mehr als 80 Zeichen eingetragen wurden
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -92,6 +97,7 @@ public class ChatFragment extends Fragment {
                     }
                 }
             });
+            //Als nicht verifizierter User ist es nicht möglich am Chat teilzunehmen
         }else{
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,18 +121,20 @@ public class ChatFragment extends Fragment {
         }
     }
 
+    //Beim verlassen des Chatraumes muss die Verbindnug zum Server getrennt werden
     @Override
     public void onDestroy() {
         super.onDestroy();
         closeCon();
     }
-
+    //Beim verlassen des Chatraumes muss die Verbindnug zum Server getrennt werden
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         closeCon();
     }
 
+    //If-Bedingung damit der Text nicht größer als 80 Zeichen wird
     public boolean textSize(){
         if(et_Text.length()<=80){
             return true;
@@ -134,6 +142,7 @@ public class ChatFragment extends Fragment {
             return false;
         }
     }
+    //If-Bedingung damit der Text nichts enthält
     public boolean textSize0(){
         if(et_Text.length()!=0){
             return true;
@@ -142,6 +151,7 @@ public class ChatFragment extends Fragment {
         }
     }
 
+    //Activity thread wird gestartet um auf der Activity neu zu zeichenen bzw. eine Ausgabe einzublenden
     public void recieveText(final String text , final String username){
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -151,11 +161,13 @@ public class ChatFragment extends Fragment {
         });
     }
 
+    //Übergibt das Massage object zum Chatadapter weiter
     public void sendMessage(ChatMessage obj) {
         adapter.add(obj);
         this.et_Text.setText("");
     }
 
+    //Beendet die Verbindung vom Clienten und Server
     public void closeCon(){
         myClient.closeCon();
     }

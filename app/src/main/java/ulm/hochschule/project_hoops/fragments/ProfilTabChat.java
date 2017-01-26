@@ -23,6 +23,8 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 /**
  * Created by Patri on 26.09.2016.
  */
+
+//Wenn im Chat einen Benutzernamen anklickt, wird ein neues Fenster geöffnet und zeigt das Profiel des anderen Benutzers an
 public class ProfilTabChat extends Fragment {
 
     private static ProfilTab tab;
@@ -46,6 +48,7 @@ public class ProfilTabChat extends Fragment {
 
     }
 
+    //Neue Fragment wird erstellt
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,9 +59,6 @@ public class ProfilTabChat extends Fragment {
         instatiateUiObjects();
         mapUser();
         updateData();
-
-
-
 
         try {
             updateAvatar();
@@ -71,6 +71,7 @@ public class ProfilTabChat extends Fragment {
         return layout;
     }
 
+    //In tab wird eine Profiel Instance gesetzt
     public static ProfilTab getInstance() {
         if (tab == null) {
             tab = new ProfilTab();
@@ -79,7 +80,7 @@ public class ProfilTabChat extends Fragment {
     }
 
 
-
+    //updateAvatar holt sich vom SQL Server die Avatar informationen um das Avatarbild vom anderen Benutzer
     public void updateAvatar() throws SQLException{
         aItems = AvatarItems.getInstance();
         imgHat.setBackgroundResource(aItems.getAccountItemByID("hat",this.username));
@@ -91,11 +92,13 @@ public class ProfilTabChat extends Fragment {
 
     }
 
+    //Aktivity wird gestartet
     private void openEditProfile() {
         Intent i = new Intent(getActivity().getApplicationContext(), EditProfilActivity.class);
         startActivity(i);
     }
 
+    //Hier werden alle Layout and Variablen weiter gegeben
     private void instatiateUiObjects() {
         lbl_Coins = (TextView) layout.findViewById(R.id.lbl_CoinsChat);
         lbl_Highscore = (TextView) layout.findViewById(R.id.lbl_HighscoreChat);
@@ -147,17 +150,20 @@ public class ProfilTabChat extends Fragment {
         });
 
     }
-
+//
     public void updateData() {
 
         String name = "", gebDat = "";
 
         int settings = user.getSettings();
-
+        //Wenn bei den Settings etwas gesetzt wurde dann wird in die If-Anweisung gegangen
         if((settings&3) > 0) {
+            //Wenn bei Settings das erste Bit gesetzt wurde dann wird der Username im ProfielTab angezeigt wenn nicht wird der Name nicht angezeigt
+            //Settings sind die Angaben die der Nutzer in die Öffentlichkeit stellen will
             if ((settings & 1) > 0) {
                 name += user.getForename();
             }
+            //Der Nachname wird angezeit
             if ((settings & 2) > 0) {
                 if(name.length() != 0) {
                     name += " ";
@@ -171,7 +177,7 @@ public class ProfilTabChat extends Fragment {
         } else {
             view_Name.setVisibility(View.GONE);
         }
-
+         //Geburtstag wird angezeigt oder nicht
         if((settings&4) > 0) {
             Date d = user.getGebDat();
             String[] s = d.toString().split("-");
@@ -183,7 +189,7 @@ public class ProfilTabChat extends Fragment {
         } else {
             view_GebDat.setVisibility(View.GONE);
         }
-
+        //Persönlicher text wird angezeit oder nicht
         if((settings&8) > 0) {
             lbl_AboutMe.setText(user.getAboutMe());
             view_AboutMe.setVisibility(View.VISIBLE);
@@ -193,7 +199,7 @@ public class ProfilTabChat extends Fragment {
 
     }
 
-
+    //Hier werden in der Aktivity die User daten eingesetzt
     private void mapUser() {
         lbl_Coins.setText("" + user.getCoins());
         lbl_Ranking.setText("" + user.getRanking());

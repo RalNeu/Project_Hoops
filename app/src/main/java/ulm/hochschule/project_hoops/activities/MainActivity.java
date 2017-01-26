@@ -437,7 +437,7 @@ public class MainActivity extends AppCompatActivity
         achievementTab.addAchievement(idx, emblem, description, date);
     }
 
-    //Close keyboard Patrick
+    //Close keyboard
     public void closeKeyboard() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
