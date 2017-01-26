@@ -207,7 +207,6 @@ public class MainActivity extends AppCompatActivity
                     ois.close();
                     s.close();
                 }catch(Exception e){
-                    e.printStackTrace();
                 }
                 requestingImage = false;
             }

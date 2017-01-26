@@ -59,15 +59,7 @@ public class LoginTab extends Fragment {
                     login();
             }
         });
-        Button qL = (Button) layout.findViewById(R.id.button4);
-        qL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_Username.setText("RalNeu");
-                et_Password.setText("11111111");
-                login();
-            }
-        });
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

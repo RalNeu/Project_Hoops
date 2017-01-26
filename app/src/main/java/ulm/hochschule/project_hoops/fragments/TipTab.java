@@ -84,16 +84,13 @@ public class TipTab extends Fragment {
         });
 
         if(!message.equals("")) {
-            if(message.charAt(0) == '!') {
-                System.out.println("lol " + message);
-                message = message.substring(1);
-                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
-                dlgAlert.setMessage(message);
-                dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
-            }
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
+            dlgAlert.setMessage(message);
+            dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+            update();
             message = "";
         }
         return layout;
@@ -117,24 +114,25 @@ public class TipTab extends Fragment {
             sb_SeekBar.setProgress((int) sqlManager.getQuoteOther());
             tv_information_vote.setText("");
 
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
-
-            if(win > 0) {
-                dlgAlert.setMessage(getResources().getString(R.string.won1) + " " + win + " " + getResources().getString(R.string.won2));
-                try {
-                    AchievementHandler.getInstance().performEvent(14, win, getActivity());
-                } catch (ServerException e) {
-                    e.printStackTrace();
+            if(win >= 0) {
+                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
+                if (win > 0) {
+                    dlgAlert.setMessage(getResources().getString(R.string.won1) + " " + win + " " + getResources().getString(R.string.won2));
+                    try {
+                        AchievementHandler.getInstance().performEvent(14, win, getActivity());
+                    } catch (ServerException e) {
+                        e.printStackTrace();
+                    }
+                } else if (win == 0) {
+                    dlgAlert.setMessage(getResources().getString(R.string.won3));
                 }
-            } else if(win == 0) {
-                dlgAlert.setMessage(getResources().getString(R.string.won3));
-            }
 
-            dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
-            dlgAlert.setPositiveButton("OK", null);
-            dlgAlert.setCancelable(true);
-            dlgAlert.create().show();
-            btn_Vote.setEnabled(true);
+                dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+                btn_Vote.setEnabled(true);
+            }
 
         } catch (NotBettableException e) {
             btn_Vote.setEnabled(false);
@@ -153,6 +151,7 @@ public class TipTab extends Fragment {
             sb_SeekBar.setProgress((int) sqlManager.getQuoteOther());
             btn_Vote.setEnabled(false);
         }
+        sb_SeekBar.requestLayout();
     }
 
 }

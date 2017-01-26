@@ -140,7 +140,6 @@ public class fragment_Send_Tip extends Fragment {
                 public void run() {
                     Looper.prepare();
                     if(chosenCoins > 0) {
-
                             try {
                                 SqlManager.getInstance().sendTip(chosenCoins, team);
                                 if(team == 0) {
@@ -149,11 +148,10 @@ public class fragment_Send_Tip extends Fragment {
                                     AchievementHandler.getInstance().performEvent(11, 1, getActivity());
                                 }
                                 AchievementHandler.getInstance().performEvent(13, chosenCoins, getActivity());
-                                mCallback.passData("!" + getResources().getString(R.string.tippSucc));
-                                //changeFragment();
+                                mCallback.passData(getResources().getString(R.string.tippSucc));
                         } catch(Exception e) {
                                 e.printStackTrace();
-                                mCallback.passData("!" + getResources().getString(R.string.tippFail));
+                                mCallback.passData(getResources().getString(R.string.tippFail));
                         }
                     }
                     progressDialog.cancel();
