@@ -20,37 +20,31 @@ import ulm.hochschule.project_hoops.fragments.ChatFragment;
 import ulm.hochschule.project_hoops.fragments.ProfilTabChat;
 import ulm.hochschule.project_hoops.objects.ChatMessage;
 
-
+//Der Chatadapter is für die Anzeige einer Chatnachricht unter dem berücksichtigten Layout zuständig.
 public class ChatAdapter extends ArrayAdapter<ChatMessage> {
 
-
-    //TextMessage
+    //Layout
     private TextView textView;
-    private TextView time;
     private TextView name;
     private List<ChatMessage> messages = new ArrayList<ChatMessage>();
 
-    //image Layout
-    private ImageView image;
-    private TextView text;
-    private ListView listView;
     private FragmentManager fsm = null;
     private ChatFragment cA = new ChatFragment();
 
-
     public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm, ChatFragment cA){
         super(context, r);
-        this.listView = listView;
         this.fsm = fm;
         this.cA = cA;
     }
 
+    //Fügt eine Nachricht hinzu
     @Override
     public void add(ChatMessage obj){
         messages.add(obj);
         super.add(obj);
     }
 
+    //Erstellt das Layout
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ChatMessage obj = getItem(position);

@@ -31,7 +31,7 @@ public class ChatClient extends Thread {
     private Socket socket;
     private ChatFragment cA;
 
-//Verbindung zum Chat Server
+    //Verbindung zum Chat Server
     public ChatClient(ChatFragment ca) {
         host =  "141.59.26.107";
         port = 21401;
@@ -60,7 +60,7 @@ public class ChatClient extends Thread {
     }
 
     //Daten werden an Chat Fragment weiter geleitet
-public void recieveText(String msg,String username){
+    public void recieveText(String msg,String username){
     cA.recieveText(msg,username);
 }
 

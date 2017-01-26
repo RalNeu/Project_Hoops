@@ -12,6 +12,7 @@ import ulm.hochschule.project_hoops.R;
 /**
  * Created by Johann on 19.09.2016.
  */
+//Basketball Objekt für das Basketballspiel
 public class Ball {
 
     public float xCenter;
@@ -58,6 +59,7 @@ public class Ball {
         resetBall();
     }
 
+    //Aktualisierung der Ballposition
     public boolean update()
     {
         //xVelocity -= 5f * deltaT;
@@ -109,6 +111,7 @@ public class Ball {
         yCenter = y;
     }
 
+    //Ball wieder auf die Anfangsposition
     public void resetBall() {
         xCenter = widthScreen / 4 * distance;
         yCenter = heightScreen / 2 * (1/distance);
@@ -116,6 +119,7 @@ public class Ball {
             yCenter = heightScreen - RADIUS - 100;
     }
 
+    //Ball zeichnen
     public void myDraw(Canvas canvas){
 
         Bitmap rotatedBitmap = RotateBitmap(bitmap, angle);
@@ -130,6 +134,7 @@ public class Ball {
         canvas.drawBitmap(rotatedBitmap, xCenter - rotatedBallHalfWidth, yCenter - rotatedBallHalfHeight, alphaPaint);
     }
 
+    //Ball rotieren lassen(fürs Rollen zuständig)
     public Bitmap RotateBitmap(Bitmap source, float angle)
     {
         Matrix matrix = new Matrix();

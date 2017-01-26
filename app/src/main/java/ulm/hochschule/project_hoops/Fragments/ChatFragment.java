@@ -37,9 +37,6 @@ public class ChatFragment extends Fragment {
 
     private View layout;
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

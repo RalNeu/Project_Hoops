@@ -21,6 +21,7 @@ import ulm.hochschule.project_hoops.sonstige.GameThread;
 /**
  * Created by Johann on 19.09.2016.
  */
+//Fläche auf der das Spiel abläuft
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread thread;
@@ -56,6 +57,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         case MotionEvent.ACTION_DOWN:
                             model.ball.ok = false;
                             drawPoint = true;
+                            //Koordianten der Berührung werden gespeichert
                             x = event.getX();
                             y = event.getY();
                             break;
@@ -74,11 +76,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                                 //model.ball.yVelocity = -102.02344f;
 
                             }
-
+                            //Testzwecke
+                            //----------
                             System.out.println("xVel: " + model.ball.xVelocity);
                             System.out.println("yVel: " + model.ball.yVelocity);
                             System.out.println("dist: " + model.distance);
-
+                            //----------
                             break;
                         case MotionEvent.ACTION_MOVE:
                             x2 = event.getX();
@@ -132,7 +135,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawColor(Color.WHITE);
             model.ball.myDraw(canvas);
             model.hoop.myDraw(canvas);
-
+            //Testzwecke
+            //-----------------------------------------------------------------------
             velocityText.post(new Runnable() {
                 public void run() {
                     velocityText.setText("     xVel: " + xVel + "   yVel: " + yVel);
@@ -150,7 +154,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     scoreText.setText("Score: " + model.score);
                 }
             });
-
+            //------------------------------------------------------------------------
 
             if(drawPoint) {
                 for (int i = 0; i < 25; i++) {

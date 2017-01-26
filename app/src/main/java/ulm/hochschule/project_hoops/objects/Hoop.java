@@ -13,7 +13,7 @@ import ulm.hochschule.project_hoops.R;
  * Created by Johann on 27.09.2016.
  */
 
-
+//Basketballkorb Objekt für das Basketballspiel
 public class Hoop {
 
     private float widthScreen;
@@ -59,6 +59,7 @@ public class Hoop {
         initCollPos();
     }
 
+    //Hier werden die Kollisionspunkte vom Basketballkorb festgelegt
     private void initCollPos() {
         xBasketCollFront = widthScreen - bitmap.getWidth() + 5;
         yBasketCollFront = heightScreen - bitmap.getHeight()*80/121;
@@ -81,11 +82,14 @@ public class Hoop {
         yNetCollBot = heightScreen - bitmap.getHeight() *11/ 24;
     }
 
+    //Hier wird der Basketballkorb gezeichnet
     public void myDraw(Canvas canvas){
         canvas.drawBitmap(bitmap, widthScreen - bitmap.getWidth(), heightScreen - bitmap.getHeight(), new Paint());
         Paint p = new Paint();
         p.setColor(Color.BLUE);
         p.setAlpha(100);
+        //Testzwecke
+        //---------------------------------------------------------------------------
         canvas.drawCircle(xBasketCollFront, yBasketCollFront, basketCollRadius, p);
         canvas.drawCircle(xBasketCollBack, yBasketCollBack, basketCollRadius, p);
         canvas.drawRect(xBackboardTop, yBackboardTop, xBackboardTop+10, yBackboardBot, p);

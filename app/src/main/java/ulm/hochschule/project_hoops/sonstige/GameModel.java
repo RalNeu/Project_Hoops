@@ -16,6 +16,7 @@ import ulm.hochschule.project_hoops.objects.Hoop;
  * Created by Johann on 09.11.2016.
  */
 
+//Spiellogik wird hier implementiert
 public class GameModel {
     public Ball ball;
     public Hoop hoop;

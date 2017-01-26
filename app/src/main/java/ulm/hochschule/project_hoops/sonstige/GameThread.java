@@ -8,6 +8,7 @@ import ulm.hochschule.project_hoops.views.GamePanel;
 /**
  * Created by Johann on 19.09.2016.
  */
+//Thread auf dem das Spiel abläuft
 public class GameThread extends Thread {
 
     private SurfaceHolder holder;
@@ -22,6 +23,7 @@ public class GameThread extends Thread {
         this.model = model;
     }
 
+    //Hauptschleife
     @Override
     public void run() {
         Canvas c;

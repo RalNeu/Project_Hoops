@@ -29,6 +29,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 /**
  * Created by Johann on 17.05.2016.
  */
+//Fragment, dass das Layout und die Funktion vom Registrierfenster beschreibt.
 public class RegisterTab2 extends Fragment {
 
     private View layout;
@@ -50,9 +51,8 @@ public class RegisterTab2 extends Fragment {
 
     //Patrick für tastatur schließen
     private LinearLayout lLayout;
-    private FragmentManager fsm = null;
 
-
+    //Attribute initialisieren
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +60,7 @@ public class RegisterTab2 extends Fragment {
         notifyManager = new NotifyManager();
     }
 
+    //View wird erzeugt
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class RegisterTab2 extends Fragment {
         return layout;
     }
 
+    //Activity wird gestartet
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -100,6 +102,7 @@ public class RegisterTab2 extends Fragment {
         });
     }
 
+    //Versuch sich zu registrieren
     public void register() {
         if (!ok()) {
             onRegisterFailed();
@@ -128,6 +131,7 @@ public class RegisterTab2 extends Fragment {
                 }, 3000);
     }
 
+    //Bei erfolgreicher Registrierung wird ein neuer User angelegt und demjenigen eine Email zur Verifizierung gesendet
     public void onRegisterSuccess() {
         btn_Register.setEnabled(true);
 
@@ -139,6 +143,7 @@ public class RegisterTab2 extends Fragment {
         mailVerifierTask.execute();
     }
 
+    //User wird nach dem registrieren eingeloggt
     public void login(String username){
         UserProfile.logoffUser();
         UserProfile user = UserProfile.getInstance(username, getActivity());
@@ -151,12 +156,13 @@ public class RegisterTab2 extends Fragment {
         ma.setProfileEnabled(true);
     }
 
+    //Bei nicht erfolgreicher Registrierung
     private void onRegisterFailed() {
         Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         btn_Register.setEnabled(true);
     }
 
+    //Überprüft ob alle Eingaben korrekt sind bzw. den erforderlichen Vorraussetzungen erfüllen
     private boolean ok(){
         boolean isok = true;
 

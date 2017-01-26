@@ -6,11 +6,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 
-import ulm.hochschule.project_hoops.R;
-
 /**
  * Created by Johann on 26.07.2016.
  */
+//Klasse zum Senden vom Push-Up Benachrichtigungen
 public class NotifyManager {
 
     public void sendNotify(int id, String title, String message, Context context, int icon){

@@ -37,12 +37,12 @@ import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.ChatFragment;
 import ulm.hochschule.project_hoops.fragments.SocialMedia;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
 
-import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.AchievementTab;
 import ulm.hochschule.project_hoops.fragments.LoginTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;

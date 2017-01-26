@@ -21,14 +21,15 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.sonstige.GameModel;
 import ulm.hochschule.project_hoops.views.GamePanel;
 
+//Activity, über dass das Spiel beginnt
 public class GameActivity extends Activity implements View.OnClickListener {
-    // screen size
+    //Bildschirmgröße
     private int widthScreen;
     private int heightScreen;
+    //Spielfläche
     private GamePanel gamePanel;
     private int score = 0;
     private int attempt = 1;
@@ -36,23 +37,23 @@ public class GameActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // set the screen always portait
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         widthScreen = displaymetrics.widthPixels;
         heightScreen = displaymetrics.heightPixels - getStatusBarHeight();
 
+        //Für Testzwecke
+        //--------------
         final TextView scoreText = new TextView(this);
         scoreText.setText("Score: " + score);
         final TextView attemptText = new TextView(this);
         attemptText.setText("    attempt: " + attempt + "/10");
         final TextView velocityText = new TextView(this);
         attemptText.setText("    xVel: 0 yVel: 0");
-
+        //--------------
 
         FrameLayout game = new FrameLayout(this);
-
         Bundle b = getIntent().getExtras();
         String mode = "";
         if(b != null) {
@@ -82,11 +83,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     }
 
+    //Spiel wird gestartet
     public void onClick(View v) {
         //Intent intent = new Intent(this, MainActivity.class);
         //startActivity(intent);
         gamePanel.model.restartGame();
     }
+
 
     public int getStatusBarHeight() {
         int result = 0;
