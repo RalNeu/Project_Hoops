@@ -81,7 +81,7 @@ public class RegisterTab extends Fragment {
 
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.contentPanel, new NewsTab()).commit();
+                        ft.replace(R.id.contentPanel, new ProfilTab()).commit();
 
 
                     }

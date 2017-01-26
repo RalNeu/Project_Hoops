@@ -22,6 +22,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 /**
  * Created by Johann on 20.05.2016.
  */
+//Fragment, dass das Layout und die Funktion vom Loginfenster beschreibt.
 public class LoginTab extends Fragment {
 
     private View layout;
@@ -70,6 +71,7 @@ public class LoginTab extends Fragment {
         });
     }
 
+    //Bei erfolgreichem Login wird der entsprechende User aus der Datenbank geladen
     public void onLoginSuccess()  {
         btn_Login.setEnabled(true);
         UserProfile.logoffUser();
@@ -81,22 +83,24 @@ public class LoginTab extends Fragment {
         }
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contentPanel, new NewsTab()).commit();
+        ft.replace(R.id.contentPanel, new LoginTab()).commit();
         Toast.makeText(getContext(), getResources().getString(R.string.loginSucc), Toast.LENGTH_SHORT).show();
     }
 
+    //Solange der Account nicht verifiziert wurde, wird nach jedem Login dran erinnert
     public void verifReminder(){
         Toast.makeText(getContext(), getResources().getString(R.string.verifRem), Toast.LENGTH_SHORT).show();
     }
 
+    //Bei nicht erfolgreichem Login
     private void onLoginFailed() {
         MainActivity ma = (MainActivity) getActivity();
         ma.setProfileEnabled(false);
         Toast.makeText(getContext(), getResources().getString(R.string.loginFail), Toast.LENGTH_LONG).show();
-
         btn_Login.setEnabled(true);
     }
 
+    //Versuch sich einzuloggen
     public void login() {
 
         if (!check()) {
@@ -124,6 +128,7 @@ public class LoginTab extends Fragment {
 
     }
 
+    //Überprüft beim einloggen ob der Benutzer existiert und ob das Passwort mit dem User-Passwort übereinstimmt
     private boolean check(){
         boolean ok = true;
         try {

@@ -55,10 +55,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
             name = (TextView) row.findViewById(R.id.name);
             name.setText(obj.getUserName()+":");
             String mes;
-            if(obj.getMessage().charAt(0) == '.'){
-                mes = obj.getMessage().replaceFirst(".", "");
-            }else
-                mes = obj.getMessage();
+            mes = obj.getMessage();
             textView.setText(mes);
 
         final TextView tv = (TextView) row.findViewById(R.id.name);
