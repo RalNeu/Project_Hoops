@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity
                 });
 
             }
-        },20*1000);
+        },5*60*1000);
     }
 
 
@@ -361,35 +361,7 @@ public class MainActivity extends AppCompatActivity
             imV.getLayoutParams().width = (int) (h*ratio);
         }
 
-        //btn_Register = (Button) findViewById(R.id.btn_Register);
-        //btn_login = (Button) findViewById(R.id.bt_Login);
 
-       // dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-
-       // MenuView.ItemView i = (MenuView.ItemView) dLayout.findViewById(R.id.profile);
-        //i.setEnabled(false);
-
-       // et_username = (EditText) findViewById(R.id.et_UserName_nav);
-        //et_password = (EditText) findViewById(R.id.et_Password_nav);
-
-/*        btn_Register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRegister();
-            }
-        });
-        btn_login.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 if (check()) {
-                     Toast.makeText(getApplicationContext(), "eingeloggt", Toast.LENGTH_LONG).show();
-                     onBackPressed();
-                 } else
-                     Toast.makeText(getApplicationContext(), "nicht eingeloggt", Toast.LENGTH_LONG).show();
-             }
-         }
-        );*/
 
         return true;
     }

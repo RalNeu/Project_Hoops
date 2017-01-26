@@ -37,6 +37,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private FragmentManager fsm = null;
     private ChatFragment cA = new ChatFragment();
 
+
     public ChatAdapter(Context context, int r, ListView listView, FragmentManager fm, ChatFragment cA){
         super(context, r);
         this.listView = listView;

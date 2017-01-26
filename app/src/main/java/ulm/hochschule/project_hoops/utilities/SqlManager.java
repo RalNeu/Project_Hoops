@@ -54,6 +54,7 @@ public class SqlManager {
         }
     }
 
+    //connection to SQL Server
     private SqlManager(boolean f) {
         try {
             Class.forName("com.mysql.jdbc.Driver");

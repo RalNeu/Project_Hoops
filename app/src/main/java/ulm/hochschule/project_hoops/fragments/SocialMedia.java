@@ -41,6 +41,7 @@ public class SocialMedia extends Fragment {
         return layout;
     }
 
+    //OnClicklistener erstellt
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -68,7 +69,7 @@ public class SocialMedia extends Fragment {
     }
 
 
-
+//Öffnet Facebook im Browser oder App
     public void startFacebook() {
         Uri uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/bbu01/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -86,7 +87,7 @@ public class SocialMedia extends Fragment {
 
 
 
-
+//Öffnet Twitter im Browser oder App
     public void startTwitter(){
 
         Uri uri = Uri.parse("twitter://user?user_id=1446432300");
@@ -105,7 +106,7 @@ public class SocialMedia extends Fragment {
 
 
 
-
+    //Öffnet Instagramm im Browser oder App
     public void startInstagram(){
         Uri uri = Uri.parse("http://instagram.com/_u/ratiopharmulm");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);

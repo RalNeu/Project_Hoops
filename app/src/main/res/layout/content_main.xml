@@ -13,7 +13,7 @@
     tools:context=".activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
+//Bild für die Werbung die eingeblentet wird
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
@@ -23,7 +23,7 @@
         android:layout_alignParentEnd="true"
         android:src="@drawable/achievement_gold"
         />
-
+//Ein X Button damit die Werbung geschlossen wird
     <Button
         android:text="X"
         android:textSize="30dp"

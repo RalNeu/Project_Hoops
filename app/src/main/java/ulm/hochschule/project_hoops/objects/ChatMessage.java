@@ -3,7 +3,7 @@ package ulm.hochschule.project_hoops.objects;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-
+//Ein object das Nachrichten und Benutzername besitzt
 public class ChatMessage {
 
     private String message;

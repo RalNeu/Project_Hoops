@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bghome"></LinearLayout>
 
-
+     //Liste von Items mit Scrollbar
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
@@ -22,6 +22,7 @@
         android:layout_above="@+id/messageLayout"
         android:layout_marginBottom="5dp"></ListView>
 
+    //Um Nachrichten zu schreiben
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +50,7 @@
 
     </LinearLayout>
 
+    //Button der im unteren rechten Eck ist um die Nachricht zu versenden
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_send"
         android:layout_width="wrap_content"

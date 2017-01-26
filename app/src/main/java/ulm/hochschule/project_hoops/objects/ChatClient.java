@@ -31,7 +31,7 @@ public class ChatClient extends Thread {
     private Socket socket;
     private ChatFragment cA;
 
-
+//Verbindung zum Chat Server
     public ChatClient(ChatFragment ca) {
         host =  "141.59.26.107";
         port = 21401;
@@ -48,6 +48,7 @@ public class ChatClient extends Thread {
         }
     }
 
+    //Sendet Nachricht und Benutzername zum Server.
     public void processMessage(String message,String username){
         try{
             dout.writeUTF(message);
@@ -58,10 +59,13 @@ public class ChatClient extends Thread {
 
     }
 
+    //Daten werden an Chat Fragment weiter geleitet
 public void recieveText(String msg,String username){
     cA.recieveText(msg,username);
 }
 
+
+    //Thread der die Inputs vom Server entgegen nimmt und im recieveText weiterverarbeitet
     @Override
     public void run() {
         super.run();
@@ -79,6 +83,7 @@ public void recieveText(String msg,String username){
 
     }
 
+    //Beendet die Verbindung zum Server
     public void closeCon(){
         try {
             socket.close();

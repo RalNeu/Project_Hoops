@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context="ulm.hochschule.project_hoops.fragments.SocialMedia">
 
+    //Ein Knopf mit dem Facebook logo
     <Button
         android:id="@+id/ibtn_facebook"
         android:layout_width="wrap_content"
@@ -14,7 +15,7 @@
         android:layout_alignStart="@+id/ibtn_twitter"
         android:layout_marginBottom="29dp"
         android:layout_alignEnd="@+id/ibtn_twitter" />
-
+    //Ein Knopf mit dem Instagramm logo
     <Button
         android:id="@+id/ibtn_instagram"
         android:layout_width="wrap_content"
@@ -23,7 +24,7 @@
         android:layout_marginBottom="36dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/ibtn_twitter" />
-
+    //Ein Knopf mit dem Twitter logo
     <Button
         android:id="@+id/ibtn_twitter"
         android:layout_width="wrap_content"
