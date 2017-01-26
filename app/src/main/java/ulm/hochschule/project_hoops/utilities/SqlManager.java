@@ -82,7 +82,7 @@ public class SqlManager {
     }
 
     public int createUser(String firstName, String lastName, String email, String userName, String password) {
-        return createUser(firstName, lastName, email, userName, password, "0/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
+        return createUser(firstName, lastName, email, userName, password, "1/0/0/0-0/0/0/0/0/0/0/0/0/0/0/0/0");
     }
 
     public ArrayList<String> readBoughtAvatarItems(int aID) {
@@ -118,7 +118,7 @@ public class SqlManager {
         try {
 
             // create the mysql insert for person
-            query = "insert into person ( email, vorname, nachname, geburtsdatum, hobbies)"
+            query = "insert into person (email, vorname, nachname, geburtsdatum, hobbies)"
                     + " values (?, ?, ?, ?, ?)";
             preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, email);
@@ -335,6 +335,7 @@ public class SqlManager {
 
     public Object[] getUser(String userName) throws java.sql.SQLException{
         int  personID=0;
+
 
         Object[] retArray = new Object[14];
 
@@ -591,19 +592,30 @@ public class SqlManager {
     public boolean sendTip(int coins, int team) throws AlreadyBettedException, NotBettableException{
         boolean result = true;
         try{
-            int game = getActiveGame();
+            if(UserProfile.getInstance().getCoins() >= coins) {
+                int game = getActiveGame();
 
-            alreadyBetted(game);
+                alreadyBetted(game);
 
-            coins = (int) addOdds(coins, game, team);
 
-            String query = "INSERT INTO tipp(aID, spielID, coins, team) VALUES(?, ?, ?, ?)";
-            preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1, UserProfile.getInstance().getUserID());
-            preparedStmt.setInt(2, game);
-            preparedStmt.setInt(3, coins);
-            preparedStmt.setInt(4, team);
-            preparedStmt.executeUpdate();
+                String query = "update account set coins = " + (UserProfile.getInstance().getCoins()-coins) + " where aID = " + UserProfile.getInstance().getUserID();
+                preparedStmt = con.prepareStatement(query);
+                preparedStmt.executeUpdate();
+
+                UserProfile.getInstance().updateCoins(-1*coins);
+                coins = (int) addOdds(coins, game, team);
+
+                query = "INSERT INTO tipp(aID, spielID, coins, team) VALUES(?, ?, ?, ?)";
+                preparedStmt = con.prepareStatement(query);
+                preparedStmt.setInt(1, UserProfile.getInstance().getUserID());
+                preparedStmt.setInt(2, game);
+                preparedStmt.setInt(3, coins);
+                preparedStmt.setInt(4, team);
+                preparedStmt.executeUpdate();
+
+            } else {
+                throw new NotBettableException();
+            }
 
         } catch(SQLException e){
             result = false;

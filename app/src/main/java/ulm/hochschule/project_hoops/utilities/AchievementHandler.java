@@ -178,7 +178,7 @@ public class AchievementHandler {
     }
 
     /**
-     * Speichert die Aschievements ab
+     * Speichert die Achievements ab
      */
     private void saveAchievements() {
         SqlManager.getInstance().updateAchievements(aID, formAchievementString());

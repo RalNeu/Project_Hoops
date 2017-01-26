@@ -73,6 +73,10 @@ public class UserProfile {
         }
     }
 
+    public static void logoffUser() {
+        user = null;
+    }
+
     public String getAchievements() {
         return achievements;
     }

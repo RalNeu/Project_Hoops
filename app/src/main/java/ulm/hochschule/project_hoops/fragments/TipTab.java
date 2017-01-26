@@ -85,6 +85,7 @@ public class TipTab extends Fragment {
 
         if(!message.equals("")) {
             if(message.charAt(0) == '!') {
+                System.out.println("lol " + message);
                 message = message.substring(1);
                 AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
                 dlgAlert.setMessage(message);

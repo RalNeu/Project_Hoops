@@ -193,10 +193,8 @@ public class MainActivity extends AppCompatActivity
                 requestingImage = true;
                 adsImage = null;
                 try{
-                    System.out.println(1);
                     Socket s = new Socket("141.59.26.107", 21403);
 
-                    System.out.println(2);
                     ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
                     try{
