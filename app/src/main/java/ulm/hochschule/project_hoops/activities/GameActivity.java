@@ -24,7 +24,6 @@ import android.widget.TextView;
 import ulm.hochschule.project_hoops.sonstige.GameModel;
 import ulm.hochschule.project_hoops.views.GamePanel;
 
-//Activity, über dass das Spiel beginnt
 public class GameActivity extends Activity implements View.OnClickListener {
     //Bildschirmgröße
     private int widthScreen;
@@ -43,24 +42,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
         widthScreen = displaymetrics.widthPixels;
         heightScreen = displaymetrics.heightPixels - getStatusBarHeight();
 
-        //Für Testzwecke
-        //--------------
         final TextView scoreText = new TextView(this);
         scoreText.setText("Score: " + score);
         final TextView attemptText = new TextView(this);
         attemptText.setText("    attempt: " + attempt + "/10");
-        final TextView velocityText = new TextView(this);
-        attemptText.setText("    xVel: 0 yVel: 0");
-        //--------------
 
         FrameLayout game = new FrameLayout(this);
-        Bundle b = getIntent().getExtras();
-        String mode = "";
-        if(b != null) {
-            mode = b.getString("key");
-        } else
-            throw new RuntimeException("No mode chosen");
-        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText, velocityText, mode);
+        this.gamePanel = new GamePanel(getApplicationContext(), widthScreen, heightScreen, scoreText, attemptText);
         LinearLayout gameWidgets = new LinearLayout (this);
 
 
@@ -71,7 +59,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         gameWidgets.addView(scoreText);
         gameWidgets.addView(attemptText);
-        gameWidgets.addView(velocityText);
         gameWidgets.addView(endGameButton);
 
         game.addView(gamePanel);
@@ -83,10 +70,8 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     }
 
-    //Spiel wird gestartet
+    //Neuer Versuch wird gestartet
     public void onClick(View v) {
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
         gamePanel.model.restartGame();
     }
 

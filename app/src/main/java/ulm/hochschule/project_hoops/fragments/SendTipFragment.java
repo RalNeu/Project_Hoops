@@ -23,7 +23,7 @@ import ulm.hochschule.project_hoops.utilities.UserProfile;
 /**
  * Fragment zum Versenden eines Tipps.
  */
-public class fragment_Send_Tip extends Fragment {
+public class SendTipFragment extends Fragment {
 
     private View layout;
 
@@ -41,7 +41,7 @@ public class fragment_Send_Tip extends Fragment {
     }
 
 
-    public fragment_Send_Tip() {
+    public SendTipFragment() {
         // Required empty public constructor
     }
 

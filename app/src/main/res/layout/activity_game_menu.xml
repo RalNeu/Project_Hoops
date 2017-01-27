@@ -31,13 +31,6 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="@string/gamemenu_settings"
-            android:id="@+id/btnSettings"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
             android:text="@string/gamemenu_end"
             android:id="@+id/btnExit"
             android:layout_weight="1" />

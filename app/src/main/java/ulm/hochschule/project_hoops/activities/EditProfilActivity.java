@@ -53,6 +53,10 @@ public class EditProfilActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    /**
+     * Setzt den View Pager, so dass es 2 Tabs gibt
+     * @param viewPager
+     */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         final EditProfileFragment epf = new EditProfileFragment();

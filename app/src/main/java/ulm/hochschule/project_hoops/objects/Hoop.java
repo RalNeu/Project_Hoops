@@ -88,17 +88,5 @@ public class Hoop {
         Paint p = new Paint();
         p.setColor(Color.BLUE);
         p.setAlpha(100);
-        //Testzwecke
-        //---------------------------------------------------------------------------
-        canvas.drawCircle(xBasketCollFront, yBasketCollFront, basketCollRadius, p);
-        canvas.drawCircle(xBasketCollBack, yBasketCollBack, basketCollRadius, p);
-        canvas.drawRect(xBackboardTop, yBackboardTop, xBackboardTop+10, yBackboardBot, p);
-        canvas.drawRect(xPoleCollTop, yPoleCollTop, xPoleCollTop+10, yPoleCollBot, p);
-        p.setColor(Color.GREEN);
-        p.setAlpha(50);
-        canvas.drawRect(xBasketCollFront, yBasketCollFront-50, xBasketCollBack, yBasketCollFront+50, p);
-        p.setColor(Color.YELLOW);
-        p.setAlpha(50);
-        canvas.drawRect(xBasketCollFront, yBasketCollFront, xBasketCollBack, yNetCollBot, p);
     }
 }

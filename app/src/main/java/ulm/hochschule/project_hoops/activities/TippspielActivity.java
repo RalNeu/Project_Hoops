@@ -1,29 +1,12 @@
 package ulm.hochschule.project_hoops.activities;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.TipTab;
-import ulm.hochschule.project_hoops.fragments.fragment_Send_Tip;
+import ulm.hochschule.project_hoops.fragments.SendTipFragment;
 import ulm.hochschule.project_hoops.interfaces.DataPassListener;
 
 /**
@@ -32,7 +15,7 @@ import ulm.hochschule.project_hoops.interfaces.DataPassListener;
 public class TippspielActivity extends AppCompatActivity implements DataPassListener{
 
     private TipTab tippTab;
-    private fragment_Send_Tip sendTipp;
+    private SendTipFragment sendTipp;
     private boolean frag = true;
 
 
@@ -47,7 +30,7 @@ public class TippspielActivity extends AppCompatActivity implements DataPassList
 
         tippTab = new TipTab();
         tippTab.setDataPassListener(this);
-        sendTipp = new fragment_Send_Tip();
+        sendTipp = new SendTipFragment();
         sendTipp.setDataPassListener(this);
 
         changeFragment( tippTab);

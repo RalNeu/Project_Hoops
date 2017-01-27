@@ -16,37 +16,13 @@ public class GameMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_menu);
 
         final Button btnPlay = (Button) findViewById(R.id.btnPlay);
-        final Button btnSettings = (Button) findViewById(R.id.btnSettings);
         Button btnExit = (Button) findViewById(R.id.btnExit);
-
-        final Bundle b = new Bundle();
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnPlay.setText("10 Balls");
-                btnPlay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        b.putString("key", "10Balls");
-                        Intent intent = new Intent(GameMenuActivity.this, GameActivity.class);
-                        intent.putExtras(b);
-                        startActivity(intent);
-                    }
-                });
-                btnSettings.setText("Time Trial");
-                btnSettings.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        b.putString("key", "TimeTrial");
-                        Intent intent = new Intent(GameMenuActivity.this, GameActivity.class);
-                        intent.putExtras(b);
-                        startActivity(intent);
-
-                    }
-                });
-
+                Intent intent = new Intent(GameMenuActivity.this, GameActivity.class);
+                startActivity(intent);
             }
         });
 

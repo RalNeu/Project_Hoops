@@ -117,7 +117,7 @@ public class GameModel {
     //wenn Ball in der grünen Zone ist, wird beim nächsten mal geprüft ob er unter der grünen Zone ist => Scored = true
     private void checkGoal() {
         if(inHoopZone && ball.yCenter > hoop.yBasketCollFront + 50 && !scored) {
-            score += (1/(Math.pow(distance, 4)));
+            score += (1/(distance/20));
             scored = true;
             inHoopZone = false;
         }
@@ -156,7 +156,6 @@ public class GameModel {
             xBasketColVector = (float) Math.sin(basketColAngle) * -1;
             yBasketColVector = (float) Math.cos(basketColAngle) * -1;
             if(ball.xCenter > xBasketColl){
-                //xBasketColVector *= -1;
                 yBasketColVector *= -1;
             }
 
@@ -164,25 +163,11 @@ public class GameModel {
         }
 
         if(Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < ball.RADIUS + basketCollRadius) {
-            /*System.out.println("Col detected:");
-            System.out.println("Angle: " + lastBasketColAngle + " new angle: " + basketColAngle);
-
-            System.out.println("ball velx: " + ball.xVelocity);
-            System.out.println("ball vely: " + ball.yVelocity);*/
-            System.out.println("velo: " + velocity);
             if(velocity > 20 || velocity < -20) {
                 ball.xVelocity = ((ball.xVelocity * (float) Math.cos(collisionAngle) + ball.yVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) velocity * ball.FACTOR_BOUNCEBACK;
                 ball.yVelocity = ((ball.yVelocity * (float) Math.cos(collisionAngle) + ball.xVelocity * (float) Math.sin(collisionAngle)) * velocity) / (float) velocity * ball.FACTOR_BOUNCEBACK;
             }
-            /*System.out.println("ball velx: " + ball.xVelocity);
-            System.out.println("ball vely: " + ball.yVelocity);
 
-            System.out.println("ball x: " + ball.xCenter);
-            System.out.println("ball y: " + ball.yCenter);
-            System.out.println("xBasketColl: " + xBasketColl);
-            System.out.println("yBasketColl: " + yBasketColl);*/
-            //lastBasketColAngle durch collisionAngle ersetzt
-            //Idee: lastXCenter speichern, checken ob nun hinter basketColl, dann lastBasketColAngle benutzen. das gleiche mit Y
             if(ball.xCenter < xBasketColl && Math.sqrt(Math.pow(xBasketColl - ball.xCenter, 2) + Math.pow(yBasketColl - ball.yCenter, 2)) < (ball.RADIUS + basketCollRadius)) {
                 if(velocity > 20 || velocity < -20)
                     ball.xCenter = xBasketColl - (float) Math.cos(basketColAngle) * (ball.RADIUS + basketCollRadius);
@@ -199,37 +184,9 @@ public class GameModel {
                 else
                     ball.xVelocity += 0.2f;
             }
-            System.out.println("velo: " + velocity);
-
-            /*System.out.println("ball x: " + ball.xCenter);
-            System.out.println("ball y: " + ball.yCenter);*/
-
-            /*if(ball.xCenter < xBasketColl) {
-                //ball.xVelocity -= 2;
-                ball.xCenter -= 1;
-            }
-            else {
-                //ball.xVelocity += 2;
-                ball.xCenter += 1;
-            }
-            if(ball.yCenter < yBasketColl) {
-                //ball.yVelocity -= 2;
-                ball.yCenter--;
-            }
-            else {
-                //ball.yVelocity += 2;
-                ball.yCenter++;
-            }*/
 
         }
         lastBasketColAngle = basketColAngle;
-//        lastXBasketColVector = (float) Math.cos(lastBasketColAngle) * -1;
-//        lastYBasketColVector = (float) Math.sin(lastBasketColAngle) * -1;
-//        if(ball.xCenter > xBasketColl){
-//            lastXBasketColVector *= -1;
-//            lastYBasketColVector *= -1;
-//        }
-
     }
 
     //checkt Kollision mit Backboard, setzt Ballgeschwindigkeit

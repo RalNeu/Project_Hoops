@@ -97,37 +97,31 @@ public class EditAvatarTab extends Fragment {
                     case R.id.btnHat:
                         hatIndex = getNextIdx(0, hatIndex);
                         imgHat.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), hats.get(hatIndex), 300,300));
-                        //imgHat.setBackgroundResource(hats.get(hatIndex));
                         handleArrowEnable(0, hatIndex);
                         break;
                     case R.id.btnBackground:
                         backgroundIndex = getNextIdx(2, backgroundIndex);
                         imgBackground.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), background.get(backgroundIndex), 300,300));
-                        //imgBackground.setBackgroundResource(0);
                         handleArrowEnable(2, backgroundIndex);
                         break;
                     case R.id.btnEyes:
                         eyesIndex = getNextIdx(1, eyesIndex);
                         imgEyes.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), eyes.get(eyesIndex), 300,300));
-                        //imgEyes.setBackgroundResource(eyes.get(eyesIndex));
                         handleArrowEnable(1, eyesIndex);
                         break;
                     case R.id.btnMouth:
                         mouthIndex = getNextIdx(3, mouthIndex);
                         imgMouth.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), mouth.get(mouthIndex), 300,300));
-                        //imgMouth.setBackgroundResource(mouth.get(mouthIndex));
                         handleArrowEnable(3, mouthIndex);
                         break;
                     case R.id.btnSkin:
                         skinIndex = getNextIdx(4, skinIndex);
                         imgSkin.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), skin.get(skinIndex), 300,300));
-                        // imgSkin.setBackgroundResource(skin.get(skinIndex));
                         handleArrowEnable(4, skinIndex);
                         break;
                     case R.id.btnBody:
                         bodyIndex = getNextIdx(5, bodyIndex);
                         imgBody.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), body.get(bodyIndex), 300,300));
-                        //imgBody.setBackgroundResource(body.get(bodyIndex));
                         handleArrowEnable(5, bodyIndex);
                         break;
                 }
@@ -142,42 +136,35 @@ public class EditAvatarTab extends Fragment {
                     case R.id.btnHat:
                         hatIndex = getPrevIdx(0, hatIndex);
                         imgHat.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), hats.get(hatIndex), 300,300));
-                        //imgHat.setBackgroundResource(hats.get(hatIndex));
                         handleArrowEnable(0, hatIndex);
                         break;
                     case R.id.btnBackground:
                         backgroundIndex = getPrevIdx(2, backgroundIndex);
                         if(backgroundIndex == -1) {
                             imgBackground.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), 0, 300,300));
-                            //imgBackground.setBackgroundResource(0);
                         } else {
                             imgBackground.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), background.get(backgroundIndex), 300,300));
-                            //imgBackground.setBackgroundResource(background.get(backgroundIndex));
                         }
                         handleArrowEnable(2, backgroundIndex);
                         break;
                     case R.id.btnEyes:
                         eyesIndex = getPrevIdx(1, eyesIndex);
                         imgEyes.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), eyes.get(eyesIndex), 300,300));
-                        //imgEyes.setBackgroundResource(eyes.get(eyesIndex));
                         handleArrowEnable(1, eyesIndex);
                         break;
                     case R.id.btnMouth:
                         mouthIndex = getPrevIdx(3, mouthIndex);
                         imgMouth.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), mouth.get(mouthIndex), 300,300));
-                        //imgMouth.setBackgroundResource(mouth.get(mouthIndex));
                         handleArrowEnable(3, mouthIndex);
                         break;
                     case R.id.btnSkin:
                         skinIndex = getPrevIdx(4, skinIndex);
                         imgSkin.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), skin.get(skinIndex), 300,300));
-                       // imgSkin.setBackgroundResource(skin.get(skinIndex));
                         handleArrowEnable(4, skinIndex);
                         break;
                     case R.id.btnBody:
                         bodyIndex = getPrevIdx(5, bodyIndex);
                         imgBody.setImageBitmap(BitmapResolver.decodeSampledBitmapFromResource(getResources(), body.get(bodyIndex), 300,300));
-                        //imgBody.setBackgroundResource(body.get(bodyIndex));
                         handleArrowEnable(5, bodyIndex);
                         break;
                 }

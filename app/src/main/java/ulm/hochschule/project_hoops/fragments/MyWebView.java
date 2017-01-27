@@ -14,16 +14,16 @@ import ulm.hochschule.project_hoops.R;
 /**
  * Created by Johann on 06.05.2016.
  */
-public class WebView2 extends Fragment {
+public class MyWebView extends Fragment {
 
-    private WebView wv;
+    private android.webkit.WebView wv;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.web_view, container, false);
-        wv = (WebView) v.findViewById(R.id.web_view);
+        wv = (android.webkit.WebView) v.findViewById(R.id.web_view);
         return v;
     }
 

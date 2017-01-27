@@ -22,16 +22,16 @@ public class GameEndActivity extends AppCompatActivity {
 
         TextView scoreText = (TextView) findViewById(R.id.scoreText);
         Button btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
-        Button btnMode = (Button) findViewById(R.id.btnMode);
 
-
+        //Score wird von GamePanel geholt
         Bundle b = getIntent().getExtras();
-        int score = -1; // or other values
+        int score = -1;
         if(b != null) {
             score = b.getInt("key");
             scoreText.setText("Score: " + score);
         }
 
+        //Bei eingeloggtem User werden Coins hinzugefügt
         if(UserProfile.isLoggedIn()){
             UserProfile user = UserProfile.getInstance();
             user.updateCoins(score);
@@ -44,13 +44,6 @@ public class GameEndActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(GameEndActivity.this, GameActivity.class));
-            }
-        });
-
-        btnMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(GameEndActivity.this, GameMenuActivity.class));
             }
         });
 
