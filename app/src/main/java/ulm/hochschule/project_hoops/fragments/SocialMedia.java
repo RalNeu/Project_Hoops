@@ -74,11 +74,10 @@ public class SocialMedia extends Fragment {
         Uri uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/bbu01/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setPackage("com.facebook.katana");
-        //Intent intent2 = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/bbu01/"));
-        //intent2.setPackage("com.android.chrome");
 
         try {
             startActivity(intent);
+            // Wenn die Facebook App nicht gefunden wurde wird im Webbrowser die Seite geöffnet
         }catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/bbu01/")));
         }
@@ -94,11 +93,10 @@ public class SocialMedia extends Fragment {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setPackage("com.twitter.android");
         Uri uri2 = Uri.parse("https://twitter.com/ratiopharmulm?lang=de");
-        //Intent intent2 = new Intent(Intent.ACTION_VIEW,uri2);
-       // intent2.setPackage("com.android.chrome");
 
         try {
             startActivity(intent);
+            // Wenn die Twitter App nicht gefunden wurde wird im Webbrowser die Seite geöffnet
         }catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://twitter.com/ratiopharmulm?lang=de")));
         }
@@ -112,11 +110,11 @@ public class SocialMedia extends Fragment {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setPackage("com.instagram.android");
         Uri uri2 = Uri.parse("https://www.instagram.com/ratiopharmulm/");
-       // Intent intent2 = new Intent(Intent.ACTION_VIEW,uri2);
-        //intent2.setPackage("com.android.chrome");
+
 
         try {
             startActivity(intent);
+            // Wenn die Instagramm App nicht gefunden wurde wird im Webbrowser die Seite geöffnet
         }catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.instagram.com/ratiopharmulm/")));
         }
