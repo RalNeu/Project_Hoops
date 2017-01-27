@@ -98,7 +98,8 @@ public class EditProfileFragment extends Fragment {
 
         np_Year = (NumberPicker) layout.findViewById(R.id.np_YearChooser);
         np_Year.setMinValue(1900);
-        np_Year.setMaxValue(2016); //TODO
+        Calendar now = Calendar.getInstance();
+        np_Year.setMaxValue(now.get(Calendar.YEAR));
         np_Year.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {

@@ -29,7 +29,6 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.activities.AccountshopActivity;
 import ulm.hochschule.project_hoops.objects.AvatarItemDescription;
 import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
-import ulm.hochschule.project_hoops.tasks.ImageDownloaderTask;
 import ulm.hochschule.project_hoops.tasks.ImageLoader;
 import ulm.hochschule.project_hoops.utilities.Notificator;
 import ulm.hochschule.project_hoops.utilities.UserProfile;

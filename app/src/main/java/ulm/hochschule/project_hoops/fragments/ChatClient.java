@@ -33,7 +33,7 @@ public class ChatClient extends Thread {
     public ChatClient(ChatFragment ca) {
         host =  "141.59.26.107";
         port = 21401;
-       cA = ca;
+        cA = ca;
 
 
         try {
@@ -55,7 +55,7 @@ public class ChatClient extends Thread {
 
     }
 
-public void recieveText(String msg,String username){
+    public void recieveText(String msg,String username){
     cA.recieveText(msg,username);
 }
 

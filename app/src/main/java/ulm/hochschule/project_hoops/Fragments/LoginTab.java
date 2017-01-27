@@ -137,7 +137,6 @@ public class LoginTab extends Fragment {
                     ok = false;
                 }
             }else{
-                //TODO
                 ok = false;
             }
         }catch (Exception e){

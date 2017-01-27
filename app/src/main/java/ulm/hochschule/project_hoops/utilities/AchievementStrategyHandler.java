@@ -10,7 +10,7 @@ import ulm.hochschule.project_hoops.interfaces.AchievementStrategy;
  */
 public class AchievementStrategyHandler {
 
-    public static AchievementStrategy getStrategy(int id) {
+    public AchievementStrategy getStrategy(int id) {
         AchievementStrategy as = null;
 
         switch (id) {
@@ -71,7 +71,7 @@ public class AchievementStrategyHandler {
      * Die Strategie um val dem alten Wert hinzuzufügen
      * @return Die Strategie
      */
-    private static AchievementStrategy strat1() {
+    private AchievementStrategy strat1() {
         return new AchievementStrategy() {
             @Override
             public int changeValue(int old, int val, int max) {
@@ -84,7 +84,7 @@ public class AchievementStrategyHandler {
      * Die Strategie um val zu ersetzen, falls es größer ist als der alte Wert
      * @return Die Strategie
      */
-    private static AchievementStrategy strat2() {
+    private AchievementStrategy strat2() {
         return new AchievementStrategy() {
             @Override
             public int changeValue(int old, int val, int max) {

@@ -17,6 +17,7 @@
     <string name="et_UserName">Username</string>
     <string name="alter_string">Age</string>
     <string name="meine_hobbys"><u>My hobbies</u></string>
+    <string name="website">Website</string>
 
     <string name="enter_your_firstname">Insert your name</string>
     <string name="enter_your_lastname">Insert your surname</string>
@@ -41,7 +42,6 @@
     <string name="editProfile">Edit profile</string>
     <string name="profile">My profile</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="reqCode">New code</string>

@@ -97,13 +97,14 @@ public class AchievementTests {
 
     @Test
     public void testStrategies() {
-        assertEquals(10, AchievementStrategyHandler.getStrategy(0).changeValue(7,3,20));
-        assertEquals(9, AchievementStrategyHandler.getStrategy(0).changeValue(7,3,9));
-        assertEquals(20, AchievementStrategyHandler.getStrategy(0).changeValue(17,13,20));
-        assertEquals(9, AchievementStrategyHandler.getStrategy(3).changeValue(8,9,20));
-        assertEquals(20, AchievementStrategyHandler.getStrategy(0).changeValue(20,50,20));
-        assertEquals(13, AchievementStrategyHandler.getStrategy(13).changeValue(13,3,20));
-        assertEquals(10, AchievementStrategyHandler.getStrategy(13).changeValue(7,10,20));
-        assertEquals(10, AchievementStrategyHandler.getStrategy(13).changeValue(10,100,10));
+        AchievementStrategyHandler ach = new AchievementStrategyHandler();
+        assertEquals(10, ach.getStrategy(0).changeValue(7,3,20));
+        assertEquals(9, ach.getStrategy(0).changeValue(7,3,9));
+        assertEquals(20, ach.getStrategy(0).changeValue(17,13,20));
+        assertEquals(9, ach.getStrategy(3).changeValue(8,9,20));
+        assertEquals(20, ach.getStrategy(0).changeValue(20,50,20));
+        assertEquals(13, ach.getStrategy(13).changeValue(13,3,20));
+        assertEquals(10, ach.getStrategy(13).changeValue(7,10,20));
+        assertEquals(10, ach.getStrategy(13).changeValue(10,100,10));
     }
 }

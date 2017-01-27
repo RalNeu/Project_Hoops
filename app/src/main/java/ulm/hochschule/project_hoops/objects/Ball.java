@@ -105,7 +105,7 @@ public class Ball {
         return true;
     }
 
-    //set Random TODO
+    //set Random
     public void setCenter(float x, float y){
         xCenter = x;
         yCenter = y;

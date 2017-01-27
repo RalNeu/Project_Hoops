@@ -16,7 +16,7 @@ import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 
 /**
- * TODO: document your custom view class.
+ * Stellt ein Achievement als UI-Element dar
  */
 public class Achievement extends LinearLayout {
 

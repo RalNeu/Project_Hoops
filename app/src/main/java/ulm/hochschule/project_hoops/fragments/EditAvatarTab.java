@@ -251,7 +251,7 @@ public class EditAvatarTab extends Fragment {
         else
             enableNext();
 
-        //Bei hats kann noch 1 Schritt weiter zurückgegangen werden um den Hut zu entfernen
+        //Bei backgrounds kann noch 1 Schritt weiter zurückgegangen werden um den Hut zu entfernen. item = 2
         if(item == 2) {
             if(itemIndex == -1 )
                 disablePrev();

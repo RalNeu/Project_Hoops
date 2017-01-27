@@ -55,17 +55,12 @@ import ulm.hochschule.project_hoops.utilities.SqlManager;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AchievementReceiver {
 
-    private Button btn_Register;
-    private Button btn_login;
     private NavigationView navigationView;
 
-    private EditText et_username;
-    private EditText et_password;
 
     //For Server downloading the ads
     private ImageView imageView;
     private Button buttonAds;
-    private Image adsImage;
     private Bitmap bitmap;
 
     private SqlManager manager;
@@ -84,7 +79,6 @@ public class MainActivity extends AppCompatActivity
     private MenuItem achievements;
     private MenuItem chatClientMenuItem;
     private MenuItem accountshop;
-    private MenuItem sozialMediaMenuItem;
     private boolean requestingImage = false;
 
     //For closeKeyboard
@@ -191,7 +185,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 requestingImage = true;
-                adsImage = null;
                 try{
                     Socket s = new Socket("141.59.26.107", 21403);
 
@@ -245,7 +238,6 @@ public class MainActivity extends AppCompatActivity
 
     private void setIcons(Menu navDrawer) {
 
-        MenuItem news = navDrawer.findItem(R.id.nav_news);
         MenuItem ticket = navDrawer.findItem(R.id.nav_ticket);
         MenuItem chat = navDrawer.findItem(R.id.nav_chat);
         MenuItem map = navDrawer.findItem(R.id.hausansicht);
@@ -255,7 +247,6 @@ public class MainActivity extends AppCompatActivity
 
         int res = 40;
 
-        news.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_news, res, res)));
         ticket.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.ic_ticket_icon, res, res)));
         map.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.drawable.icmap, res, res)));
         login.setIcon(new BitmapDrawable(getResources(), BitmapResolver.decodeSampledBitmapFromResource(getResources(), R.mipmap.ic_login, res, res)));
@@ -294,35 +285,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void logIn() {
-        // TODO: 20.05.2016
-    }
-
-    private boolean check() {
-        boolean ok = true;
-        try {
-            if (manager.userExist(et_username.getText().toString())) {
-                if (!et_password.getText().toString().equals(manager.getUser(et_username.getText().toString())[3])) {
-                    et_password.setError(getResources().getString(R.string.wrong_password));
-                    et_username.setError(getResources().getString(R.string.wrong_username));
-                    ok = false;
-                }
-            } else if (manager.emailExist(et_username.getText().toString())) {
-                if (!et_password.getText().toString().equals(manager.getPassword(et_username.getText().toString()))) {
-                    et_password.setError(getResources().getString(R.string.wrong_password));
-                    et_username.setError(getResources().getString(R.string.wrong_username));
-                    ok = false;
-                }
-            } else {
-                et_password.setError(getResources().getString(R.string.wrong_password));
-                et_username.setError(getResources().getString(R.string.wrong_username));
-                ok = false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ok;
-    }
 
     @Override
     public void onBackPressed() {
@@ -393,10 +355,7 @@ public class MainActivity extends AppCompatActivity
 
         Fragment f = null;
 
-        if (id == R.id.nav_news) {
-            //currTab = newsTab;
-           // changeFragment(newsTab);
-        } else if (id == R.id.nav_ticket) {
+         if (id == R.id.nav_ticket) {
             changeFragment(new WebView2());
         }else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();

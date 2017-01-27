@@ -118,8 +118,6 @@ public class RegisterTab2 extends Fragment {
         progressDialog.setMessage("Anfrage wird verarbeitet...");
         progressDialog.show();
 
-        // TODO: Implement your own authentication logic here.
-
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {

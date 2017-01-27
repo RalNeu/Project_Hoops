@@ -5,7 +5,6 @@
     tools:context="ulm.hochschule.project_hoops.fragments.AchievementTab"
     android:background="@drawable/bg_achievement">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:orientation="vertical"

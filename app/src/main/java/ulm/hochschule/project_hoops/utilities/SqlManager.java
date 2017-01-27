@@ -124,7 +124,7 @@ public class SqlManager {
             preparedStmt.setString(1, email);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
-            preparedStmt.setDate(4, new Date(100,1,1)); //TODO
+            preparedStmt.setDate(4, new Date(100,1,1));
             preparedStmt.setString(5, "");
             preparedStmt.execute();
             ret--;
@@ -305,7 +305,7 @@ public class SqlManager {
         return input;
     }
 
-    public boolean emailExist(String email){ //TODO : testen obs geht
+    public boolean emailExist(String email){
         boolean response = false;
         try {
             String query = "select case WHEN (select count(*) from person where email='"+email+"') > 0  THEN 1 ELSE 0 END AS Abfrage;";
@@ -454,7 +454,7 @@ public class SqlManager {
         }
     }
 
-    public String getPassword(String username) throws java.sql.SQLException{//TODO: testen obs geht
+    public String getPassword(String username) throws java.sql.SQLException{
 
         String result = "";
 

@@ -37,17 +37,17 @@ public class AchievementTab extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void addAchievement(int idx, int emblem, String description, String date) {
+    public void addAchievement(int idx, int emblem, String description, String title) {
         Achievement a;
 
         if(achievements.containsKey(idx)) {
             a = (Achievement) lay_Achievement.findViewById(idx);
-            a.setAchievement(emblem, description, date);
+            a.setAchievement(emblem, description, title);
         } else {
             a = new Achievement(getContext());
             a.setId(idx);
             lay_Achievement.addView(a);
-            a.setAchievement(emblem, description, date);
+            a.setAchievement(emblem, description, title);
             achievements.put(idx, a);
         }
     }
@@ -72,7 +72,6 @@ public class AchievementTab extends Fragment {
                 e.printStackTrace();
             }
         }
-
         return layout;
     }
 }

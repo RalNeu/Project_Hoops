@@ -19,6 +19,7 @@ public class AchievementHandler {
     private HashMap<Integer, Integer> achievements;
     private int[] achievementreference;
     private int[] achiementStatus;
+    private AchievementStrategyHandler ash = new AchievementStrategyHandler();
 
     private String[] descriptions;
     private String[] titles;
@@ -114,7 +115,7 @@ public class AchievementHandler {
 
         if(achiementStatus[event] != 3) {
             //int newVal = achievements.get(event) + val;
-            int newVal = AchievementStrategyHandler.getStrategy(event).changeValue(achievements.get(event), val, achievementreference[event*3+2]);
+            int newVal = ash.getStrategy(event).changeValue(achievements.get(event), val, achievementreference[event*3+2]);
 
             if(event == 3)
                 tageHintereinander = val;
@@ -200,7 +201,6 @@ public class AchievementHandler {
         } else {
             if(i != 0 && i != 1 && i != 6) {
                 String[] s = descriptions[i].split("/");
-                System.out.println(i);
                 d = s[0] + achievementreference[i * 3 + e - 1] + s[1];
             } else {
                 d = descriptions[i];
