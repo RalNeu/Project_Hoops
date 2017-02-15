@@ -35,7 +35,7 @@ public class MailVerifierTask extends AsyncTask<Void,Void,Void> {
         private String email;
         private String subject = "Validation Code";
         private String message = "Here is your Code: ";
-        private final static String bungamail = "projecthoops69@gmail.com";
+        private final static String bungamail = "hs.projecthoops@gmail.com";
         private boolean emailSent = false;
         private SqlManager sm;
         private UserProfile userProfile;

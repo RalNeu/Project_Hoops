@@ -64,7 +64,7 @@ public class RegisterTab2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_register2, container, false);
+        layout = inflater.inflate(R.layout.fragment_register, container, false);
         et_Firstname = (EditText) layout.findViewById(R.id.et_Firstname);
         et_Lastname = (EditText) layout.findViewById(R.id.et_Lastname);
         et_Username = (EditText) layout.findViewById(R.id.et_Username);

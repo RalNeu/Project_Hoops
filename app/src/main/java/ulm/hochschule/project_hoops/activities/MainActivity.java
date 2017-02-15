@@ -39,6 +39,7 @@ import java.util.TimerTask;
 
 import ulm.hochschule.project_hoops.R;
 import ulm.hochschule.project_hoops.fragments.ChatFragment;
+import ulm.hochschule.project_hoops.fragments.MyWebView;
 import ulm.hochschule.project_hoops.fragments.SocialMedia;
 import ulm.hochschule.project_hoops.interfaces.AchievementReceiver;
 import ulm.hochschule.project_hoops.fragments.HouseViewTab;
@@ -48,7 +49,6 @@ import ulm.hochschule.project_hoops.fragments.LoginTab;
 import ulm.hochschule.project_hoops.fragments.ProfilTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab;
 import ulm.hochschule.project_hoops.fragments.RegisterTab2;
-import ulm.hochschule.project_hoops.fragments.WebView2;
 import ulm.hochschule.project_hoops.sonstige.BitmapResolver;
 import ulm.hochschule.project_hoops.utilities.SqlManager;
 
@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity
         Fragment f = null;
 
          if (id == R.id.nav_ticket) {
-            changeFragment(new WebView2());
+            changeFragment(new MyWebView());
         }else if (id == R.id.profile) {
             ProfilTab tab = ProfilTab.getInstance();
             changeFragment(tab);
