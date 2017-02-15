@@ -104,8 +104,9 @@ public class TipTab extends Fragment {
      * Holt die neuen Werte von der Datenbank
      */
     public void update() {
+        int win = -1;
         try {
-            int win = sqlManager.getWin();
+            win = sqlManager.getWin();
             sqlManager.getRdyToTipp();
 
             tv_Prozent_Ulm.setText("" + Math.round(sqlManager.getQuoteUlm()));
@@ -113,26 +114,7 @@ public class TipTab extends Fragment {
             tv_gast.setText(sqlManager.getOpponentName());
             sb_SeekBar.setProgress((int) sqlManager.getQuoteOther());
             tv_information_vote.setText("");
-
-            if(win >= 0) {
-                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
-                if (win > 0) {
-                    dlgAlert.setMessage(getResources().getString(R.string.won1) + " " + win + " " + getResources().getString(R.string.won2));
-                    try {
-                        AchievementHandler.getInstance().performEvent(14, win, getActivity());
-                    } catch (ServerException e) {
-                        e.printStackTrace();
-                    }
-                } else if (win == 0) {
-                    dlgAlert.setMessage(getResources().getString(R.string.won3));
-                }
-
-                dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
-                btn_Vote.setEnabled(true);
-            }
+            btn_Vote.setEnabled(true);
 
         } catch (NotBettableException e) {
             btn_Vote.setEnabled(false);
@@ -151,6 +133,25 @@ public class TipTab extends Fragment {
             sb_SeekBar.setProgress((int) sqlManager.getQuoteOther());
             btn_Vote.setEnabled(false);
         }
+        if(win >= 0) {
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(getActivity());
+            if (win > 0) {
+                dlgAlert.setMessage(getResources().getString(R.string.won1) + " " + win + " " + getResources().getString(R.string.won2));
+                try {
+                    AchievementHandler.getInstance().performEvent(14, win, getActivity());
+                } catch (ServerException e) {
+                    e.printStackTrace();
+                }
+            } else if (win == 0) {
+                dlgAlert.setMessage(getResources().getString(R.string.won3));
+            }
+
+            dlgAlert.setTitle(getResources().getString(R.string.title_activity_tipp_spiel));
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+        }
+
         sb_SeekBar.requestLayout();
     }
 

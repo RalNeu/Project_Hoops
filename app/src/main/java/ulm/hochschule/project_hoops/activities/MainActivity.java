@@ -383,7 +383,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), AccountshopActivity.class));
         }
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         closeKeyboard();
